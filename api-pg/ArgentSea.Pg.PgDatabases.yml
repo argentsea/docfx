@@ -1,0 +1,751 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Pg.PgDatabases
+  commentId: T:ArgentSea.Pg.PgDatabases
+  id: PgDatabases
+  parent: ArgentSea.Pg
+  children:
+  - ArgentSea.Pg.PgDatabases.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases})
+  langs:
+  - csharp
+  - vb
+  name: PgDatabases
+  nameWithType: PgDatabases
+  fullName: ArgentSea.Pg.PgDatabases
+  type: Class
+  source:
+    remote:
+      path: src/PgDatabases.cs
+      branch: master
+      repo: https://github.com/argentsea/pg.git
+    id: PgDatabases
+    path: ../ArgentSea.Pg/src/PgDatabases.cs
+    startLine: 8
+  assemblies:
+  - ArgentSea.Pg
+  namespace: ArgentSea.Pg
+  summary: "\nThis class manages the non-sharded SQL database connections.\n"
+  example: []
+  syntax:
+    content: 'public class PgDatabases : DbDataStores<PgDbConnectionOptions>'
+    content.vb: >-
+      Public Class PgDatabases
+          Inherits DbDataStores(Of PgDbConnectionOptions)
+  inheritance:
+  - System.Object
+  - ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}
+  inheritedMembers:
+  - ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}.DbConnections
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: ArgentSea.Pg.PgDatabases.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases})
+  commentId: M:ArgentSea.Pg.PgDatabases.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases})
+  id: '#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases})'
+  parent: ArgentSea.Pg.PgDatabases
+  langs:
+  - csharp
+  - vb
+  name: PgDatabases(IOptions<PgDbConnectionOptions>, IOptions<DataSecurityOptions>, IOptions<DataResilienceOptions>, ILogger<PgDatabases>)
+  nameWithType: PgDatabases.PgDatabases(IOptions<PgDbConnectionOptions>, IOptions<DataSecurityOptions>, IOptions<DataResilienceOptions>, ILogger<PgDatabases>)
+  fullName: ArgentSea.Pg.PgDatabases.PgDatabases(Microsoft.Extensions.Options.IOptions<ArgentSea.Pg.PgDbConnectionOptions>, Microsoft.Extensions.Options.IOptions<ArgentSea.DataSecurityOptions>, Microsoft.Extensions.Options.IOptions<ArgentSea.DataResilienceOptions>, Microsoft.Extensions.Logging.ILogger<ArgentSea.Pg.PgDatabases>)
+  type: Constructor
+  source:
+    remote:
+      path: src/PgDatabases.cs
+      branch: master
+      repo: https://github.com/argentsea/pg.git
+    id: .ctor
+    path: ../ArgentSea.Pg/src/PgDatabases.cs
+    startLine: 10
+  assemblies:
+  - ArgentSea.Pg
+  namespace: ArgentSea.Pg
+  syntax:
+    content: public PgDatabases(IOptions<PgDbConnectionOptions> configOptions, IOptions<DataSecurityOptions> securityOptions, IOptions<DataResilienceOptions> resilienceStrategiesOptions, ILogger<PgDatabases> logger)
+    parameters:
+    - id: configOptions
+      type: Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions}
+    - id: securityOptions
+      type: Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions}
+    - id: resilienceStrategiesOptions
+      type: Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions}
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases}
+    content.vb: Public Sub New(configOptions As IOptions(Of PgDbConnectionOptions), securityOptions As IOptions(Of DataSecurityOptions), resilienceStrategiesOptions As IOptions(Of DataResilienceOptions), logger As ILogger(Of PgDatabases))
+  overload: ArgentSea.Pg.PgDatabases.#ctor*
+  nameWithType.vb: PgDatabases.PgDatabases(IOptions(Of PgDbConnectionOptions), IOptions(Of DataSecurityOptions), IOptions(Of DataResilienceOptions), ILogger(Of PgDatabases))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: ArgentSea.Pg.PgDatabases.PgDatabases(Microsoft.Extensions.Options.IOptions(Of ArgentSea.Pg.PgDbConnectionOptions), Microsoft.Extensions.Options.IOptions(Of ArgentSea.DataSecurityOptions), Microsoft.Extensions.Options.IOptions(Of ArgentSea.DataResilienceOptions), Microsoft.Extensions.Logging.ILogger(Of ArgentSea.Pg.PgDatabases))
+  name.vb: PgDatabases(IOptions(Of PgDbConnectionOptions), IOptions(Of DataSecurityOptions), IOptions(Of DataResilienceOptions), ILogger(Of PgDatabases))
+references:
+- uid: ArgentSea.Pg
+  commentId: N:ArgentSea.Pg
+  name: ArgentSea.Pg
+  nameWithType: ArgentSea.Pg
+  fullName: ArgentSea.Pg
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}
+  commentId: T:ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}
+  parent: ArgentSea
+  definition: ArgentSea.DbDataStores`1
+  name: DbDataStores<PgDbConnectionOptions>
+  nameWithType: DbDataStores<PgDbConnectionOptions>
+  fullName: ArgentSea.DbDataStores<ArgentSea.Pg.PgDbConnectionOptions>
+  nameWithType.vb: DbDataStores(Of PgDbConnectionOptions)
+  fullName.vb: ArgentSea.DbDataStores(Of ArgentSea.Pg.PgDbConnectionOptions)
+  name.vb: DbDataStores(Of PgDbConnectionOptions)
+  spec.csharp:
+  - uid: ArgentSea.DbDataStores`1
+    name: DbDataStores
+    nameWithType: DbDataStores
+    fullName: ArgentSea.DbDataStores
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: ArgentSea.Pg.PgDbConnectionOptions
+    name: PgDbConnectionOptions
+    nameWithType: PgDbConnectionOptions
+    fullName: ArgentSea.Pg.PgDbConnectionOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: ArgentSea.DbDataStores`1
+    name: DbDataStores
+    nameWithType: DbDataStores
+    fullName: ArgentSea.DbDataStores
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: ArgentSea.Pg.PgDbConnectionOptions
+    name: PgDbConnectionOptions
+    nameWithType: PgDbConnectionOptions
+    fullName: ArgentSea.Pg.PgDbConnectionOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}.DbConnections
+  commentId: P:ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}.DbConnections
+  parent: ArgentSea.DbDataStores{ArgentSea.Pg.PgDbConnectionOptions}
+  definition: ArgentSea.DbDataStores`1.DbConnections
+  name: DbConnections
+  nameWithType: DbDataStores<PgDbConnectionOptions>.DbConnections
+  fullName: ArgentSea.DbDataStores<ArgentSea.Pg.PgDbConnectionOptions>.DbConnections
+  nameWithType.vb: DbDataStores(Of PgDbConnectionOptions).DbConnections
+  fullName.vb: ArgentSea.DbDataStores(Of ArgentSea.Pg.PgDbConnectionOptions).DbConnections
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ArgentSea.DbDataStores`1
+  commentId: T:ArgentSea.DbDataStores`1
+  name: DbDataStores<TConfiguration>
+  nameWithType: DbDataStores<TConfiguration>
+  fullName: ArgentSea.DbDataStores<TConfiguration>
+  nameWithType.vb: DbDataStores(Of TConfiguration)
+  fullName.vb: ArgentSea.DbDataStores(Of TConfiguration)
+  name.vb: DbDataStores(Of TConfiguration)
+  spec.csharp:
+  - uid: ArgentSea.DbDataStores`1
+    name: DbDataStores
+    nameWithType: DbDataStores
+    fullName: ArgentSea.DbDataStores
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TConfiguration
+    nameWithType: TConfiguration
+    fullName: TConfiguration
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: ArgentSea.DbDataStores`1
+    name: DbDataStores
+    nameWithType: DbDataStores
+    fullName: ArgentSea.DbDataStores
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TConfiguration
+    nameWithType: TConfiguration
+    fullName: TConfiguration
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea
+  commentId: N:ArgentSea
+  name: ArgentSea
+  nameWithType: ArgentSea
+  fullName: ArgentSea
+- uid: ArgentSea.DbDataStores`1.DbConnections
+  commentId: P:ArgentSea.DbDataStores`1.DbConnections
+  name: DbConnections
+  nameWithType: DbDataStores<TConfiguration>.DbConnections
+  fullName: ArgentSea.DbDataStores<TConfiguration>.DbConnections
+  nameWithType.vb: DbDataStores(Of TConfiguration).DbConnections
+  fullName.vb: ArgentSea.DbDataStores(Of TConfiguration).DbConnections
+- uid: ArgentSea.Pg.PgDatabases.#ctor*
+  commentId: Overload:ArgentSea.Pg.PgDatabases.#ctor
+  name: PgDatabases
+  nameWithType: PgDatabases.PgDatabases
+  fullName: ArgentSea.Pg.PgDatabases.PgDatabases
+- uid: Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions}
+  commentId: T:Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgDbConnectionOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.IOptions`1
+  name: IOptions<PgDbConnectionOptions>
+  nameWithType: IOptions<PgDbConnectionOptions>
+  fullName: Microsoft.Extensions.Options.IOptions<ArgentSea.Pg.PgDbConnectionOptions>
+  nameWithType.vb: IOptions(Of PgDbConnectionOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of ArgentSea.Pg.PgDbConnectionOptions)
+  name.vb: IOptions(Of PgDbConnectionOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: ArgentSea.Pg.PgDbConnectionOptions
+    name: PgDbConnectionOptions
+    nameWithType: PgDbConnectionOptions
+    fullName: ArgentSea.Pg.PgDbConnectionOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: ArgentSea.Pg.PgDbConnectionOptions
+    name: PgDbConnectionOptions
+    nameWithType: PgDbConnectionOptions
+    fullName: ArgentSea.Pg.PgDbConnectionOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions}
+  commentId: T:Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.IOptions`1
+  name: IOptions<DataSecurityOptions>
+  nameWithType: IOptions<DataSecurityOptions>
+  fullName: Microsoft.Extensions.Options.IOptions<ArgentSea.DataSecurityOptions>
+  nameWithType.vb: IOptions(Of DataSecurityOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of ArgentSea.DataSecurityOptions)
+  name.vb: IOptions(Of DataSecurityOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: ArgentSea.DataSecurityOptions
+    name: DataSecurityOptions
+    nameWithType: DataSecurityOptions
+    fullName: ArgentSea.DataSecurityOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: ArgentSea.DataSecurityOptions
+    name: DataSecurityOptions
+    nameWithType: DataSecurityOptions
+    fullName: ArgentSea.DataSecurityOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions}
+  commentId: T:Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.IOptions`1
+  name: IOptions<DataResilienceOptions>
+  nameWithType: IOptions<DataResilienceOptions>
+  fullName: Microsoft.Extensions.Options.IOptions<ArgentSea.DataResilienceOptions>
+  nameWithType.vb: IOptions(Of DataResilienceOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of ArgentSea.DataResilienceOptions)
+  name.vb: IOptions(Of DataResilienceOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: ArgentSea.DataResilienceOptions
+    name: DataResilienceOptions
+    nameWithType: DataResilienceOptions
+    fullName: ArgentSea.DataResilienceOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: ArgentSea.DataResilienceOptions
+    name: DataResilienceOptions
+    nameWithType: DataResilienceOptions
+    fullName: ArgentSea.DataResilienceOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases}
+  commentId: T:Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgDatabases}
+  parent: Microsoft.Extensions.Logging
+  definition: Microsoft.Extensions.Logging.ILogger`1
+  name: ILogger<PgDatabases>
+  nameWithType: ILogger<PgDatabases>
+  fullName: Microsoft.Extensions.Logging.ILogger<ArgentSea.Pg.PgDatabases>
+  nameWithType.vb: ILogger(Of PgDatabases)
+  fullName.vb: Microsoft.Extensions.Logging.ILogger(Of ArgentSea.Pg.PgDatabases)
+  name.vb: ILogger(Of PgDatabases)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: ArgentSea.Pg.PgDatabases
+    name: PgDatabases
+    nameWithType: PgDatabases
+    fullName: ArgentSea.Pg.PgDatabases
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: ArgentSea.Pg.PgDatabases
+    name: PgDatabases
+    nameWithType: PgDatabases
+    fullName: ArgentSea.Pg.PgDatabases
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.IOptions`1
+  commentId: T:Microsoft.Extensions.Options.IOptions`1
+  isExternal: true
+  name: IOptions<TOptions>
+  nameWithType: IOptions<TOptions>
+  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
+  nameWithType.vb: IOptions(Of TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
+  name.vb: IOptions(Of TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IOptions`1
+    name: IOptions
+    nameWithType: IOptions
+    fullName: Microsoft.Extensions.Options.IOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options
+  commentId: N:Microsoft.Extensions.Options
+  isExternal: true
+  name: Microsoft.Extensions.Options
+  nameWithType: Microsoft.Extensions.Options
+  fullName: Microsoft.Extensions.Options
+- uid: Microsoft.Extensions.Logging.ILogger`1
+  commentId: T:Microsoft.Extensions.Logging.ILogger`1
+  isExternal: true
+  name: ILogger<TCategoryName>
+  nameWithType: ILogger<TCategoryName>
+  fullName: Microsoft.Extensions.Logging.ILogger<TCategoryName>
+  nameWithType.vb: ILogger(Of TCategoryName)
+  fullName.vb: Microsoft.Extensions.Logging.ILogger(Of TCategoryName)
+  name.vb: ILogger(Of TCategoryName)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TCategoryName
+    nameWithType: TCategoryName
+    fullName: TCategoryName
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TCategoryName
+    nameWithType: TCategoryName
+    fullName: TCategoryName
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging

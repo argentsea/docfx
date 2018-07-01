@@ -1,0 +1,569 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.SqlLoggingExtensions
+  commentId: T:ArgentSea.Sql.SqlLoggingExtensions
+  id: SqlLoggingExtensions
+  parent: ArgentSea.Sql
+  children:
+  - ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope(Microsoft.Extensions.Logging.ILogger,System.Type)
+  - ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit(Microsoft.Extensions.Logging.ILogger,System.Type)
+  - ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss(Microsoft.Extensions.Logging.ILogger,System.Type)
+  - ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty(Microsoft.Extensions.Logging.ILogger,System.String)
+  langs:
+  - csharp
+  - vb
+  name: SqlLoggingExtensions
+  nameWithType: SqlLoggingExtensions
+  fullName: ArgentSea.Sql.SqlLoggingExtensions
+  type: Class
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SqlLoggingExtensions
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 12
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  summary: "\nThis static class provides the logging extension methods for handling table-valued parameter (TVP) mapping.\n"
+  example: []
+  syntax:
+    content: public static class SqlLoggingExtensions
+    content.vb: Public Module SqlLoggingExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss(Microsoft.Extensions.Logging.ILogger,System.Type)
+  commentId: M:ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss(Microsoft.Extensions.Logging.ILogger,System.Type)
+  id: SqlTvpCacheMiss(Microsoft.Extensions.Logging.ILogger,System.Type)
+  isExtensionMethod: true
+  parent: ArgentSea.Sql.SqlLoggingExtensions
+  langs:
+  - csharp
+  - vb
+  name: SqlTvpCacheMiss(ILogger, Type)
+  nameWithType: SqlLoggingExtensions.SqlTvpCacheMiss(ILogger, Type)
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss(Microsoft.Extensions.Logging.ILogger, System.Type)
+  type: Method
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SqlTvpCacheMiss
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 33
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public static void SqlTvpCacheMiss(this ILogger logger, Type modelT)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: modelT
+      type: System.Type
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub SqlTvpCacheMiss(logger As ILogger, modelT As Type)
+  overload: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit(Microsoft.Extensions.Logging.ILogger,System.Type)
+  commentId: M:ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit(Microsoft.Extensions.Logging.ILogger,System.Type)
+  id: SqlTvpCacheHit(Microsoft.Extensions.Logging.ILogger,System.Type)
+  isExtensionMethod: true
+  parent: ArgentSea.Sql.SqlLoggingExtensions
+  langs:
+  - csharp
+  - vb
+  name: SqlTvpCacheHit(ILogger, Type)
+  nameWithType: SqlLoggingExtensions.SqlTvpCacheHit(ILogger, Type)
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit(Microsoft.Extensions.Logging.ILogger, System.Type)
+  type: Method
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SqlTvpCacheHit
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 37
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public static void SqlTvpCacheHit(this ILogger logger, Type modelT)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: modelT
+      type: System.Type
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub SqlTvpCacheHit(logger As ILogger, modelT As Type)
+  overload: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty(Microsoft.Extensions.Logging.ILogger,System.String)
+  commentId: M:ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty(Microsoft.Extensions.Logging.ILogger,System.String)
+  id: TraceTvpMapperProperty(Microsoft.Extensions.Logging.ILogger,System.String)
+  isExtensionMethod: true
+  parent: ArgentSea.Sql.SqlLoggingExtensions
+  langs:
+  - csharp
+  - vb
+  name: TraceTvpMapperProperty(ILogger, String)
+  nameWithType: SqlLoggingExtensions.TraceTvpMapperProperty(ILogger, String)
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty(Microsoft.Extensions.Logging.ILogger, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: TraceTvpMapperProperty
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 41
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public static void TraceTvpMapperProperty(this ILogger logger, string propertyName)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: propertyName
+      type: System.String
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TraceTvpMapperProperty(logger As ILogger, propertyName As String)
+  overload: ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope(Microsoft.Extensions.Logging.ILogger,System.Type)
+  commentId: M:ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope(Microsoft.Extensions.Logging.ILogger,System.Type)
+  id: BuildTvpScope(Microsoft.Extensions.Logging.ILogger,System.Type)
+  isExtensionMethod: true
+  parent: ArgentSea.Sql.SqlLoggingExtensions
+  langs:
+  - csharp
+  - vb
+  name: BuildTvpScope(ILogger, Type)
+  nameWithType: SqlLoggingExtensions.BuildTvpScope(ILogger, Type)
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope(Microsoft.Extensions.Logging.ILogger, System.Type)
+  type: Method
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: BuildTvpScope
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 45
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public static IDisposable BuildTvpScope(this ILogger logger, Type model)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: model
+      type: System.Type
+    return:
+      type: System.IDisposable
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BuildTvpScope(logger As ILogger, model As Type) As IDisposable
+  overload: ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: ArgentSea.Sql
+  commentId: N:ArgentSea.Sql
+  name: ArgentSea.Sql
+  nameWithType: ArgentSea.Sql
+  fullName: ArgentSea.Sql
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss*
+  commentId: Overload:ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss
+  name: SqlTvpCacheMiss
+  nameWithType: SqlLoggingExtensions.SqlTvpCacheMiss
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheMiss
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit*
+  commentId: Overload:ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit
+  name: SqlTvpCacheHit
+  nameWithType: SqlLoggingExtensions.SqlTvpCacheHit
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlTvpCacheHit
+- uid: ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty*
+  commentId: Overload:ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty
+  name: TraceTvpMapperProperty
+  nameWithType: SqlLoggingExtensions.TraceTvpMapperProperty
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.TraceTvpMapperProperty
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope*
+  commentId: Overload:ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope
+  name: BuildTvpScope
+  nameWithType: SqlLoggingExtensions.BuildTvpScope
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.BuildTvpScope
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable

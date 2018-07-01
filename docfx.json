@@ -1,0 +1,100 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [ "**/*.csproj" ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
+          ],
+          "cwd": "../ArgentSea.Shared"
+        }
+      ],
+      "dest": "api"
+    },
+    {
+      "src": [
+        {
+          "files": [ "**/*.csproj" ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
+          ],
+          "cwd": "../ArgentSea.Sql"
+        }
+      ],
+      "dest": "api-sql"
+    },
+    {
+      "src": [
+        {
+          "files": [ "**/*.csproj" ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
+          ],
+          "cwd": "../ArgentSea.Pg"
+        }
+      ],
+      "dest": "api-pg"
+    }
+  ],
+  "build": {
+    "template": [
+      "default",
+      "templates/as"
+    ],
+    "content": [
+      {
+        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "tutorials/**.md",
+          "tutorials/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      },
+      {
+        "files": [
+          "api/**.yml"
+        ]
+      },
+      {
+        "files": [
+          "api-pg/**.yml"
+        ]
+      },
+      {
+        "files": [
+          "api-sql/**.yml"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "globalMetadata": {
+      "_appTitle": "ArgentSea Docs",
+      "_enableSearch": true
+    },
+    "markdownEngineName": "markdig",
+    "dest": "_site"
+  }
+}

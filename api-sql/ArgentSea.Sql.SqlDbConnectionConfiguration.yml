@@ -1,0 +1,613 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration
+  commentId: T:ArgentSea.Sql.SqlDbConnectionConfiguration
+  id: SqlDbConnectionConfiguration
+  parent: ArgentSea.Sql
+  children:
+  - ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
+  - ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection
+  - ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
+  - ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey
+  - ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey
+  langs:
+  - csharp
+  - vb
+  name: SqlDbConnectionConfiguration
+  nameWithType: SqlDbConnectionConfiguration
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration
+  type: Class
+  source:
+    remote:
+      path: src/SqlDbConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SqlDbConnectionConfiguration
+    path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
+    startLine: 42
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: 'public class SqlDbConnectionConfiguration : IDbConnectionConfiguration'
+    content.vb: >-
+      Public Class SqlDbConnectionConfiguration
+          Implements IDbConnectionConfiguration
+  inheritance:
+  - System.Object
+  implements:
+  - ArgentSea.IDbConnectionConfiguration
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
+  commentId: P:ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
+  id: DatabaseKey
+  parent: ArgentSea.Sql.SqlDbConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: DatabaseKey
+  nameWithType: SqlDbConnectionConfiguration.DatabaseKey
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
+  type: Property
+  source:
+    remote:
+      path: src/SqlDbConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: DatabaseKey
+    path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
+    startLine: 44
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public string DatabaseKey { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DatabaseKey As String
+  overload: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey*
+  implements:
+  - ArgentSea.IDbConnectionConfiguration.DatabaseKey
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey
+  commentId: P:ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey
+  id: SecurityKey
+  parent: ArgentSea.Sql.SqlDbConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: SecurityKey
+  nameWithType: SqlDbConnectionConfiguration.SecurityKey
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey
+  type: Property
+  source:
+    remote:
+      path: src/SqlDbConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SecurityKey
+    path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
+    startLine: 45
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public string SecurityKey { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SecurityKey As String
+  overload: ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey*
+  implements:
+  - ArgentSea.IDbConnectionConfiguration.SecurityKey
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey
+  commentId: P:ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey
+  id: DataResilienceKey
+  parent: ArgentSea.Sql.SqlDbConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: DataResilienceKey
+  nameWithType: SqlDbConnectionConfiguration.DataResilienceKey
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey
+  type: Property
+  source:
+    remote:
+      path: src/SqlDbConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: DataResilienceKey
+    path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
+    startLine: 46
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public string DataResilienceKey { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataResilienceKey As String
+  overload: ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey*
+  implements:
+  - ArgentSea.IDbConnectionConfiguration.DataResilienceKey
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
+  commentId: P:ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
+  id: DataConnectionInternal
+  parent: ArgentSea.Sql.SqlDbConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: DataConnectionInternal
+  nameWithType: SqlDbConnectionConfiguration.DataConnectionInternal
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
+  type: Property
+  source:
+    remote:
+      path: src/SqlDbConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: DataConnectionInternal
+    path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
+    startLine: 48
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public IConnectionConfiguration DataConnectionInternal { get; }
+    parameters: []
+    return:
+      type: ArgentSea.IConnectionConfiguration
+    content.vb: Public ReadOnly Property DataConnectionInternal As IConnectionConfiguration
+  overload: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal*
+  implements:
+  - ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection
+  commentId: P:ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection
+  id: DataConnection
+  parent: ArgentSea.Sql.SqlDbConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: DataConnection
+  nameWithType: SqlDbConnectionConfiguration.DataConnection
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection
+  type: Property
+  source:
+    remote:
+      path: src/SqlDbConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: DataConnection
+    path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
+    startLine: 49
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public SqlConnectionConfiguration DataConnection { get; set; }
+    parameters: []
+    return:
+      type: ArgentSea.Sql.SqlConnectionConfiguration
+    content.vb: Public Property DataConnection As SqlConnectionConfiguration
+  overload: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: ArgentSea.Sql
+  commentId: N:ArgentSea.Sql
+  name: ArgentSea.Sql
+  nameWithType: ArgentSea.Sql
+  fullName: ArgentSea.Sql
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: ArgentSea.IDbConnectionConfiguration
+  commentId: T:ArgentSea.IDbConnectionConfiguration
+  parent: ArgentSea
+  name: IDbConnectionConfiguration
+  nameWithType: IDbConnectionConfiguration
+  fullName: ArgentSea.IDbConnectionConfiguration
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ArgentSea
+  commentId: N:ArgentSea
+  name: ArgentSea
+  nameWithType: ArgentSea
+  fullName: ArgentSea
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey*
+  commentId: Overload:ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
+  name: DatabaseKey
+  nameWithType: SqlDbConnectionConfiguration.DatabaseKey
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
+- uid: ArgentSea.IDbConnectionConfiguration.DatabaseKey
+  commentId: P:ArgentSea.IDbConnectionConfiguration.DatabaseKey
+  parent: ArgentSea.IDbConnectionConfiguration
+  name: DatabaseKey
+  nameWithType: IDbConnectionConfiguration.DatabaseKey
+  fullName: ArgentSea.IDbConnectionConfiguration.DatabaseKey
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey*
+  commentId: Overload:ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey
+  name: SecurityKey
+  nameWithType: SqlDbConnectionConfiguration.SecurityKey
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.SecurityKey
+- uid: ArgentSea.IDbConnectionConfiguration.SecurityKey
+  commentId: P:ArgentSea.IDbConnectionConfiguration.SecurityKey
+  parent: ArgentSea.IDbConnectionConfiguration
+  name: SecurityKey
+  nameWithType: IDbConnectionConfiguration.SecurityKey
+  fullName: ArgentSea.IDbConnectionConfiguration.SecurityKey
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey*
+  commentId: Overload:ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey
+  name: DataResilienceKey
+  nameWithType: SqlDbConnectionConfiguration.DataResilienceKey
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataResilienceKey
+- uid: ArgentSea.IDbConnectionConfiguration.DataResilienceKey
+  commentId: P:ArgentSea.IDbConnectionConfiguration.DataResilienceKey
+  parent: ArgentSea.IDbConnectionConfiguration
+  name: DataResilienceKey
+  nameWithType: IDbConnectionConfiguration.DataResilienceKey
+  fullName: ArgentSea.IDbConnectionConfiguration.DataResilienceKey
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal*
+  commentId: Overload:ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
+  name: DataConnectionInternal
+  nameWithType: SqlDbConnectionConfiguration.DataConnectionInternal
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
+- uid: ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
+  commentId: P:ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
+  parent: ArgentSea.IDbConnectionConfiguration
+  name: DataConnectionInternal
+  nameWithType: IDbConnectionConfiguration.DataConnectionInternal
+  fullName: ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
+- uid: ArgentSea.IConnectionConfiguration
+  commentId: T:ArgentSea.IConnectionConfiguration
+  parent: ArgentSea
+  name: IConnectionConfiguration
+  nameWithType: IConnectionConfiguration
+  fullName: ArgentSea.IConnectionConfiguration
+- uid: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection*
+  commentId: Overload:ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection
+  name: DataConnection
+  nameWithType: SqlDbConnectionConfiguration.DataConnection
+  fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnection
+- uid: ArgentSea.Sql.SqlConnectionConfiguration
+  commentId: T:ArgentSea.Sql.SqlConnectionConfiguration
+  parent: ArgentSea.Sql
+  name: SqlConnectionConfiguration
+  nameWithType: SqlConnectionConfiguration
+  fullName: ArgentSea.Sql.SqlConnectionConfiguration

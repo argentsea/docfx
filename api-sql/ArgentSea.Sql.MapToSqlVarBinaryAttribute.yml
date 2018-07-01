@@ -1,0 +1,4373 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  commentId: T:ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  id: MapToSqlVarBinaryAttribute
+  parent: ArgentSea.Sql
+  children:
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor(System.String,System.Int32)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor(System.String,System.Int32,System.Boolean)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType(System.Type)
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length
+  - ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName
+  langs:
+  - csharp
+  - vb
+  name: MapToSqlVarBinaryAttribute
+  nameWithType: MapToSqlVarBinaryAttribute
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  type: Class
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: MapToSqlVarBinaryAttribute
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 890
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  summary: "\nThis attribute maps a model property to/from a SQL VarBinary parameter or column.\n"
+  example: []
+  syntax:
+    content: 'public class MapToSqlVarBinaryAttribute : SqlParameterMapAttribute'
+    content.vb: >-
+      Public Class MapToSqlVarBinaryAttribute
+          Inherits SqlParameterMapAttribute
+  inheritance:
+  - System.Object
+  - System.Attribute
+  - ArgentSea.ParameterMapAttribute
+  - ArgentSea.Sql.SqlParameterMapAttribute
+  inheritedMembers:
+  - ArgentSea.ParameterMapAttribute.Name
+  - ArgentSea.ParameterMapAttribute.SqlType
+  - ArgentSea.ParameterMapAttribute.IsRequired
+  - System.Attribute.Equals(System.Object)
+  - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
+  - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type)
+  - System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type)
+  - System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type)
+  - System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Assembly)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
+  - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
+  - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Module)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type)
+  - System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo)
+  - System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Boolean)
+  - System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type)
+  - System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  - System.Attribute.GetHashCode
+  - System.Attribute.IsDefaultAttribute
+  - System.Attribute.IsDefined(System.Reflection.Assembly,System.Type)
+  - System.Attribute.IsDefined(System.Reflection.Assembly,System.Type,System.Boolean)
+  - System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type)
+  - System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  - System.Attribute.IsDefined(System.Reflection.Module,System.Type)
+  - System.Attribute.IsDefined(System.Reflection.Module,System.Type,System.Boolean)
+  - System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type)
+  - System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  - System.Attribute.Match(System.Object)
+  - System.Attribute.TypeId
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor(System.String,System.Int32)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor(System.String,System.Int32)
+  id: '#ctor(System.String,System.Int32)'
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: MapToSqlVarBinaryAttribute(String, Int32)
+  nameWithType: MapToSqlVarBinaryAttribute.MapToSqlVarBinaryAttribute(String, Int32)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.MapToSqlVarBinaryAttribute(System.String, System.Int32)
+  type: Constructor
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: .ctor
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 897
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  summary: "\nMap this property to the specified VarBinary database column.\n"
+  example: []
+  syntax:
+    content: public MapToSqlVarBinaryAttribute(string parameterName, int length)
+    parameters:
+    - id: parameterName
+      type: System.String
+      description: The name of the parameter or column that contains the value. The system will automatically add or remove the prefix &apos;@&apos; as needed.
+    - id: length
+      type: System.Int32
+      description: The maximum length of the binary value or blob. Set to -1 for VarBinary(max).
+    content.vb: Public Sub New(parameterName As String, length As Integer)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor(System.String,System.Int32,System.Boolean)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor(System.String,System.Int32,System.Boolean)
+  id: '#ctor(System.String,System.Int32,System.Boolean)'
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: MapToSqlVarBinaryAttribute(String, Int32, Boolean)
+  nameWithType: MapToSqlVarBinaryAttribute.MapToSqlVarBinaryAttribute(String, Int32, Boolean)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.MapToSqlVarBinaryAttribute(System.String, System.Int32, System.Boolean)
+  type: Constructor
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: .ctor
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 901
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public MapToSqlVarBinaryAttribute(string parameterName, int length, bool isRequired)
+    parameters:
+    - id: parameterName
+      type: System.String
+    - id: length
+      type: System.Int32
+    - id: isRequired
+      type: System.Boolean
+    content.vb: Public Sub New(parameterName As String, length As Integer, isRequired As Boolean)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length
+  commentId: P:ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length
+  id: Length
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: MapToSqlVarBinaryAttribute.Length
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length
+  type: Property
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: Length
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 905
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Length As Integer
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType(System.Type)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType(System.Type)
+  id: IsValidType(System.Type)
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: IsValidType(Type)
+  nameWithType: MapToSqlVarBinaryAttribute.IsValidType(Type)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType(System.Type)
+  type: Method
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: IsValidType
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 907
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public override bool IsValidType(Type candidateType)
+    parameters:
+    - id: candidateType
+      type: System.Type
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function IsValidType(candidateType As Type) As Boolean
+  overridden: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  id: AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
+  nameWithType: MapToSqlVarBinaryAttribute.AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  type: Method
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: AppendInParameterExpressions
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 910
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: protected override void AppendInParameterExpressions(IList<Expression> expressions, ParameterExpression expSprocParameters, ParameterExpression expIgnoreParameters, HashSet<string> parameterNames, Expression expProperty, Type propertyType, ParameterExpression expLogger, ILogger logger)
+    parameters:
+    - id: expressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+    - id: expSprocParameters
+      type: System.Linq.Expressions.ParameterExpression
+    - id: expIgnoreParameters
+      type: System.Linq.Expressions.ParameterExpression
+    - id: parameterNames
+      type: System.Collections.Generic.HashSet{System.String}
+    - id: expProperty
+      type: System.Linq.Expressions.Expression
+    - id: propertyType
+      type: System.Type
+    - id: expLogger
+      type: System.Linq.Expressions.ParameterExpression
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected Overrides Sub AppendInParameterExpressions(expressions As IList(Of Expression), expSprocParameters As ParameterExpression, expIgnoreParameters As ParameterExpression, parameterNames As HashSet(Of String), expProperty As Expression, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
+  overridden: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions*
+  nameWithType.vb: MapToSqlVarBinaryAttribute.AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  id: AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: AppendTvpExpressions(ParameterExpression, Expression, IList<Expression>, IList<NewExpression>, HashSet<String>, ref Int32, Type, ParameterExpression, ILogger)
+  nameWithType: MapToSqlVarBinaryAttribute.AppendTvpExpressions(ParameterExpression, Expression, IList<Expression>, IList<NewExpression>, HashSet<String>, ref Int32, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Collections.Generic.IList<System.Linq.Expressions.NewExpression>, System.Collections.Generic.HashSet<System.String>, ref System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  type: Method
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: AppendTvpExpressions
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 913
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: protected override void AppendTvpExpressions(ParameterExpression expRecord, Expression expProperty, IList<Expression> setExpressions, IList<NewExpression> sqlMetaDataTypeExpressions, HashSet<string> parameterNames, ref int ordinal, Type propertyType, ParameterExpression expLogger, ILogger logger)
+    parameters:
+    - id: expRecord
+      type: System.Linq.Expressions.ParameterExpression
+    - id: expProperty
+      type: System.Linq.Expressions.Expression
+    - id: setExpressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+    - id: sqlMetaDataTypeExpressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.NewExpression}
+    - id: parameterNames
+      type: System.Collections.Generic.HashSet{System.String}
+    - id: ordinal
+      type: System.Int32
+    - id: propertyType
+      type: System.Type
+    - id: expLogger
+      type: System.Linq.Expressions.ParameterExpression
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected Overrides Sub AppendTvpExpressions(expRecord As ParameterExpression, expProperty As Expression, setExpressions As IList(Of Expression), sqlMetaDataTypeExpressions As IList(Of NewExpression), parameterNames As HashSet(Of String), ByRef ordinal As Integer, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
+  overridden: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions*
+  nameWithType.vb: MapToSqlVarBinaryAttribute.AppendTvpExpressions(ParameterExpression, Expression, IList(Of Expression), IList(Of NewExpression), HashSet(Of String), ByRef Int32, Type, ParameterExpression, ILogger)
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Collections.Generic.IList(Of System.Linq.Expressions.NewExpression), System.Collections.Generic.HashSet(Of System.String), ByRef System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendTvpExpressions(ParameterExpression, Expression, IList(Of Expression), IList(Of NewExpression), HashSet(Of String), ByRef Int32, Type, ParameterExpression, ILogger)
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  id: AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
+  nameWithType: MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  type: Method
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: AppendSetOutParameterExpressions
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 916
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: protected override void AppendSetOutParameterExpressions(IList<Expression> expressions, ParameterExpression expSprocParameters, ParameterExpression expIgnoreParameters, HashSet<string> parameterNames, ParameterExpression expLogger, ILogger logger)
+    parameters:
+    - id: expressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+    - id: expSprocParameters
+      type: System.Linq.Expressions.ParameterExpression
+    - id: expIgnoreParameters
+      type: System.Linq.Expressions.ParameterExpression
+    - id: parameterNames
+      type: System.Collections.Generic.HashSet{System.String}
+    - id: expLogger
+      type: System.Linq.Expressions.ParameterExpression
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected Overrides Sub AppendSetOutParameterExpressions(expressions As IList(Of Expression), expSprocParameters As ParameterExpression, expIgnoreParameters As ParameterExpression, parameterNames As HashSet(Of String), expLogger As ParameterExpression, logger As ILogger)
+  overridden: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions*
+  nameWithType.vb: MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  id: AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  nameWithType: MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  type: Method
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: AppendReadOutParameterExpressions
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 919
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: protected override void AppendReadOutParameterExpressions(Expression expProperty, IList<Expression> expressions, ParameterExpression expSprocParameters, ParameterExpression expPrm, Type propertyType, ParameterExpression expLogger, ILogger logger)
+    parameters:
+    - id: expProperty
+      type: System.Linq.Expressions.Expression
+    - id: expressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+    - id: expSprocParameters
+      type: System.Linq.Expressions.ParameterExpression
+    - id: expPrm
+      type: System.Linq.Expressions.ParameterExpression
+    - id: propertyType
+      type: System.Type
+    - id: expLogger
+      type: System.Linq.Expressions.ParameterExpression
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected Overrides Sub AppendReadOutParameterExpressions(expProperty As Expression, expressions As IList(Of Expression), expSprocParameters As ParameterExpression, expPrm As ParameterExpression, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
+  overridden: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions*
+  nameWithType.vb: MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  id: AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, ref Int32, Type, ParameterExpression, ILogger)
+  nameWithType: MapToSqlVarBinaryAttribute.AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, ref Int32, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.MethodCallExpression>, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, ref System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  type: Method
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: AppendReaderExpressions
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 922
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: protected override void AppendReaderExpressions(Expression expProperty, IList<MethodCallExpression> columnLookupExpressions, IList<Expression> expressions, ParameterExpression prmSqlRdr, ParameterExpression expOrdinals, ParameterExpression expOrdinal, ref int propIndex, Type propertyType, ParameterExpression expLogger, ILogger logger)
+    parameters:
+    - id: expProperty
+      type: System.Linq.Expressions.Expression
+    - id: columnLookupExpressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression}
+    - id: expressions
+      type: System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+    - id: prmSqlRdr
+      type: System.Linq.Expressions.ParameterExpression
+    - id: expOrdinals
+      type: System.Linq.Expressions.ParameterExpression
+    - id: expOrdinal
+      type: System.Linq.Expressions.ParameterExpression
+    - id: propIndex
+      type: System.Int32
+    - id: propertyType
+      type: System.Type
+    - id: expLogger
+      type: System.Linq.Expressions.ParameterExpression
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected Overrides Sub AppendReaderExpressions(expProperty As Expression, columnLookupExpressions As IList(Of MethodCallExpression), expressions As IList(Of Expression), prmSqlRdr As ParameterExpression, expOrdinals As ParameterExpression, expOrdinal As ParameterExpression, ByRef propIndex As Integer, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
+  overridden: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions*
+  nameWithType.vb: MapToSqlVarBinaryAttribute.AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, ByRef Int32, Type, ParameterExpression, ILogger)
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.MethodCallExpression), System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, ByRef System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, ByRef Int32, Type, ParameterExpression, ILogger)
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName
+  commentId: P:ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName
+  id: ParameterName
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: ParameterName
+  nameWithType: MapToSqlVarBinaryAttribute.ParameterName
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName
+  type: Property
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ParameterName
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 925
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public override string ParameterName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overrides ReadOnly Property ParameterName As String
+  overridden: ArgentSea.ParameterMapAttribute.ParameterName
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName*
+  modifiers.csharp:
+  - public
+  - override
+  - get
+  modifiers.vb:
+  - Public
+  - Overrides
+  - ReadOnly
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName
+  commentId: P:ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName
+  id: ColumnName
+  parent: ArgentSea.Sql.MapToSqlVarBinaryAttribute
+  langs:
+  - csharp
+  - vb
+  name: ColumnName
+  nameWithType: MapToSqlVarBinaryAttribute.ColumnName
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName
+  type: Property
+  source:
+    remote:
+      path: src/SqlMapAttributes.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ColumnName
+    path: ../ArgentSea.Sql/src/SqlMapAttributes.cs
+    startLine: 927
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public override string ColumnName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overrides ReadOnly Property ColumnName As String
+  overridden: ArgentSea.ParameterMapAttribute.ColumnName
+  overload: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName*
+  modifiers.csharp:
+  - public
+  - override
+  - get
+  modifiers.vb:
+  - Public
+  - Overrides
+  - ReadOnly
+references:
+- uid: ArgentSea.Sql
+  commentId: N:ArgentSea.Sql
+  name: ArgentSea.Sql
+  nameWithType: ArgentSea.Sql
+  fullName: ArgentSea.Sql
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Attribute
+  commentId: T:System.Attribute
+  parent: System
+  isExternal: true
+  name: Attribute
+  nameWithType: Attribute
+  fullName: System.Attribute
+- uid: ArgentSea.ParameterMapAttribute
+  commentId: T:ArgentSea.ParameterMapAttribute
+  parent: ArgentSea
+  name: ParameterMapAttribute
+  nameWithType: ParameterMapAttribute
+  fullName: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.Sql.SqlParameterMapAttribute
+  commentId: T:ArgentSea.Sql.SqlParameterMapAttribute
+  parent: ArgentSea.Sql
+  name: SqlParameterMapAttribute
+  nameWithType: SqlParameterMapAttribute
+  fullName: ArgentSea.Sql.SqlParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttribute.Name
+  commentId: P:ArgentSea.ParameterMapAttribute.Name
+  parent: ArgentSea.ParameterMapAttribute
+  name: Name
+  nameWithType: ParameterMapAttribute.Name
+  fullName: ArgentSea.ParameterMapAttribute.Name
+- uid: ArgentSea.ParameterMapAttribute.SqlType
+  commentId: P:ArgentSea.ParameterMapAttribute.SqlType
+  parent: ArgentSea.ParameterMapAttribute
+  name: SqlType
+  nameWithType: ParameterMapAttribute.SqlType
+  fullName: ArgentSea.ParameterMapAttribute.SqlType
+- uid: ArgentSea.ParameterMapAttribute.IsRequired
+  commentId: P:ArgentSea.ParameterMapAttribute.IsRequired
+  parent: ArgentSea.ParameterMapAttribute
+  name: IsRequired
+  nameWithType: ParameterMapAttribute.IsRequired
+  fullName: ArgentSea.ParameterMapAttribute.IsRequired
+- uid: System.Attribute.Equals(System.Object)
+  commentId: M:System.Attribute.Equals(System.Object)
+  parent: System.Attribute
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Attribute.Equals(Object)
+  fullName: System.Attribute.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Attribute.Equals(System.Object)
+    name: Equals
+    nameWithType: Attribute.Equals
+    fullName: System.Attribute.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.Equals(System.Object)
+    name: Equals
+    nameWithType: Attribute.Equals
+    fullName: System.Attribute.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(Assembly, Type)
+  nameWithType: Attribute.GetCustomAttribute(Assembly, Type)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.Assembly, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(Assembly, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttribute(Assembly, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.Assembly, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(MemberInfo, Type)
+  nameWithType: Attribute.GetCustomAttribute(MemberInfo, Type)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(MemberInfo, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttribute(MemberInfo, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(Module, Type)
+  nameWithType: Attribute.GetCustomAttribute(Module, Type)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.Module, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(Module, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttribute(Module, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.Module, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.Module,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(ParameterInfo, Type)
+  nameWithType: Attribute.GetCustomAttribute(ParameterInfo, Type)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttribute(ParameterInfo, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttribute(ParameterInfo, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttribute(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+    name: GetCustomAttribute
+    nameWithType: Attribute.GetCustomAttribute
+    fullName: System.Attribute.GetCustomAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Assembly)
+  nameWithType: Attribute.GetCustomAttributes(Assembly)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Assembly)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Assembly, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(Assembly, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Assembly, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Assembly, Type)
+  nameWithType: Attribute.GetCustomAttributes(Assembly, Type)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Assembly, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Assembly, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(Assembly, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Assembly, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Assembly,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(MemberInfo)
+  nameWithType: Attribute.GetCustomAttributes(MemberInfo)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(MemberInfo, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(MemberInfo, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(MemberInfo, Type)
+  nameWithType: Attribute.GetCustomAttributes(MemberInfo, Type)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(MemberInfo, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(MemberInfo, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Module)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Module)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Module)
+  nameWithType: Attribute.GetCustomAttributes(Module)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Module)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Module, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(Module, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Module, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Module, Type)
+  nameWithType: Attribute.GetCustomAttributes(Module, Type)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Module, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(Module, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(Module, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.Module, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.Module,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(ParameterInfo)
+  nameWithType: Attribute.GetCustomAttributes(ParameterInfo)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(ParameterInfo, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(ParameterInfo, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(ParameterInfo, Type)
+  nameWithType: Attribute.GetCustomAttributes(ParameterInfo, Type)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: GetCustomAttributes(ParameterInfo, Type, Boolean)
+  nameWithType: Attribute.GetCustomAttributes(ParameterInfo, Type, Boolean)
+  fullName: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetCustomAttributes(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+    name: GetCustomAttributes
+    nameWithType: Attribute.GetCustomAttributes
+    fullName: System.Attribute.GetCustomAttributes
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.GetHashCode
+  commentId: M:System.Attribute.GetHashCode
+  parent: System.Attribute
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Attribute.GetHashCode()
+  fullName: System.Attribute.GetHashCode()
+  spec.csharp:
+  - uid: System.Attribute.GetHashCode
+    name: GetHashCode
+    nameWithType: Attribute.GetHashCode
+    fullName: System.Attribute.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.GetHashCode
+    name: GetHashCode
+    nameWithType: Attribute.GetHashCode
+    fullName: System.Attribute.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefaultAttribute
+  commentId: M:System.Attribute.IsDefaultAttribute
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefaultAttribute()
+  nameWithType: Attribute.IsDefaultAttribute()
+  fullName: System.Attribute.IsDefaultAttribute()
+  spec.csharp:
+  - uid: System.Attribute.IsDefaultAttribute
+    name: IsDefaultAttribute
+    nameWithType: Attribute.IsDefaultAttribute
+    fullName: System.Attribute.IsDefaultAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefaultAttribute
+    name: IsDefaultAttribute
+    nameWithType: Attribute.IsDefaultAttribute
+    fullName: System.Attribute.IsDefaultAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.Assembly,System.Type)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.Assembly,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(Assembly, Type)
+  nameWithType: Attribute.IsDefined(Assembly, Type)
+  fullName: System.Attribute.IsDefined(System.Reflection.Assembly, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.Assembly,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.Assembly,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.Assembly,System.Type,System.Boolean)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.Assembly,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(Assembly, Type, Boolean)
+  nameWithType: Attribute.IsDefined(Assembly, Type, Boolean)
+  fullName: System.Attribute.IsDefined(System.Reflection.Assembly, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.Assembly,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.Assembly,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    nameWithType: Assembly
+    fullName: System.Reflection.Assembly
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(MemberInfo, Type)
+  nameWithType: Attribute.IsDefined(MemberInfo, Type)
+  fullName: System.Attribute.IsDefined(System.Reflection.MemberInfo, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(MemberInfo, Type, Boolean)
+  nameWithType: Attribute.IsDefined(MemberInfo, Type, Boolean)
+  fullName: System.Attribute.IsDefined(System.Reflection.MemberInfo, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.MemberInfo
+    name: MemberInfo
+    nameWithType: MemberInfo
+    fullName: System.Reflection.MemberInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.Module,System.Type)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.Module,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(Module, Type)
+  nameWithType: Attribute.IsDefined(Module, Type)
+  fullName: System.Attribute.IsDefined(System.Reflection.Module, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.Module,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.Module,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.Module,System.Type,System.Boolean)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.Module,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(Module, Type, Boolean)
+  nameWithType: Attribute.IsDefined(Module, Type, Boolean)
+  fullName: System.Attribute.IsDefined(System.Reflection.Module, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.Module,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.Module,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.Module
+    name: Module
+    nameWithType: Module
+    fullName: System.Reflection.Module
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(ParameterInfo, Type)
+  nameWithType: Attribute.IsDefined(ParameterInfo, Type)
+  fullName: System.Attribute.IsDefined(System.Reflection.ParameterInfo, System.Type)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  commentId: M:System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+  parent: System.Attribute
+  isExternal: true
+  name: IsDefined(ParameterInfo, Type, Boolean)
+  nameWithType: Attribute.IsDefined(ParameterInfo, Type, Boolean)
+  fullName: System.Attribute.IsDefined(System.Reflection.ParameterInfo, System.Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.IsDefined(System.Reflection.ParameterInfo,System.Type,System.Boolean)
+    name: IsDefined
+    nameWithType: Attribute.IsDefined
+    fullName: System.Attribute.IsDefined
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Reflection.ParameterInfo
+    name: ParameterInfo
+    nameWithType: ParameterInfo
+    fullName: System.Reflection.ParameterInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.Match(System.Object)
+  commentId: M:System.Attribute.Match(System.Object)
+  parent: System.Attribute
+  isExternal: true
+  name: Match(Object)
+  nameWithType: Attribute.Match(Object)
+  fullName: System.Attribute.Match(System.Object)
+  spec.csharp:
+  - uid: System.Attribute.Match(System.Object)
+    name: Match
+    nameWithType: Attribute.Match
+    fullName: System.Attribute.Match
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Attribute.Match(System.Object)
+    name: Match
+    nameWithType: Attribute.Match
+    fullName: System.Attribute.Match
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Attribute.TypeId
+  commentId: P:System.Attribute.TypeId
+  parent: System.Attribute
+  isExternal: true
+  name: TypeId
+  nameWithType: Attribute.TypeId
+  fullName: System.Attribute.TypeId
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ArgentSea
+  commentId: N:ArgentSea
+  name: ArgentSea
+  nameWithType: ArgentSea
+  fullName: ArgentSea
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.#ctor
+  name: MapToSqlVarBinaryAttribute
+  nameWithType: MapToSqlVarBinaryAttribute.MapToSqlVarBinaryAttribute
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.MapToSqlVarBinaryAttribute
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length
+  name: Length
+  nameWithType: MapToSqlVarBinaryAttribute.Length
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.Length
+- uid: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  commentId: M:ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  parent: ArgentSea.ParameterMapAttribute
+  isExternal: true
+  name: IsValidType(Type)
+  nameWithType: ParameterMapAttribute.IsValidType(Type)
+  fullName: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  spec.csharp:
+  - uid: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+    name: IsValidType
+    nameWithType: ParameterMapAttribute.IsValidType
+    fullName: ArgentSea.ParameterMapAttribute.IsValidType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+    name: IsValidType
+    nameWithType: ParameterMapAttribute.IsValidType
+    fullName: ArgentSea.ParameterMapAttribute.IsValidType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType
+  name: IsValidType
+  nameWithType: MapToSqlVarBinaryAttribute.IsValidType
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.IsValidType
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttribute
+  isExternal: true
+  name: AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
+  nameWithType: ParameterMapAttribute.AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttribute.AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
+  spec.csharp:
+  - uid: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendInParameterExpressions
+    nameWithType: ParameterMapAttribute.AppendInParameterExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendInParameterExpressions
+    nameWithType: ParameterMapAttribute.AppendInParameterExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions
+  name: AppendInParameterExpressions
+  nameWithType: MapToSqlVarBinaryAttribute.AppendInParameterExpressions
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendInParameterExpressions
+- uid: System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+  commentId: T:System.Collections.Generic.IList{System.Linq.Expressions.Expression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<Expression>
+  nameWithType: IList<Expression>
+  fullName: System.Collections.Generic.IList<System.Linq.Expressions.Expression>
+  nameWithType.vb: IList(Of Expression)
+  fullName.vb: System.Collections.Generic.IList(Of System.Linq.Expressions.Expression)
+  name.vb: IList(Of Expression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Linq.Expressions.ParameterExpression
+  commentId: T:System.Linq.Expressions.ParameterExpression
+  parent: System.Linq.Expressions
+  isExternal: true
+  name: ParameterExpression
+  nameWithType: ParameterExpression
+  fullName: System.Linq.Expressions.ParameterExpression
+- uid: System.Collections.Generic.HashSet{System.String}
+  commentId: T:System.Collections.Generic.HashSet{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.HashSet`1
+  name: HashSet<String>
+  nameWithType: HashSet<String>
+  fullName: System.Collections.Generic.HashSet<System.String>
+  nameWithType.vb: HashSet(Of String)
+  fullName.vb: System.Collections.Generic.HashSet(Of System.String)
+  name.vb: HashSet(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Linq.Expressions.Expression
+  commentId: T:System.Linq.Expressions.Expression
+  parent: System.Linq.Expressions
+  isExternal: true
+  name: Expression
+  nameWithType: Expression
+  fullName: System.Linq.Expressions.Expression
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Linq.Expressions
+  commentId: N:System.Linq.Expressions
+  isExternal: true
+  name: System.Linq.Expressions
+  nameWithType: System.Linq.Expressions
+  fullName: System.Linq.Expressions
+- uid: System.Collections.Generic.HashSet`1
+  commentId: T:System.Collections.Generic.HashSet`1
+  isExternal: true
+  name: HashSet<T>
+  nameWithType: HashSet<T>
+  fullName: System.Collections.Generic.HashSet<T>
+  nameWithType.vb: HashSet(Of T)
+  fullName.vb: System.Collections.Generic.HashSet(Of T)
+  name.vb: HashSet(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.Sql.SqlParameterMapAttribute
+  isExternal: true
+  name: AppendTvpExpressions(ParameterExpression, Expression, IList<Expression>, IList<NewExpression>, HashSet<String>, Int32, Type, ParameterExpression, ILogger)
+  nameWithType: SqlParameterMapAttribute.AppendTvpExpressions(ParameterExpression, Expression, IList<Expression>, IList<NewExpression>, HashSet<String>, Int32, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Collections.Generic.IList<System.Linq.Expressions.NewExpression>, System.Collections.Generic.HashSet<System.String>, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: SqlParameterMapAttribute.AppendTvpExpressions(ParameterExpression, Expression, IList(Of Expression), IList(Of NewExpression), HashSet(Of String), Int32, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Collections.Generic.IList(Of System.Linq.Expressions.NewExpression), System.Collections.Generic.HashSet(Of System.String), System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendTvpExpressions(ParameterExpression, Expression, IList(Of Expression), IList(Of NewExpression), HashSet(Of String), Int32, Type, ParameterExpression, ILogger)
+  spec.csharp:
+  - uid: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendTvpExpressions
+    nameWithType: SqlParameterMapAttribute.AppendTvpExpressions
+    fullName: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.NewExpression
+    name: NewExpression
+    nameWithType: NewExpression
+    fullName: System.Linq.Expressions.NewExpression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Collections.Generic.IList{System.Linq.Expressions.NewExpression},System.Collections.Generic.HashSet{System.String},System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendTvpExpressions
+    nameWithType: SqlParameterMapAttribute.AppendTvpExpressions
+    fullName: ArgentSea.Sql.SqlParameterMapAttribute.AppendTvpExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.NewExpression
+    name: NewExpression
+    nameWithType: NewExpression
+    fullName: System.Linq.Expressions.NewExpression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions
+  name: AppendTvpExpressions
+  nameWithType: MapToSqlVarBinaryAttribute.AppendTvpExpressions
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendTvpExpressions
+- uid: System.Collections.Generic.IList{System.Linq.Expressions.NewExpression}
+  commentId: T:System.Collections.Generic.IList{System.Linq.Expressions.NewExpression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<NewExpression>
+  nameWithType: IList<NewExpression>
+  fullName: System.Collections.Generic.IList<System.Linq.Expressions.NewExpression>
+  nameWithType.vb: IList(Of NewExpression)
+  fullName.vb: System.Collections.Generic.IList(Of System.Linq.Expressions.NewExpression)
+  name.vb: IList(Of NewExpression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.NewExpression
+    name: NewExpression
+    nameWithType: NewExpression
+    fullName: System.Linq.Expressions.NewExpression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.NewExpression
+    name: NewExpression
+    nameWithType: NewExpression
+    fullName: System.Linq.Expressions.NewExpression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttribute
+  isExternal: true
+  name: AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
+  nameWithType: ParameterMapAttribute.AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttribute.AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
+  spec.csharp:
+  - uid: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendSetOutParameterExpressions
+    nameWithType: ParameterMapAttribute.AppendSetOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendSetOutParameterExpressions
+    nameWithType: ParameterMapAttribute.AppendSetOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions
+  name: AppendSetOutParameterExpressions
+  nameWithType: MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendSetOutParameterExpressions
+- uid: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttribute
+  isExternal: true
+  name: AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  nameWithType: ParameterMapAttribute.AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttribute.AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  spec.csharp:
+  - uid: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendReadOutParameterExpressions
+    nameWithType: ParameterMapAttribute.AppendReadOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendReadOutParameterExpressions
+    nameWithType: ParameterMapAttribute.AppendReadOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions
+  name: AppendReadOutParameterExpressions
+  nameWithType: MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReadOutParameterExpressions
+- uid: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttribute
+  isExternal: true
+  name: AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
+  nameWithType: ParameterMapAttribute.AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.MethodCallExpression>, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttribute.AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.MethodCallExpression), System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  name.vb: AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
+  spec.csharp:
+  - uid: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendReaderExpressions
+    nameWithType: ParameterMapAttribute.AppendReaderExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendReaderExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.MethodCallExpression
+    name: MethodCallExpression
+    nameWithType: MethodCallExpression
+    fullName: System.Linq.Expressions.MethodCallExpression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+    name: AppendReaderExpressions
+    nameWithType: ParameterMapAttribute.AppendReaderExpressions
+    fullName: ArgentSea.ParameterMapAttribute.AppendReaderExpressions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.MethodCallExpression
+    name: MethodCallExpression
+    nameWithType: MethodCallExpression
+    fullName: System.Linq.Expressions.MethodCallExpression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.ParameterExpression
+    name: ParameterExpression
+    nameWithType: ParameterExpression
+    fullName: System.Linq.Expressions.ParameterExpression
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions
+  name: AppendReaderExpressions
+  nameWithType: MapToSqlVarBinaryAttribute.AppendReaderExpressions
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.AppendReaderExpressions
+- uid: System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression}
+  commentId: T:System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<MethodCallExpression>
+  nameWithType: IList<MethodCallExpression>
+  fullName: System.Collections.Generic.IList<System.Linq.Expressions.MethodCallExpression>
+  nameWithType.vb: IList(Of MethodCallExpression)
+  fullName.vb: System.Collections.Generic.IList(Of System.Linq.Expressions.MethodCallExpression)
+  name.vb: IList(Of MethodCallExpression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Linq.Expressions.MethodCallExpression
+    name: MethodCallExpression
+    nameWithType: MethodCallExpression
+    fullName: System.Linq.Expressions.MethodCallExpression
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Linq.Expressions.MethodCallExpression
+    name: MethodCallExpression
+    nameWithType: MethodCallExpression
+    fullName: System.Linq.Expressions.MethodCallExpression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.ParameterMapAttribute.ParameterName
+  commentId: P:ArgentSea.ParameterMapAttribute.ParameterName
+  parent: ArgentSea.ParameterMapAttribute
+  name: ParameterName
+  nameWithType: ParameterMapAttribute.ParameterName
+  fullName: ArgentSea.ParameterMapAttribute.ParameterName
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName
+  name: ParameterName
+  nameWithType: MapToSqlVarBinaryAttribute.ParameterName
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ParameterName
+- uid: ArgentSea.ParameterMapAttribute.ColumnName
+  commentId: P:ArgentSea.ParameterMapAttribute.ColumnName
+  parent: ArgentSea.ParameterMapAttribute
+  name: ColumnName
+  nameWithType: ParameterMapAttribute.ColumnName
+  fullName: ArgentSea.ParameterMapAttribute.ColumnName
+- uid: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName*
+  commentId: Overload:ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName
+  name: ColumnName
+  nameWithType: MapToSqlVarBinaryAttribute.ColumnName
+  fullName: ArgentSea.Sql.MapToSqlVarBinaryAttribute.ColumnName

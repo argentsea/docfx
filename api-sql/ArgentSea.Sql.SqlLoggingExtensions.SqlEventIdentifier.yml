@@ -1,0 +1,112 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  commentId: T:ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  id: SqlLoggingExtensions.SqlEventIdentifier
+  parent: ArgentSea.Sql
+  children:
+  - ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpCacheStatus
+  - ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpTrace
+  langs:
+  - csharp
+  - vb
+  name: SqlLoggingExtensions.SqlEventIdentifier
+  nameWithType: SqlLoggingExtensions.SqlEventIdentifier
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  type: Enum
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SqlEventIdentifier
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 14
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public enum SqlEventIdentifier
+    content.vb: Public Enum SqlEventIdentifier
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpCacheStatus
+  commentId: F:ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpCacheStatus
+  id: MapperTvpCacheStatus
+  parent: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  langs:
+  - csharp
+  - vb
+  name: MapperTvpCacheStatus
+  nameWithType: SqlLoggingExtensions.SqlEventIdentifier.MapperTvpCacheStatus
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpCacheStatus
+  type: Field
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: MapperTvpCacheStatus
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 16
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: MapperTvpCacheStatus = 0
+    return:
+      type: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpTrace
+  commentId: F:ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpTrace
+  id: MapperTvpTrace
+  parent: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  langs:
+  - csharp
+  - vb
+  name: MapperTvpTrace
+  nameWithType: SqlLoggingExtensions.SqlEventIdentifier.MapperTvpTrace
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier.MapperTvpTrace
+  type: Field
+  source:
+    remote:
+      path: src/SqlLoggingExtensions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: MapperTvpTrace
+    path: ../ArgentSea.Sql/src/SqlLoggingExtensions.cs
+    startLine: 17
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: MapperTvpTrace = 1
+    return:
+      type: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: ArgentSea.Sql
+  commentId: N:ArgentSea.Sql
+  name: ArgentSea.Sql
+  nameWithType: ArgentSea.Sql
+  fullName: ArgentSea.Sql
+- uid: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  commentId: T:ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier
+  parent: ArgentSea.Sql
+  name: SqlLoggingExtensions.SqlEventIdentifier
+  nameWithType: SqlLoggingExtensions.SqlEventIdentifier
+  fullName: ArgentSea.Sql.SqlLoggingExtensions.SqlEventIdentifier

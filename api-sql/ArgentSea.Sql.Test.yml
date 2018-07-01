@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.Test
+  commentId: N:ArgentSea.Sql.Test
+  id: ArgentSea.Sql.Test
+  children:
+  - ArgentSea.Sql.Test.ConfigurationTests
+  - ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ArgentSea.Sql.Test
+  nameWithType: ArgentSea.Sql.Test
+  fullName: ArgentSea.Sql.Test
+  type: Namespace
+  assemblies:
+  - ArgentSea.Sql.Test
+references:
+- uid: ArgentSea.Sql.Test.ConfigurationTests
+  commentId: T:ArgentSea.Sql.Test.ConfigurationTests
+  name: ConfigurationTests
+  nameWithType: ConfigurationTests
+  fullName: ArgentSea.Sql.Test.ConfigurationTests
+- uid: ArgentSea.Sql.Test.MappingTests
+  commentId: T:ArgentSea.Sql.Test.MappingTests
+  name: MappingTests
+  nameWithType: MappingTests
+  fullName: ArgentSea.Sql.Test.MappingTests

@@ -1,0 +1,6 @@
+- name: Configuration
+  href: configuration.md
+  name: Mapping
+  href: mapping.md
+  name: Sharding
+  href: sharding.md

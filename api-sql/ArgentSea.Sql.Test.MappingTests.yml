@@ -1,0 +1,756 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.Test.MappingTests
+  commentId: T:ArgentSea.Sql.Test.MappingTests
+  id: MappingTests
+  parent: ArgentSea.Sql.Test
+  children:
+  - ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper
+  - ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper
+  - ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader
+  - ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader
+  - ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator
+  - ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader
+  - ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader
+  - ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper
+  - ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper
+  langs:
+  - csharp
+  - vb
+  name: MappingTests
+  nameWithType: MappingTests
+  fullName: ArgentSea.Sql.Test.MappingTests
+  type: Class
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: MappingTests
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 10
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: public class MappingTests
+    content.vb: Public Class MappingTests
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper
+  id: ValidateInParameterMapper
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateInParameterMapper()
+  nameWithType: MappingTests.ValidateInParameterMapper()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateInParameterMapper
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 12
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateInParameterMapper()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateInParameterMapper
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper
+  id: ValidateInParameterNullMapper
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateInParameterNullMapper()
+  nameWithType: MappingTests.ValidateInParameterNullMapper()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateInParameterNullMapper
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 149
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateInParameterNullMapper()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateInParameterNullMapper
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator
+  id: ValidateOutParameterCreator
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateOutParameterCreator()
+  nameWithType: MappingTests.ValidateOutParameterCreator()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateOutParameterCreator
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 317
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateOutParameterCreator()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateOutParameterCreator
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader
+  id: ValidateOutParameterReader
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateOutParameterReader()
+  nameWithType: MappingTests.ValidateOutParameterReader()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateOutParameterReader
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 463
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateOutParameterReader()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateOutParameterReader
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader
+  id: ValidateOutNullParameterReader
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateOutNullParameterReader()
+  nameWithType: MappingTests.ValidateOutNullParameterReader()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateOutNullParameterReader
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 584
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateOutNullParameterReader()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateOutNullParameterReader
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper
+  id: ValidateSqlMetadataMapper
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateSqlMetadataMapper()
+  nameWithType: MappingTests.ValidateSqlMetadataMapper()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateSqlMetadataMapper
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 685
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateSqlMetadataMapper()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateSqlMetadataMapper
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper
+  id: ValidateSqlMetadataNullMapper
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateSqlMetadataNullMapper()
+  nameWithType: MappingTests.ValidateSqlMetadataNullMapper()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateSqlMetadataNullMapper
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 793
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateSqlMetadataNullMapper()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateSqlMetadataNullMapper
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader
+  id: ValidateSqlDataReader
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateSqlDataReader()
+  nameWithType: MappingTests.ValidateSqlDataReader()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateSqlDataReader
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 883
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateSqlDataReader()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateSqlDataReader
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader
+  commentId: M:ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader
+  id: ValidateNullSqlDataReader
+  parent: ArgentSea.Sql.Test.MappingTests
+  langs:
+  - csharp
+  - vb
+  name: ValidateNullSqlDataReader()
+  nameWithType: MappingTests.ValidateNullSqlDataReader()
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader()
+  type: Method
+  source:
+    remote:
+      path: test/MappingTests.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ValidateNullSqlDataReader
+    path: ../ArgentSea.Sql/test/MappingTests.cs
+    startLine: 1130
+  assemblies:
+  - ArgentSea.Sql.Test
+  namespace: ArgentSea.Sql.Test
+  syntax:
+    content: >-
+      [Fact]
+
+      public void ValidateNullSqlDataReader()
+    content.vb: >-
+      <Fact>
+
+      Public Sub ValidateNullSqlDataReader
+  overload: ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader*
+  attributes:
+  - type: Xunit.FactAttribute
+    ctor: Xunit.FactAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: ArgentSea.Sql.Test
+  commentId: N:ArgentSea.Sql.Test
+  name: ArgentSea.Sql.Test
+  nameWithType: ArgentSea.Sql.Test
+  fullName: ArgentSea.Sql.Test
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper
+  name: ValidateInParameterMapper
+  nameWithType: MappingTests.ValidateInParameterMapper
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateInParameterMapper
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper
+  name: ValidateInParameterNullMapper
+  nameWithType: MappingTests.ValidateInParameterNullMapper
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateInParameterNullMapper
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator
+  name: ValidateOutParameterCreator
+  nameWithType: MappingTests.ValidateOutParameterCreator
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterCreator
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader
+  name: ValidateOutParameterReader
+  nameWithType: MappingTests.ValidateOutParameterReader
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateOutParameterReader
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader
+  name: ValidateOutNullParameterReader
+  nameWithType: MappingTests.ValidateOutNullParameterReader
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateOutNullParameterReader
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper
+  name: ValidateSqlMetadataMapper
+  nameWithType: MappingTests.ValidateSqlMetadataMapper
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataMapper
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper
+  name: ValidateSqlMetadataNullMapper
+  nameWithType: MappingTests.ValidateSqlMetadataNullMapper
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateSqlMetadataNullMapper
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader
+  name: ValidateSqlDataReader
+  nameWithType: MappingTests.ValidateSqlDataReader
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateSqlDataReader
+- uid: ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader*
+  commentId: Overload:ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader
+  name: ValidateNullSqlDataReader
+  nameWithType: MappingTests.ValidateNullSqlDataReader
+  fullName: ArgentSea.Sql.Test.MappingTests.ValidateNullSqlDataReader

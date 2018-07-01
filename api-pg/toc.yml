@@ -1,0 +1,84 @@
+### YamlMime:TableOfContent
+- uid: ArgentSea.Pg
+  name: ArgentSea.Pg
+  items:
+  - uid: ArgentSea.Pg.DataProviderServiceFactory
+    name: DataProviderServiceFactory
+  - uid: ArgentSea.Pg.MapToPgArrayAttribute
+    name: MapToPgArrayAttribute
+  - uid: ArgentSea.Pg.MapToPgBigintAttribute
+    name: MapToPgBigintAttribute
+  - uid: ArgentSea.Pg.MapToPgBooleanAttribute
+    name: MapToPgBooleanAttribute
+  - uid: ArgentSea.Pg.MapToPgByteaAttribute
+    name: MapToPgByteaAttribute
+  - uid: ArgentSea.Pg.MapToPgCharAttribute
+    name: MapToPgCharAttribute
+  - uid: ArgentSea.Pg.MapToPgDateAttribute
+    name: MapToPgDateAttribute
+  - uid: ArgentSea.Pg.MapToPgDoubleAttribute
+    name: MapToPgDoubleAttribute
+  - uid: ArgentSea.Pg.MapToPgHstoreAttribute
+    name: MapToPgHstoreAttribute
+  - uid: ArgentSea.Pg.MapToPgIntegerAttribute
+    name: MapToPgIntegerAttribute
+  - uid: ArgentSea.Pg.MapToPgInternalCharAttribute
+    name: MapToPgInternalCharAttribute
+  - uid: ArgentSea.Pg.MapToPgIntervalAttribute
+    name: MapToPgIntervalAttribute
+  - uid: ArgentSea.Pg.MapToPgMoneyAttribute
+    name: MapToPgMoneyAttribute
+  - uid: ArgentSea.Pg.MapToPgNumericAttribute
+    name: MapToPgNumericAttribute
+  - uid: ArgentSea.Pg.MapToPgRealAttribute
+    name: MapToPgRealAttribute
+  - uid: ArgentSea.Pg.MapToPgSmallintAttribute
+    name: MapToPgSmallintAttribute
+  - uid: ArgentSea.Pg.MapToPgTextAttribute
+    name: MapToPgTextAttribute
+  - uid: ArgentSea.Pg.MapToPgTimeAttribute
+    name: MapToPgTimeAttribute
+  - uid: ArgentSea.Pg.MapToPgTimestampAttribute
+    name: MapToPgTimestampAttribute
+  - uid: ArgentSea.Pg.MapToPgTimestampTzAttribute
+    name: MapToPgTimestampTzAttribute
+  - uid: ArgentSea.Pg.MapToPgTimeTzAttribute
+    name: MapToPgTimeTzAttribute
+  - uid: ArgentSea.Pg.MapToPgUuidAttribute
+    name: MapToPgUuidAttribute
+  - uid: ArgentSea.Pg.MapToPgVarCharAttribute
+    name: MapToPgVarCharAttribute
+  - uid: ArgentSea.Pg.PgConnectionConfiguration
+    name: PgConnectionConfiguration
+  - uid: ArgentSea.Pg.PgDatabases
+    name: PgDatabases
+  - uid: ArgentSea.Pg.PgDbConnectionConfiguration
+    name: PgDbConnectionConfiguration
+  - uid: ArgentSea.Pg.PgDbConnectionOptions
+    name: PgDbConnectionOptions
+  - uid: ArgentSea.Pg.PgParameterCollectionExtensions
+    name: PgParameterCollectionExtensions
+  - uid: ArgentSea.Pg.PgParameterMapAttribute
+    name: PgParameterMapAttribute
+  - uid: ArgentSea.Pg.PgShardConnectionOptions`1
+    name: PgShardConnectionOptions<TShard>
+    name.vb: PgShardConnectionOptions(Of TShard)
+  - uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionConfiguration
+    name: PgShardConnectionOptions<TShard>.PgShardConnectionConfiguration
+    name.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionConfiguration
+  - uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration
+    name: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration
+    name.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration
+  - uid: ArgentSea.Pg.PgShardSets`1
+    name: PgShardSets<TShard>
+    name.vb: PgShardSets(Of TShard)
+- uid: ArgentSea.Pg.Test
+  name: ArgentSea.Pg.Test
+  items:
+  - uid: ArgentSea.Pg.Test.UnitTest1
+    name: UnitTest1
+- uid: Microsoft.Extensions.DependencyInjection
+  name: Microsoft.Extensions.DependencyInjection
+  items:
+  - uid: Microsoft.Extensions.DependencyInjection.PgServiceBuilderExtensions
+    name: PgServiceBuilderExtensions

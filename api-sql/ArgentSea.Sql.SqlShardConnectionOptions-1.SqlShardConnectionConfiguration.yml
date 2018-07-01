@@ -1,0 +1,730 @@
+### YamlMime:ManagedReference
+items:
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  commentId: T:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  id: SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  parent: ArgentSea.Sql
+  children:
+  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnection
+  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnectionInternal
+  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ShardId
+  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnection
+  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnectionInternal
+  langs:
+  - csharp
+  - vb
+  name: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration
+  type: Class
+  source:
+    remote:
+      path: src/SqlShardConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: SqlShardConnectionConfiguration
+    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
+    startLine: 25
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: 'public class SqlShardConnectionConfiguration : IShardConnectionConfiguration<TShard>'
+    content.vb: >-
+      Public Class SqlShardConnectionConfiguration
+          Implements IShardConnectionConfiguration(Of TShard)
+  inheritance:
+  - System.Object
+  implements:
+  - ArgentSea.IShardConnectionConfiguration{{TShard}}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration
+  name.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ShardId
+  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ShardId
+  id: ShardId
+  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: ShardId
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ShardId
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ShardId
+  type: Property
+  source:
+    remote:
+      path: src/SqlShardConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ShardId
+    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
+    startLine: 27
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public TShard ShardId { get; set; }
+    parameters: []
+    return:
+      type: '{TShard}'
+    content.vb: Public Property ShardId As TShard
+  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ShardId*
+  implements:
+  - ArgentSea.IShardConnectionConfiguration{{TShard}}.ShardId
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ShardId
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ShardId
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnectionInternal
+  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnectionInternal
+  id: ReadConnectionInternal
+  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: ReadConnectionInternal
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnectionInternal
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnectionInternal
+  type: Property
+  source:
+    remote:
+      path: src/SqlShardConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ReadConnectionInternal
+    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
+    startLine: 28
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public IConnectionConfiguration ReadConnectionInternal { get; }
+    parameters: []
+    return:
+      type: ArgentSea.IConnectionConfiguration
+    content.vb: Public ReadOnly Property ReadConnectionInternal As IConnectionConfiguration
+  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnectionInternal*
+  implements:
+  - ArgentSea.IShardConnectionConfiguration{{TShard}}.ReadConnectionInternal
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnectionInternal
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnectionInternal
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnectionInternal
+  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnectionInternal
+  id: WriteConnectionInternal
+  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: WriteConnectionInternal
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnectionInternal
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnectionInternal
+  type: Property
+  source:
+    remote:
+      path: src/SqlShardConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: WriteConnectionInternal
+    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
+    startLine: 29
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public IConnectionConfiguration WriteConnectionInternal { get; }
+    parameters: []
+    return:
+      type: ArgentSea.IConnectionConfiguration
+    content.vb: Public ReadOnly Property WriteConnectionInternal As IConnectionConfiguration
+  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnectionInternal*
+  implements:
+  - ArgentSea.IShardConnectionConfiguration{{TShard}}.WriteConnectionInternal
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnectionInternal
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnectionInternal
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnection
+  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnection
+  id: ReadConnection
+  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: ReadConnection
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnection
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnection
+  type: Property
+  source:
+    remote:
+      path: src/SqlShardConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: ReadConnection
+    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
+    startLine: 30
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public SqlConnectionConfiguration ReadConnection { get; set; }
+    parameters: []
+    return:
+      type: ArgentSea.Sql.SqlConnectionConfiguration
+    content.vb: Public Property ReadConnection As SqlConnectionConfiguration
+  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnection*
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnection
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnection
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnection
+  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnection
+  id: WriteConnection
+  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
+  langs:
+  - csharp
+  - vb
+  name: WriteConnection
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnection
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnection
+  type: Property
+  source:
+    remote:
+      path: src/SqlShardConnectionOptions.cs
+      branch: master
+      repo: https://github.com/argentsea/sql.git
+    id: WriteConnection
+    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
+    startLine: 31
+  assemblies:
+  - ArgentSea.Sql
+  namespace: ArgentSea.Sql
+  syntax:
+    content: public SqlConnectionConfiguration WriteConnection { get; set; }
+    parameters: []
+    return:
+      type: ArgentSea.Sql.SqlConnectionConfiguration
+    content.vb: Public Property WriteConnection As SqlConnectionConfiguration
+  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnection*
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnection
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnection
+references:
+- uid: ArgentSea.Sql
+  commentId: N:ArgentSea.Sql
+  name: ArgentSea.Sql
+  nameWithType: ArgentSea.Sql
+  fullName: ArgentSea.Sql
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: ArgentSea.IShardConnectionConfiguration{{TShard}}
+  commentId: T:ArgentSea.IShardConnectionConfiguration{`0}
+  parent: ArgentSea
+  definition: ArgentSea.IShardConnectionConfiguration`1
+  name: IShardConnectionConfiguration<TShard>
+  nameWithType: IShardConnectionConfiguration<TShard>
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard)
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard)
+  name.vb: IShardConnectionConfiguration(Of TShard)
+  spec.csharp:
+  - uid: ArgentSea.IShardConnectionConfiguration`1
+    name: IShardConnectionConfiguration
+    nameWithType: IShardConnectionConfiguration
+    fullName: ArgentSea.IShardConnectionConfiguration
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TShard
+    nameWithType: TShard
+    fullName: TShard
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: ArgentSea.IShardConnectionConfiguration`1
+    name: IShardConnectionConfiguration
+    nameWithType: IShardConnectionConfiguration
+    fullName: ArgentSea.IShardConnectionConfiguration
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TShard
+    nameWithType: TShard
+    fullName: TShard
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ArgentSea.IShardConnectionConfiguration`1
+  commentId: T:ArgentSea.IShardConnectionConfiguration`1
+  name: IShardConnectionConfiguration<TShard>
+  nameWithType: IShardConnectionConfiguration<TShard>
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard)
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard)
+  name.vb: IShardConnectionConfiguration(Of TShard)
+  spec.csharp:
+  - uid: ArgentSea.IShardConnectionConfiguration`1
+    name: IShardConnectionConfiguration
+    nameWithType: IShardConnectionConfiguration
+    fullName: ArgentSea.IShardConnectionConfiguration
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TShard
+    nameWithType: TShard
+    fullName: TShard
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: ArgentSea.IShardConnectionConfiguration`1
+    name: IShardConnectionConfiguration
+    nameWithType: IShardConnectionConfiguration
+    fullName: ArgentSea.IShardConnectionConfiguration
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TShard
+    nameWithType: TShard
+    fullName: TShard
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea
+  commentId: N:ArgentSea
+  name: ArgentSea
+  nameWithType: ArgentSea
+  fullName: ArgentSea
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ShardId*
+  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ShardId
+  name: ShardId
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ShardId
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ShardId
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ShardId
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ShardId
+- uid: ArgentSea.IShardConnectionConfiguration{{TShard}}.ShardId
+  commentId: P:ArgentSea.IShardConnectionConfiguration{`0}.ShardId
+  parent: ArgentSea.IShardConnectionConfiguration{{TShard}}
+  definition: ArgentSea.IShardConnectionConfiguration`1.ShardId
+  name: ShardId
+  nameWithType: IShardConnectionConfiguration<TShard>.ShardId
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>.ShardId
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard).ShardId
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard).ShardId
+- uid: '{TShard}'
+  commentId: '!:TShard'
+  definition: TShard
+  name: TShard
+  nameWithType: TShard
+  fullName: TShard
+- uid: ArgentSea.IShardConnectionConfiguration`1.ShardId
+  commentId: P:ArgentSea.IShardConnectionConfiguration`1.ShardId
+  name: ShardId
+  nameWithType: IShardConnectionConfiguration<TShard>.ShardId
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>.ShardId
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard).ShardId
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard).ShardId
+- uid: TShard
+  commentId: '!:TShard'
+  name: TShard
+  nameWithType: TShard
+  fullName: TShard
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnectionInternal*
+  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnectionInternal
+  name: ReadConnectionInternal
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnectionInternal
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnectionInternal
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnectionInternal
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnectionInternal
+- uid: ArgentSea.IShardConnectionConfiguration{{TShard}}.ReadConnectionInternal
+  commentId: P:ArgentSea.IShardConnectionConfiguration{`0}.ReadConnectionInternal
+  parent: ArgentSea.IShardConnectionConfiguration{{TShard}}
+  definition: ArgentSea.IShardConnectionConfiguration`1.ReadConnectionInternal
+  name: ReadConnectionInternal
+  nameWithType: IShardConnectionConfiguration<TShard>.ReadConnectionInternal
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>.ReadConnectionInternal
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard).ReadConnectionInternal
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard).ReadConnectionInternal
+- uid: ArgentSea.IConnectionConfiguration
+  commentId: T:ArgentSea.IConnectionConfiguration
+  parent: ArgentSea
+  name: IConnectionConfiguration
+  nameWithType: IConnectionConfiguration
+  fullName: ArgentSea.IConnectionConfiguration
+- uid: ArgentSea.IShardConnectionConfiguration`1.ReadConnectionInternal
+  commentId: P:ArgentSea.IShardConnectionConfiguration`1.ReadConnectionInternal
+  name: ReadConnectionInternal
+  nameWithType: IShardConnectionConfiguration<TShard>.ReadConnectionInternal
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>.ReadConnectionInternal
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard).ReadConnectionInternal
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard).ReadConnectionInternal
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnectionInternal*
+  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnectionInternal
+  name: WriteConnectionInternal
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnectionInternal
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnectionInternal
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnectionInternal
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnectionInternal
+- uid: ArgentSea.IShardConnectionConfiguration{{TShard}}.WriteConnectionInternal
+  commentId: P:ArgentSea.IShardConnectionConfiguration{`0}.WriteConnectionInternal
+  parent: ArgentSea.IShardConnectionConfiguration{{TShard}}
+  definition: ArgentSea.IShardConnectionConfiguration`1.WriteConnectionInternal
+  name: WriteConnectionInternal
+  nameWithType: IShardConnectionConfiguration<TShard>.WriteConnectionInternal
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>.WriteConnectionInternal
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard).WriteConnectionInternal
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard).WriteConnectionInternal
+- uid: ArgentSea.IShardConnectionConfiguration`1.WriteConnectionInternal
+  commentId: P:ArgentSea.IShardConnectionConfiguration`1.WriteConnectionInternal
+  name: WriteConnectionInternal
+  nameWithType: IShardConnectionConfiguration<TShard>.WriteConnectionInternal
+  fullName: ArgentSea.IShardConnectionConfiguration<TShard>.WriteConnectionInternal
+  nameWithType.vb: IShardConnectionConfiguration(Of TShard).WriteConnectionInternal
+  fullName.vb: ArgentSea.IShardConnectionConfiguration(Of TShard).WriteConnectionInternal
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnection*
+  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.ReadConnection
+  name: ReadConnection
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnection
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.ReadConnection
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnection
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.ReadConnection
+- uid: ArgentSea.Sql.SqlConnectionConfiguration
+  commentId: T:ArgentSea.Sql.SqlConnectionConfiguration
+  parent: ArgentSea.Sql
+  name: SqlConnectionConfiguration
+  nameWithType: SqlConnectionConfiguration
+  fullName: ArgentSea.Sql.SqlConnectionConfiguration
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnection*
+  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration.WriteConnection
+  name: WriteConnection
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnection
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionConfiguration.WriteConnection
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnection
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionConfiguration.WriteConnection
