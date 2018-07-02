@@ -1,4 +1,4 @@
-﻿# Configuring
-ArgentSea setup.
+﻿# Configuring ArgentSea
 
-Secrets
+
+(documentation coming soon)

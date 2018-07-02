@@ -48,8 +48,10 @@
     "content": [
       {
         "files": [
-          "articles/**.md",
-          "articles/**/toc.yml",
+          "documentation/**.md",
+          "documentation/**/toc.yml",
+          "reference/**.md",
+          "reference/**/toc.yml",
           "tutorials/**.md",
           "tutorials/**/toc.yml",
           "toc.yml",

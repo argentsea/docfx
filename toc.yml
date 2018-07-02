@@ -1,11 +1,6 @@
 - name: Tutorials
   href: tutorials/
 - name: Documentation
-  href: articles/
-- name: Shared API
-  href: api/
-- name: SQL Server API
-  href: api-sql/
-- name: PostreSQL API
-  href: api-pg/
--
+  href: documentation/
+- name: Reference
+  href: reference/

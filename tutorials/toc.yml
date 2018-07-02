@@ -1,6 +1,8 @@
+- name: Walkthroughs
+  href: index.md
 - name: Configuration
   href: configuration.md
-  name: Mapping
+- name: Mapping
   href: mapping.md
-  name: Sharding
+- name: Sharding
   href: sharding.md

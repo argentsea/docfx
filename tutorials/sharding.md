@@ -1,6 +1,3 @@
 ﻿# Sharding
-Introduction
 
-Threading
-
-ShardKey and ShardChild
+(documentation coming soon)
