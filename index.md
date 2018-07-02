@@ -1,16 +1,7 @@
-# Welcome to ArgentSea.
+# Welcome to ArgentSea Docs!
 
-## Getting Started
-If you are using SQL Server, then Add the ArgentSea.Sql NuGet package.
+The documentation is actively being worked on. Clearly, it is currently under construction.
 
-If you are using PostgreSql, then Add the ArgentSea.Pg NuGet package.
+You can find the most information in the [APIsection](/reference/apis.html). That is the area of current focus.
 
-Perspective
-
-Tutorials
-1. Setup
-2. Configuration
-3. Logging
-4. Mapping
-5. Sharding
-6. Putting it all together
+The _Getting Started_ tutorials will be coming next.
