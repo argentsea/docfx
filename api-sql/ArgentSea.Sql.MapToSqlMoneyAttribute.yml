@@ -39,6 +39,7 @@ items:
     content: 'public class MapToSqlMoneyAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlMoneyAttribute
+
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

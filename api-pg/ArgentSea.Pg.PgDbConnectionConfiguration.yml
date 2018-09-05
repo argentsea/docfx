@@ -24,7 +24,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: PgDbConnectionConfiguration
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 43
+    startLine: 32
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -32,6 +32,7 @@ items:
     content: 'public class PgDbConnectionConfiguration : IDbConnectionConfiguration'
     content.vb: >-
       Public Class PgDbConnectionConfiguration
+
           Implements IDbConnectionConfiguration
   inheritance:
   - System.Object
@@ -69,7 +70,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: DatabaseKey
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 45
+    startLine: 34
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -106,7 +107,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: SecurityKey
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 46
+    startLine: 35
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -143,7 +144,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: DataResilienceKey
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 47
+    startLine: 36
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -180,7 +181,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: DataConnectionInternal
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 49
+    startLine: 38
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -217,7 +218,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: DataConnection
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 50
+    startLine: 39
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg

@@ -39,6 +39,7 @@ items:
     content: 'public class MapToSqlUniqueIdentifierAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlUniqueIdentifierAttribute
+
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

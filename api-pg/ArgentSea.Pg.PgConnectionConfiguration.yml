@@ -74,6 +74,7 @@ items:
     content: 'public class PgConnectionConfiguration : IConnectionConfiguration'
     content.vb: >-
       Public Class PgConnectionConfiguration
+
           Implements IConnectionConfiguration
   inheritance:
   - System.Object

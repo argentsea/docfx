@@ -24,7 +24,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SqlDbConnectionConfiguration
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 42
+    startLine: 31
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -32,6 +32,7 @@ items:
     content: 'public class SqlDbConnectionConfiguration : IDbConnectionConfiguration'
     content.vb: >-
       Public Class SqlDbConnectionConfiguration
+
           Implements IDbConnectionConfiguration
   inheritance:
   - System.Object
@@ -69,7 +70,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DatabaseKey
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 44
+    startLine: 33
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -106,7 +107,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SecurityKey
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 45
+    startLine: 34
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -143,7 +144,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DataResilienceKey
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 46
+    startLine: 35
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -180,7 +181,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DataConnectionInternal
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 48
+    startLine: 37
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -217,7 +218,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DataConnection
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 49
+    startLine: 38
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql

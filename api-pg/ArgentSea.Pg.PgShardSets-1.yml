@@ -33,6 +33,7 @@ items:
       description: ''
     content.vb: >-
       Public Class PgShardSets(Of TShard As IComparable)
+
           Inherits ShardDataStores(Of TShard, PgShardConnectionOptions(Of TShard))
   inheritance:
   - System.Object

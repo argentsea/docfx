@@ -36,6 +36,7 @@ items:
     content: 'public class MapToPgMoneyAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgMoneyAttribute
+
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

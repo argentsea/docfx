@@ -59,6 +59,7 @@ items:
     content: 'public class SqlConnectionConfiguration : IConnectionConfiguration'
     content.vb: >-
       Public Class SqlConnectionConfiguration
+
           Implements IConnectionConfiguration
   inheritance:
   - System.Object
@@ -131,7 +132,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectionDescription
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 35
+    startLine: 38
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -168,7 +169,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: GetConnectionString
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 40
+    startLine: 43
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -202,7 +203,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ApplicationIntent
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 47
+    startLine: 50
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -239,7 +240,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ApplicationName
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 56
+    startLine: 59
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -276,7 +277,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectRetryCount
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 64
+    startLine: 67
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -313,7 +314,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectRetryInterval
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 72
+    startLine: 75
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -350,7 +351,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectTimeout
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 80
+    startLine: 83
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -387,7 +388,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: CurrentLanguage
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 88
+    startLine: 91
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -424,7 +425,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DataSource
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 96
+    startLine: 99
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -461,7 +462,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Encrypt
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 104
+    startLine: 107
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -498,7 +499,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: FailoverPartner
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 112
+    startLine: 115
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -535,7 +536,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: InitialCatalog
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 120
+    startLine: 123
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -572,7 +573,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: LoadBalanceTimeout
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 128
+    startLine: 131
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -609,7 +610,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MaxPoolSize
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 136
+    startLine: 139
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -646,7 +647,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MinPoolSize
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 144
+    startLine: 147
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -683,7 +684,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MultipleActiveResultSets
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 152
+    startLine: 155
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -720,7 +721,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MultiSubnetFailover
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 160
+    startLine: 163
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -757,7 +758,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: PacketSize
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 168
+    startLine: 171
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -794,7 +795,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: PersistSecurityInfo
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 176
+    startLine: 179
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -831,7 +832,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Pooling
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 184
+    startLine: 187
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -868,7 +869,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Replication
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 192
+    startLine: 195
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -905,7 +906,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: TrustServerCertificate
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 200
+    startLine: 203
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -942,7 +943,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: TypeSystemVersion
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 208
+    startLine: 211
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -979,7 +980,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: WorkstationID
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 216
+    startLine: 219
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1016,7 +1017,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Add
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 254
+    startLine: 257
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1055,7 +1056,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ContainsKey
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 261
+    startLine: 264
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1092,7 +1093,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Remove
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 269
+    startLine: 272
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1130,7 +1131,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Remove
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 277
+    startLine: 280
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1165,7 +1166,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: TryGetValue
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 282
+    startLine: 285
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql

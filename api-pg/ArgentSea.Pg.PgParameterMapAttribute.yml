@@ -31,6 +31,7 @@ items:
     content: 'public abstract class PgParameterMapAttribute : ParameterMapAttribute'
     content.vb: >-
       Public MustInherit Class PgParameterMapAttribute
+
           Inherits ParameterMapAttribute
   inheritance:
   - System.Object

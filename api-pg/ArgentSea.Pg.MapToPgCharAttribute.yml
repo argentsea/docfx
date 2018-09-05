@@ -37,6 +37,7 @@ items:
     content: 'public class MapToPgCharAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgCharAttribute
+
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

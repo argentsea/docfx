@@ -66,7 +66,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: AddSqlServices
     path: ../ArgentSea.Sql/src/SqlServiceBuilderExtensions.cs
-    startLine: 24
+    startLine: 20
   assemblies:
   - ArgentSea.Sql
   namespace: Microsoft.Extensions.DependencyInjection
@@ -114,7 +114,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: AddSqlServices
     path: ../ArgentSea.Sql/src/SqlServiceBuilderExtensions.cs
-    startLine: 49
+    startLine: 40
   assemblies:
   - ArgentSea.Sql
   namespace: Microsoft.Extensions.DependencyInjection
@@ -123,6 +123,7 @@ items:
   syntax:
     content: >-
       public static IServiceCollection AddSqlServices<TShard>(this IServiceCollection services, IConfiguration config)
+
           where TShard : IComparable
     parameters:
     - id: services

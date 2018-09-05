@@ -33,6 +33,7 @@ items:
       description: ''
     content.vb: >-
       Public Class SqlShardSets(Of TShard As IComparable)
+
           Inherits ShardDataStores(Of TShard, SqlShardConnectionOptions(Of TShard))
   inheritance:
   - System.Object

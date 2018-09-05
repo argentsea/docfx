@@ -41,6 +41,7 @@ items:
     content: 'public class MapToSqlDecimalAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlDecimalAttribute
+
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

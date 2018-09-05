@@ -33,6 +33,7 @@ items:
     content: 'public class DataProviderServiceFactory : IDataProviderServiceFactory'
     content.vb: >-
       Public Class DataProviderServiceFactory
+
           Implements IDataProviderServiceFactory
   inheritance:
   - System.Object
@@ -183,7 +184,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: SetParameters
     path: ../ArgentSea.Pg/src/DataProviderServiceFactory.cs
-    startLine: 48
+    startLine: 38
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg

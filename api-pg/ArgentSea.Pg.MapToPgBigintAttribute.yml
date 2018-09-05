@@ -36,6 +36,7 @@ items:
     content: 'public class MapToPgBigintAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgBigintAttribute
+
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

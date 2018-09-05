@@ -21,14 +21,17 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SqlDbConnectionOptions
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 36
+    startLine: 25
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
+  summary: "\nThis configuration class defines an array of database <xref href=\"ArgentSea.Sql.SqlConnectionConfiguration\" data-throw-if-not-resolved=\"false\"></xref>. \n<example>\nFor example, you might configure your appsettings.json like this:\n<pre><code>  &quot;SqlDbConnections&quot;: [\n  {\n    &quot;DatabaseKey&quot;: &quot;MyDatabase&quot;,\n    &quot;SecurityKey&quot;: &quot;SecKey1&quot;,\n    &quot;DataConnection&quot;: {\n      &quot;DataSource&quot;: &quot;localhost&quot;,\n      &quot;InitialCatalog&quot;: &quot;MyDb&quot;\n      }\n    }\n  ]</code></pre>\n Note that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a DataResilienceKey (if defined) must match a key in the DataResilienceOptions array.\n</example>\n"
+  example: []
   syntax:
     content: 'public class SqlDbConnectionOptions : IDbDataConfigurationOptions'
     content.vb: >-
       Public Class SqlDbConnectionOptions
+
           Implements IDbDataConfigurationOptions
   inheritance:
   - System.Object
@@ -66,7 +69,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SqlDbConnections
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 38
+    startLine: 27
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -101,7 +104,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DbConnectionsInternal
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 39
+    startLine: 28
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -121,6 +124,12 @@ items:
   - Public
   - ReadOnly
 references:
+- uid: ArgentSea.Sql.SqlConnectionConfiguration
+  commentId: T:ArgentSea.Sql.SqlConnectionConfiguration
+  parent: ArgentSea.Sql
+  name: SqlConnectionConfiguration
+  nameWithType: SqlConnectionConfiguration
+  fullName: ArgentSea.Sql.SqlConnectionConfiguration
 - uid: ArgentSea.Sql
   commentId: N:ArgentSea.Sql
   name: ArgentSea.Sql
