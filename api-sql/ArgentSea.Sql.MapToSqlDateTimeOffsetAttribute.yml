@@ -39,7 +39,6 @@ items:
     content: 'public class MapToSqlDateTimeOffsetAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlDateTimeOffsetAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

@@ -39,7 +39,6 @@ items:
     content: 'public class MapToSqlFloatAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlFloatAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

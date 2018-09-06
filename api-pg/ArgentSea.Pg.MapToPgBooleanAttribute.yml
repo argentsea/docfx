@@ -36,7 +36,6 @@ items:
     content: 'public class MapToPgBooleanAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgBooleanAttribute
-
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

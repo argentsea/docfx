@@ -30,7 +30,6 @@ items:
     content: 'public class SqlDatabases : DbDataStores<SqlDbConnectionOptions>'
     content.vb: >-
       Public Class SqlDatabases
-
           Inherits DbDataStores(Of SqlDbConnectionOptions)
   inheritance:
   - System.Object

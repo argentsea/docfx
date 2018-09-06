@@ -33,7 +33,6 @@ items:
     content: 'public class DataProviderServiceFactory : IDataProviderServiceFactory'
     content.vb: >-
       Public Class DataProviderServiceFactory
-
           Implements IDataProviderServiceFactory
   inheritance:
   - System.Object

@@ -41,7 +41,6 @@ items:
     content: 'public class MapToSqlVarCharAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlVarCharAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

@@ -39,7 +39,6 @@ items:
     content: 'public class MapToSqlSmallIntAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlSmallIntAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

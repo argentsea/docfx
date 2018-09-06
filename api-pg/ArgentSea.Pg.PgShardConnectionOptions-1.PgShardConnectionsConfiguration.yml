@@ -32,7 +32,6 @@ items:
     content: 'public class PgShardConnectionsConfiguration : IShardConnectionsConfiguration<TShard>'
     content.vb: >-
       Public Class PgShardConnectionsConfiguration
-
           Implements IShardConnectionsConfiguration(Of TShard)
   inheritance:
   - System.Object

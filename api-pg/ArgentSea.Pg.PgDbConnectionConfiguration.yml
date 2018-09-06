@@ -32,7 +32,6 @@ items:
     content: 'public class PgDbConnectionConfiguration : IDbConnectionConfiguration'
     content.vb: >-
       Public Class PgDbConnectionConfiguration
-
           Implements IDbConnectionConfiguration
   inheritance:
   - System.Object

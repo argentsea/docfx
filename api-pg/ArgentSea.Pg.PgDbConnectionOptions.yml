@@ -31,7 +31,6 @@ items:
     content: 'public class PgDbConnectionOptions : IDbDataConfigurationOptions'
     content.vb: >-
       Public Class PgDbConnectionOptions
-
           Implements IDbDataConfigurationOptions
   inheritance:
   - System.Object

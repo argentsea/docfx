@@ -36,7 +36,6 @@ items:
     content: 'public class MapToPgIntervalAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgIntervalAttribute
-
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

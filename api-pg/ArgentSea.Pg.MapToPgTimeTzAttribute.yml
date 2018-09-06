@@ -36,7 +36,6 @@ items:
     content: 'public class MapToPgTimeTzAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgTimeTzAttribute
-
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

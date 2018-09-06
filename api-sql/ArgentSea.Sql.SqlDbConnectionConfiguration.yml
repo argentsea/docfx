@@ -32,7 +32,6 @@ items:
     content: 'public class SqlDbConnectionConfiguration : IDbConnectionConfiguration'
     content.vb: >-
       Public Class SqlDbConnectionConfiguration
-
           Implements IDbConnectionConfiguration
   inheritance:
   - System.Object

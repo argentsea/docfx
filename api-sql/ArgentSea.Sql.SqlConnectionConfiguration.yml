@@ -59,7 +59,6 @@ items:
     content: 'public class SqlConnectionConfiguration : IConnectionConfiguration'
     content.vb: >-
       Public Class SqlConnectionConfiguration
-
           Implements IConnectionConfiguration
   inheritance:
   - System.Object

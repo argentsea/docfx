@@ -40,7 +40,6 @@ items:
     content: 'public class MapToSqlNVarCharAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlNVarCharAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

@@ -36,7 +36,6 @@ items:
     content: 'public class MapToPgSmallintAttribute : PgParameterMapAttribute'
     content.vb: >-
       Public Class MapToPgSmallintAttribute
-
           Inherits PgParameterMapAttribute
   inheritance:
   - System.Object

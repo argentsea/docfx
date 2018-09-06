@@ -39,7 +39,6 @@ items:
     content: 'public class MapToSqlTimeAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlTimeAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

@@ -40,7 +40,6 @@ items:
     content: 'public class MapToSqlVarBinaryAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlVarBinaryAttribute
-
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

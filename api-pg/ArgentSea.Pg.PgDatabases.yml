@@ -30,7 +30,6 @@ items:
     content: 'public class PgDatabases : DbDataStores<PgDbConnectionOptions>'
     content.vb: >-
       Public Class PgDatabases
-
           Inherits DbDataStores(Of PgDbConnectionOptions)
   inheritance:
   - System.Object
