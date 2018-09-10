@@ -156,8 +156,9 @@ For SQL Server, the entire set of attributes would look like this:
 "SqlDbConnections": [
   {
     "DatabaseKey": "MyDb",
-    "SecurityKey": "MyCredentials",
     "DataConnection": {
+      "SecurityKey": "0",
+      "DataResilienceKey": "remote",
       "ApplicationIntent": "ReadWrite",
       "ApplicationName": "MyWebApp",
       "ConnectRetryCount": 0,
@@ -198,8 +199,10 @@ If you accept the defaults, the only required parameter values are:
 ````json
 "SqlDbConnections": [
   {
-    "DbConnectionId": 1,
-    "DbConnection": {
+    "DatabaseKey": 1,
+    "DataConnection ": {
+      "SecurityKey": "2",
+      "DataResilienceKey": "remote",
       "DataSource": "localhost",
       "InitialCatalog": "MyDb",
     }
@@ -217,9 +220,9 @@ For SQL Server, the entire set of attributes would look like this:
 "PgDbConnections": [
   {
     "DatabaseKey": "MyDB",
-    "SecurityKey": "MyCredentials",
-    "ResilienceKey": "local",
     "DataConnection": {
+      "SecurityKey": "MyCredentials",
+      "ResilienceKey": "local",
       "ApplicationName": "MyWebApp",
       "AutoPrepareMinUsages": 5,
       "CheckCertificateRevocation": false,
@@ -273,8 +276,8 @@ If you accept the defaults and are running on the default port (5432), the only 
 "PgDbConnections": [
   {
     "DatabaseKey": "MyDB",
-    "SecurityKey": "MyCredentials",
     "DataConnection": {
+      "SecurityKey": "MyCredentials",
       "Host": "localhost",
       "Database": "MyDb",
     }
@@ -307,15 +310,39 @@ A record that references another record that is located in a different shard nee
 ````json
 "SqlShardSets": [
   {
-    "Key": "customers",
-    "ReadConnection": {
-      "DataSource": "localhost",
-      "InitialCatalog": "MyDb"
-    },
-    "WriteConnection": {
-      "DataSource": "localhost",
-      "InitialCatalog": "MyDb"
-    }
+    "ShardSetKey": "Set1",
+    "Shards": [
+      {
+        "ShardId": 0,
+        "ReadConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "local",
+          "DataSource": "MyOtherServer",
+          "InitialCatalog": "dbName2"
+        },
+        "WriteConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "local",
+          "DataSource": "MyOtherServer",
+          "InitialCatalog": "dbName2"
+        }
+      },
+      {
+        "ShardId": 1,
+        "ReadConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "local",
+          "DataSource": "MyOtherServer",
+          "InitialCatalog": "dbName2"
+        },
+        "WriteConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "local",
+          "DataSource": "MyOtherServer",
+          "InitialCatalog": "dbName2"
+        }
+      }
+    ]
   }
 ]
 ````
