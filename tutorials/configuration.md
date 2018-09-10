@@ -286,26 +286,63 @@ If you accept the defaults and are running on the default port (5432), the only 
 
 ````
 
+***
+
 ## Shard Set Connections
 
-A shard set represents a single data set that is spread among multiple database servers. This is a common practice for high-performance data access, since it is usually more cost effective and predictably scalable to have multiple smaller database servers than one massive server. By locating the sharded servers in datacenters around the globe, you may optimize performance for your global customers. Using the ArgentSea data access components, you can query across multiple servers or a find specific record on its corresponding host server.
+A shard set represents a single set of data  that is spread among multiple database servers. This structure is common for high-performance data access, since it is usually more cost effective and predictably scalable to have multiple smaller database servers than to build one massive server. Global applications might try to improve performance for their global users by distributing shards in datacenters around the globe. The ArgentSea data access components allow you to query across multiple servers or a find specific record on its corresponding host server.
 
-From a configuration perspective, a single sharded data introduces three concerns:
+From a configuration perspective, sharded data introduces three concerns:
 
-* There can be a large number of database connections to manage.
-* In high-performance scenarios (especially when globally distributed), queries may *read* from a cloned database, but *write* to a different (possibly remote) database.
-* The data type of the shard identifier is important because a record in a data shard may refer to records in other shards. Persisting the remote shard reference means saving the shard identifier too.
+* Sharded data requires a larger number of database connections to manage.
+* Scaled out data often uses different connections for read operations and write operations.
+* Because sharded records often need to refer to related records hosted in other shards, the shard identifier become part of the record key.
 
-ArgentSea does support querying multiple shard sets, but you cannot join or combine records between them without implementing that code yourself. You could have a distinct shard set for, say, all of your subscriber information and a separate shard set for all of your transactions. You define the shard set name in your configuration; when you query a shard set, you specify the shard set name.
+### Managing Database Connections
 
-Each database in a shard set has a shard identifier. This shard identifier is used in combination with the record identifier to uniquely tag a record. In other words, records in the shard set are identified with a sort of virtual compound key, consisting of the shard identifier and the record identifier.
+Sharded data sets may run to hundreds of servers. ArgentSea manages any number of distinct shard sets and any number of connections in each shard set.
 
+You could have a distinct shard set for, say, all of your subscriber information and a separate shard set for all of your operational data. You define the shard set name in your configuration; when you query a shard set, you simply specify the shard set name.
 
-customer records
-must be persisted along with the remote record ID. This makes the data type of the shard identifier in important consideration
+### Distinct Read and Write Endpoints
 
-A record that references another record that is located in a different shard needs special care. ArgentSea offers a “Shard Key” type as a record identifier (which we think is less cumbersome than managing distinct identity ranges on every shard). Configuration must also be aware of the nature of this shard key.
+If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes SQL Availability Groups, RDS Read Replicas, Azure SQL geo-replication, Aurora reader endpoints, etc.
 
+ArgentSea shard sets have both read connections and write connections. Only one of these *must* be defined. If only one is defined, it will be used for both.
+
+Complicating this is the replication latency between the write/read servers. A read immediately following a write might fail because the expected data has not yet been copied to the read server.
+
+To accommodate replication latency when an expected read-only result is not retrieved, ArgentSea will immediately retry the query on the read-write connection under the following conditions:
+
+* The query arguments indicate that it is read-only data fetch.
+* The read connection is different than the write connection.
+* The query handler returns a null object (i.e. a parameter attribute is marked *required* but the database value is (db) null or a custom handler returns null).
+
+### The Shard Identifier Type
+
+Each database in a shard set has a shard identifier *(shardId)*. The shardId is used in combination with the record key to uniquely identify a record. In other words, records in the shard set are identified with a sort of virtual compound key, consisting of the shard identifier and the record key.
+
+> [!INFORMATION]
+> Records within a shard set are uniquely identified with a sort of virtual compound key — a ShardKey — consisting of the shardId and the record identifier.
+
+The data type of the ShardId is important because a record in a data shard may refer to records in *other* shards. Persisting the remote shard reference means saving the shard identifier too.
+
+In other words, the ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets.
+
+> [!WARNING]
+> Once established, the ShardId *type* cannot be easily changed.
+
+Technically, the ShardId can be one of the following types: byte, char, DateTime, DateTimeOffset, decimal, double, float, Guid, int, long, sbyte, short, string, TimeSpan, uint, ulong, or ushort. Practically, realistic candidates are much fewer. Avoid types without a corresponding SQL type and unnecessarily large data sizes.
+
+Essentially, this leaves *byte*, *short*, *char* as efficient choices; and *int* or *string* as choices if your ShardId needs to integrate with some external system with previously defined data.
+
+Your configuration must also be aware of the nature of this shard key; the ShardId value in your json configuration file must be cast to your ShardId type.
+
+## ShardSet JSON
+
+## [SQL Server](#tab/tabid-sql)
+
+For SQL Server, a simple configuration would look like this (assuming that the ShardId type is an integer value):
 
 ````json
 "SqlShardSets": [
@@ -317,29 +354,49 @@ A record that references another record that is located in a different shard nee
         "ReadConnection": {
           "SecurityKey": "0",
           "DataResilienceKey": "local",
-          "DataSource": "MyOtherServer",
-          "InitialCatalog": "dbName2"
+          "DataSource": "LocalServer",
+          "InitialCatalog": "dbName1"
         },
         "WriteConnection": {
           "SecurityKey": "0",
-          "DataResilienceKey": "local",
-          "DataSource": "MyOtherServer",
-          "InitialCatalog": "dbName2"
+          "DataResilienceKey": "remote",
+          "DataSource": "RemoteServer",
+          "InitialCatalog": "dbName1"
         }
       },
       {
         "ShardId": 1,
         "ReadConnection": {
           "SecurityKey": "0",
-          "DataResilienceKey": "local",
-          "DataSource": "MyOtherServer",
+          "DataResilienceKey": "remote",
+          "DataSource": "RemoteServer",
           "InitialCatalog": "dbName2"
         },
         "WriteConnection": {
           "SecurityKey": "0",
           "DataResilienceKey": "local",
-          "DataSource": "MyOtherServer",
-          "InitialCatalog": "dbName2"
+          "ApplicationIntent": "ReadWrite",
+          "ApplicationName": "MyWebApp",
+          "ConnectRetryCount": 0,
+          "ConnectRetryInterval": 0,
+          "ConnectTimeout": 2,
+          "CurrentLanguage": "english",
+          "DataSource": "LocalServer",
+          "Encrypt": false,
+          "FailoverPartner": "",
+          "InitialCatalog": "dbName2",
+          "LoadBalanceTimeout": 0,
+          "MaxPoolSize": 100,
+          "MinPoolSize": 0,
+          "MultipleActiveResultSets": false,
+          "MultiSubnetFailover": true,
+          "PacketSize": 8000,
+          "PersistSecurityInfo": false,
+          "Pooling": true,
+          "Replication": false,
+          "TrustServerCertificate": true,
+          "TypeSystemVersion": "Latest",
+          "WorkstationID": ""
         }
       }
     ]
@@ -347,20 +404,272 @@ A record that references another record that is located in a different shard nee
 ]
 ````
 
-## MISC NOTES
+## [PostgreSQL](#tab/tabid-pg)
 
-Sharding introduces substantial performance benefits but also substantial complexity. Because of this complexity it is difficult to retrofit a sharding architecture onto an existing data model. Leveraging the ArgentSea framework allows you to build Shard awareness into your application.
+For PostgreSQL, a simple configuration would look like this (assuming that the ShardId type is an integer value):
 
-Sharded data may need to refer to related records which reside in a different shard. In ArgentSea, this is resolved by a “ShardKey” structure. This is essentially a virtual compound key, where one part is the ShardId. Applications build with Shard awareness will likely need to store both the ShardId and record key for any related records that span shards. To maximize performance and storage flexibility, ArgentSea uses a generic value, which means you can use strings, any size of integer, or other values.
+````json
+"SqlShardSets": [
+  {
+    "ShardSetKey": "Set1",
+    "Shards": [
+      {
+        "ShardId": 0,
+        "ReadConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "local",
+          "Host": "LocalServer",
+          "Database": "dbName1",
+        },
+        "WriteConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "remote",
+          "Host": "RemoteServer",
+          "Database": "dbName1",
+        }
+      },
+      {
+        "ShardId": 1,
+        "ReadConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "remote",
+          "Host": "RemoteServer",
+          "Database": "dbName2",
+        },
+        "WriteConnection": {
+          "SecurityKey": "0",
+          "DataResilienceKey": "local",
+          "ApplicationName": "MyWebApp",
+          "AutoPrepareMinUsages": 5,
+          "CheckCertificateRevocation": false,
+          "ClientEncoding": "UTF8",
+          "CommandTimeout": 15,
+          "ConnectionIdleLifetime": 300,
+          "ConnectionPruningInterval": 10,
+          "ConvertInfinityDateTime": false,
+          "Database": "dbName2",
+          "Encoding": "UTF8",
+          "Enlist": true,
+          "Host": "LocalServer",
+          "IncludeRealm": false,
+          "InternalCommandTimeout": -1,
+          "KeepAlive": 0,
+          "KerberosServiceName": "postgres",
+          "MaxAutoPrepare": 0,
+          "MaxPoolSize": 100,
+          "MinPoolSize": 1,
+          "NoResetOnClose": false,
+          "PersistSecurityInfo": true,
+          "Pooling": true,
+          "Port": 5432,
+          "ReadBufferSize": 8192,
+          "SearchPath": "",
+          "ServerCompatibilityMode": "Redshift",
+          "SocketReceiveBufferSize": 8192,
+          "SocketSendBufferSize": 8192,
+          "SslMode": "Disable",
+          "TcpKeepAliveInterval": 0,
+          "TcpKeepAliveTime": 0,
+          "Timeout": 2,
+          "TrustServerCertificate": false,
+          "UsePerfCounters": false,
+          "UseSslStream": false,
+          "WriteBufferSize": 8192
+        }
+      }
+    ]
+  }
+]
+````
 
-## Identifying a Record in a Sharded Data Source
+***
 
-In a traditional database, a record refers to another record with its “key”, usually a number. The database engine can ensure that keys are unique within a data set. With sharded data, different database engines are involved, so this...
+The configuration file can repeat the ShardSet section (the object with ShardSetKey and Shards entries) for each shard set. Likewise, the entries in the Shards array can repeat for every data shard in the shard set. As illustrated by Shard 1’s Write Connection, any connection can include a any number of provider-specific connection attributes.
 
-In a sharded data source, it become difficult to ensure that a
+## Loading the Configuration
 
-You can better understand the *shard set* configuration by being aware of these key features:
+ArgentSea uses the built-in Options configuration and dependency injection architecture in .NET Core. The complexity of turning a JSON configuration file into a connection object is as simple as adding the `services.AddSqlServices<TShard>(Configuration)` extension method to the `ConfigureServices` method in your `Startup` class.
 
-* You can You can use any value type
-* You can query across multiple shards
-* You can store data geographically local
+## [SQL Server](#tab/tabid-sql)
+
+This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter. 
+
+If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
+
+````C#
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+            // add your injectable logging provider
+            services.AddLogging();
+            // add the ArgentSea SQL database connections (shardId type: byte)
+            services.AddSqlServices<byte>(Configuration);
+            // now add your custom data classes, which use the data components
+            services.AddSingleton<MyDataStore>();
+            ...
+            services.AddMvc();
+            ...
+        }
+
+````
+
+## [PostgreSQL](#tab/tabid-pg)
+
+This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter. 
+
+If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
+
+````C#
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+            // add your injectable logging provider
+            services.AddLogging();
+            // add the ArgentSea SQL database connections (shardId type: byte)
+            services.AddPgServices<byte>(Configuration);
+            // now add your custom data classes, which use the data components
+            services.AddSingleton<MyDataStore>();
+            ...
+            services.AddMvc();
+            ...
+        }
+        public IConfiguration Configuration { get; }
+
+````
+
+***
+
+This code references a `Configuration` property. It is common practice to obtain the configuration object from the constructor of the `Startup` class, then use this to set the `Configuration` property.
+
+### Simplified Data Connections
+
+In .NET Core, any data repository class can use the ArgentSea data access component by adding and argument to its constructor.
+
+if you any experience in .NET Core, requesting the database connection in any data access class is straightforward:
+
+## [SQL Server](#tab/tabid-sql)
+
+```C#
+
+        public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
+        {
+          ...
+
+```
+
+## [PostgreSQL](#tab/tabid-pg)
+
+```C#
+
+        public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
+        {
+          ...
+
+```
+
+***
+
+The injected data access component allows the class to access *any* connection, which means that you would need to specify the connection name. In most cases, however, the class will only access a *single* data source. 
+
+To simplify the data access code, you can instead store only the relevant connection instance:
+
+## [SQL Server](#tab/tabid-sql)
+
+```C#
+        private readonly SqlDatabases.DataConnection _data;
+
+        public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
+        {
+            ...
+            _data = dbs.DbConnections["MyConnectionName"];
+          ...
+```
+
+Subsequent calls to the SQL database can be on methods directly on the `_data` object.
+
+## [PostgreSQL](#tab/tabid-pg)
+
+```C#
+        private readonly PgDatabases.DataConnection _data;
+
+        public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
+        {
+            ...
+            _data = dbs.DbConnections["MyConnectionName"];
+          ...
+```
+
+Subsequent calls to the SQL database can be on methods directly on the `_data` object.
+
+***
+
+The flexibility of the `ShardSets` object stands in more need of this simplification. Using the ArgentSea components requires that the generic *ShardId* type (which can never change) is declared redundantly. You can simplify this is two ways:
+
+* Use the `using` statement to alias the ShardSet declaration.
+* Declare a internal class which inherits from ShardSet
+
+To simplify calling a ShardSet *within a single file*, simply add:
+
+## [SQL Server](#tab/tabid-sql)
+
+```C#
+using ShardSets = ArgentSea.Sql.SqlShardSets<byte>;
+// and/or
+using ShardSet = ArgentSea.Sql.SqlShardSets<byte>.ShardDataSet;
+```
+
+Again, the assumes a ShardId type of *byte*; replace this as appropriate.
+
+## [PostgreSQL](#tab/tabid-pg)
+
+```C#
+using ShardSets = ArgentSea.Pg.PgShardSets<byte>;
+// and/or
+using ShardSet = ArgentSea.Pg.PgShardSets<byte>.ShardDataSet;
+```
+
+Again, the assumes a ShardId type of *byte*; replace this as appropriate.
+
+***
+
+By creating a local class that inherits from then generic class, you can simplify the shard set reference throughout your project.
+ 
+## [SQL Server](#tab/tabid-sql)
+
+```C#
+    public class ShardSets : SqlShardSets<byte>
+    {
+        public ShardSets(
+            IOptions<SqlShardConnectionOptions<byte>> configOptions,
+            IOptions<DataSecurityOptions> securityOptions,
+            IOptions<DataResilienceOptions> resilienceStrategiesOptions,
+            ILogger<ShardSets> logger
+        ) : base(configOptions, securityOptions, resilienceStrategiesOptions, logger)
+        {
+            //
+        }
+    }
+
+```
+
+## [PostgreSQL](#tab/tabid-pg)
+
+```C#
+    public class ShardSets : PgShardSets<byte>
+    {
+        public ShardSets(
+            IOptions<SqlShardConnectionOptions<byte>> configOptions,
+            IOptions<DataSecurityOptions> securityOptions,
+            IOptions<DataResilienceOptions> resilienceStrategiesOptions,
+            ILogger<ShardSets> logger
+        ) : base(configOptions, securityOptions, resilienceStrategiesOptions, logger)
+        {
+            //
+        }
+    }
+
+```
+
+***
+
+This approach will go some way toward reducing the number of times the generic *shardId* type must be specified in project.
