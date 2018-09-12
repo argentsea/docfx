@@ -1,4 +1,4 @@
-﻿# Configuring ArgentSea
+﻿# Configuration Deep-Dive
 
 ## Introduction
 
@@ -7,8 +7,7 @@ ArgentSea fully leverages the configuration architecture of .NET core/.NET stand
 * A configuration dictionary, which can be loaded from multiple sources, one of which is a file called *appsettings.json*
 * An “options” architecture, which casts the configuration entries into a strongly-typed configuration object.
 
-One of the key improvements of the configuration architecture in .NET standard is the dictionary architecture, which allows entries to be loaded from multiple sources. So, for example, you might load the account names from an *appsettings.json* configuration file, the passwords from a usersecrets.json file (or Key Vault), and the server names from
-environment variables. Properly managed, this can make deployments both easier and more secure.
+One of the key improvements of the configuration architecture in .NET standard is the dictionary architecture, which allows entries to be loaded from multiple sources. So, for example, you might load the account names from an *appsettings.json* configuration file, the passwords from a usersecrets.json file (or Key Vault), and the server names from environment variables. Properly managed, this can make deployments both easier and more secure.
 
 ## ArgentSea Database Connections
 
@@ -492,7 +491,7 @@ ArgentSea uses the built-in Options configuration and dependency injection archi
 
 ## [SQL Server](#tab/tabid-sql)
 
-This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter. 
+This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter.
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
@@ -515,7 +514,7 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter. 
+This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter.
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
@@ -569,7 +568,7 @@ if you any experience in .NET Core, requesting the database connection in any da
 
 ***
 
-The injected data access component allows the class to access *any* connection, which means that you would need to specify the connection name. In most cases, however, the class will only access a *single* data source. 
+The injected data access component allows the class to access *any* connection, which means that you would need to specify the connection name. In most cases, however, the class will only access a *single* data source.
 
 To simplify the data access code, you can instead store only the relevant connection instance:
 
@@ -633,7 +632,7 @@ Again, the assumes a ShardId type of *byte*; replace this as appropriate.
 ***
 
 By creating a local class that inherits from then generic class, you can simplify the shard set reference throughout your project.
- 
+
 ## [SQL Server](#tab/tabid-sql)
 
 ```C#
@@ -672,4 +671,4 @@ By creating a local class that inherits from then generic class, you can simplif
 
 ***
 
-This approach will go some way toward reducing the number of times the generic *shardId* type must be specified in project.
+This approach will be helpful in reducing the number of times the generic *shardId* type must be specified in project.
