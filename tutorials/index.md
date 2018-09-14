@@ -1,25 +1,13 @@
-﻿# Introduction
+﻿# Environment
 
-In essence, ArgentSea consists of four areas of functionality, which are complementary but still rather independent (i.e. you can use one without the others):
+ArgentSea will likely be useful even if you are not using data sharding, but its genesis and continuing purpose is to facilitate high-performance data access via sharding. 
 
-* __Configuring connections__ - is particularly useful with the large number of connections necessary for sharded data.
-* __Querying data__ - in a way that supports multi-threaded concurrent queries on multiple shards.
-* __Mapping__ - simplifies and dramatically shortens the code required to map data (result sets and/or parameters) to or from objects.
-* __Tooling__ - a simple UI to generate starter model classes and/or CRUD procedures based on a table or view.
+Data sharding is very difficult to retroactively add to an existing project:
 
-Because ArgentSea enhances the familiar ADO.NET data access classes, you can still use ADO.NET to resolve any capability gaps or distinctive query requirements.
+* Identifying unique records on sharded data requires either very careful management of identity ranges or a “virtual compound key” (ArgentSea has classes to help with the latter approach). Either approach requires smart logic to dispatch the query to the correct shard.
+* Simultaneous querying across multiple shards requires querying on multiple threads. Both ADO.NET and Entity Framework require “non-standard” implementations to enable queries on multiple threads.
+
+Consequently, ArgentSea adds the most value if you are building a new project. And if you are creating a new project, you should use .NET Core. While much of ArgentSea may work with the legacy .NET framework, it is not tested for this purpose, and it uses services — such as dependency injection, configuration, and logging — that are implemented differently in the legacy .NET framework.
 
 ## Getting Started
 
-If you want to understand everything first, explore the [deep dives](#deep-dives); if you prefer to learn by getting your hands dirty, jump into the [walkthroughs](#walkthroughs).
-
-## Deep Dives
-
-1. Installing ArgentSea.
-2. [Setting up your configuration](configuration.md)
-3. [Mapping](mapping.md)
-4. [Using shards](sharding.md)
-
-## Walkthroughs
-1. [QuickStart 1](quickstart1.md) - Setting up and configuring an initial project
-2. [QuickStart 2](quickstart2.md) - Adding shard handling and queries

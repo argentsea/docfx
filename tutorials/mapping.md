@@ -9,7 +9,7 @@ Using the Mapper consists of two steps:
 * Define how each property in your model class should be mapped to a data store (if at all) using property attributes
 * Call a Mapper method to automatically create data parameters, DataReader handler, etc.
 
-### Property Attributes
+## Property Attributes
 
 You use properties attributes to define the metadata that the Mapper requires. For example, given this very simple model class:
 
@@ -75,8 +75,7 @@ Often, due to different naming conventions or development drift, database column
 > [!WARNING]
 > Database parameters and columns should be named as consistently as possible. In most cases, this means the parameters have the same name as the columns they reference. If you like to alias columns or abbreviate parameters, you will find the Mapper largely unhelpful.
 
-
-## Attribute Types
+### Attribute Types
 
 There is a mapping attribute defined for most common database types. Spatial data types, CLR types, XML, and JSON types are examples of missing attributes. These are absent because there is not a straightforward mapping between the core .NET base types and these database types. It is very possible to write custom handlers to render this from your database; indeed it is not much harder than writing the necessary custom code without this framework.
 
@@ -86,7 +85,7 @@ Many data attribute types have an additional parameters. The *length* argument, 
 
 Here is catalog of the current attributes, along with their arguments and corresponding .NET types:
 
-### [SQL Server](#tab/tabid-sql)
+# [SQL Server](#tab/tabid-sql)
 
 | Attribute | Arguments | .NET types | SqlType |
 | --- |--- | --- | --- |
@@ -121,7 +120,7 @@ Here is catalog of the current attributes, along with their arguments and corres
 
 ⁴ The Enum value is saved based on its underlying numeric value. The Enum integer *base type* (int, short, byte, etc.) must match the attribute type.
 
-### [PostgreSQL](#tab/tabid-pg)
+# [PostgreSQL](#tab/tabid-pg)
 
 | Attribute | Arguments | .NET types | SQL Type |
 | --- |--- | --- | --- |
@@ -167,19 +166,188 @@ When `required` is set to true, then:
 * The Mapper will return a null object if this parameter or column is null.
 * The shard set will retry a data fetch on the a Write connection.
 
+### Nullable Types and Empty Types
+
+Because database columns often contain Null values, nullable .NET types are extremely helpful in representing this. All of the “MapTo...” attributes support nullable .NET types that correspond to their value types.
+
+#### Strings and Arrays
+
+A .NET string with a value of *null* or a null array will be saved as a database null. Empty strings will save as a zero-length string.
+
+#### Integers
+
+Integers cannot be null, so the advent of nullable types is a godsend for mapping to database storage. To save or retrieve an integer (byte, Int16, Int32, or Int64) database value from a column that allows null, you should declare a nullable value type.
+
+#### Floating Point Numbers
+
+Like integer types, floating point types (Double and Float) can be wrapped in a nullable value. However, ArgentSea also handles *NaN* as a database Null. If the floating point value is presented as a nullable type, then ArgentSea will read or write NaN; if plain floating point type is presented, then NaN will be converted to a data Null.
+
+#### Guids
+
+Rather like floating point types, Guid.Empty (00000000-0000-0000-0000-000000000000) will be converted to a data Null when read from or written to the database. If you need to write an empty Guid, wrap it in a nullable type.
+
+#### Enum Types
+
+.NET enum values can be stored as either numbers or strings. Writing to a text column will automatically save the *name* of the enum; writing to a numeric column saves the *number* value.
+
+Note that Enums can inherit from several base types (byte, short, int, etc.). The base type should correctly correspond to the database data type.
+
+Nullable Enum types will save or read as a database Null when the value is null.
+
+#### ShardKey and ShardChild
+
+These are special types and will be discussed in detail in the sharding section.
+
+## Mapping Targets
+
+The ArgentSea Mapper maps to:
+
+* Query input parameters
+* Query output parameters
+* Data reader columns
+* Table-value parameters (SQL Server only)
+
+The mapper does *not* generate dynamic SQL statements. The Mapper may be useful in situations where dynamic SQL is used, but, philosophically, this is not encouraged. Stored procedures are generally more secure, more performant, and offer a less tightly-coupled architecture.
+
+### The Parameter Collection
+
+The Mapper is implemented as an extension method to the (abstract) DbParametersCollection, which is inherited by each provider implementation of the DbCommand.Parameters property. What this means is that you can call the Mapper through the command object of any provider.
+
+```C#
+cmd.Parameters.MapToInParameters<MyDataClass>(myDataClass, logger);
+cmd.Parameters.MapToOutParameters<MyDataClass>(logger);
+```
+
+These extension methods can be combined with the other extension methods for a *fluent API*, which allows you to build a logical sequence of code that may be more readable.
+
+# [SQL Server](#tab/tabid-sql)
+
+For example, this code uses the fluent API to to set an output parameter and then the mapper to create and set all the other object properties from a transaction object.
+
+```C#
+cmd.AddSqlIntOutParameter("@TransactionId").MapToInParameters<Transaction>(transaction, logger);
+```
+
+# [PostgreSQL](#tab/tabid-pg)
+
+For example, this code uses the fluent API to to set an output parameter and then the mapper to create and set all the other object properties from a transaction object.
+
+```C#
+cmd.AddPgIntegerOutParameter("TransactionId").MapToInParameters<Transaction>(transaction, logger);
+```
+
+***
+
+In ADO.NET, you normally access the data parameters collection (`SqlParametersCollection`, `NpgsqlParametersCollection`, etc.) through the Parameters collection of the command object. In ArgentSea, you can still do this; the Mapper and other extension methods work on the parameters collection property. But this is problematic with sharded data sets.
+
+The parameters collection offered by the database providers are created only by the Command object. This creates a problem when presenting a query with the same parameters to multiple data shards (to search among shards, for example). A multi-shard query cannot execute on a single command object! (Nor can a single output parameter contain the query result from multiple shards).
+
+When working with sharded data, the parameters collection needs to be thought of as simple list which is copied to the Command object when needed. ArgentSea offers the `QueryParameterCollection` class to help. It is functionally not much more than a parameter list, but it can be created without a command object. Because it also inherits from the abstract DbParameters collection, the same extension methods — like the Mapper — work on this object too.
+
+# [SQL Server](#tab/tabid-sql)
+
+Again, the optional fluent API makes setting an input parameter and a mapped set of output parameters quite simple:
+
+```C#
+var prms = new QueryParameterCollection().AddSqlBigIntInParameter("@ID", _id).MapToOutParameters<MyClass>(logger);
+```
+
+# [PostgreSQL](#tab/tabid-pg)
+
+Again, the optional fluent API makes setting an input parameter and a mapped set of output parameters quite simple:
+
+```C#
+var prms = new QueryParameterCollection().AddPgBigintInParameter("ID", _id).MapToOutParameters<MyClass>(logger);
+```
+
+***
+
+### Mapping to Input Parameters
+
+You can create input parameters with the `MapToInParameters` method. The mapping attributes in your class will be used to:
+
+* Create the set of input parameters
+* Set the value of those parameters to the value of the corresponding property.
+
+That is all the Mapper does. The Mapper simply saved you the time and effort of hand-coding a whole bunch of parameters. You can view the parameters in the debugger and you can add, remove or update any of them. If a particular query needs a parameter that is not presented in a property attribute, just add it to parameter the collection yourself!
+
+Any parameters already added to the parameter collection will not be recreated (the names must match exactly). This is helpful if you need to treat one or more parameters differently (say, an output parameter in a collection of input parameters). 
+
+If you don’t want the Mapper to create a particular parameter set, you can provide a list of parameter names to suppress.
+
+### Mapping to Output Parameters
+
+Working with output parameters is done in two steps:
+
+* Create the output parameters before executing the query
+* Read the output parameter values after executing the query
+
+# [SQL Server](#tab/tabid-sql)
+
+This example creates and sets the CustomerId parameter and creates all of the output parameters. It then executes the query and reads the output values into a new object.
+
+```C#
+cmd.Parameters.AddSqlIntInParameter("@CustomerId", _Id).MapToOutParameters<Customer>(logger);
+await cmd.ExecuteNonQueryAsync();
+var customer = cmd.ReadOutParameters<Customer>(logger);
+```
+
+# [PostgreSQL](#tab/tabid-pg)
+
+This example creates and sets the CustomerId parameter and creates all of the output parameters. It then executes the query and reads the output values into a new object.
+
+```C#
+cmd.Parameters.AddPgIntegerInParameter("CustomerId", _Id).MapToOutParameters<Customer>(logger);
+await cmd.ExecuteNonQueryAsync();
+var customer = cmd.ReadOutParameters<Customer>(logger);
+```
+
+***
+
+Of course, it would be quite unusual to have a query that *only* uses output parameters. Because the input parameter is added to the collection first, the output parameter will be automatically skipped. As with input parameters, you can also provide a list of parameter names that you want to explicitly skip. And also like input parameters, the `MapToOutParameters` method simply creates output parameters, which you can explicitly modify as needed.
+
+Once the parameters are set and the procedure is executed, the Mapper can read the values of the output parameters into the corresponding properties of a new object instance.
+
+### The DataReader
+
+The Mapper also converts the rows presented by a DataReader object into a list of corresponding objects.
 
 
-### Enum Types
 
-.NET enum values can be stored with their base integer data type (int, short, etc.), or as their string name, or (PostgreSQL only) as an Enum database type. 
 
-* If the mapping attribute database type is a numeric database type, then the base number type is stored
-* If the mapping attribute database type is a text-type field, the Mapper stores the name of the enum value
-* If the mapping attribute database type is Enum (PostgreSQL only), then the Enum value is set
+## Debugging
 
-### Nullable
 
-### ShardKey and ShardChild
+
+## The Implicit use of the Mapper
+
+## Required Attributes
+
+```C#
+cmd.Parameters.MapToInParameters<MyDataClass>(myDataClass, logger);
+cmd.Parameters.MapToOutParameters<MyDataClass>(logger);
+var myObject = cmd.Parameters.ReadOutParameters<MyDataClass>(logger);
+
+```
+
+
+## Performance
+
+The ArgentSea Mapper is written to be as high-performance as optimized hand-coded data access code. However, there is a hitch.
+
+Property attributes can only be retrieved using *reflection*, which is relatively slow .NET code. To avoid this type of performance penalty on every data access, ArgentSea uses reflection only the first time the mapping is performed; using that metadata it then creates and compiles an “Expression Tree”to build an optimized, compiled mapping. The compiled code is cached in memory and reused for all subsequent calls.
+
+> [!INFORMATION]
+> The Mapper will be relatively slow (and CPU intensive) the *first time* each model class is mapped to parameters or data. The initial compilation usually takes about a second or less. Subsequent calls will execute the data to property mapping at native machine-code speeds. When the application is restarted, the memory is cleared and the compilation overhead occurs again.
+
+## Instrumentation
+
+### Setting the Shard Id.
+
+
+
+
+The Mapper also use
 
 ## Mapping Attributes
 
@@ -197,46 +365,3 @@ To map a property
 There is a mapping attribute defined for most SQL Server data types. The principals exceptions are the CLR types and complex types, like hierarchyid, geometry, geography, variant, and xml. The property type must correspond
 
 ***
-
-
-## Mapping Targets
-
-The ArgentSea Mapper maps to:
-
-* Query input parameters
-* Query output parameters
-* Data reader columns
-* Table-value parameters (SQL Server only)
-
-The mapper does not generate dynamic SQL statements. The Mapper may be useful in situations where dynamic SQL is used, but philosophically this is not encouraged. Stored procedures are generally more secure, more performant, and offer a less tightly-coupled architecture.
-
-
-
-### Mapping to Input Parameters
-
-
-### Mapping to Output Parameters
-
-
-### The DataReader
-
-
-## The Implicit use of the Mapper
-
-## Required Attributes
-
-
-## Performance
-
-The ArgentSea Mapper is written to be as high-performance as optimized hand-coded data access code. However, there is a hitch.
-
-Property attributes can only be retrieved using *reflection*, which is relatively slow .NET code. To avoid this type of performance penalty on every data access, ArgentSea uses reflection only the first time the mapping is performed; using that metadata it then creates and compiles an “Expression Tree”to build an optimized, compiled mapping. The compiled code is cached in memory and reused for all subsequent calls.
-
-> [!INFORMATION]
-> The Mapper will be relatively slow (and CPU intensive) the *first time* each model class is mapped to parameters or data. The initial compilation usually takes about a second or less. Subsequent calls will execute the data to property mapping at native machine-code speeds. When the application is restarted, the memory is cleared and the compilation overhead occurs again.
-
-## Instrumentation
-
-
-
-The Mapper also use

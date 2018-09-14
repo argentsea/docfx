@@ -116,9 +116,11 @@ is available [here](/tutorials/configuration.html).
 
 ## 6. Load ArgentSea on Application Start
 
-Open your project’s *Startup* class. At the top, add the following *using* statement:
+ArgentSea is an injectable service, so it needs to be registered on application startup.
 
 # [SQL Server](#tab/tabid-sql)
+
+Open your project’s *Startup* class. At the top, add the following *using* statement:
 
 ```C#
 using ArgentSea.Sql;
@@ -134,6 +136,8 @@ This step creates an injectable *SqlServices* object that we can use in all
 of our data access clients.
 
 # [PostgreSQL](#tab/tabid-pg)
+
+Open your project’s *Startup* class. At the top, add the following *using* statement:
 
 ```C#
 using ArgentSea.Pg;
@@ -216,7 +220,7 @@ public class Subscriber
 Note that the property name *does not* need to match the parameter or column name. It is not uncommon for database naming conventions to differ from .NET property naming conventions.
 
 > [!WARNING]
-> ArgentSea assumes consistent naming in your data parameters and results. A project with consistently inconsistent parameters or column names will find the ArgentSea Mapper of little practical use.
+> ArgentSea assumes consistent naming in your data parameters and results. A project with “consistently inconsistent” parameters or column names will find the ArgentSea Mapper of little practical use.
 
 ## 5. Call a Stored Procedure or Function
 
