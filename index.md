@@ -13,7 +13,7 @@ In essence, ArgentSea data library consists of four areas of functionality. Thes
 * __Mapping__ - simplifies and dramatically shortens the code required to map data (result sets and/or parameters) to or from .NET objects.
 * __Tooling__ - a simple UI to generate starter model classes and/or CRUD procedures based on a table or view. A time saver for generating boilerplate code.
 
-> [!INFORMATION]
+> [!TIP]
 > Because ArgentSea enhances the familiar ADO.NET data access classes, you can still use ADO.NET to resolve any capability gaps or distinctive query requirements.
 
 ## Deep Dives

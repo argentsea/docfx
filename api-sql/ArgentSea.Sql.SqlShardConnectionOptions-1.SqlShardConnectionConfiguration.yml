@@ -24,7 +24,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SqlShardConnectionConfiguration
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 25
+    startLine: 23
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -72,7 +72,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ShardId
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 27
+    startLine: 25
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -111,7 +111,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ReadConnectionInternal
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 28
+    startLine: 26
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -150,7 +150,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: WriteConnectionInternal
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 29
+    startLine: 27
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -189,7 +189,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ReadConnection
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 30
+    startLine: 28
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -226,7 +226,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: WriteConnection
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 31
+    startLine: 29
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql

@@ -87,7 +87,7 @@ An example resiliency configuration section might look like this:
     }
 ````
 
-##### Retries
+**Retries**
 
 Not that retries only occur on errors that are defined as *transient*.
 A permissions error or invalid object reference would be pointless to retry.
@@ -121,12 +121,19 @@ You can visualize the impact of `RetryLengthening` with these charts:
 
 ![Doubling](../images/retrygraphs/doubling.jpg)
 
-If a Resilience Strategy is not defined, ArgentSea will use a default strategy. Currently, this a is `RetryCount` of 6, `RetryInterval` of 250 milliseconds, and a
-`RetryLengthening` of Fibonacci. With these values, the default resilience strategy would take a total of five seconds to finally fail.
+If a Resilience Strategy is not defined, ArgentSea will use a default strategy. Currently, this is:
+
+| Setting | Default Value |
+| --- | --- |
+| RetryCount | 6 tries |
+|RetryInterval | 256 milliseconds |
+| Lengthening | Fibonacci |
+
+With these values, the default resilience strategy would take a total of five seconds to finally fail.
 
 Note that a high `RetryCount` could create a very long delay before a connection is allowed to ultimately fail.
 
-##### Circuit Breaking
+**Circuit Breaking**
 
 When a database connection is unavailable, this can cause serious downstream problems. Processes may pile-on further requests even while earlier requests are simply waiting
 to time out. As this continues, the queue of backlogged requests becomes so large that the caller itself can manage no more. This bottleneck can block other systems too. What started as a broken connection to a single database eventually becomes fatal to the calling system too!
@@ -299,7 +306,7 @@ From a configuration perspective, sharded data introduces three concerns:
 
 ### Managing Database Connections
 
-Sharded data sets may run to hundreds of servers. ArgentSea manages any number of distinct shard sets and any number of connections in each shard set.
+Sharded data sets may run to hundreds of servers (or more). ArgentSea manages any number of distinct shard sets and any number of connections in each shard set.
 
 You could have a distinct shard set for, say, all of your subscriber information and a separate shard set for all of your operational data. You define the shard set name in your configuration; when you query a shard set, you simply specify the shard set name.
 
@@ -307,11 +314,11 @@ You could have a distinct shard set for, say, all of your subscriber information
 
 If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes SQL Availability Groups, RDS Read Replicas, Azure SQL geo-replication, Aurora reader endpoints, etc.
 
-ArgentSea shard sets have both read connections and write connections. Only one of these *must* be defined. If only one is defined, it will be used for both.
+An ArgentSea `ShardSet` has both read connections and write connections. Only one of these *must* be defined. If only one is defined, it will be used for both reads and writes.
 
 Complicating this is the replication latency between the write/read servers. A read immediately following a write might fail because the expected data has not yet been copied to the read server.
 
-To accommodate replication latency when an expected read-only result is not retrieved, ArgentSea will immediately retry the query on the read-write connection under the following conditions:
+To accommodate replication latency when an expected read-only result is not retrieved, ArgentSea will immediately retry the query on the write connection under the following conditions:
 
 * The query arguments indicate that it is read-only data fetch.
 * The read connection is different than the write connection.
@@ -321,19 +328,17 @@ To accommodate replication latency when an expected read-only result is not retr
 
 Each database in a shard set has a shard identifier *(shardId)*. The shardId is used in combination with the record key to uniquely identify a record. In other words, records in the shard set are identified with a sort of virtual compound key, consisting of the shard identifier and the record key.
 
-> [!INFORMATION]
+> [!NOTE]
 > Records within a shard set are uniquely identified with a sort of virtual compound key — a ShardKey — consisting of the shardId and the record identifier.
 
 The data type of the ShardId is important because a record in a data shard may refer to records in *other* shards. Persisting the remote shard reference means saving the shard identifier too.
 
 In other words, the ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets.
 
-> [!WARNING]
+> [!IMPORTANT]
 > Once established, the ShardId *type* cannot be easily changed.
 
-Technically, the ShardId can be one of the following types: byte, char, DateTime, DateTimeOffset, decimal, double, float, Guid, int, long, sbyte, short, string, TimeSpan, uint, ulong, or ushort. Practically, realistic candidates are much fewer. Avoid types without a corresponding SQL type and unnecessarily large data sizes.
-
-Essentially, this leaves *byte*, *short*, *char* as efficient choices; and *int* or *string* as choices if your ShardId needs to integrate with some external system with previously defined data.
+Technically, the ShardId can be one of the following types: byte, char, DateTime, DateTimeOffset, decimal, double, float, Guid, int, long, sbyte, short, string, TimeSpan, uint, ulong, or ushort. Practically, realistic candidates are much fewer. Avoiding types without a corresponding SQL type and unnecessarily large data sizes, leaves *byte*, *short*, *char* as the most efficient choices. Also, *int* or *string* are viable choices if your ShardId needs to integrate with some external system with previously defined data.
 
 Your configuration must also be aware of the nature of this shard key; the ShardId value in your json configuration file must be cast to your ShardId type.
 
@@ -482,6 +487,8 @@ For PostgreSQL, a simple configuration would look like this (assuming that the S
 ````
 
 ***
+
+If the *shardid* were a string you should enclose the value in quotes (`ShardId: "0"`).
 
 The configuration file can repeat the ShardSet section (the object with ShardSetKey and Shards entries) for each shard set. Likewise, the entries in the Shards array can repeat for every data shard in the shard set. As illustrated by Shard 1’s Write Connection, any connection can include a any number of provider-specific connection attributes.
 

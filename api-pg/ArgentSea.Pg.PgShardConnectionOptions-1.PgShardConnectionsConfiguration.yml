@@ -5,10 +5,8 @@ items:
   id: PgShardConnectionOptions`1.PgShardConnectionsConfiguration
   parent: ArgentSea.Pg
   children:
-  - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.DataResilienceKey
-  - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.SecurityKey
   - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.Shards
-  - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetKey
+  - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetName
   - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardsInternal
   langs:
   - csharp
@@ -54,123 +52,45 @@ items:
   - Class
   fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration
   name.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration
-- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetKey
-  commentId: P:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetKey
-  id: ShardSetKey
+- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetName
+  commentId: P:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetName
+  id: ShardSetName
   parent: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration
   langs:
   - csharp
   - vb
-  name: ShardSetKey
-  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetKey
-  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetKey
+  name: ShardSetName
+  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetName
+  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetName
   type: Property
   source:
     remote:
       path: src/PgShardConnectionOptions.cs
       branch: master
       repo: https://github.com/argentsea/pg.git
-    id: ShardSetKey
+    id: ShardSetName
     path: ../ArgentSea.Pg/src/PgShardConnectionOptions.cs
     startLine: 18
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
   syntax:
-    content: public string ShardSetKey { get; set; }
+    content: public string ShardSetName { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property ShardSetKey As String
-  overload: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetKey*
+    content.vb: Public Property ShardSetName As String
+  overload: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetName*
   implements:
-  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetKey
-  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetKey
+  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetName
+  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetName
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetKey
-- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.SecurityKey
-  commentId: P:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.SecurityKey
-  id: SecurityKey
-  parent: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration
-  langs:
-  - csharp
-  - vb
-  name: SecurityKey
-  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.SecurityKey
-  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.SecurityKey
-  type: Property
-  source:
-    remote:
-      path: src/PgShardConnectionOptions.cs
-      branch: master
-      repo: https://github.com/argentsea/pg.git
-    id: SecurityKey
-    path: ../ArgentSea.Pg/src/PgShardConnectionOptions.cs
-    startLine: 19
-  assemblies:
-  - ArgentSea.Pg
-  namespace: ArgentSea.Pg
-  syntax:
-    content: public string SecurityKey { get; set; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property SecurityKey As String
-  overload: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.SecurityKey*
-  implements:
-  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.SecurityKey
-  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.SecurityKey
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.SecurityKey
-- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.DataResilienceKey
-  commentId: P:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.DataResilienceKey
-  id: DataResilienceKey
-  parent: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration
-  langs:
-  - csharp
-  - vb
-  name: DataResilienceKey
-  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.DataResilienceKey
-  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.DataResilienceKey
-  type: Property
-  source:
-    remote:
-      path: src/PgShardConnectionOptions.cs
-      branch: master
-      repo: https://github.com/argentsea/pg.git
-    id: DataResilienceKey
-    path: ../ArgentSea.Pg/src/PgShardConnectionOptions.cs
-    startLine: 20
-  assemblies:
-  - ArgentSea.Pg
-  namespace: ArgentSea.Pg
-  syntax:
-    content: public string DataResilienceKey { get; set; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property DataResilienceKey As String
-  overload: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.DataResilienceKey*
-  implements:
-  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.DataResilienceKey
-  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.DataResilienceKey
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.DataResilienceKey
+  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetName
 - uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardsInternal
   commentId: P:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardsInternal
   id: ShardsInternal
@@ -189,7 +109,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ShardsInternal
     path: ../ArgentSea.Pg/src/PgShardConnectionOptions.cs
-    startLine: 21
+    startLine: 19
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -228,7 +148,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Shards
     path: ../ArgentSea.Pg/src/PgShardConnectionOptions.cs
-    startLine: 22
+    startLine: 20
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -624,22 +544,22 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetKey*
-  commentId: Overload:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetKey
-  name: ShardSetKey
-  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetKey
-  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetKey
-  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetKey
-  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetKey
-- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.ShardSetKey
+- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetName*
+  commentId: Overload:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardSetName
+  name: ShardSetName
+  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetName
+  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.ShardSetName
+  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetName
+  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.ShardSetName
+- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetName
+  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.ShardSetName
   parent: ArgentSea.IShardConnectionsConfiguration{{TShard}}
-  definition: ArgentSea.IShardConnectionsConfiguration`1.ShardSetKey
-  name: ShardSetKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetKey
+  definition: ArgentSea.IShardConnectionsConfiguration`1.ShardSetName
+  name: ShardSetName
+  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetName
+  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetName
+  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetName
+  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetName
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -647,59 +567,13 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: ArgentSea.IShardConnectionsConfiguration`1.ShardSetKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.ShardSetKey
-  name: ShardSetKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetKey
-- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.SecurityKey*
-  commentId: Overload:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.SecurityKey
-  name: SecurityKey
-  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.SecurityKey
-  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.SecurityKey
-  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.SecurityKey
-  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.SecurityKey
-- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.SecurityKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.SecurityKey
-  parent: ArgentSea.IShardConnectionsConfiguration{{TShard}}
-  definition: ArgentSea.IShardConnectionsConfiguration`1.SecurityKey
-  name: SecurityKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.SecurityKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.SecurityKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).SecurityKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).SecurityKey
-- uid: ArgentSea.IShardConnectionsConfiguration`1.SecurityKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.SecurityKey
-  name: SecurityKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.SecurityKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.SecurityKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).SecurityKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).SecurityKey
-- uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.DataResilienceKey*
-  commentId: Overload:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.DataResilienceKey
-  fullName: ArgentSea.Pg.PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration.DataResilienceKey
-  nameWithType.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.DataResilienceKey
-  fullName.vb: ArgentSea.Pg.PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration.DataResilienceKey
-- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.DataResilienceKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.DataResilienceKey
-  parent: ArgentSea.IShardConnectionsConfiguration{{TShard}}
-  definition: ArgentSea.IShardConnectionsConfiguration`1.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).DataResilienceKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).DataResilienceKey
-- uid: ArgentSea.IShardConnectionsConfiguration`1.DataResilienceKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).DataResilienceKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).DataResilienceKey
+- uid: ArgentSea.IShardConnectionsConfiguration`1.ShardSetName
+  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.ShardSetName
+  name: ShardSetName
+  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetName
+  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetName
+  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetName
+  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetName
 - uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardsInternal*
   commentId: Overload:ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardsInternal
   name: ShardsInternal

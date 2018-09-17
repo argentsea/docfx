@@ -38,7 +38,6 @@ items:
   - ArgentSea.Pg.PgConnectionConfiguration.Remove(System.String)
   - ArgentSea.Pg.PgConnectionConfiguration.SearchPath
   - ArgentSea.Pg.PgConnectionConfiguration.ServerCompatibilityMode
-  - ArgentSea.Pg.PgConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
   - ArgentSea.Pg.PgConnectionConfiguration.SocketReceiveBufferSize
   - ArgentSea.Pg.PgConnectionConfiguration.SocketSendBufferSize
   - ArgentSea.Pg.PgConnectionConfiguration.SslMode
@@ -64,22 +63,30 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: PgConnectionConfiguration
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
-  summary: "\nThis class represents is a (non-sharded) database connection.\nNote that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a DataResilienceKey (if defined) must match as key in the DataResilienceOptions array.\nIf the DataResilienceKey is not defined, a default data resilience strategy will be used.\n"
+  summary: "\nThis class represents is a (non-sharded) database connection.\nNote that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a ResilienceKey (if defined) must match as key in the DataResilienceOptions array.\nIf the ResilienceKey is not defined, a default data resilience strategy will be used.\n"
   example: []
   syntax:
-    content: 'public class PgConnectionConfiguration : IConnectionConfiguration'
+    content: 'public class PgConnectionConfiguration : DataConnectionConfiguration, IConnectionConfiguration'
     content.vb: >-
       Public Class PgConnectionConfiguration
+          Inherits DataConnectionConfiguration
           Implements IConnectionConfiguration
   inheritance:
   - System.Object
+  - ArgentSea.DataConnectionConfiguration
   implements:
   - ArgentSea.IConnectionConfiguration
   inheritedMembers:
+  - ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+  - ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  - ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - ArgentSea.DataConnectionConfiguration.SecurityKey
+  - ArgentSea.DataConnectionConfiguration.ResilienceKey
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -93,41 +100,6 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: ArgentSea.Pg.PgConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  commentId: M:ArgentSea.Pg.PgConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  id: SetSecurity(ArgentSea.SecurityConfiguration)
-  parent: ArgentSea.Pg.PgConnectionConfiguration
-  langs:
-  - csharp
-  - vb
-  name: SetSecurity(SecurityConfiguration)
-  nameWithType: PgConnectionConfiguration.SetSecurity(SecurityConfiguration)
-  fullName: ArgentSea.Pg.PgConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  type: Method
-  source:
-    remote:
-      path: src/PgConnectionConfiguration.cs
-      branch: master
-      repo: https://github.com/argentsea/pg.git
-    id: SetSecurity
-    path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 20
-  assemblies:
-  - ArgentSea.Pg
-  namespace: ArgentSea.Pg
-  syntax:
-    content: public void SetSecurity(SecurityConfiguration security)
-    parameters:
-    - id: security
-      type: ArgentSea.SecurityConfiguration
-    content.vb: Public Sub SetSecurity(security As SecurityConfiguration)
-  overload: ArgentSea.Pg.PgConnectionConfiguration.SetSecurity*
-  implements:
-  - ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription
   commentId: P:ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription
   id: ConnectionDescription
@@ -146,24 +118,25 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ConnectionDescription
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 34
+    startLine: 22
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
   syntax:
-    content: public string ConnectionDescription { get; }
+    content: public override string ConnectionDescription { get; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public ReadOnly Property ConnectionDescription As String
+    content.vb: Public Overrides ReadOnly Property ConnectionDescription As String
+  overridden: ArgentSea.DataConnectionConfiguration.ConnectionDescription
   overload: ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription*
-  implements:
-  - ArgentSea.IConnectionConfiguration.ConnectionDescription
   modifiers.csharp:
   - public
+  - override
   - get
   modifiers.vb:
   - Public
+  - Overrides
   - ReadOnly
 - uid: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString
   commentId: M:ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString
@@ -183,22 +156,23 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: GetConnectionString
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 39
+    startLine: 27
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
   syntax:
-    content: public string GetConnectionString()
+    content: public override string GetConnectionString()
     return:
       type: System.String
-    content.vb: Public Function GetConnectionString As String
+    content.vb: Public Overrides Function GetConnectionString As String
+  overridden: ArgentSea.DataConnectionConfiguration.GetConnectionString
   overload: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString*
-  implements:
-  - ArgentSea.IConnectionConfiguration.GetConnectionString
   modifiers.csharp:
   - public
+  - override
   modifiers.vb:
   - Public
+  - Overrides
 - uid: ArgentSea.Pg.PgConnectionConfiguration.ApplicationName
   commentId: P:ArgentSea.Pg.PgConnectionConfiguration.ApplicationName
   id: ApplicationName
@@ -217,7 +191,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ApplicationName
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 45
+    startLine: 53
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -254,7 +228,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AutoPrepareMinUsages
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 53
+    startLine: 65
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -291,7 +265,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: CheckCertificateRevocation
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 61
+    startLine: 77
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -328,7 +302,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ClientEncoding
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 69
+    startLine: 89
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -365,7 +339,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: CommandTimeout
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 77
+    startLine: 101
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -402,7 +376,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ConnectionIdleLifetime
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 85
+    startLine: 113
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -439,7 +413,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ConnectionPruningInterval
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 93
+    startLine: 125
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -476,7 +450,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ConvertInfinityDateTime
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 101
+    startLine: 137
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -513,7 +487,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Database
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 109
+    startLine: 149
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -550,7 +524,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Encoding
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 117
+    startLine: 161
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -587,7 +561,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Enlist
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 125
+    startLine: 173
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -624,7 +598,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Host
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 133
+    startLine: 185
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -661,7 +635,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: IncludeRealm
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 141
+    startLine: 197
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -698,7 +672,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: InternalCommandTimeout
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 149
+    startLine: 209
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -735,7 +709,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: KeepAlive
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 157
+    startLine: 221
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -772,7 +746,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: KerberosServiceName
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 165
+    startLine: 233
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -809,7 +783,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: MaxAutoPrepare
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 173
+    startLine: 245
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -846,7 +820,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: MaxPoolSize
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 181
+    startLine: 257
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -883,7 +857,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: MinPoolSize
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 189
+    startLine: 269
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -920,7 +894,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: NoResetOnClose
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 197
+    startLine: 281
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -957,7 +931,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: PersistSecurityInfo
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 205
+    startLine: 293
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -994,7 +968,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Pooling
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 213
+    startLine: 305
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1031,7 +1005,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Port
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 221
+    startLine: 317
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1068,7 +1042,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ReadBufferSize
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 229
+    startLine: 329
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1105,7 +1079,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: SearchPath
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 237
+    startLine: 341
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1142,7 +1116,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ServerCompatibilityMode
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 245
+    startLine: 353
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1179,7 +1153,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: SocketReceiveBufferSize
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 253
+    startLine: 365
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1216,7 +1190,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: SocketSendBufferSize
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 261
+    startLine: 377
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1253,7 +1227,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: SslMode
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 269
+    startLine: 389
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1290,7 +1264,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: TcpKeepAliveInterval
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 277
+    startLine: 401
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1327,7 +1301,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: TcpKeepAliveTime
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 285
+    startLine: 413
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1364,7 +1338,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Timeout
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 293
+    startLine: 425
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1401,7 +1375,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: TrustServerCertificate
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 301
+    startLine: 437
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1438,7 +1412,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: UsePerfCounters
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 310
+    startLine: 450
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1475,7 +1449,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: UseSslStream
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 318
+    startLine: 462
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1512,7 +1486,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: WriteBufferSize
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 327
+    startLine: 475
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1549,7 +1523,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Add
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 337
+    startLine: 489
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1588,7 +1562,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Contains
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 344
+    startLine: 496
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1628,7 +1602,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: ContainsKey
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 351
+    startLine: 503
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1665,7 +1639,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Remove
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 360
+    startLine: 512
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1703,7 +1677,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: Remove
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 368
+    startLine: 520
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1738,7 +1712,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: TryGetValue
     path: ../ArgentSea.Pg/src/PgConnectionConfiguration.cs
-    startLine: 373
+    startLine: 525
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -1773,12 +1747,153 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: ArgentSea.DataConnectionConfiguration
+  commentId: T:ArgentSea.DataConnectionConfiguration
+  parent: ArgentSea
+  name: DataConnectionConfiguration
+  nameWithType: DataConnectionConfiguration
+  fullName: ArgentSea.DataConnectionConfiguration
 - uid: ArgentSea.IConnectionConfiguration
   commentId: T:ArgentSea.IConnectionConfiguration
   parent: ArgentSea
   name: IConnectionConfiguration
   nameWithType: IConnectionConfiguration
   fullName: ArgentSea.IConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+  commentId: F:ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+  parent: ArgentSea.DataConnectionConfiguration
+  name: hasConnectionPropertyChanged
+  nameWithType: DataConnectionConfiguration.hasConnectionPropertyChanged
+  fullName: ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+- uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  commentId: M:ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  parent: ArgentSea.DataConnectionConfiguration
+  name: SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
+  nameWithType: DataConnectionConfiguration.SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
+  fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions, ArgentSea.DataResilienceOptions)
+  spec.csharp:
+  - uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+    name: SetConfigurationOptions
+    nameWithType: DataConnectionConfiguration.SetConfigurationOptions
+    fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: ArgentSea.DataSecurityOptions
+    name: DataSecurityOptions
+    nameWithType: DataSecurityOptions
+    fullName: ArgentSea.DataSecurityOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: ArgentSea.DataResilienceOptions
+    name: DataResilienceOptions
+    nameWithType: DataResilienceOptions
+    fullName: ArgentSea.DataResilienceOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+    name: SetConfigurationOptions
+    nameWithType: DataConnectionConfiguration.SetConfigurationOptions
+    fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: ArgentSea.DataSecurityOptions
+    name: DataSecurityOptions
+    nameWithType: DataSecurityOptions
+    fullName: ArgentSea.DataSecurityOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: ArgentSea.DataResilienceOptions
+    name: DataResilienceOptions
+    nameWithType: DataResilienceOptions
+    fullName: ArgentSea.DataResilienceOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.DataConnectionConfiguration
+  isExternal: true
+  name: GetResilienceStrategy(ILogger)
+  nameWithType: DataConnectionConfiguration.GetResilienceStrategy(ILogger)
+  fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  spec.csharp:
+  - uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+    name: GetResilienceStrategy
+    nameWithType: DataConnectionConfiguration.GetResilienceStrategy
+    fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+    name: GetResilienceStrategy
+    nameWithType: DataConnectionConfiguration.GetResilienceStrategy
+    fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  commentId: M:ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  parent: ArgentSea.DataConnectionConfiguration
+  name: GetSecurityConfiguration()
+  nameWithType: DataConnectionConfiguration.GetSecurityConfiguration()
+  fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration()
+  spec.csharp:
+  - uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+    name: GetSecurityConfiguration
+    nameWithType: DataConnectionConfiguration.GetSecurityConfiguration
+    fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+    name: GetSecurityConfiguration
+    nameWithType: DataConnectionConfiguration.GetSecurityConfiguration
+    fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DataConnectionConfiguration.SecurityKey
+  commentId: P:ArgentSea.DataConnectionConfiguration.SecurityKey
+  parent: ArgentSea.DataConnectionConfiguration
+  name: SecurityKey
+  nameWithType: DataConnectionConfiguration.SecurityKey
+  fullName: ArgentSea.DataConnectionConfiguration.SecurityKey
+- uid: ArgentSea.DataConnectionConfiguration.ResilienceKey
+  commentId: P:ArgentSea.DataConnectionConfiguration.ResilienceKey
+  parent: ArgentSea.DataConnectionConfiguration
+  name: ResilienceKey
+  nameWithType: DataConnectionConfiguration.ResilienceKey
+  fullName: ArgentSea.DataConnectionConfiguration.ResilienceKey
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -2069,64 +2184,17 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.Pg.PgConnectionConfiguration.SetSecurity*
-  commentId: Overload:ArgentSea.Pg.PgConnectionConfiguration.SetSecurity
-  name: SetSecurity
-  nameWithType: PgConnectionConfiguration.SetSecurity
-  fullName: ArgentSea.Pg.PgConnectionConfiguration.SetSecurity
-- uid: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  commentId: M:ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  parent: ArgentSea.IConnectionConfiguration
-  name: SetSecurity(SecurityConfiguration)
-  nameWithType: IConnectionConfiguration.SetSecurity(SecurityConfiguration)
-  fullName: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  spec.csharp:
-  - uid: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-    name: SetSecurity
-    nameWithType: IConnectionConfiguration.SetSecurity
-    fullName: ArgentSea.IConnectionConfiguration.SetSecurity
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: ArgentSea.SecurityConfiguration
-    name: SecurityConfiguration
-    nameWithType: SecurityConfiguration
-    fullName: ArgentSea.SecurityConfiguration
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-    name: SetSecurity
-    nameWithType: IConnectionConfiguration.SetSecurity
-    fullName: ArgentSea.IConnectionConfiguration.SetSecurity
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: ArgentSea.SecurityConfiguration
-    name: SecurityConfiguration
-    nameWithType: SecurityConfiguration
-    fullName: ArgentSea.SecurityConfiguration
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ArgentSea.SecurityConfiguration
-  commentId: T:ArgentSea.SecurityConfiguration
-  parent: ArgentSea
-  name: SecurityConfiguration
-  nameWithType: SecurityConfiguration
-  fullName: ArgentSea.SecurityConfiguration
+- uid: ArgentSea.DataConnectionConfiguration.ConnectionDescription
+  commentId: P:ArgentSea.DataConnectionConfiguration.ConnectionDescription
+  parent: ArgentSea.DataConnectionConfiguration
+  name: ConnectionDescription
+  nameWithType: DataConnectionConfiguration.ConnectionDescription
+  fullName: ArgentSea.DataConnectionConfiguration.ConnectionDescription
 - uid: ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription*
   commentId: Overload:ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription
   name: ConnectionDescription
   nameWithType: PgConnectionConfiguration.ConnectionDescription
   fullName: ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription
-- uid: ArgentSea.IConnectionConfiguration.ConnectionDescription
-  commentId: P:ArgentSea.IConnectionConfiguration.ConnectionDescription
-  parent: ArgentSea.IConnectionConfiguration
-  name: ConnectionDescription
-  nameWithType: IConnectionConfiguration.ConnectionDescription
-  fullName: ArgentSea.IConnectionConfiguration.ConnectionDescription
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -2134,22 +2202,17 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString*
-  commentId: Overload:ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString
-  name: GetConnectionString
-  nameWithType: PgConnectionConfiguration.GetConnectionString
-  fullName: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString
-- uid: ArgentSea.IConnectionConfiguration.GetConnectionString
-  commentId: M:ArgentSea.IConnectionConfiguration.GetConnectionString
-  parent: ArgentSea.IConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
+  commentId: M:ArgentSea.DataConnectionConfiguration.GetConnectionString
+  parent: ArgentSea.DataConnectionConfiguration
   name: GetConnectionString()
-  nameWithType: IConnectionConfiguration.GetConnectionString()
-  fullName: ArgentSea.IConnectionConfiguration.GetConnectionString()
+  nameWithType: DataConnectionConfiguration.GetConnectionString()
+  fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString()
   spec.csharp:
-  - uid: ArgentSea.IConnectionConfiguration.GetConnectionString
+  - uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
     name: GetConnectionString
-    nameWithType: IConnectionConfiguration.GetConnectionString
-    fullName: ArgentSea.IConnectionConfiguration.GetConnectionString
+    nameWithType: DataConnectionConfiguration.GetConnectionString
+    fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString
   - name: (
     nameWithType: (
     fullName: (
@@ -2157,16 +2220,21 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.IConnectionConfiguration.GetConnectionString
+  - uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
     name: GetConnectionString
-    nameWithType: IConnectionConfiguration.GetConnectionString
-    fullName: ArgentSea.IConnectionConfiguration.GetConnectionString
+    nameWithType: DataConnectionConfiguration.GetConnectionString
+    fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
+- uid: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString*
+  commentId: Overload:ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString
+  name: GetConnectionString
+  nameWithType: PgConnectionConfiguration.GetConnectionString
+  fullName: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString
 - uid: ArgentSea.Pg.PgConnectionConfiguration.ApplicationName*
   commentId: Overload:ArgentSea.Pg.PgConnectionConfiguration.ApplicationName
   name: ApplicationName

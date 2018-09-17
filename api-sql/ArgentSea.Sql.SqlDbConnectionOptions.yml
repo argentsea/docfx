@@ -25,7 +25,7 @@ items:
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
-  summary: "\nThis configuration class defines an array of database <xref href=\"ArgentSea.Sql.SqlConnectionConfiguration\" data-throw-if-not-resolved=\"false\"></xref>. \n<example>\nFor example, you might configure your appsettings.json like this:\n<pre><code>  &quot;SqlDbConnections&quot;: [\n  {\n    &quot;DatabaseKey&quot;: &quot;MyDatabase&quot;,\n    &quot;SecurityKey&quot;: &quot;SecKey1&quot;,\n    &quot;DataConnection&quot;: {\n      &quot;DataSource&quot;: &quot;localhost&quot;,\n      &quot;InitialCatalog&quot;: &quot;MyDb&quot;\n      }\n    }\n  ]</code></pre>\n Note that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a DataResilienceKey (if defined) must match a key in the DataResilienceOptions array.\n</example>\n"
+  summary: "\nThis configuration class defines an array of database <xref href=\"ArgentSea.Sql.SqlConnectionConfiguration\" data-throw-if-not-resolved=\"false\"></xref>. \n<example>\nFor example, you might configure your appsettings.json like this:\n<pre><code>  &quot;SqlDbConnections&quot;: [\n  {\n    &quot;DatabaseKey&quot;: &quot;MyDatabase&quot;,\n    &quot;SecurityKey&quot;: &quot;SecKey1&quot;,\n    &quot;DataConnection&quot;: {\n      &quot;DataSource&quot;: &quot;localhost&quot;,\n      &quot;InitialCatalog&quot;: &quot;MyDb&quot;\n      }\n    }\n  ]</code></pre>\n Note that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a ResilienceKey (if defined) must match a key in the DataResilienceOptions array.\n</example>\n"
   example: []
   syntax:
     content: 'public class SqlDbConnectionOptions : IDbDataConfigurationOptions'
@@ -103,7 +103,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DbConnectionsInternal
     path: ../ArgentSea.Sql/src/SqlDbConnectionOptions.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql

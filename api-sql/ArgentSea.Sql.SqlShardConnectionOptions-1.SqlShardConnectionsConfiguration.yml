@@ -5,10 +5,8 @@ items:
   id: SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration
   parent: ArgentSea.Sql
   children:
-  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.DataResilienceKey
-  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.SecurityKey
   - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.Shards
-  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetKey
+  - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName
   - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardsInternal
   langs:
   - csharp
@@ -54,123 +52,45 @@ items:
   - Class
   fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration
   name.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration
-- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetKey
-  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetKey
-  id: ShardSetKey
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName
+  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName
+  id: ShardSetName
   parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration
   langs:
   - csharp
   - vb
-  name: ShardSetKey
-  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetKey
-  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetKey
+  name: ShardSetName
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetName
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetName
   type: Property
   source:
     remote:
       path: src/SqlShardConnectionOptions.cs
       branch: master
       repo: https://github.com/argentsea/sql.git
-    id: ShardSetKey
+    id: ShardSetName
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
     startLine: 18
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
   syntax:
-    content: public string ShardSetKey { get; set; }
+    content: public string ShardSetName { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property ShardSetKey As String
-  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetKey*
+    content.vb: Public Property ShardSetName As String
+  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName*
   implements:
-  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetKey
-  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetKey
+  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetName
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetName
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetKey
-- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.SecurityKey
-  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.SecurityKey
-  id: SecurityKey
-  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration
-  langs:
-  - csharp
-  - vb
-  name: SecurityKey
-  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.SecurityKey
-  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.SecurityKey
-  type: Property
-  source:
-    remote:
-      path: src/SqlShardConnectionOptions.cs
-      branch: master
-      repo: https://github.com/argentsea/sql.git
-    id: SecurityKey
-    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 19
-  assemblies:
-  - ArgentSea.Sql
-  namespace: ArgentSea.Sql
-  syntax:
-    content: public string SecurityKey { get; set; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property SecurityKey As String
-  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.SecurityKey*
-  implements:
-  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.SecurityKey
-  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.SecurityKey
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.SecurityKey
-- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.DataResilienceKey
-  commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.DataResilienceKey
-  id: DataResilienceKey
-  parent: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration
-  langs:
-  - csharp
-  - vb
-  name: DataResilienceKey
-  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.DataResilienceKey
-  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.DataResilienceKey
-  type: Property
-  source:
-    remote:
-      path: src/SqlShardConnectionOptions.cs
-      branch: master
-      repo: https://github.com/argentsea/sql.git
-    id: DataResilienceKey
-    path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 20
-  assemblies:
-  - ArgentSea.Sql
-  namespace: ArgentSea.Sql
-  syntax:
-    content: public string DataResilienceKey { get; set; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property DataResilienceKey As String
-  overload: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.DataResilienceKey*
-  implements:
-  - ArgentSea.IShardConnectionsConfiguration{{TShard}}.DataResilienceKey
-  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.DataResilienceKey
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.DataResilienceKey
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetName
 - uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardsInternal
   commentId: P:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardsInternal
   id: ShardsInternal
@@ -189,7 +109,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ShardsInternal
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 21
+    startLine: 19
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -228,7 +148,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Shards
     path: ../ArgentSea.Sql/src/SqlShardConnectionOptions.cs
-    startLine: 22
+    startLine: 20
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -624,22 +544,22 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetKey*
-  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetKey
-  name: ShardSetKey
-  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetKey
-  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetKey
-  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetKey
-  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetKey
-- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.ShardSetKey
+- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName*
+  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName
+  name: ShardSetName
+  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetName
+  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.ShardSetName
+  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetName
+  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.ShardSetName
+- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.ShardSetName
+  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.ShardSetName
   parent: ArgentSea.IShardConnectionsConfiguration{{TShard}}
-  definition: ArgentSea.IShardConnectionsConfiguration`1.ShardSetKey
-  name: ShardSetKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetKey
+  definition: ArgentSea.IShardConnectionsConfiguration`1.ShardSetName
+  name: ShardSetName
+  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetName
+  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetName
+  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetName
+  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetName
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -647,59 +567,13 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: ArgentSea.IShardConnectionsConfiguration`1.ShardSetKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.ShardSetKey
-  name: ShardSetKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetKey
-- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.SecurityKey*
-  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.SecurityKey
-  name: SecurityKey
-  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.SecurityKey
-  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.SecurityKey
-  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.SecurityKey
-  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.SecurityKey
-- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.SecurityKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.SecurityKey
-  parent: ArgentSea.IShardConnectionsConfiguration{{TShard}}
-  definition: ArgentSea.IShardConnectionsConfiguration`1.SecurityKey
-  name: SecurityKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.SecurityKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.SecurityKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).SecurityKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).SecurityKey
-- uid: ArgentSea.IShardConnectionsConfiguration`1.SecurityKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.SecurityKey
-  name: SecurityKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.SecurityKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.SecurityKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).SecurityKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).SecurityKey
-- uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.DataResilienceKey*
-  commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.DataResilienceKey
-  fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration.DataResilienceKey
-  nameWithType.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.DataResilienceKey
-  fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration.DataResilienceKey
-- uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}.DataResilienceKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration{`0}.DataResilienceKey
-  parent: ArgentSea.IShardConnectionsConfiguration{{TShard}}
-  definition: ArgentSea.IShardConnectionsConfiguration`1.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).DataResilienceKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).DataResilienceKey
-- uid: ArgentSea.IShardConnectionsConfiguration`1.DataResilienceKey
-  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.DataResilienceKey
-  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).DataResilienceKey
-  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).DataResilienceKey
+- uid: ArgentSea.IShardConnectionsConfiguration`1.ShardSetName
+  commentId: P:ArgentSea.IShardConnectionsConfiguration`1.ShardSetName
+  name: ShardSetName
+  nameWithType: IShardConnectionsConfiguration<TShard>.ShardSetName
+  fullName: ArgentSea.IShardConnectionsConfiguration<TShard>.ShardSetName
+  nameWithType.vb: IShardConnectionsConfiguration(Of TShard).ShardSetName
+  fullName.vb: ArgentSea.IShardConnectionsConfiguration(Of TShard).ShardSetName
 - uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardsInternal*
   commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardsInternal
   name: ShardsInternal

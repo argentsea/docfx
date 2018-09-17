@@ -30,7 +30,6 @@ items:
   - ArgentSea.Sql.SqlConnectionConfiguration.Remove(System.Collections.Generic.KeyValuePair{System.String,System.Object})
   - ArgentSea.Sql.SqlConnectionConfiguration.Remove(System.String)
   - ArgentSea.Sql.SqlConnectionConfiguration.Replication
-  - ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
   - ArgentSea.Sql.SqlConnectionConfiguration.TrustServerCertificate
   - ArgentSea.Sql.SqlConnectionConfiguration.TryGetValue(System.String,System.Object@)
   - ArgentSea.Sql.SqlConnectionConfiguration.TypeSystemVersion
@@ -49,22 +48,30 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SqlConnectionConfiguration
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
-  summary: "\nThis class represents is a (non-sharded) database connection.\nNote that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a DataResilienceKey (if defined) must match as key in the DataResilienceOptions array.\nIf the DataResilienceKey is not defined, a default data resilience strategy will be used.\n"
+  summary: "\nThis class represents is a (non-sharded) database connection.\nNote that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a ResilienceKey (if defined) must match as key in the DataResilienceOptions array.\nIf the ResilienceKey is not defined, a default data resilience strategy will be used.\n"
   example: []
   syntax:
-    content: 'public class SqlConnectionConfiguration : IConnectionConfiguration'
+    content: 'public class SqlConnectionConfiguration : DataConnectionConfiguration, IConnectionConfiguration'
     content.vb: >-
       Public Class SqlConnectionConfiguration
+          Inherits DataConnectionConfiguration
           Implements IConnectionConfiguration
   inheritance:
   - System.Object
+  - ArgentSea.DataConnectionConfiguration
   implements:
   - ArgentSea.IConnectionConfiguration
   inheritedMembers:
+  - ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+  - ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  - ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - ArgentSea.DataConnectionConfiguration.SecurityKey
+  - ArgentSea.DataConnectionConfiguration.ResilienceKey
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -78,41 +85,6 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  commentId: M:ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  id: SetSecurity(ArgentSea.SecurityConfiguration)
-  parent: ArgentSea.Sql.SqlConnectionConfiguration
-  langs:
-  - csharp
-  - vb
-  name: SetSecurity(SecurityConfiguration)
-  nameWithType: SqlConnectionConfiguration.SetSecurity(SecurityConfiguration)
-  fullName: ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  type: Method
-  source:
-    remote:
-      path: src/SqlConnectionConfiguration.cs
-      branch: master
-      repo: https://github.com/argentsea/sql.git
-    id: SetSecurity
-    path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 21
-  assemblies:
-  - ArgentSea.Sql
-  namespace: ArgentSea.Sql
-  syntax:
-    content: public void SetSecurity(SecurityConfiguration security)
-    parameters:
-    - id: security
-      type: ArgentSea.SecurityConfiguration
-    content.vb: Public Sub SetSecurity(security As SecurityConfiguration)
-  overload: ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity*
-  implements:
-  - ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: ArgentSea.Sql.SqlConnectionConfiguration.ConnectionDescription
   commentId: P:ArgentSea.Sql.SqlConnectionConfiguration.ConnectionDescription
   id: ConnectionDescription
@@ -131,24 +103,25 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectionDescription
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 38
+    startLine: 23
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
   syntax:
-    content: public string ConnectionDescription { get; }
+    content: public override string ConnectionDescription { get; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public ReadOnly Property ConnectionDescription As String
+    content.vb: Public Overrides ReadOnly Property ConnectionDescription As String
+  overridden: ArgentSea.DataConnectionConfiguration.ConnectionDescription
   overload: ArgentSea.Sql.SqlConnectionConfiguration.ConnectionDescription*
-  implements:
-  - ArgentSea.IConnectionConfiguration.ConnectionDescription
   modifiers.csharp:
   - public
+  - override
   - get
   modifiers.vb:
   - Public
+  - Overrides
   - ReadOnly
 - uid: ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString
   commentId: M:ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString
@@ -168,22 +141,23 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: GetConnectionString
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 43
+    startLine: 28
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
   syntax:
-    content: public string GetConnectionString()
+    content: public override string GetConnectionString()
     return:
       type: System.String
-    content.vb: Public Function GetConnectionString As String
+    content.vb: Public Overrides Function GetConnectionString As String
+  overridden: ArgentSea.DataConnectionConfiguration.GetConnectionString
   overload: ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString*
-  implements:
-  - ArgentSea.IConnectionConfiguration.GetConnectionString
   modifiers.csharp:
   - public
+  - override
   modifiers.vb:
   - Public
+  - Overrides
 - uid: ArgentSea.Sql.SqlConnectionConfiguration.ApplicationIntent
   commentId: P:ArgentSea.Sql.SqlConnectionConfiguration.ApplicationIntent
   id: ApplicationIntent
@@ -202,7 +176,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ApplicationIntent
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 50
+    startLine: 55
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -239,7 +213,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ApplicationName
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 59
+    startLine: 68
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -276,7 +250,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectRetryCount
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 67
+    startLine: 80
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -313,7 +287,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectRetryInterval
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 75
+    startLine: 92
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -350,7 +324,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ConnectTimeout
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 83
+    startLine: 104
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -387,7 +361,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: CurrentLanguage
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 91
+    startLine: 116
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -424,7 +398,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: DataSource
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 99
+    startLine: 128
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -461,7 +435,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Encrypt
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 107
+    startLine: 140
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -498,7 +472,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: FailoverPartner
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 115
+    startLine: 152
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -535,7 +509,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: InitialCatalog
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 123
+    startLine: 164
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -572,7 +546,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: LoadBalanceTimeout
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 131
+    startLine: 176
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -609,7 +583,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MaxPoolSize
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 139
+    startLine: 188
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -646,7 +620,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MinPoolSize
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 147
+    startLine: 200
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -683,7 +657,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MultipleActiveResultSets
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 155
+    startLine: 212
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -720,7 +694,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: MultiSubnetFailover
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 163
+    startLine: 224
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -757,7 +731,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: PacketSize
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 171
+    startLine: 236
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -794,7 +768,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: PersistSecurityInfo
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 179
+    startLine: 248
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -831,7 +805,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Pooling
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 187
+    startLine: 260
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -868,7 +842,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Replication
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 195
+    startLine: 272
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -905,7 +879,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: TrustServerCertificate
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 203
+    startLine: 280
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -942,7 +916,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: TypeSystemVersion
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 211
+    startLine: 292
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -979,7 +953,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: WorkstationID
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 219
+    startLine: 304
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1016,7 +990,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Add
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 257
+    startLine: 346
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1055,7 +1029,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: ContainsKey
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 264
+    startLine: 353
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1092,7 +1066,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Remove
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 272
+    startLine: 361
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1130,7 +1104,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: Remove
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 280
+    startLine: 369
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1165,7 +1139,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: TryGetValue
     path: ../ArgentSea.Sql/src/SqlConnectionConfiguration.cs
-    startLine: 285
+    startLine: 374
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -1200,12 +1174,153 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: ArgentSea.DataConnectionConfiguration
+  commentId: T:ArgentSea.DataConnectionConfiguration
+  parent: ArgentSea
+  name: DataConnectionConfiguration
+  nameWithType: DataConnectionConfiguration
+  fullName: ArgentSea.DataConnectionConfiguration
 - uid: ArgentSea.IConnectionConfiguration
   commentId: T:ArgentSea.IConnectionConfiguration
   parent: ArgentSea
   name: IConnectionConfiguration
   nameWithType: IConnectionConfiguration
   fullName: ArgentSea.IConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+  commentId: F:ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+  parent: ArgentSea.DataConnectionConfiguration
+  name: hasConnectionPropertyChanged
+  nameWithType: DataConnectionConfiguration.hasConnectionPropertyChanged
+  fullName: ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
+- uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  commentId: M:ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  parent: ArgentSea.DataConnectionConfiguration
+  name: SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
+  nameWithType: DataConnectionConfiguration.SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
+  fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions, ArgentSea.DataResilienceOptions)
+  spec.csharp:
+  - uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+    name: SetConfigurationOptions
+    nameWithType: DataConnectionConfiguration.SetConfigurationOptions
+    fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: ArgentSea.DataSecurityOptions
+    name: DataSecurityOptions
+    nameWithType: DataSecurityOptions
+    fullName: ArgentSea.DataSecurityOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: ArgentSea.DataResilienceOptions
+    name: DataResilienceOptions
+    nameWithType: DataResilienceOptions
+    fullName: ArgentSea.DataResilienceOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+    name: SetConfigurationOptions
+    nameWithType: DataConnectionConfiguration.SetConfigurationOptions
+    fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: ArgentSea.DataSecurityOptions
+    name: DataSecurityOptions
+    nameWithType: DataSecurityOptions
+    fullName: ArgentSea.DataSecurityOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: ArgentSea.DataResilienceOptions
+    name: DataResilienceOptions
+    nameWithType: DataResilienceOptions
+    fullName: ArgentSea.DataResilienceOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.DataConnectionConfiguration
+  isExternal: true
+  name: GetResilienceStrategy(ILogger)
+  nameWithType: DataConnectionConfiguration.GetResilienceStrategy(ILogger)
+  fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  spec.csharp:
+  - uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+    name: GetResilienceStrategy
+    nameWithType: DataConnectionConfiguration.GetResilienceStrategy
+    fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+    name: GetResilienceStrategy
+    nameWithType: DataConnectionConfiguration.GetResilienceStrategy
+    fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  commentId: M:ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  parent: ArgentSea.DataConnectionConfiguration
+  name: GetSecurityConfiguration()
+  nameWithType: DataConnectionConfiguration.GetSecurityConfiguration()
+  fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration()
+  spec.csharp:
+  - uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+    name: GetSecurityConfiguration
+    nameWithType: DataConnectionConfiguration.GetSecurityConfiguration
+    fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+    name: GetSecurityConfiguration
+    nameWithType: DataConnectionConfiguration.GetSecurityConfiguration
+    fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.DataConnectionConfiguration.SecurityKey
+  commentId: P:ArgentSea.DataConnectionConfiguration.SecurityKey
+  parent: ArgentSea.DataConnectionConfiguration
+  name: SecurityKey
+  nameWithType: DataConnectionConfiguration.SecurityKey
+  fullName: ArgentSea.DataConnectionConfiguration.SecurityKey
+- uid: ArgentSea.DataConnectionConfiguration.ResilienceKey
+  commentId: P:ArgentSea.DataConnectionConfiguration.ResilienceKey
+  parent: ArgentSea.DataConnectionConfiguration
+  name: ResilienceKey
+  nameWithType: DataConnectionConfiguration.ResilienceKey
+  fullName: ArgentSea.DataConnectionConfiguration.ResilienceKey
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -1496,64 +1611,17 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity*
-  commentId: Overload:ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity
-  name: SetSecurity
-  nameWithType: SqlConnectionConfiguration.SetSecurity
-  fullName: ArgentSea.Sql.SqlConnectionConfiguration.SetSecurity
-- uid: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  commentId: M:ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  parent: ArgentSea.IConnectionConfiguration
-  name: SetSecurity(SecurityConfiguration)
-  nameWithType: IConnectionConfiguration.SetSecurity(SecurityConfiguration)
-  fullName: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-  spec.csharp:
-  - uid: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-    name: SetSecurity
-    nameWithType: IConnectionConfiguration.SetSecurity
-    fullName: ArgentSea.IConnectionConfiguration.SetSecurity
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: ArgentSea.SecurityConfiguration
-    name: SecurityConfiguration
-    nameWithType: SecurityConfiguration
-    fullName: ArgentSea.SecurityConfiguration
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ArgentSea.IConnectionConfiguration.SetSecurity(ArgentSea.SecurityConfiguration)
-    name: SetSecurity
-    nameWithType: IConnectionConfiguration.SetSecurity
-    fullName: ArgentSea.IConnectionConfiguration.SetSecurity
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: ArgentSea.SecurityConfiguration
-    name: SecurityConfiguration
-    nameWithType: SecurityConfiguration
-    fullName: ArgentSea.SecurityConfiguration
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ArgentSea.SecurityConfiguration
-  commentId: T:ArgentSea.SecurityConfiguration
-  parent: ArgentSea
-  name: SecurityConfiguration
-  nameWithType: SecurityConfiguration
-  fullName: ArgentSea.SecurityConfiguration
+- uid: ArgentSea.DataConnectionConfiguration.ConnectionDescription
+  commentId: P:ArgentSea.DataConnectionConfiguration.ConnectionDescription
+  parent: ArgentSea.DataConnectionConfiguration
+  name: ConnectionDescription
+  nameWithType: DataConnectionConfiguration.ConnectionDescription
+  fullName: ArgentSea.DataConnectionConfiguration.ConnectionDescription
 - uid: ArgentSea.Sql.SqlConnectionConfiguration.ConnectionDescription*
   commentId: Overload:ArgentSea.Sql.SqlConnectionConfiguration.ConnectionDescription
   name: ConnectionDescription
   nameWithType: SqlConnectionConfiguration.ConnectionDescription
   fullName: ArgentSea.Sql.SqlConnectionConfiguration.ConnectionDescription
-- uid: ArgentSea.IConnectionConfiguration.ConnectionDescription
-  commentId: P:ArgentSea.IConnectionConfiguration.ConnectionDescription
-  parent: ArgentSea.IConnectionConfiguration
-  name: ConnectionDescription
-  nameWithType: IConnectionConfiguration.ConnectionDescription
-  fullName: ArgentSea.IConnectionConfiguration.ConnectionDescription
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -1561,22 +1629,17 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString*
-  commentId: Overload:ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString
-  name: GetConnectionString
-  nameWithType: SqlConnectionConfiguration.GetConnectionString
-  fullName: ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString
-- uid: ArgentSea.IConnectionConfiguration.GetConnectionString
-  commentId: M:ArgentSea.IConnectionConfiguration.GetConnectionString
-  parent: ArgentSea.IConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
+  commentId: M:ArgentSea.DataConnectionConfiguration.GetConnectionString
+  parent: ArgentSea.DataConnectionConfiguration
   name: GetConnectionString()
-  nameWithType: IConnectionConfiguration.GetConnectionString()
-  fullName: ArgentSea.IConnectionConfiguration.GetConnectionString()
+  nameWithType: DataConnectionConfiguration.GetConnectionString()
+  fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString()
   spec.csharp:
-  - uid: ArgentSea.IConnectionConfiguration.GetConnectionString
+  - uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
     name: GetConnectionString
-    nameWithType: IConnectionConfiguration.GetConnectionString
-    fullName: ArgentSea.IConnectionConfiguration.GetConnectionString
+    nameWithType: DataConnectionConfiguration.GetConnectionString
+    fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString
   - name: (
     nameWithType: (
     fullName: (
@@ -1584,16 +1647,21 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.IConnectionConfiguration.GetConnectionString
+  - uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
     name: GetConnectionString
-    nameWithType: IConnectionConfiguration.GetConnectionString
-    fullName: ArgentSea.IConnectionConfiguration.GetConnectionString
+    nameWithType: DataConnectionConfiguration.GetConnectionString
+    fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
+- uid: ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString*
+  commentId: Overload:ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString
+  name: GetConnectionString
+  nameWithType: SqlConnectionConfiguration.GetConnectionString
+  fullName: ArgentSea.Sql.SqlConnectionConfiguration.GetConnectionString
 - uid: ArgentSea.Sql.SqlConnectionConfiguration.ApplicationIntent*
   commentId: Overload:ArgentSea.Sql.SqlConnectionConfiguration.ApplicationIntent
   name: ApplicationIntent

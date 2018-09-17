@@ -8,8 +8,6 @@ items:
   - ArgentSea.Pg.PgDbConnectionConfiguration.DatabaseKey
   - ArgentSea.Pg.PgDbConnectionConfiguration.DataConnection
   - ArgentSea.Pg.PgDbConnectionConfiguration.DataConnectionInternal
-  - ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey
-  - ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey
   langs:
   - csharp
   - vb
@@ -24,7 +22,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: PgDbConnectionConfiguration
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 32
+    startLine: 33
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -69,7 +67,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: DatabaseKey
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 34
+    startLine: 35
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -82,80 +80,6 @@ items:
   overload: ArgentSea.Pg.PgDbConnectionConfiguration.DatabaseKey*
   implements:
   - ArgentSea.IDbConnectionConfiguration.DatabaseKey
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey
-  commentId: P:ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey
-  id: SecurityKey
-  parent: ArgentSea.Pg.PgDbConnectionConfiguration
-  langs:
-  - csharp
-  - vb
-  name: SecurityKey
-  nameWithType: PgDbConnectionConfiguration.SecurityKey
-  fullName: ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey
-  type: Property
-  source:
-    remote:
-      path: src/PgDbConnectionOptions.cs
-      branch: master
-      repo: https://github.com/argentsea/pg.git
-    id: SecurityKey
-    path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 35
-  assemblies:
-  - ArgentSea.Pg
-  namespace: ArgentSea.Pg
-  syntax:
-    content: public string SecurityKey { get; set; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property SecurityKey As String
-  overload: ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey*
-  implements:
-  - ArgentSea.IDbConnectionConfiguration.SecurityKey
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey
-  commentId: P:ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey
-  id: DataResilienceKey
-  parent: ArgentSea.Pg.PgDbConnectionConfiguration
-  langs:
-  - csharp
-  - vb
-  name: DataResilienceKey
-  nameWithType: PgDbConnectionConfiguration.DataResilienceKey
-  fullName: ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey
-  type: Property
-  source:
-    remote:
-      path: src/PgDbConnectionOptions.cs
-      branch: master
-      repo: https://github.com/argentsea/pg.git
-    id: DataResilienceKey
-    path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 36
-  assemblies:
-  - ArgentSea.Pg
-  namespace: ArgentSea.Pg
-  syntax:
-    content: public string DataResilienceKey { get; set; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property DataResilienceKey As String
-  overload: ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey*
-  implements:
-  - ArgentSea.IDbConnectionConfiguration.DataResilienceKey
   modifiers.csharp:
   - public
   - get
@@ -180,7 +104,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: DataConnectionInternal
     path: ../ArgentSea.Pg/src/PgDbConnectionOptions.cs
-    startLine: 38
+    startLine: 37
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -561,28 +485,6 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey*
-  commentId: Overload:ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey
-  name: SecurityKey
-  nameWithType: PgDbConnectionConfiguration.SecurityKey
-  fullName: ArgentSea.Pg.PgDbConnectionConfiguration.SecurityKey
-- uid: ArgentSea.IDbConnectionConfiguration.SecurityKey
-  commentId: P:ArgentSea.IDbConnectionConfiguration.SecurityKey
-  parent: ArgentSea.IDbConnectionConfiguration
-  name: SecurityKey
-  nameWithType: IDbConnectionConfiguration.SecurityKey
-  fullName: ArgentSea.IDbConnectionConfiguration.SecurityKey
-- uid: ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey*
-  commentId: Overload:ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey
-  name: DataResilienceKey
-  nameWithType: PgDbConnectionConfiguration.DataResilienceKey
-  fullName: ArgentSea.Pg.PgDbConnectionConfiguration.DataResilienceKey
-- uid: ArgentSea.IDbConnectionConfiguration.DataResilienceKey
-  commentId: P:ArgentSea.IDbConnectionConfiguration.DataResilienceKey
-  parent: ArgentSea.IDbConnectionConfiguration
-  name: DataResilienceKey
-  nameWithType: IDbConnectionConfiguration.DataResilienceKey
-  fullName: ArgentSea.IDbConnectionConfiguration.DataResilienceKey
 - uid: ArgentSea.Pg.PgDbConnectionConfiguration.DataConnectionInternal*
   commentId: Overload:ArgentSea.Pg.PgDbConnectionConfiguration.DataConnectionInternal
   name: DataConnectionInternal

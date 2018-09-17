@@ -72,7 +72,7 @@ public class Subscriber
 
 Often, due to different naming conventions or development drift, database column names and the corresponding .NET properties names do not match. That is why every attribute requires a “name” argument — which should largly correspond to the database name. The Mapper will create query parameters based on this name and reference DataReader columns with this name.
 
-> [!WARNING]
+> [!IMPORTANT]
 > Database parameters and columns should be named as consistently as possible. In most cases, this means the parameters have the same name as the columns they reference. If you like to alias columns or abbreviate parameters, you will find the Mapper largely unhelpful.
 
 ### Attribute Types
@@ -337,7 +337,7 @@ The ArgentSea Mapper is written to be as high-performance as optimized hand-code
 
 Property attributes can only be retrieved using *reflection*, which is relatively slow .NET code. To avoid this type of performance penalty on every data access, ArgentSea uses reflection only the first time the mapping is performed; using that metadata it then creates and compiles an “Expression Tree”to build an optimized, compiled mapping. The compiled code is cached in memory and reused for all subsequent calls.
 
-> [!INFORMATION]
+> [!WARNING]
 > The Mapper will be relatively slow (and CPU intensive) the *first time* each model class is mapped to parameters or data. The initial compilation usually takes about a second or less. Subsequent calls will execute the data to property mapping at native machine-code speeds. When the application is restarted, the memory is cleared and the compilation overhead occurs again.
 
 ## Instrumentation

@@ -33,7 +33,7 @@ on the project and select *Manage User Secrets*).
 
 If you are not using User Secrets, you can simply one of the json sections to your appsettings.json configuration file.
 
-> [!WARNING]
+> [!TIP]
 > The sample application *does* use User Secrets, so if you are following along at home you will need to manually copy the credentials section below into the secrets.json file in the sample app.
 
 For a connection using username and password authentication, use:
@@ -63,7 +63,7 @@ Alternatively, for a connection using Windows authentication, use:
 
 Storing passwords more securely is an incidental benefit of having a separate Credentials section. The principal purpose is to simplify login management when the system has many connections across multiple shard sets.
 
-> [!WARNING]
+> [!CAUTION]
 > In a production deployment, the Credential section could be hosted in Azure Key Vault, AWS Secrets Manager, or some other secure resource.
 
 ## 4. Define Your Database Settings
@@ -111,7 +111,7 @@ Configure the *Host* and *Database* properties below.
 A deep-dive into configuration settings, including a complete list of configuration attributes,
 is available [here](/tutorials/configuration.html).
 
-> [!NOTE]
+> [!TIP]
 > In a production deployment, environment-specific connection information might be stored in server environment variables rather than configuration files. This make deployments much easier to manage.
 
 ## 6. Load ArgentSea on Application Start
