@@ -15,9 +15,7 @@ In outline, retrieving data using ArgentSea follows the same steps as in ADO.NET
 * Call a procedure or function in the database
 * Capture the data results in a set of objects
 
-The Mapper helps simplify the first and last of these steps. By defining metadata about the names of parameters or result columns, the Mapper can automatically map properties to columns or parameters.
-
-To make things even simpler, the query methods on both Connections and ShardSets implicitly use the Mapper, combining the second and third steps.
+The Mapper helps simplify the first and last of these steps. By defining metadata about the names of parameters or result columns, the Mapper can automatically map properties to columns or parameters. To make things even simpler, the query methods on both Connections and ShardSets implicitly use the Mapper, combining the second and third steps.
 
 ## Property Attributes
 
