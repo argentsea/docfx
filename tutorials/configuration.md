@@ -333,14 +333,12 @@ Each database in a shard set has a shard identifier *(shardId)*. The shardId is 
 
 The data type of the ShardId is important because a record in a data shard may refer to records in *other* shards. Persisting the remote shard reference means saving the shard identifier too.
 
-In other words, the ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets.
+In other words, the ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets. Your configuration must also be aware of the nature of this shard key; the ShardId value in your json configuration file must be cast to your ShardId type.
 
 > [!IMPORTANT]
 > Once established, the ShardId *type* cannot be easily changed.
 
-Technically, the ShardId can be one of the following types: byte, char, DateTime, DateTimeOffset, decimal, double, float, Guid, int, long, sbyte, short, string, TimeSpan, uint, ulong, or ushort. Practically, realistic candidates are much fewer. Avoiding types without a corresponding SQL type and unnecessarily large data sizes, leaves *byte*, *short*, *char* as the most efficient choices. Also, *int* or *string* are viable choices if your ShardId needs to integrate with some external system with previously defined data.
-
-Your configuration must also be aware of the nature of this shard key; the ShardId value in your json configuration file must be cast to your ShardId type.
+More details about the sharId type is in the [Sharding](sharding.md) section
 
 ## ShardSet JSON
 
