@@ -20,25 +20,36 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: SqlShardSets
     path: ../ArgentSea.Sql/src/SqlShardSets.cs
-    startLine: 11
+    startLine: 27
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
-  summary: "\nThis configuration class contains the configuration information for a shard set.\n"
+  summary: "\nA collection of ShardSets.\n"
   example: []
   syntax:
-    content: 'public class SqlShardSets<TShard> : ShardDataStores<TShard, SqlShardConnectionOptions<TShard>> where TShard : IComparable'
+    content: 'public class SqlShardSets<TShard> : ShardSets<TShard, SqlShardConnectionOptions<TShard>>, ICollection, IEnumerable where TShard : IComparable'
     typeParameters:
     - id: TShard
-      description: ''
+      description: The type of the shardId index value.
     content.vb: >-
       Public Class SqlShardSets(Of TShard As IComparable)
-          Inherits ShardDataStores(Of TShard, SqlShardConnectionOptions(Of TShard))
+
+          Inherits ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard))
+
+          Implements ICollection, IEnumerable
   inheritance:
   - System.Object
-  - ArgentSea.ShardDataStores{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  implements:
+  - System.Collections.ICollection
+  - System.Collections.IEnumerable
   inheritedMembers:
-  - ArgentSea.ShardDataStores{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.ShardSets
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.Item(System.String)
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.Count
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.IsSynchronized
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.SyncRoot
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.CopyTo(System.Array,System.Int32)
+  - ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.GetEnumerator
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -73,7 +84,7 @@ items:
       repo: https://github.com/argentsea/sql.git
     id: .ctor
     path: ../ArgentSea.Sql/src/SqlShardSets.cs
-    startLine: 13
+    startLine: 29
   assemblies:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
@@ -110,21 +121,21 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ArgentSea.ShardDataStores{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
-  commentId: T:ArgentSea.ShardDataStores{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  commentId: T:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}
   parent: ArgentSea
-  definition: ArgentSea.ShardDataStores`2
-  name: ShardDataStores<TShard, SqlShardConnectionOptions<TShard>>
-  nameWithType: ShardDataStores<TShard, SqlShardConnectionOptions<TShard>>
-  fullName: ArgentSea.ShardDataStores<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>
-  nameWithType.vb: ShardDataStores(Of TShard, SqlShardConnectionOptions(Of TShard))
-  fullName.vb: ArgentSea.ShardDataStores(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard))
-  name.vb: ShardDataStores(Of TShard, SqlShardConnectionOptions(Of TShard))
+  definition: ArgentSea.ShardSets`2
+  name: ShardSets<TShard, SqlShardConnectionOptions<TShard>>
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard))
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard))
+  name.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard))
   spec.csharp:
-  - uid: ArgentSea.ShardDataStores`2
-    name: ShardDataStores
-    nameWithType: ShardDataStores
-    fullName: ArgentSea.ShardDataStores
+  - uid: ArgentSea.ShardSets`2
+    name: ShardSets
+    nameWithType: ShardSets
+    fullName: ArgentSea.ShardSets
   - name: <
     nameWithType: <
     fullName: <
@@ -151,10 +162,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArgentSea.ShardDataStores`2
-    name: ShardDataStores
-    nameWithType: ShardDataStores
-    fullName: ArgentSea.ShardDataStores
+  - uid: ArgentSea.ShardSets`2
+    name: ShardSets
+    nameWithType: ShardSets
+    fullName: ArgentSea.ShardSets
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -180,15 +191,177 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ArgentSea.ShardDataStores{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.ShardSets
-  commentId: P:ArgentSea.ShardDataStores{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.ShardSets
-  parent: ArgentSea.ShardDataStores{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
-  definition: ArgentSea.ShardDataStores`2.ShardSets
-  name: ShardSets
-  nameWithType: ShardDataStores<TShard, SqlShardConnectionOptions<TShard>>.ShardSets
-  fullName: ArgentSea.ShardDataStores<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.ShardSets
-  nameWithType.vb: ShardDataStores(Of TShard, SqlShardConnectionOptions(Of TShard)).ShardSets
-  fullName.vb: ArgentSea.ShardDataStores(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).ShardSets
+- uid: System.Collections.ICollection
+  commentId: T:System.Collections.ICollection
+  parent: System.Collections
+  isExternal: true
+  name: ICollection
+  nameWithType: ICollection
+  fullName: System.Collections.ICollection
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.Item(System.String)
+  commentId: P:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.Item(System.String)
+  parent: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  definition: ArgentSea.ShardSets`2.Item(System.String)
+  name: Item[String]
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.Item[String]
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.Item[System.String]
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).Item(String)
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).Item(System.String)
+  name.vb: Item(String)
+  spec.csharp:
+  - uid: ArgentSea.ShardSets`2.Item(System.String)
+    name: Item
+    nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.Item
+    fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: ArgentSea.ShardSets`2.Item(System.String)
+    name: Item
+    nameWithType: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).Item
+    fullName: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.Count
+  commentId: P:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.Count
+  parent: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  definition: ArgentSea.ShardSets`2.Count
+  name: Count
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.Count
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.Count
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).Count
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).Count
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.IsSynchronized
+  commentId: P:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.IsSynchronized
+  parent: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  definition: ArgentSea.ShardSets`2.IsSynchronized
+  name: IsSynchronized
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.IsSynchronized
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.IsSynchronized
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).IsSynchronized
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).IsSynchronized
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.SyncRoot
+  commentId: P:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.SyncRoot
+  parent: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  definition: ArgentSea.ShardSets`2.SyncRoot
+  name: SyncRoot
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.SyncRoot
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.SyncRoot
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).SyncRoot
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).SyncRoot
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.CopyTo(System.Array,System.Int32)
+  commentId: M:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.CopyTo(System.Array,System.Int32)
+  parent: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  definition: ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+  name: CopyTo(Array, Int32)
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.CopyTo(Array, Int32)
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).CopyTo(Array, Int32)
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).CopyTo(System.Array, System.Int32)
+  spec.csharp:
+  - uid: ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.CopyTo
+    fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).CopyTo
+    fullName: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}.GetEnumerator
+  commentId: M:ArgentSea.ShardSets{`0,ArgentSea.Sql.SqlShardConnectionOptions{`0}}.GetEnumerator
+  parent: ArgentSea.ShardSets{{TShard},ArgentSea.Sql.SqlShardConnectionOptions{{TShard}}}
+  definition: ArgentSea.ShardSets`2.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.GetEnumerator()
+  fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.GetEnumerator()
+  nameWithType.vb: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).GetEnumerator()
+  fullName.vb: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).GetEnumerator()
+  spec.csharp:
+  - uid: ArgentSea.ShardSets`2.GetEnumerator
+    name: GetEnumerator
+    nameWithType: ShardSets<TShard, SqlShardConnectionOptions<TShard>>.GetEnumerator
+    fullName: ArgentSea.ShardSets<TShard, ArgentSea.Sql.SqlShardConnectionOptions<TShard>>.GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ShardSets`2.GetEnumerator
+    name: GetEnumerator
+    nameWithType: ShardSets(Of TShard, SqlShardConnectionOptions(Of TShard)).GetEnumerator
+    fullName: ArgentSea.ShardSets(Of TShard, ArgentSea.Sql.SqlShardConnectionOptions(Of TShard)).GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -474,19 +647,19 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: ArgentSea.ShardDataStores`2
-  commentId: T:ArgentSea.ShardDataStores`2
-  name: ShardDataStores<TShard, TConfiguration>
-  nameWithType: ShardDataStores<TShard, TConfiguration>
-  fullName: ArgentSea.ShardDataStores<TShard, TConfiguration>
-  nameWithType.vb: ShardDataStores(Of TShard, TConfiguration)
-  fullName.vb: ArgentSea.ShardDataStores(Of TShard, TConfiguration)
-  name.vb: ShardDataStores(Of TShard, TConfiguration)
+- uid: ArgentSea.ShardSets`2
+  commentId: T:ArgentSea.ShardSets`2
+  name: ShardSets<TShard, TConfiguration>
+  nameWithType: ShardSets<TShard, TConfiguration>
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration)
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration)
+  name.vb: ShardSets(Of TShard, TConfiguration)
   spec.csharp:
-  - uid: ArgentSea.ShardDataStores`2
-    name: ShardDataStores
-    nameWithType: ShardDataStores
-    fullName: ArgentSea.ShardDataStores
+  - uid: ArgentSea.ShardSets`2
+    name: ShardSets
+    nameWithType: ShardSets
+    fullName: ArgentSea.ShardSets
   - name: <
     nameWithType: <
     fullName: <
@@ -503,10 +676,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArgentSea.ShardDataStores`2
-    name: ShardDataStores
-    nameWithType: ShardDataStores
-    fullName: ArgentSea.ShardDataStores
+  - uid: ArgentSea.ShardSets`2
+    name: ShardSets
+    nameWithType: ShardSets
+    fullName: ArgentSea.ShardSets
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -527,13 +700,159 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.ShardDataStores`2.ShardSets
-  commentId: P:ArgentSea.ShardDataStores`2.ShardSets
-  name: ShardSets
-  nameWithType: ShardDataStores<TShard, TConfiguration>.ShardSets
-  fullName: ArgentSea.ShardDataStores<TShard, TConfiguration>.ShardSets
-  nameWithType.vb: ShardDataStores(Of TShard, TConfiguration).ShardSets
-  fullName.vb: ArgentSea.ShardDataStores(Of TShard, TConfiguration).ShardSets
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+- uid: ArgentSea.ShardSets`2.Item(System.String)
+  commentId: P:ArgentSea.ShardSets`2.Item(System.String)
+  isExternal: true
+  name: Item[String]
+  nameWithType: ShardSets<TShard, TConfiguration>.Item[String]
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>.Item[System.String]
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration).Item(String)
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration).Item(System.String)
+  name.vb: Item(String)
+  spec.csharp:
+  - uid: ArgentSea.ShardSets`2.Item(System.String)
+    name: Item
+    nameWithType: ShardSets<TShard, TConfiguration>.Item
+    fullName: ArgentSea.ShardSets<TShard, TConfiguration>.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: ArgentSea.ShardSets`2.Item(System.String)
+    name: Item
+    nameWithType: ShardSets(Of TShard, TConfiguration).Item
+    fullName: ArgentSea.ShardSets(Of TShard, TConfiguration).Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.ShardSets`2.Count
+  commentId: P:ArgentSea.ShardSets`2.Count
+  name: Count
+  nameWithType: ShardSets<TShard, TConfiguration>.Count
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>.Count
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration).Count
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration).Count
+- uid: ArgentSea.ShardSets`2.IsSynchronized
+  commentId: P:ArgentSea.ShardSets`2.IsSynchronized
+  name: IsSynchronized
+  nameWithType: ShardSets<TShard, TConfiguration>.IsSynchronized
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>.IsSynchronized
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration).IsSynchronized
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration).IsSynchronized
+- uid: ArgentSea.ShardSets`2.SyncRoot
+  commentId: P:ArgentSea.ShardSets`2.SyncRoot
+  name: SyncRoot
+  nameWithType: ShardSets<TShard, TConfiguration>.SyncRoot
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>.SyncRoot
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration).SyncRoot
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration).SyncRoot
+- uid: ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+  commentId: M:ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+  isExternal: true
+  name: CopyTo(Array, Int32)
+  nameWithType: ShardSets<TShard, TConfiguration>.CopyTo(Array, Int32)
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration).CopyTo(Array, Int32)
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration).CopyTo(System.Array, System.Int32)
+  spec.csharp:
+  - uid: ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: ShardSets<TShard, TConfiguration>.CopyTo
+    fullName: ArgentSea.ShardSets<TShard, TConfiguration>.CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ShardSets`2.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: ShardSets(Of TShard, TConfiguration).CopyTo
+    fullName: ArgentSea.ShardSets(Of TShard, TConfiguration).CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.ShardSets`2.GetEnumerator
+  commentId: M:ArgentSea.ShardSets`2.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: ShardSets<TShard, TConfiguration>.GetEnumerator()
+  fullName: ArgentSea.ShardSets<TShard, TConfiguration>.GetEnumerator()
+  nameWithType.vb: ShardSets(Of TShard, TConfiguration).GetEnumerator()
+  fullName.vb: ArgentSea.ShardSets(Of TShard, TConfiguration).GetEnumerator()
+  spec.csharp:
+  - uid: ArgentSea.ShardSets`2.GetEnumerator
+    name: GetEnumerator
+    nameWithType: ShardSets<TShard, TConfiguration>.GetEnumerator
+    fullName: ArgentSea.ShardSets<TShard, TConfiguration>.GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.ShardSets`2.GetEnumerator
+    name: GetEnumerator
+    nameWithType: ShardSets(Of TShard, TConfiguration).GetEnumerator
+    fullName: ArgentSea.ShardSets(Of TShard, TConfiguration).GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: ArgentSea.Sql.SqlShardSets`1.#ctor*
   commentId: Overload:ArgentSea.Sql.SqlShardSets`1.#ctor
   name: SqlShardSets

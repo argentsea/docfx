@@ -66,11 +66,11 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AddPgServices
     path: ../ArgentSea.Pg/src/PgServiceBuilderExtensions.cs
-    startLine: 22
+    startLine: 20
   assemblies:
   - ArgentSea.Pg
   namespace: Microsoft.Extensions.DependencyInjection
-  summary: "\nLoads configuration into injectable Options and the DbDataStores service. This overload does not load ShardSets.  ILogger service should have already be created.\n"
+  summary: "\nLoads configuration into injectable Options and the DbDataStores and ShardDataStores services. ILogger service should have already be created.\n"
   example: []
   syntax:
     content: public static IServiceCollection AddPgServices(this IServiceCollection services, IConfiguration config)
@@ -114,7 +114,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AddPgServices
     path: ../ArgentSea.Pg/src/PgServiceBuilderExtensions.cs
-    startLine: 63
+    startLine: 36
   assemblies:
   - ArgentSea.Pg
   namespace: Microsoft.Extensions.DependencyInjection

@@ -34,6 +34,7 @@ items:
       description: ''
     content.vb: >-
       Public Class SqlShardConnectionOptions(Of TShard As IComparable)
+
           Implements IShardDataConfigurationOptions(Of TShard)
   inheritance:
   - System.Object

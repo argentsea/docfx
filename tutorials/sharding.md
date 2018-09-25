@@ -53,15 +53,25 @@ Both the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/Argent
 
 For example, keys representing a *Customer* record might have a [DataOrgin](/api/ArgentSea.DataOrigin.html) of “c”, whereas keys representing a *Product* record might have a [DataOrgin](/api/ArgentSea.DataOrigin.html) of “p”. Because this simple tag identifies the data source, two different [ShardKeys](/api/ArgentSea.ShardKey-2.html) from the same shard and with the same record number will still not be equal because they represent different source data.
 
+> [!IMPORTANT]
+> One [DataOrgin](/api/ArgentSea.DataOrigin.html) charactor value is reserved: “0” (Unicode charactor Zero, Unicode numeric value 30).
+>
+> This is used for the [DataOrgin](/api/ArgentSea.DataOrigin.html) of `ShardKey.Empty` and `ShardChild.Empty`. Creating a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) with a “zero” [DataOrgin](/api/ArgentSea.DataOrigin.html) character but non-default (i.e. not zero or not null) *ShardId* or *RecordId* will throw an [InvalidShardArgumentsException](/api/ArgentSea.InvalidShardArgumentsException.html) error.
+
 This capability is useful for helping prevent data from being accessed with the wrong type of key — like an inventory key inadvertently passed to fetch an account record. Also, this may be helpful for caching data, since you can use the same dictionary to cache objects of different types without key collision.
 
 #### The ShardId
 
-ArgentSea uses a generic type for the ShardId because the ideal data type will depend upon your requirements. Technically, the ShardId can be any of the types available to a RecordId (see below). Practically, however, it makes sense to avoid types without a corresponding SQL type and also avoid unnecessarily large data sizes. This leaves *byte*, *short*, *char* as the most storage-efficient choices; *int*, *string* are viable choices if your ShardId has other requirements — like needing to integrate with external systems.
+The ShardId is used to identify a particular shard in the ShardSet. The core ArgentSea framework uses a generic type for the ShardId because the ideal data type will depend upon your requirements. Technically, the ShardId can be any of the types available to a RecordId (see below). Practically, however, it makes sense to avoid types without a corresponding SQL type and also avoid unnecessarily large data sizes. This leaves *byte* (SQL Server only), *short*, *char* as the most storage-efficient choices; *int*, *string* are viable choices if your ShardId has other requirements — like needing to integrate with external systems.
 
-If you really can’t decide and have no particular requirements, a simple starting place is to use *byte* if you have confidence that you will never need more than 256 shards in a [ShardSet](/api/ArgentSea.ShardDataStores-2.ShardDataSet.html), otherwise use *short*.
+In essense, the most efficient ShardId type for SQL Server is byte/Tinyint, and for PostgreSQL is Int16(short)/Smalllint.
 
-Because the ShardId value is used for the ShardSet configuration, for queries, and also for saving foreign shard references in your databases, this value cannot be easily changed once your project is established. The same ShardId type is used across all [ShardSets](/api/ArgentSea.ShardDataStores-2.ShardDataSet.html).
+If you really can’t decide and have no particular requirements, a simple starting place is to use *byte* if are using SQL Server and you have confidence that you will never need more than 256 shards in a [ShardSet](/api/ArgentSea.ShardDataStores-2.ShardDataSet.html), otherwise start with *short*.
+
+
+Because the ShardId value is used in configuration, queries, and also for saving foreign shard references in your databases, once your project is established this value cannot be easily changed. The same ShardId type is used across all [ShardSets](/api/ArgentSea.ShardDataStores-2.ShardDataSet.html).
+
+
 
 > [!NOTE]
 > The database itself may not know what its own *ShardId* is. This sounds absurd until you realize that it is genuinely difficult to keep scores or hundreds of database schemas and procedures in sync while preserving a programmatic ShardId value. Your continuous delivery tooling will keep detecting any differences and trying to overwrite them. Fortunately, your connection *does* know this and can set the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) values correctly.
@@ -132,7 +142,7 @@ public ShardKey<byte, int> CustomerKey { get; set; }
 ````C#
 [MapShardKey('c', "CustomerId")]
 [MapToPgInteger("CustomerId")]
-public ShardKey<byte, int> CustomerKey { get; set; }
+public ShardKey<short, int> CustomerKey { get; set; }
 ````
 
 ***
@@ -160,17 +170,22 @@ public ShardChild<byte, long, short> OrderItemKey { get; set; }
 ````C#
 [MapShardChild('O', "OrderId", "OrderItemId")]
 [MapToPgBigint("OrderId")]
-[MapToPgSmallint("OrderItemId")]
-public ShardChild<byte, long, short> OrderItemKey { get; set; }
+[MapToPgInteger("OrderItemId")]
+public ShardChild<short, long, int> OrderItemKey { get; set; }
 ````
 
 ***
 
-In both previous examples, the ShardId will be implicitly obtained from the connection’s ShardId. Occasionally, however, particularly when a data record refers to a record in a foreign shard, the *ShardId* must come from the database record. To do this, just add a *ShardID* parameter and *MapTo* attribute:
+In both previous examples, the ShardId will be *implicitly* obtained from the connection’s ShardId. In the case of results that include then primary key column, this works well. However, when a data record references the primary key of a sharded table, the *ShardId* of the ShardKey or ShardChild must *explicitly* come from the database record. To do this, just add a *ShardID* parameter to the *MapShard* attribute and the additional *MapTo* data attribute:
 
 ## [SQL Server](#tab/tabid-sql)
 
 ````C#
+[MapShardKey('c', "@CustomerShardId", "@CustomerId")]
+[MapToSqlTinyInt("@CustomerShardId")]
+[MapToSqlInt("@CustomerId")]
+public ShardKey<byte, int> CustomerKey { get; set; }
+
 [MapShardChild('O', "@OrderShardId", "@OrderId", "@OrderItemId")]
 [MapToSqlTinyInt("@OrderShardId")]
 [MapToSqlBigInt("@OrderId")]
@@ -182,22 +197,38 @@ public ShardChild<byte, long, short> OrderItemKey { get; set; }
 ## [PostgreSQL](#tab/tabid-pg)
 
 ````C#
+[MapShardKey('c', "CustomerId")]
+[MapToSqlTinyint("CustomerShardId")]
+[MapToPgInteger("CustomerId")]
+public ShardKey<short, int> CustomerKey { get; set; }
+
 [MapShardChild('O', "OrderShardId", "OrderId", "OrderItemId")]
-[MapToPgTinyint("OrderShardId")]
+[MapToPgSmallint("OrderShardId")]
 [MapToPgBigint("OrderId")]
 [MapToPgSmallint("OrderItemId")]
-public ShardChild<byte, long, short> OrderItemKey { get; set; }
+public ShardChild<short, long, short> OrderItemKey { get; set; }
 ````
 
 ***
 
-#### Equals
+### Null Values
 
-#### Empty
+Because both [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) are structs, a variable or property of this type *cannot* be null. [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) objects are initialized to ShardKey.Empty or ShardChild.Empty respectively.
+
+If a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) represents a database field that might be Null, the [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) property or variable should be wrapped in the `Nullable<>` type. The *MapTo* attribute will set the `Nullable<ShardKey<>>` or `Nullable<ShardChild<>>` property to null if any of the constituent database column values are Null. If the underlying type is not `Nullable<>` and the database value is Null, the Mapper with throw an error (except as described in the next paragraph).
+
+In most cases, a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) represents a primary key, so a database Null value really represents a non-existent record. In this case, the desired behavior is probably to return the entire parent object as null. Marking the *MapTo* attribute(s) as *required* implements this behavior. When the *required* parameter is set, the [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) property does not need to be `Nullable<>` since a Null database value will return a null result object.
 
 ## ShardSets
 
-The root injectable service is a `ShardSets` object, which is simply a collection of ShardSets. You can reference any ShardSet by name. Many (probably most) applications will have only one ShardSet, but this supports circumstances where different data is sharded differently. Your user information, for example, might be distributed across global datacenters, while product availability information might be sharded for business process reasons.
+The root injectable service is a `ShardSets` object, which is merely a collection of `ShardSet` instances. You can reference any ShardSet by name. Many (probably most) applications will have only one ShardSet, but this supports contexts where different data is sharded differently. For example, your user information might be sharded globally by datacenter location, while product availability information might be sharded by subsidiary (ok, this specious example might be better served via microservices; the point is that the framework does not preclude more than one ShardSet, if needed).
+
+.NET allows nested classes to share internal values and the generic types of the parent. ArgentSea leverages this to simplify the ShardSet hierarchy. A ShardSet consists of a root class and three nested classes:
+
+* `ShardSets<T>` - the root type, which represents collection of sharding information.
+* `ShardSets<T>.ShardSet` - a sharded data set, which is the same schema spread over multiple servers.
+* `ShardSets<T>.ShardInstance` - a shard (single database) in the shard set. Includes (optionally) separate read and write connections.
+* `ShardSets<T>.DataConnection` - A database connection.
 
 You can access a ShardSet by name:
 
@@ -205,26 +236,16 @@ You can access a ShardSet by name:
     public class SubscriberStore
     {
         private readonly SqlDatabases _dbs;
-        private readonly SqlShardSets<byte>.ShardDataSet _shardSet;
+        private readonly SqlShardSets<short>.ShardDataSet _shardSet;
 
         private readonly ILogger<SubscriberStore> _logger;
-        public SubscriberStore(SqlShardSets<byte> shardSets, ILogger<SubscriberStore> logger)
+        public SubscriberStore(SqlShardSets<short> shardSets, ILogger<SubscriberStore> logger)
         {
-            _shardSet = shardSets.ShardSets["Subscribers"];
+            _shardSet = shardSets["Subscribers"];
             _logger = logger;
         }
 
 ```
-
-
- might be For example, you could have a 
-
-A ShardSet is a collection
-
-## Virtual Compound Keys
-
-
-### Data Origin
 
 ### MapShardKey attribute and MapShardChild attribute
 

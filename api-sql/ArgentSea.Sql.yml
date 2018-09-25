@@ -38,6 +38,7 @@ items:
   - ArgentSea.Sql.SqlShardConnectionOptions`1
   - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionConfiguration
   - ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration
+  - ArgentSea.Sql.SqlShardSets
   - ArgentSea.Sql.SqlShardSets`1
   - ArgentSea.Sql.TvpMapper
   langs:
@@ -304,6 +305,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: ArgentSea.Sql.SqlShardSets
+  commentId: T:ArgentSea.Sql.SqlShardSets
+  name: SqlShardSets
+  nameWithType: SqlShardSets
+  fullName: ArgentSea.Sql.SqlShardSets
 - uid: ArgentSea.Sql.SqlShardSets`1
   commentId: T:ArgentSea.Sql.SqlShardSets`1
   name: SqlShardSets<TShard>

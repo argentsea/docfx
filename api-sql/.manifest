@@ -383,6 +383,8 @@
   "ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardSetName": "ArgentSea.Sql.SqlShardConnectionOptions-1.SqlShardConnectionsConfiguration.yml",
   "ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration.ShardsInternal": "ArgentSea.Sql.SqlShardConnectionOptions-1.SqlShardConnectionsConfiguration.yml",
   "ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardSets": "ArgentSea.Sql.SqlShardConnectionOptions-1.yml",
+  "ArgentSea.Sql.SqlShardSets": "ArgentSea.Sql.SqlShardSets.yml",
+  "ArgentSea.Sql.SqlShardSets.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Sql.SqlShardConnectionOptions{System.Byte}},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Sql.SqlShardSets{System.Byte}})": "ArgentSea.Sql.SqlShardSets.yml",
   "ArgentSea.Sql.SqlShardSets`1": "ArgentSea.Sql.SqlShardSets-1.yml",
   "ArgentSea.Sql.SqlShardSets`1.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Sql.SqlShardConnectionOptions{`0}},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Sql.SqlShardSets{`0}})": "ArgentSea.Sql.SqlShardSets-1.yml",
   "ArgentSea.Sql.Test": "ArgentSea.Sql.Test.yml",

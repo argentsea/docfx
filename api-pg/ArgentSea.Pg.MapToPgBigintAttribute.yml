@@ -26,7 +26,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: MapToPgBigintAttribute
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 139
+    startLine: 140
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -114,7 +114,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: .ctor
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 145
+    startLine: 146
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -150,7 +150,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: .ctor
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 149
+    startLine: 150
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -185,7 +185,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: IsValidType
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 154
+    startLine: 155
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -223,7 +223,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendInParameterExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 159
+    startLine: 160
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -276,7 +276,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendSetOutParameterExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 162
+    startLine: 163
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -325,7 +325,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendReadOutParameterExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 165
+    startLine: 166
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -376,7 +376,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendReaderExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 168
+    startLine: 169
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg

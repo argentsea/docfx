@@ -320,6 +320,8 @@
   "ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration.ShardsInternal": "ArgentSea.Pg.PgShardConnectionOptions-1.PgShardConnectionsConfiguration.yml",
   "ArgentSea.Pg.PgShardConnectionOptions`1.PgShardSets": "ArgentSea.Pg.PgShardConnectionOptions-1.yml",
   "ArgentSea.Pg.PgShardConnectionOptions`1.ShardSetsInternal": "ArgentSea.Pg.PgShardConnectionOptions-1.yml",
+  "ArgentSea.Pg.PgShardSets": "ArgentSea.Pg.PgShardSets.yml",
+  "ArgentSea.Pg.PgShardSets.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgShardConnectionOptions{System.Int16}},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgShardSets{System.Int16}})": "ArgentSea.Pg.PgShardSets.yml",
   "ArgentSea.Pg.PgShardSets`1": "ArgentSea.Pg.PgShardSets-1.yml",
   "ArgentSea.Pg.PgShardSets`1.#ctor(Microsoft.Extensions.Options.IOptions{ArgentSea.Pg.PgShardConnectionOptions{`0}},Microsoft.Extensions.Options.IOptions{ArgentSea.DataSecurityOptions},Microsoft.Extensions.Options.IOptions{ArgentSea.DataResilienceOptions},Microsoft.Extensions.Logging.ILogger{ArgentSea.Pg.PgShardSets{`0}})": "ArgentSea.Pg.PgShardSets-1.yml",
   "ArgentSea.Pg.Test": "ArgentSea.Pg.Test.yml",

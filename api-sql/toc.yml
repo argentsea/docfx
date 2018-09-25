@@ -73,6 +73,8 @@
   - uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardConnectionsConfiguration
     name: SqlShardConnectionOptions<TShard>.SqlShardConnectionsConfiguration
     name.vb: SqlShardConnectionOptions(Of TShard).SqlShardConnectionsConfiguration
+  - uid: ArgentSea.Sql.SqlShardSets
+    name: SqlShardSets
   - uid: ArgentSea.Sql.SqlShardSets`1
     name: SqlShardSets<TShard>
     name.vb: SqlShardSets(Of TShard)

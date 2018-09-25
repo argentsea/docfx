@@ -36,6 +36,7 @@ items:
   - ArgentSea.Pg.PgShardConnectionOptions`1
   - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionConfiguration
   - ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration
+  - ArgentSea.Pg.PgShardSets
   - ArgentSea.Pg.PgShardSets`1
   langs:
   - csharp
@@ -290,6 +291,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: ArgentSea.Pg.PgShardSets
+  commentId: T:ArgentSea.Pg.PgShardSets
+  name: PgShardSets
+  nameWithType: PgShardSets
+  fullName: ArgentSea.Pg.PgShardSets
 - uid: ArgentSea.Pg.PgShardSets`1
   commentId: T:ArgentSea.Pg.PgShardSets`1
   name: PgShardSets<TShard>

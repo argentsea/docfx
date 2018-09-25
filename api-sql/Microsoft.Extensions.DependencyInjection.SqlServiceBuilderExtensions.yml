@@ -123,6 +123,7 @@ items:
   syntax:
     content: >-
       public static IServiceCollection AddSqlServices<TShard>(this IServiceCollection services, IConfiguration config)
+
           where TShard : IComparable
     parameters:
     - id: services

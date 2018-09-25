@@ -26,7 +26,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: MapToPgTimestampTzAttribute
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 502
+    startLine: 503
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -114,7 +114,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: .ctor
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 508
+    startLine: 509
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -150,7 +150,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: .ctor
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 512
+    startLine: 513
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -185,7 +185,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: IsValidType
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 517
+    startLine: 518
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -223,7 +223,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendInParameterExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 521
+    startLine: 522
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -276,7 +276,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendSetOutParameterExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 524
+    startLine: 525
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -325,7 +325,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendReadOutParameterExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 527
+    startLine: 528
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
@@ -376,7 +376,7 @@ items:
       repo: https://github.com/argentsea/pg.git
     id: AppendReaderExpressions
     path: ../ArgentSea.Pg/src/PgMapAttributes.cs
-    startLine: 530
+    startLine: 531
   assemblies:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg

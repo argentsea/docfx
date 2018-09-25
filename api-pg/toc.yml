@@ -69,6 +69,8 @@
   - uid: ArgentSea.Pg.PgShardConnectionOptions`1.PgShardConnectionsConfiguration
     name: PgShardConnectionOptions<TShard>.PgShardConnectionsConfiguration
     name.vb: PgShardConnectionOptions(Of TShard).PgShardConnectionsConfiguration
+  - uid: ArgentSea.Pg.PgShardSets
+    name: PgShardSets
   - uid: ArgentSea.Pg.PgShardSets`1
     name: PgShardSets<TShard>
     name.vb: PgShardSets(Of TShard)

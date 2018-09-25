@@ -27,15 +27,26 @@ items:
   summary: "\nThis class manages the non-sharded SQL database connections.\n"
   example: []
   syntax:
-    content: 'public class SqlDatabases : DbDataStores<SqlDbConnectionOptions>'
+    content: 'public class SqlDatabases : Databases<SqlDbConnectionOptions>, ICollection, IEnumerable'
     content.vb: >-
       Public Class SqlDatabases
-          Inherits DbDataStores(Of SqlDbConnectionOptions)
+
+          Inherits Databases(Of SqlDbConnectionOptions)
+
+          Implements ICollection, IEnumerable
   inheritance:
   - System.Object
-  - ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  implements:
+  - System.Collections.ICollection
+  - System.Collections.IEnumerable
   inheritedMembers:
-  - ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}.DbConnections
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.Item(System.String)
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.Count
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.IsSynchronized
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.SyncRoot
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.CopyTo(System.Array,System.Int32)
+  - ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.GetEnumerator
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -104,21 +115,21 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}
-  commentId: T:ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  commentId: T:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
   parent: ArgentSea
-  definition: ArgentSea.DbDataStores`1
-  name: DbDataStores<SqlDbConnectionOptions>
-  nameWithType: DbDataStores<SqlDbConnectionOptions>
-  fullName: ArgentSea.DbDataStores<ArgentSea.Sql.SqlDbConnectionOptions>
-  nameWithType.vb: DbDataStores(Of SqlDbConnectionOptions)
-  fullName.vb: ArgentSea.DbDataStores(Of ArgentSea.Sql.SqlDbConnectionOptions)
-  name.vb: DbDataStores(Of SqlDbConnectionOptions)
+  definition: ArgentSea.Databases`1
+  name: Databases<SqlDbConnectionOptions>
+  nameWithType: Databases<SqlDbConnectionOptions>
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions)
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions)
+  name.vb: Databases(Of SqlDbConnectionOptions)
   spec.csharp:
-  - uid: ArgentSea.DbDataStores`1
-    name: DbDataStores
-    nameWithType: DbDataStores
-    fullName: ArgentSea.DbDataStores
+  - uid: ArgentSea.Databases`1
+    name: Databases
+    nameWithType: Databases
+    fullName: ArgentSea.Databases
   - name: <
     nameWithType: <
     fullName: <
@@ -130,10 +141,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArgentSea.DbDataStores`1
-    name: DbDataStores
-    nameWithType: DbDataStores
-    fullName: ArgentSea.DbDataStores
+  - uid: ArgentSea.Databases`1
+    name: Databases
+    nameWithType: Databases
+    fullName: ArgentSea.Databases
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -144,15 +155,177 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}.DbConnections
-  commentId: P:ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}.DbConnections
-  parent: ArgentSea.DbDataStores{ArgentSea.Sql.SqlDbConnectionOptions}
-  definition: ArgentSea.DbDataStores`1.DbConnections
-  name: DbConnections
-  nameWithType: DbDataStores<SqlDbConnectionOptions>.DbConnections
-  fullName: ArgentSea.DbDataStores<ArgentSea.Sql.SqlDbConnectionOptions>.DbConnections
-  nameWithType.vb: DbDataStores(Of SqlDbConnectionOptions).DbConnections
-  fullName.vb: ArgentSea.DbDataStores(Of ArgentSea.Sql.SqlDbConnectionOptions).DbConnections
+- uid: System.Collections.ICollection
+  commentId: T:System.Collections.ICollection
+  parent: System.Collections
+  isExternal: true
+  name: ICollection
+  nameWithType: ICollection
+  fullName: System.Collections.ICollection
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.Item(System.String)
+  commentId: P:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.Item(System.String)
+  parent: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  definition: ArgentSea.Databases`1.Item(System.String)
+  name: Item[String]
+  nameWithType: Databases<SqlDbConnectionOptions>.Item[String]
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.Item[System.String]
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions).Item(String)
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).Item(System.String)
+  name.vb: Item(String)
+  spec.csharp:
+  - uid: ArgentSea.Databases`1.Item(System.String)
+    name: Item
+    nameWithType: Databases<SqlDbConnectionOptions>.Item
+    fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: ArgentSea.Databases`1.Item(System.String)
+    name: Item
+    nameWithType: Databases(Of SqlDbConnectionOptions).Item
+    fullName: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.Count
+  commentId: P:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.Count
+  parent: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  definition: ArgentSea.Databases`1.Count
+  name: Count
+  nameWithType: Databases<SqlDbConnectionOptions>.Count
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.Count
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions).Count
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).Count
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.IsSynchronized
+  commentId: P:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.IsSynchronized
+  parent: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  definition: ArgentSea.Databases`1.IsSynchronized
+  name: IsSynchronized
+  nameWithType: Databases<SqlDbConnectionOptions>.IsSynchronized
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.IsSynchronized
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions).IsSynchronized
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).IsSynchronized
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.SyncRoot
+  commentId: P:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.SyncRoot
+  parent: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  definition: ArgentSea.Databases`1.SyncRoot
+  name: SyncRoot
+  nameWithType: Databases<SqlDbConnectionOptions>.SyncRoot
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.SyncRoot
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions).SyncRoot
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).SyncRoot
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.CopyTo(System.Array,System.Int32)
+  commentId: M:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.CopyTo(System.Array,System.Int32)
+  parent: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  definition: ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+  name: CopyTo(Array, Int32)
+  nameWithType: Databases<SqlDbConnectionOptions>.CopyTo(Array, Int32)
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions).CopyTo(Array, Int32)
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).CopyTo(System.Array, System.Int32)
+  spec.csharp:
+  - uid: ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: Databases<SqlDbConnectionOptions>.CopyTo
+    fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: Databases(Of SqlDbConnectionOptions).CopyTo
+    fullName: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.GetEnumerator
+  commentId: M:ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}.GetEnumerator
+  parent: ArgentSea.Databases{ArgentSea.Sql.SqlDbConnectionOptions}
+  definition: ArgentSea.Databases`1.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: Databases<SqlDbConnectionOptions>.GetEnumerator()
+  fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.GetEnumerator()
+  nameWithType.vb: Databases(Of SqlDbConnectionOptions).GetEnumerator()
+  fullName.vb: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).GetEnumerator()
+  spec.csharp:
+  - uid: ArgentSea.Databases`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: Databases<SqlDbConnectionOptions>.GetEnumerator
+    fullName: ArgentSea.Databases<ArgentSea.Sql.SqlDbConnectionOptions>.GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.Databases`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: Databases(Of SqlDbConnectionOptions).GetEnumerator
+    fullName: ArgentSea.Databases(Of ArgentSea.Sql.SqlDbConnectionOptions).GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -438,19 +611,19 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: ArgentSea.DbDataStores`1
-  commentId: T:ArgentSea.DbDataStores`1
-  name: DbDataStores<TConfiguration>
-  nameWithType: DbDataStores<TConfiguration>
-  fullName: ArgentSea.DbDataStores<TConfiguration>
-  nameWithType.vb: DbDataStores(Of TConfiguration)
-  fullName.vb: ArgentSea.DbDataStores(Of TConfiguration)
-  name.vb: DbDataStores(Of TConfiguration)
+- uid: ArgentSea.Databases`1
+  commentId: T:ArgentSea.Databases`1
+  name: Databases<TConfiguration>
+  nameWithType: Databases<TConfiguration>
+  fullName: ArgentSea.Databases<TConfiguration>
+  nameWithType.vb: Databases(Of TConfiguration)
+  fullName.vb: ArgentSea.Databases(Of TConfiguration)
+  name.vb: Databases(Of TConfiguration)
   spec.csharp:
-  - uid: ArgentSea.DbDataStores`1
-    name: DbDataStores
-    nameWithType: DbDataStores
-    fullName: ArgentSea.DbDataStores
+  - uid: ArgentSea.Databases`1
+    name: Databases
+    nameWithType: Databases
+    fullName: ArgentSea.Databases
   - name: <
     nameWithType: <
     fullName: <
@@ -461,10 +634,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArgentSea.DbDataStores`1
-    name: DbDataStores
-    nameWithType: DbDataStores
-    fullName: ArgentSea.DbDataStores
+  - uid: ArgentSea.Databases`1
+    name: Databases
+    nameWithType: Databases
+    fullName: ArgentSea.Databases
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -479,13 +652,159 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.DbDataStores`1.DbConnections
-  commentId: P:ArgentSea.DbDataStores`1.DbConnections
-  name: DbConnections
-  nameWithType: DbDataStores<TConfiguration>.DbConnections
-  fullName: ArgentSea.DbDataStores<TConfiguration>.DbConnections
-  nameWithType.vb: DbDataStores(Of TConfiguration).DbConnections
-  fullName.vb: ArgentSea.DbDataStores(Of TConfiguration).DbConnections
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+- uid: ArgentSea.Databases`1.Item(System.String)
+  commentId: P:ArgentSea.Databases`1.Item(System.String)
+  isExternal: true
+  name: Item[String]
+  nameWithType: Databases<TConfiguration>.Item[String]
+  fullName: ArgentSea.Databases<TConfiguration>.Item[System.String]
+  nameWithType.vb: Databases(Of TConfiguration).Item(String)
+  fullName.vb: ArgentSea.Databases(Of TConfiguration).Item(System.String)
+  name.vb: Item(String)
+  spec.csharp:
+  - uid: ArgentSea.Databases`1.Item(System.String)
+    name: Item
+    nameWithType: Databases<TConfiguration>.Item
+    fullName: ArgentSea.Databases<TConfiguration>.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: ArgentSea.Databases`1.Item(System.String)
+    name: Item
+    nameWithType: Databases(Of TConfiguration).Item
+    fullName: ArgentSea.Databases(Of TConfiguration).Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Databases`1.Count
+  commentId: P:ArgentSea.Databases`1.Count
+  name: Count
+  nameWithType: Databases<TConfiguration>.Count
+  fullName: ArgentSea.Databases<TConfiguration>.Count
+  nameWithType.vb: Databases(Of TConfiguration).Count
+  fullName.vb: ArgentSea.Databases(Of TConfiguration).Count
+- uid: ArgentSea.Databases`1.IsSynchronized
+  commentId: P:ArgentSea.Databases`1.IsSynchronized
+  name: IsSynchronized
+  nameWithType: Databases<TConfiguration>.IsSynchronized
+  fullName: ArgentSea.Databases<TConfiguration>.IsSynchronized
+  nameWithType.vb: Databases(Of TConfiguration).IsSynchronized
+  fullName.vb: ArgentSea.Databases(Of TConfiguration).IsSynchronized
+- uid: ArgentSea.Databases`1.SyncRoot
+  commentId: P:ArgentSea.Databases`1.SyncRoot
+  name: SyncRoot
+  nameWithType: Databases<TConfiguration>.SyncRoot
+  fullName: ArgentSea.Databases<TConfiguration>.SyncRoot
+  nameWithType.vb: Databases(Of TConfiguration).SyncRoot
+  fullName.vb: ArgentSea.Databases(Of TConfiguration).SyncRoot
+- uid: ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+  commentId: M:ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+  isExternal: true
+  name: CopyTo(Array, Int32)
+  nameWithType: Databases<TConfiguration>.CopyTo(Array, Int32)
+  fullName: ArgentSea.Databases<TConfiguration>.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: Databases(Of TConfiguration).CopyTo(Array, Int32)
+  fullName.vb: ArgentSea.Databases(Of TConfiguration).CopyTo(System.Array, System.Int32)
+  spec.csharp:
+  - uid: ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: Databases<TConfiguration>.CopyTo
+    fullName: ArgentSea.Databases<TConfiguration>.CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.Databases`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: Databases(Of TConfiguration).CopyTo
+    fullName: ArgentSea.Databases(Of TConfiguration).CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: ArgentSea.Databases`1.GetEnumerator
+  commentId: M:ArgentSea.Databases`1.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: Databases<TConfiguration>.GetEnumerator()
+  fullName: ArgentSea.Databases<TConfiguration>.GetEnumerator()
+  nameWithType.vb: Databases(Of TConfiguration).GetEnumerator()
+  fullName.vb: ArgentSea.Databases(Of TConfiguration).GetEnumerator()
+  spec.csharp:
+  - uid: ArgentSea.Databases`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: Databases<TConfiguration>.GetEnumerator
+    fullName: ArgentSea.Databases<TConfiguration>.GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: ArgentSea.Databases`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: Databases(Of TConfiguration).GetEnumerator
+    fullName: ArgentSea.Databases(Of TConfiguration).GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: ArgentSea.Sql.SqlDatabases.#ctor*
   commentId: Overload:ArgentSea.Sql.SqlDatabases.#ctor
   name: SqlDatabases
