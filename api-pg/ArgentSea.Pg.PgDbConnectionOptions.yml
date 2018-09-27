@@ -28,14 +28,14 @@ items:
   summary: "\nThis configuration class defines an array of database <see cref=\"!:SqlConnectionConfiguration\">connection configurations</see>. \n<example>\nFor example, you might configure your appsettings.json like this:\n<pre><code>&quot;PgDbConnections&quot;: [\n  {\n    &quot;DatabaseKey&quot;: &quot;MyDatabase&quot;,\n    &quot;SecurityKey&quot;: &quot;SecKey1&quot;,\n      &quot;DataConnection&quot;: {\n        &quot;Host&quot;: &quot;localhost&quot;,\n        &quot;Database&quot;: &quot;MyDb&quot;\n    }\n  }\n]</code></pre>\n Note that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a ResilienceKey (if defined) must match a key in the DataResilienceOptions array.\n</example>\n"
   example: []
   syntax:
-    content: 'public class PgDbConnectionOptions : IDbDataConfigurationOptions'
+    content: 'public class PgDbConnectionOptions : IDatabaseConfigurationOptions'
     content.vb: >-
       Public Class PgDbConnectionOptions
-          Implements IDbDataConfigurationOptions
+          Implements IDatabaseConfigurationOptions
   inheritance:
   - System.Object
   implements:
-  - ArgentSea.IDbDataConfigurationOptions
+  - ArgentSea.IDatabaseConfigurationOptions
   inheritedMembers:
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -108,14 +108,14 @@ items:
   - ArgentSea.Pg
   namespace: ArgentSea.Pg
   syntax:
-    content: public IDbConnectionConfiguration[] DbConnectionsInternal { get; }
+    content: public IDatabaseConnectionConfiguration[] DbConnectionsInternal { get; }
     parameters: []
     return:
-      type: ArgentSea.IDbConnectionConfiguration[]
-    content.vb: Public ReadOnly Property DbConnectionsInternal As IDbConnectionConfiguration()
+      type: ArgentSea.IDatabaseConnectionConfiguration[]
+    content.vb: Public ReadOnly Property DbConnectionsInternal As IDatabaseConnectionConfiguration()
   overload: ArgentSea.Pg.PgDbConnectionOptions.DbConnectionsInternal*
   implements:
-  - ArgentSea.IDbDataConfigurationOptions.DbConnectionsInternal
+  - ArgentSea.IDatabaseConfigurationOptions.DbConnectionsInternal
   modifiers.csharp:
   - public
   - get
@@ -135,12 +135,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ArgentSea.IDbDataConfigurationOptions
-  commentId: T:ArgentSea.IDbDataConfigurationOptions
+- uid: ArgentSea.IDatabaseConfigurationOptions
+  commentId: T:ArgentSea.IDatabaseConfigurationOptions
   parent: ArgentSea
-  name: IDbDataConfigurationOptions
-  nameWithType: IDbDataConfigurationOptions
-  fullName: ArgentSea.IDbDataConfigurationOptions
+  name: IDatabaseConfigurationOptions
+  nameWithType: IDatabaseConfigurationOptions
+  fullName: ArgentSea.IDatabaseConfigurationOptions
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -465,33 +465,33 @@ references:
   name: DbConnectionsInternal
   nameWithType: PgDbConnectionOptions.DbConnectionsInternal
   fullName: ArgentSea.Pg.PgDbConnectionOptions.DbConnectionsInternal
-- uid: ArgentSea.IDbDataConfigurationOptions.DbConnectionsInternal
-  commentId: P:ArgentSea.IDbDataConfigurationOptions.DbConnectionsInternal
-  parent: ArgentSea.IDbDataConfigurationOptions
+- uid: ArgentSea.IDatabaseConfigurationOptions.DbConnectionsInternal
+  commentId: P:ArgentSea.IDatabaseConfigurationOptions.DbConnectionsInternal
+  parent: ArgentSea.IDatabaseConfigurationOptions
   name: DbConnectionsInternal
-  nameWithType: IDbDataConfigurationOptions.DbConnectionsInternal
-  fullName: ArgentSea.IDbDataConfigurationOptions.DbConnectionsInternal
-- uid: ArgentSea.IDbConnectionConfiguration[]
+  nameWithType: IDatabaseConfigurationOptions.DbConnectionsInternal
+  fullName: ArgentSea.IDatabaseConfigurationOptions.DbConnectionsInternal
+- uid: ArgentSea.IDatabaseConnectionConfiguration[]
   isExternal: true
-  name: IDbConnectionConfiguration[]
-  nameWithType: IDbConnectionConfiguration[]
-  fullName: ArgentSea.IDbConnectionConfiguration[]
-  nameWithType.vb: IDbConnectionConfiguration()
-  fullName.vb: ArgentSea.IDbConnectionConfiguration()
-  name.vb: IDbConnectionConfiguration()
+  name: IDatabaseConnectionConfiguration[]
+  nameWithType: IDatabaseConnectionConfiguration[]
+  fullName: ArgentSea.IDatabaseConnectionConfiguration[]
+  nameWithType.vb: IDatabaseConnectionConfiguration()
+  fullName.vb: ArgentSea.IDatabaseConnectionConfiguration()
+  name.vb: IDatabaseConnectionConfiguration()
   spec.csharp:
-  - uid: ArgentSea.IDbConnectionConfiguration
-    name: IDbConnectionConfiguration
-    nameWithType: IDbConnectionConfiguration
-    fullName: ArgentSea.IDbConnectionConfiguration
+  - uid: ArgentSea.IDatabaseConnectionConfiguration
+    name: IDatabaseConnectionConfiguration
+    nameWithType: IDatabaseConnectionConfiguration
+    fullName: ArgentSea.IDatabaseConnectionConfiguration
   - name: '[]'
     nameWithType: '[]'
     fullName: '[]'
   spec.vb:
-  - uid: ArgentSea.IDbConnectionConfiguration
-    name: IDbConnectionConfiguration
-    nameWithType: IDbConnectionConfiguration
-    fullName: ArgentSea.IDbConnectionConfiguration
+  - uid: ArgentSea.IDatabaseConnectionConfiguration
+    name: IDatabaseConnectionConfiguration
+    nameWithType: IDatabaseConnectionConfiguration
+    fullName: ArgentSea.IDatabaseConnectionConfiguration
   - name: ()
     nameWithType: ()
     fullName: ()

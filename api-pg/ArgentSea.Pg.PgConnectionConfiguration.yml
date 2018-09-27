@@ -70,23 +70,23 @@ items:
   summary: "\nThis class represents is a (non-sharded) database connection.\nNote that the SecurityKey must match a defined key in the DataSecurityOptions; likewise, a ResilienceKey (if defined) must match as key in the DataResilienceOptions array.\nIf the ResilienceKey is not defined, a default data resilience strategy will be used.\n"
   example: []
   syntax:
-    content: 'public class PgConnectionConfiguration : DataConnectionConfiguration, IConnectionConfiguration'
+    content: 'public class PgConnectionConfiguration : DataConnectionConfigurationBase, IConnectionConfiguration'
     content.vb: >-
       Public Class PgConnectionConfiguration
-          Inherits DataConnectionConfiguration
+          Inherits DataConnectionConfigurationBase
           Implements IConnectionConfiguration
   inheritance:
   - System.Object
-  - ArgentSea.DataConnectionConfiguration
+  - ArgentSea.DataConnectionConfigurationBase
   implements:
   - ArgentSea.IConnectionConfiguration
   inheritedMembers:
-  - ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
-  - ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
-  - ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
-  - ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
-  - ArgentSea.DataConnectionConfiguration.SecurityKey
-  - ArgentSea.DataConnectionConfiguration.ResilienceKey
+  - ArgentSea.DataConnectionConfigurationBase.hasConnectionPropertyChanged
+  - ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  - ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  - ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
+  - ArgentSea.DataConnectionConfigurationBase.SecurityKey
+  - ArgentSea.DataConnectionConfigurationBase.ResilienceKey
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -128,7 +128,7 @@ items:
     return:
       type: System.String
     content.vb: Public Overrides ReadOnly Property ConnectionDescription As String
-  overridden: ArgentSea.DataConnectionConfiguration.ConnectionDescription
+  overridden: ArgentSea.DataConnectionConfigurationBase.ConnectionDescription
   overload: ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription*
   modifiers.csharp:
   - public
@@ -165,7 +165,7 @@ items:
     return:
       type: System.String
     content.vb: Public Overrides Function GetConnectionString As String
-  overridden: ArgentSea.DataConnectionConfiguration.GetConnectionString
+  overridden: ArgentSea.DataConnectionConfigurationBase.GetConnectionString
   overload: ArgentSea.Pg.PgConnectionConfiguration.GetConnectionString*
   modifiers.csharp:
   - public
@@ -1747,35 +1747,35 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ArgentSea.DataConnectionConfiguration
-  commentId: T:ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase
+  commentId: T:ArgentSea.DataConnectionConfigurationBase
   parent: ArgentSea
-  name: DataConnectionConfiguration
-  nameWithType: DataConnectionConfiguration
-  fullName: ArgentSea.DataConnectionConfiguration
+  name: DataConnectionConfigurationBase
+  nameWithType: DataConnectionConfigurationBase
+  fullName: ArgentSea.DataConnectionConfigurationBase
 - uid: ArgentSea.IConnectionConfiguration
   commentId: T:ArgentSea.IConnectionConfiguration
   parent: ArgentSea
   name: IConnectionConfiguration
   nameWithType: IConnectionConfiguration
   fullName: ArgentSea.IConnectionConfiguration
-- uid: ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
-  commentId: F:ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
-  parent: ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase.hasConnectionPropertyChanged
+  commentId: F:ArgentSea.DataConnectionConfigurationBase.hasConnectionPropertyChanged
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: hasConnectionPropertyChanged
-  nameWithType: DataConnectionConfiguration.hasConnectionPropertyChanged
-  fullName: ArgentSea.DataConnectionConfiguration.hasConnectionPropertyChanged
-- uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
-  commentId: M:ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
-  parent: ArgentSea.DataConnectionConfiguration
+  nameWithType: DataConnectionConfigurationBase.hasConnectionPropertyChanged
+  fullName: ArgentSea.DataConnectionConfigurationBase.hasConnectionPropertyChanged
+- uid: ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  commentId: M:ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
-  nameWithType: DataConnectionConfiguration.SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
-  fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions, ArgentSea.DataResilienceOptions)
+  nameWithType: DataConnectionConfigurationBase.SetConfigurationOptions(DataSecurityOptions, DataResilienceOptions)
+  fullName: ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions(ArgentSea.DataSecurityOptions, ArgentSea.DataResilienceOptions)
   spec.csharp:
-  - uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  - uid: ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
     name: SetConfigurationOptions
-    nameWithType: DataConnectionConfiguration.SetConfigurationOptions
-    fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions
+    nameWithType: DataConnectionConfigurationBase.SetConfigurationOptions
+    fullName: ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions
   - name: (
     nameWithType: (
     fullName: (
@@ -1794,10 +1794,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
+  - uid: ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions(ArgentSea.DataSecurityOptions,ArgentSea.DataResilienceOptions)
     name: SetConfigurationOptions
-    nameWithType: DataConnectionConfiguration.SetConfigurationOptions
-    fullName: ArgentSea.DataConnectionConfiguration.SetConfigurationOptions
+    nameWithType: DataConnectionConfigurationBase.SetConfigurationOptions
+    fullName: ArgentSea.DataConnectionConfigurationBase.SetConfigurationOptions
   - name: (
     nameWithType: (
     fullName: (
@@ -1815,18 +1815,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
-  commentId: M:ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
-  parent: ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.DataConnectionConfigurationBase
   isExternal: true
   name: GetResilienceStrategy(ILogger)
-  nameWithType: DataConnectionConfiguration.GetResilienceStrategy(ILogger)
-  fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  nameWithType: DataConnectionConfigurationBase.GetResilienceStrategy(ILogger)
+  fullName: ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
   spec.csharp:
-  - uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
     name: GetResilienceStrategy
-    nameWithType: DataConnectionConfiguration.GetResilienceStrategy
-    fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy
+    nameWithType: DataConnectionConfigurationBase.GetResilienceStrategy
+    fullName: ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy
   - name: (
     nameWithType: (
     fullName: (
@@ -1839,10 +1839,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy(Microsoft.Extensions.Logging.ILogger)
     name: GetResilienceStrategy
-    nameWithType: DataConnectionConfiguration.GetResilienceStrategy
-    fullName: ArgentSea.DataConnectionConfiguration.GetResilienceStrategy
+    nameWithType: DataConnectionConfigurationBase.GetResilienceStrategy
+    fullName: ArgentSea.DataConnectionConfigurationBase.GetResilienceStrategy
   - name: (
     nameWithType: (
     fullName: (
@@ -1854,17 +1854,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
-  commentId: M:ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
-  parent: ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
+  commentId: M:ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: GetSecurityConfiguration()
-  nameWithType: DataConnectionConfiguration.GetSecurityConfiguration()
-  fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration()
+  nameWithType: DataConnectionConfigurationBase.GetSecurityConfiguration()
+  fullName: ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration()
   spec.csharp:
-  - uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - uid: ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
     name: GetSecurityConfiguration
-    nameWithType: DataConnectionConfiguration.GetSecurityConfiguration
-    fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+    nameWithType: DataConnectionConfigurationBase.GetSecurityConfiguration
+    fullName: ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
   - name: (
     nameWithType: (
     fullName: (
@@ -1872,28 +1872,28 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+  - uid: ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
     name: GetSecurityConfiguration
-    nameWithType: DataConnectionConfiguration.GetSecurityConfiguration
-    fullName: ArgentSea.DataConnectionConfiguration.GetSecurityConfiguration
+    nameWithType: DataConnectionConfigurationBase.GetSecurityConfiguration
+    fullName: ArgentSea.DataConnectionConfigurationBase.GetSecurityConfiguration
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: ArgentSea.DataConnectionConfiguration.SecurityKey
-  commentId: P:ArgentSea.DataConnectionConfiguration.SecurityKey
-  parent: ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase.SecurityKey
+  commentId: P:ArgentSea.DataConnectionConfigurationBase.SecurityKey
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: SecurityKey
-  nameWithType: DataConnectionConfiguration.SecurityKey
-  fullName: ArgentSea.DataConnectionConfiguration.SecurityKey
-- uid: ArgentSea.DataConnectionConfiguration.ResilienceKey
-  commentId: P:ArgentSea.DataConnectionConfiguration.ResilienceKey
-  parent: ArgentSea.DataConnectionConfiguration
+  nameWithType: DataConnectionConfigurationBase.SecurityKey
+  fullName: ArgentSea.DataConnectionConfigurationBase.SecurityKey
+- uid: ArgentSea.DataConnectionConfigurationBase.ResilienceKey
+  commentId: P:ArgentSea.DataConnectionConfigurationBase.ResilienceKey
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: ResilienceKey
-  nameWithType: DataConnectionConfiguration.ResilienceKey
-  fullName: ArgentSea.DataConnectionConfiguration.ResilienceKey
+  nameWithType: DataConnectionConfigurationBase.ResilienceKey
+  fullName: ArgentSea.DataConnectionConfigurationBase.ResilienceKey
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -2184,12 +2184,12 @@ references:
   name: ArgentSea
   nameWithType: ArgentSea
   fullName: ArgentSea
-- uid: ArgentSea.DataConnectionConfiguration.ConnectionDescription
-  commentId: P:ArgentSea.DataConnectionConfiguration.ConnectionDescription
-  parent: ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase.ConnectionDescription
+  commentId: P:ArgentSea.DataConnectionConfigurationBase.ConnectionDescription
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: ConnectionDescription
-  nameWithType: DataConnectionConfiguration.ConnectionDescription
-  fullName: ArgentSea.DataConnectionConfiguration.ConnectionDescription
+  nameWithType: DataConnectionConfigurationBase.ConnectionDescription
+  fullName: ArgentSea.DataConnectionConfigurationBase.ConnectionDescription
 - uid: ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription*
   commentId: Overload:ArgentSea.Pg.PgConnectionConfiguration.ConnectionDescription
   name: ConnectionDescription
@@ -2202,17 +2202,17 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
-  commentId: M:ArgentSea.DataConnectionConfiguration.GetConnectionString
-  parent: ArgentSea.DataConnectionConfiguration
+- uid: ArgentSea.DataConnectionConfigurationBase.GetConnectionString
+  commentId: M:ArgentSea.DataConnectionConfigurationBase.GetConnectionString
+  parent: ArgentSea.DataConnectionConfigurationBase
   name: GetConnectionString()
-  nameWithType: DataConnectionConfiguration.GetConnectionString()
-  fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString()
+  nameWithType: DataConnectionConfigurationBase.GetConnectionString()
+  fullName: ArgentSea.DataConnectionConfigurationBase.GetConnectionString()
   spec.csharp:
-  - uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
+  - uid: ArgentSea.DataConnectionConfigurationBase.GetConnectionString
     name: GetConnectionString
-    nameWithType: DataConnectionConfiguration.GetConnectionString
-    fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString
+    nameWithType: DataConnectionConfigurationBase.GetConnectionString
+    fullName: ArgentSea.DataConnectionConfigurationBase.GetConnectionString
   - name: (
     nameWithType: (
     fullName: (
@@ -2220,10 +2220,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.DataConnectionConfiguration.GetConnectionString
+  - uid: ArgentSea.DataConnectionConfigurationBase.GetConnectionString
     name: GetConnectionString
-    nameWithType: DataConnectionConfiguration.GetConnectionString
-    fullName: ArgentSea.DataConnectionConfiguration.GetConnectionString
+    nameWithType: DataConnectionConfigurationBase.GetConnectionString
+    fullName: ArgentSea.DataConnectionConfigurationBase.GetConnectionString
   - name: (
     nameWithType: (
     fullName: (

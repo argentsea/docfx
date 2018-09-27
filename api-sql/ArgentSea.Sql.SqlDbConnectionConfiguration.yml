@@ -27,15 +27,14 @@ items:
   - ArgentSea.Sql
   namespace: ArgentSea.Sql
   syntax:
-    content: 'public class SqlDbConnectionConfiguration : IDbConnectionConfiguration'
+    content: 'public class SqlDbConnectionConfiguration : IDatabaseConnectionConfiguration'
     content.vb: >-
       Public Class SqlDbConnectionConfiguration
-
-          Implements IDbConnectionConfiguration
+          Implements IDatabaseConnectionConfiguration
   inheritance:
   - System.Object
   implements:
-  - ArgentSea.IDbConnectionConfiguration
+  - ArgentSea.IDatabaseConnectionConfiguration
   inheritedMembers:
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -80,7 +79,7 @@ items:
     content.vb: Public Property DatabaseKey As String
   overload: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey*
   implements:
-  - ArgentSea.IDbConnectionConfiguration.DatabaseKey
+  - ArgentSea.IDatabaseConnectionConfiguration.DatabaseKey
   modifiers.csharp:
   - public
   - get
@@ -117,7 +116,7 @@ items:
     content.vb: Public ReadOnly Property DataConnectionInternal As IConnectionConfiguration
   overload: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal*
   implements:
-  - ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
+  - ArgentSea.IDatabaseConnectionConfiguration.DataConnectionInternal
   modifiers.csharp:
   - public
   - get
@@ -172,12 +171,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ArgentSea.IDbConnectionConfiguration
-  commentId: T:ArgentSea.IDbConnectionConfiguration
+- uid: ArgentSea.IDatabaseConnectionConfiguration
+  commentId: T:ArgentSea.IDatabaseConnectionConfiguration
   parent: ArgentSea
-  name: IDbConnectionConfiguration
-  nameWithType: IDbConnectionConfiguration
-  fullName: ArgentSea.IDbConnectionConfiguration
+  name: IDatabaseConnectionConfiguration
+  nameWithType: IDatabaseConnectionConfiguration
+  fullName: ArgentSea.IDatabaseConnectionConfiguration
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -473,12 +472,12 @@ references:
   name: DatabaseKey
   nameWithType: SqlDbConnectionConfiguration.DatabaseKey
   fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DatabaseKey
-- uid: ArgentSea.IDbConnectionConfiguration.DatabaseKey
-  commentId: P:ArgentSea.IDbConnectionConfiguration.DatabaseKey
-  parent: ArgentSea.IDbConnectionConfiguration
+- uid: ArgentSea.IDatabaseConnectionConfiguration.DatabaseKey
+  commentId: P:ArgentSea.IDatabaseConnectionConfiguration.DatabaseKey
+  parent: ArgentSea.IDatabaseConnectionConfiguration
   name: DatabaseKey
-  nameWithType: IDbConnectionConfiguration.DatabaseKey
-  fullName: ArgentSea.IDbConnectionConfiguration.DatabaseKey
+  nameWithType: IDatabaseConnectionConfiguration.DatabaseKey
+  fullName: ArgentSea.IDatabaseConnectionConfiguration.DatabaseKey
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -491,12 +490,12 @@ references:
   name: DataConnectionInternal
   nameWithType: SqlDbConnectionConfiguration.DataConnectionInternal
   fullName: ArgentSea.Sql.SqlDbConnectionConfiguration.DataConnectionInternal
-- uid: ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
-  commentId: P:ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
-  parent: ArgentSea.IDbConnectionConfiguration
+- uid: ArgentSea.IDatabaseConnectionConfiguration.DataConnectionInternal
+  commentId: P:ArgentSea.IDatabaseConnectionConfiguration.DataConnectionInternal
+  parent: ArgentSea.IDatabaseConnectionConfiguration
   name: DataConnectionInternal
-  nameWithType: IDbConnectionConfiguration.DataConnectionInternal
-  fullName: ArgentSea.IDbConnectionConfiguration.DataConnectionInternal
+  nameWithType: IDatabaseConnectionConfiguration.DataConnectionInternal
+  fullName: ArgentSea.IDatabaseConnectionConfiguration.DataConnectionInternal
 - uid: ArgentSea.IConnectionConfiguration
   commentId: T:ArgentSea.IConnectionConfiguration
   parent: ArgentSea

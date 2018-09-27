@@ -28,18 +28,17 @@ items:
   summary: "\nThis options class contains the shard dataset configuration information.\n"
   example: []
   syntax:
-    content: 'public class SqlShardConnectionOptions<TShard> : IShardDataConfigurationOptions<TShard> where TShard : IComparable'
+    content: 'public class SqlShardConnectionOptions<TShard> : IShardSetConfigurationOptions<TShard> where TShard : IComparable'
     typeParameters:
     - id: TShard
       description: ''
     content.vb: >-
       Public Class SqlShardConnectionOptions(Of TShard As IComparable)
-
-          Implements IShardDataConfigurationOptions(Of TShard)
+          Implements IShardSetConfigurationOptions(Of TShard)
   inheritance:
   - System.Object
   implements:
-  - ArgentSea.IShardDataConfigurationOptions{{TShard}}
+  - ArgentSea.IShardSetConfigurationOptions{{TShard}}
   inheritedMembers:
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -87,7 +86,7 @@ items:
     content.vb: Public ReadOnly Property ShardSetsInternal As IShardConnectionsConfiguration(Of TShard)()
   overload: ArgentSea.Sql.SqlShardConnectionOptions`1.ShardSetsInternal*
   implements:
-  - ArgentSea.IShardDataConfigurationOptions{{TShard}}.ShardSetsInternal
+  - ArgentSea.IShardSetConfigurationOptions{{TShard}}.ShardSetsInternal
   nameWithType.vb: SqlShardConnectionOptions(Of TShard).ShardSetsInternal
   modifiers.csharp:
   - public
@@ -146,21 +145,21 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ArgentSea.IShardDataConfigurationOptions{{TShard}}
-  commentId: T:ArgentSea.IShardDataConfigurationOptions{`0}
+- uid: ArgentSea.IShardSetConfigurationOptions{{TShard}}
+  commentId: T:ArgentSea.IShardSetConfigurationOptions{`0}
   parent: ArgentSea
-  definition: ArgentSea.IShardDataConfigurationOptions`1
-  name: IShardDataConfigurationOptions<TShard>
-  nameWithType: IShardDataConfigurationOptions<TShard>
-  fullName: ArgentSea.IShardDataConfigurationOptions<TShard>
-  nameWithType.vb: IShardDataConfigurationOptions(Of TShard)
-  fullName.vb: ArgentSea.IShardDataConfigurationOptions(Of TShard)
-  name.vb: IShardDataConfigurationOptions(Of TShard)
+  definition: ArgentSea.IShardSetConfigurationOptions`1
+  name: IShardSetConfigurationOptions<TShard>
+  nameWithType: IShardSetConfigurationOptions<TShard>
+  fullName: ArgentSea.IShardSetConfigurationOptions<TShard>
+  nameWithType.vb: IShardSetConfigurationOptions(Of TShard)
+  fullName.vb: ArgentSea.IShardSetConfigurationOptions(Of TShard)
+  name.vb: IShardSetConfigurationOptions(Of TShard)
   spec.csharp:
-  - uid: ArgentSea.IShardDataConfigurationOptions`1
-    name: IShardDataConfigurationOptions
-    nameWithType: IShardDataConfigurationOptions
-    fullName: ArgentSea.IShardDataConfigurationOptions
+  - uid: ArgentSea.IShardSetConfigurationOptions`1
+    name: IShardSetConfigurationOptions
+    nameWithType: IShardSetConfigurationOptions
+    fullName: ArgentSea.IShardSetConfigurationOptions
   - name: <
     nameWithType: <
     fullName: <
@@ -171,10 +170,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArgentSea.IShardDataConfigurationOptions`1
-    name: IShardDataConfigurationOptions
-    nameWithType: IShardDataConfigurationOptions
-    fullName: ArgentSea.IShardDataConfigurationOptions
+  - uid: ArgentSea.IShardSetConfigurationOptions`1
+    name: IShardSetConfigurationOptions
+    nameWithType: IShardSetConfigurationOptions
+    fullName: ArgentSea.IShardSetConfigurationOptions
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -469,19 +468,19 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: ArgentSea.IShardDataConfigurationOptions`1
-  commentId: T:ArgentSea.IShardDataConfigurationOptions`1
-  name: IShardDataConfigurationOptions<TShard>
-  nameWithType: IShardDataConfigurationOptions<TShard>
-  fullName: ArgentSea.IShardDataConfigurationOptions<TShard>
-  nameWithType.vb: IShardDataConfigurationOptions(Of TShard)
-  fullName.vb: ArgentSea.IShardDataConfigurationOptions(Of TShard)
-  name.vb: IShardDataConfigurationOptions(Of TShard)
+- uid: ArgentSea.IShardSetConfigurationOptions`1
+  commentId: T:ArgentSea.IShardSetConfigurationOptions`1
+  name: IShardSetConfigurationOptions<TShard>
+  nameWithType: IShardSetConfigurationOptions<TShard>
+  fullName: ArgentSea.IShardSetConfigurationOptions<TShard>
+  nameWithType.vb: IShardSetConfigurationOptions(Of TShard)
+  fullName.vb: ArgentSea.IShardSetConfigurationOptions(Of TShard)
+  name.vb: IShardSetConfigurationOptions(Of TShard)
   spec.csharp:
-  - uid: ArgentSea.IShardDataConfigurationOptions`1
-    name: IShardDataConfigurationOptions
-    nameWithType: IShardDataConfigurationOptions
-    fullName: ArgentSea.IShardDataConfigurationOptions
+  - uid: ArgentSea.IShardSetConfigurationOptions`1
+    name: IShardSetConfigurationOptions
+    nameWithType: IShardSetConfigurationOptions
+    fullName: ArgentSea.IShardSetConfigurationOptions
   - name: <
     nameWithType: <
     fullName: <
@@ -492,10 +491,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArgentSea.IShardDataConfigurationOptions`1
-    name: IShardDataConfigurationOptions
-    nameWithType: IShardDataConfigurationOptions
-    fullName: ArgentSea.IShardDataConfigurationOptions
+  - uid: ArgentSea.IShardSetConfigurationOptions`1
+    name: IShardSetConfigurationOptions
+    nameWithType: IShardSetConfigurationOptions
+    fullName: ArgentSea.IShardSetConfigurationOptions
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -517,15 +516,15 @@ references:
   fullName: ArgentSea.Sql.SqlShardConnectionOptions<TShard>.ShardSetsInternal
   nameWithType.vb: SqlShardConnectionOptions(Of TShard).ShardSetsInternal
   fullName.vb: ArgentSea.Sql.SqlShardConnectionOptions(Of TShard).ShardSetsInternal
-- uid: ArgentSea.IShardDataConfigurationOptions{{TShard}}.ShardSetsInternal
-  commentId: P:ArgentSea.IShardDataConfigurationOptions{`0}.ShardSetsInternal
-  parent: ArgentSea.IShardDataConfigurationOptions{{TShard}}
-  definition: ArgentSea.IShardDataConfigurationOptions`1.ShardSetsInternal
+- uid: ArgentSea.IShardSetConfigurationOptions{{TShard}}.ShardSetsInternal
+  commentId: P:ArgentSea.IShardSetConfigurationOptions{`0}.ShardSetsInternal
+  parent: ArgentSea.IShardSetConfigurationOptions{{TShard}}
+  definition: ArgentSea.IShardSetConfigurationOptions`1.ShardSetsInternal
   name: ShardSetsInternal
-  nameWithType: IShardDataConfigurationOptions<TShard>.ShardSetsInternal
-  fullName: ArgentSea.IShardDataConfigurationOptions<TShard>.ShardSetsInternal
-  nameWithType.vb: IShardDataConfigurationOptions(Of TShard).ShardSetsInternal
-  fullName.vb: ArgentSea.IShardDataConfigurationOptions(Of TShard).ShardSetsInternal
+  nameWithType: IShardSetConfigurationOptions<TShard>.ShardSetsInternal
+  fullName: ArgentSea.IShardSetConfigurationOptions<TShard>.ShardSetsInternal
+  nameWithType.vb: IShardSetConfigurationOptions(Of TShard).ShardSetsInternal
+  fullName.vb: ArgentSea.IShardSetConfigurationOptions(Of TShard).ShardSetsInternal
 - uid: ArgentSea.IShardConnectionsConfiguration{{TShard}}[]
   isExternal: true
   name: IShardConnectionsConfiguration<TShard>[]
@@ -568,13 +567,13 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
-- uid: ArgentSea.IShardDataConfigurationOptions`1.ShardSetsInternal
-  commentId: P:ArgentSea.IShardDataConfigurationOptions`1.ShardSetsInternal
+- uid: ArgentSea.IShardSetConfigurationOptions`1.ShardSetsInternal
+  commentId: P:ArgentSea.IShardSetConfigurationOptions`1.ShardSetsInternal
   name: ShardSetsInternal
-  nameWithType: IShardDataConfigurationOptions<TShard>.ShardSetsInternal
-  fullName: ArgentSea.IShardDataConfigurationOptions<TShard>.ShardSetsInternal
-  nameWithType.vb: IShardDataConfigurationOptions(Of TShard).ShardSetsInternal
-  fullName.vb: ArgentSea.IShardDataConfigurationOptions(Of TShard).ShardSetsInternal
+  nameWithType: IShardSetConfigurationOptions<TShard>.ShardSetsInternal
+  fullName: ArgentSea.IShardSetConfigurationOptions<TShard>.ShardSetsInternal
+  nameWithType.vb: IShardSetConfigurationOptions(Of TShard).ShardSetsInternal
+  fullName.vb: ArgentSea.IShardSetConfigurationOptions(Of TShard).ShardSetsInternal
 - uid: ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardSets*
   commentId: Overload:ArgentSea.Sql.SqlShardConnectionOptions`1.SqlShardSets
   name: SqlShardSets

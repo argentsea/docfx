@@ -221,31 +221,164 @@ In most cases, a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api
 
 ## ShardSets
 
-The root injectable service is a `ShardSets` object, which is merely a collection of `ShardSet` instances. You can reference any ShardSet by name. Many (probably most) applications will have only one ShardSet, but this supports contexts where different data is sharded differently. For example, your user information might be sharded globally by datacenter location, while product availability information might be sharded by subsidiary (ok, this specious example might be better served via microservices; the point is that the framework does not preclude more than one ShardSet, if needed).
+A “shard set” is a collection of databases with essentially identical schemas, each of which contain a segment of the data. Many — probably most — sharded applications will have only one ShardSet, but this supports contexts where multiple sharding plans exist. For example, User information might be sharded globally by datacenter location, while product availability information might be sharded by subsidiary (ok, this specious example might be better served via microservices; the point is that the framework does not preclude multiple ShardSets if you need them).
 
-.NET allows nested classes to share internal values and the generic types of the parent. ArgentSea leverages this to simplify the ShardSet hierarchy. A ShardSet consists of a root class and three nested classes:
+The root injectable service is a [ShardSets](/api/ArgentSea.ShardSets-2.html) object, which is merely a collection of `ShardSet` instances. 
 
-* `ShardSets<T>` - the root type, which represents collection of sharding information.
-* `ShardSets<T>.ShardSet` - a sharded data set, which is the same schema spread over multiple servers.
-* `ShardSets<T>.ShardInstance` - a shard (single database) in the shard set. Includes (optionally) separate read and write connections.
-* `ShardSets<T>.DataConnection` - A database connection.
+There are two versions: the generic version — `ShardSet<T>` — allows you to specify the ShardId type; the non-generic `ShardSets` collection has the ShardId type already defined as a likely value based upon the platform:
 
-You can access a ShardSet by name:
+| Platform | Implicit ShardId Type | Generic equivalent | 
+| --- | --- | --- | 
+| SQL Server | Byte | `SqlShardSets<byte>` | 
+| PostgreSQL | Int16 | `PgShardSets<short>` | 
+
+### The ShardSets Hierarchy
+
+The [ShardSets](/api/ArgentSea.ShardSets-2.html) collection is the root of an object hierarchy. The child objects in thie hierarchy are implemented as nested classes. This simplifies the implementation, but can also make declarations somewhat verbose.
+
+![ShardSetHierarchy](../images/shardsethierarchy.png)
+
+#### Nested classes
+
+* `ShardSets` - the root collection, which provides access to any of the various sharding schemas.
+* `ShardSets.ShardSet` - a collection of servers which have the same schema and different segments of data.
+* `ShardSets.ShardInstance` - a shard (single data store) with one segment of data. Includes (optionally) separate read and write connections.
+* `ShardSets.DataConnection` - A database connection to a shard.
+
+### Accessing the ShardSets
+
+In .NET Core, the ShardSets collection is an injectable service. The instructions in the [Configuration](configuration.md) section can help you with setup. You can reference any ShardSet by name (i.e. a string key), which is also defined during configuration.
+
+Because it is unlikely that you would need to access more than one ShardSet in the same data access class, your class-level variable should capture only the relevant ShardSet. You can access a ShardSet by name (i.e. a string key value):
+
+## [SQL Server](#tab/tabid-sql)
+
+Injection example using the non-generic ShardSet (Byte as ShardId type):
 
 ```C#
     public class SubscriberStore
     {
-        private readonly SqlDatabases _dbs;
-        private readonly SqlShardSets<short>.ShardDataSet _shardSet;
-
+        private readonly SqlShardSets.ShardDataSet _shardSet;
         private readonly ILogger<SubscriberStore> _logger;
-        public SubscriberStore(SqlShardSets<short> shardSets, ILogger<SubscriberStore> logger)
+
+        public SubscriberStore(SqlShardSets shardSets, ILogger<SubscriberStore> logger)
         {
             _shardSet = shardSets["Subscribers"];
             _logger = logger;
         }
 
 ```
+
+Example using the generic ShardSet:
+
+```C#
+    public class SubscriberStore
+    {
+        private readonly SqlShardSets<string>.ShardDataSet _shardSet;
+        private readonly ILogger<SubscriberStore> _logger;
+
+        public SubscriberStore(SqlShardSets<string> shardSets, ILogger<SubscriberStore> logger)
+        {
+            _shardSet = shardSets["Subscribers"];
+            _logger = logger;
+        }
+
+```
+
+## [PostgreSQL](#tab/tabid-pg)
+
+Injection example using the non-generic ShardSet (Int16 as ShardId type):
+
+```C#
+    public class SubscriberStore
+    {
+        private readonly PgShardSets.ShardSet _shardSet;
+        private readonly ILogger<SubscriberStore> _logger;
+
+        public SubscriberStore(PgShardSets shardSets, ILogger<SubscriberStore> logger)
+        {
+            _shardSet = shardSets["Subscribers"];
+            _logger = logger;
+        }
+
+```
+
+Example using the generic ShardSet:
+
+```C#
+    public class SubscriberStore
+    {
+        private readonly PgShardSets<string>.ShardDataSet _shardSet;
+        private readonly ILogger<SubscriberStore> _logger;
+
+        public SubscriberStore(PgShardSets<string> shardSets, ILogger<SubscriberStore> logger)
+        {
+            _shardSet = shardSets["Subscribers"];
+            _logger = logger;
+        }
+
+```
+
+***
+
+### Querying a ShardSet
+
+There are two types of ShardSet queries:
+
+* *Queries on a particular shard* - usually to obtain a specific record, like when you have a ShardKey.
+* *Queries across all shards* - when you need a list or when don’t know the specific shard to search.
+
+#### Querying a Shard
+
+Access a shard in the ShardSet collection using an index, just like you would with any other collection. The ShardId would typically be contained in a ShardKey or ShardChild. If you have implemented a solution using identity ranges, just call your custom resolver to get the shard index.
+
+An example data access method looks like this:
+
+## [SQL Server](#tab/tabid-sql)
+
+```C#
+public async Task<Subscriber> GetSubscriber(ShardKey<byte, int> subscriberKey, CancellationToken cancellation)
+{
+    var prms = new QueryParameterCollection()
+        .AddSqlIntInParameter("@SubId", subscriberKey.RecordId);
+    Mapper.MapToOutParameters<Subscriber>(prms, _logger);
+    return await _shardSet[subscriberKey.ShardId].ReadConnection.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+}
+```
+
+## [PostgreSQL](#tab/tabid-pg)
+
+```C#
+public async Task<Subscriber> GetSubscriber(ShardKey<short, int> subscriberKey, CancellationToken cancellation)
+{
+    var prms = new QueryParameterCollection()
+        .AddPgIntegerInParameter("SubId", subscriberKey.RecordId);
+    return await _shardSet[subscriberKey.ShardId].ReadConnection.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+}
+```
+
+***
+
+
+Methods:
+
+* QueryAsync
+* LookupAsync
+* RunAsync
+* ListAsync
+
+Arguments:
+
+* Procedure
+* Parameters
+* ShardIndexOrdinal
+* Handler
+* TopOne
+* Cancellation token
+
+### Querying Across Shards
+
+Read connection only
 
 ### MapShardKey attribute and MapShardChild attribute
 

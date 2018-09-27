@@ -40,14 +40,14 @@ items:
   inheritance:
   - System.Object
   - System.Attribute
-  - ArgentSea.ParameterMapAttribute
+  - ArgentSea.ParameterMapAttributeBase
   - ArgentSea.Pg.PgParameterMapAttribute
   inheritedMembers:
-  - ArgentSea.ParameterMapAttribute.Name
-  - ArgentSea.ParameterMapAttribute.ParameterName
-  - ArgentSea.ParameterMapAttribute.ColumnName
-  - ArgentSea.ParameterMapAttribute.SqlType
-  - ArgentSea.ParameterMapAttribute.IsRequired
+  - ArgentSea.ParameterMapAttributeBase.Name
+  - ArgentSea.ParameterMapAttributeBase.ParameterName
+  - ArgentSea.ParameterMapAttributeBase.ColumnName
+  - ArgentSea.ParameterMapAttributeBase.SqlType
+  - ArgentSea.ParameterMapAttributeBase.IsRequired
   - System.Attribute.Equals(System.Object)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
@@ -197,7 +197,7 @@ items:
     return:
       type: System.Boolean
     content.vb: Public Overrides Function IsValidType(candidateType As Type) As Boolean
-  overridden: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  overridden: ArgentSea.ParameterMapAttributeBase.IsValidType(System.Type)
   overload: ArgentSea.Pg.MapToPgMoneyAttribute.IsValidType*
   modifiers.csharp:
   - public
@@ -247,7 +247,7 @@ items:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
     content.vb: Protected Overrides Sub AppendInParameterExpressions(expressions As IList(Of Expression), expSprocParameters As ParameterExpression, expIgnoreParameters As ParameterExpression, parameterNames As HashSet(Of String), expProperty As Expression, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
-  overridden: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overridden: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
   overload: ArgentSea.Pg.MapToPgMoneyAttribute.AppendInParameterExpressions*
   nameWithType.vb: MapToPgMoneyAttribute.AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
   modifiers.csharp:
@@ -296,7 +296,7 @@ items:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
     content.vb: Protected Overrides Sub AppendSetOutParameterExpressions(expressions As IList(Of Expression), expSprocParameters As ParameterExpression, expIgnoreParameters As ParameterExpression, parameterNames As HashSet(Of String), expLogger As ParameterExpression, logger As ILogger)
-  overridden: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overridden: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
   overload: ArgentSea.Pg.MapToPgMoneyAttribute.AppendSetOutParameterExpressions*
   nameWithType.vb: MapToPgMoneyAttribute.AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
   modifiers.csharp:
@@ -347,7 +347,7 @@ items:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
     content.vb: Protected Overrides Sub AppendReadOutParameterExpressions(expProperty As Expression, expressions As IList(Of Expression), expPrms As ParameterExpression, expPrm As ParameterExpression, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
-  overridden: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overridden: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
   overload: ArgentSea.Pg.MapToPgMoneyAttribute.AppendReadOutParameterExpressions*
   nameWithType.vb: MapToPgMoneyAttribute.AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
   modifiers.csharp:
@@ -404,7 +404,7 @@ items:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
     content.vb: Protected Overrides Sub AppendReaderExpressions(expProperty As Expression, columnLookupExpressions As IList(Of MethodCallExpression), expressions As IList(Of Expression), prmSqlRdr As ParameterExpression, expOrdinals As ParameterExpression, expOrdinal As ParameterExpression, ByRef propIndex As Integer, propertyType As Type, expLogger As ParameterExpression, logger As ILogger)
-  overridden: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  overridden: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
   overload: ArgentSea.Pg.MapToPgMoneyAttribute.AppendReaderExpressions*
   nameWithType.vb: MapToPgMoneyAttribute.AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, ByRef Int32, Type, ParameterExpression, ILogger)
   modifiers.csharp:
@@ -435,48 +435,48 @@ references:
   name: Attribute
   nameWithType: Attribute
   fullName: System.Attribute
-- uid: ArgentSea.ParameterMapAttribute
-  commentId: T:ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase
+  commentId: T:ArgentSea.ParameterMapAttributeBase
   parent: ArgentSea
-  name: ParameterMapAttribute
-  nameWithType: ParameterMapAttribute
-  fullName: ArgentSea.ParameterMapAttribute
+  name: ParameterMapAttributeBase
+  nameWithType: ParameterMapAttributeBase
+  fullName: ArgentSea.ParameterMapAttributeBase
 - uid: ArgentSea.Pg.PgParameterMapAttribute
   commentId: T:ArgentSea.Pg.PgParameterMapAttribute
   parent: ArgentSea.Pg
   name: PgParameterMapAttribute
   nameWithType: PgParameterMapAttribute
   fullName: ArgentSea.Pg.PgParameterMapAttribute
-- uid: ArgentSea.ParameterMapAttribute.Name
-  commentId: P:ArgentSea.ParameterMapAttribute.Name
-  parent: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase.Name
+  commentId: P:ArgentSea.ParameterMapAttributeBase.Name
+  parent: ArgentSea.ParameterMapAttributeBase
   name: Name
-  nameWithType: ParameterMapAttribute.Name
-  fullName: ArgentSea.ParameterMapAttribute.Name
-- uid: ArgentSea.ParameterMapAttribute.ParameterName
-  commentId: P:ArgentSea.ParameterMapAttribute.ParameterName
-  parent: ArgentSea.ParameterMapAttribute
+  nameWithType: ParameterMapAttributeBase.Name
+  fullName: ArgentSea.ParameterMapAttributeBase.Name
+- uid: ArgentSea.ParameterMapAttributeBase.ParameterName
+  commentId: P:ArgentSea.ParameterMapAttributeBase.ParameterName
+  parent: ArgentSea.ParameterMapAttributeBase
   name: ParameterName
-  nameWithType: ParameterMapAttribute.ParameterName
-  fullName: ArgentSea.ParameterMapAttribute.ParameterName
-- uid: ArgentSea.ParameterMapAttribute.ColumnName
-  commentId: P:ArgentSea.ParameterMapAttribute.ColumnName
-  parent: ArgentSea.ParameterMapAttribute
+  nameWithType: ParameterMapAttributeBase.ParameterName
+  fullName: ArgentSea.ParameterMapAttributeBase.ParameterName
+- uid: ArgentSea.ParameterMapAttributeBase.ColumnName
+  commentId: P:ArgentSea.ParameterMapAttributeBase.ColumnName
+  parent: ArgentSea.ParameterMapAttributeBase
   name: ColumnName
-  nameWithType: ParameterMapAttribute.ColumnName
-  fullName: ArgentSea.ParameterMapAttribute.ColumnName
-- uid: ArgentSea.ParameterMapAttribute.SqlType
-  commentId: P:ArgentSea.ParameterMapAttribute.SqlType
-  parent: ArgentSea.ParameterMapAttribute
+  nameWithType: ParameterMapAttributeBase.ColumnName
+  fullName: ArgentSea.ParameterMapAttributeBase.ColumnName
+- uid: ArgentSea.ParameterMapAttributeBase.SqlType
+  commentId: P:ArgentSea.ParameterMapAttributeBase.SqlType
+  parent: ArgentSea.ParameterMapAttributeBase
   name: SqlType
-  nameWithType: ParameterMapAttribute.SqlType
-  fullName: ArgentSea.ParameterMapAttribute.SqlType
-- uid: ArgentSea.ParameterMapAttribute.IsRequired
-  commentId: P:ArgentSea.ParameterMapAttribute.IsRequired
-  parent: ArgentSea.ParameterMapAttribute
+  nameWithType: ParameterMapAttributeBase.SqlType
+  fullName: ArgentSea.ParameterMapAttributeBase.SqlType
+- uid: ArgentSea.ParameterMapAttributeBase.IsRequired
+  commentId: P:ArgentSea.ParameterMapAttributeBase.IsRequired
+  parent: ArgentSea.ParameterMapAttributeBase
   name: IsRequired
-  nameWithType: ParameterMapAttribute.IsRequired
-  fullName: ArgentSea.ParameterMapAttribute.IsRequired
+  nameWithType: ParameterMapAttributeBase.IsRequired
+  fullName: ArgentSea.ParameterMapAttributeBase.IsRequired
 - uid: System.Attribute.Equals(System.Object)
   commentId: M:System.Attribute.Equals(System.Object)
   parent: System.Attribute
@@ -2817,18 +2817,18 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
-  commentId: M:ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
-  parent: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase.IsValidType(System.Type)
+  commentId: M:ArgentSea.ParameterMapAttributeBase.IsValidType(System.Type)
+  parent: ArgentSea.ParameterMapAttributeBase
   isExternal: true
   name: IsValidType(Type)
-  nameWithType: ParameterMapAttribute.IsValidType(Type)
-  fullName: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  nameWithType: ParameterMapAttributeBase.IsValidType(Type)
+  fullName: ArgentSea.ParameterMapAttributeBase.IsValidType(System.Type)
   spec.csharp:
-  - uid: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  - uid: ArgentSea.ParameterMapAttributeBase.IsValidType(System.Type)
     name: IsValidType
-    nameWithType: ParameterMapAttribute.IsValidType
-    fullName: ArgentSea.ParameterMapAttribute.IsValidType
+    nameWithType: ParameterMapAttributeBase.IsValidType
+    fullName: ArgentSea.ParameterMapAttributeBase.IsValidType
   - name: (
     nameWithType: (
     fullName: (
@@ -2841,10 +2841,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.ParameterMapAttribute.IsValidType(System.Type)
+  - uid: ArgentSea.ParameterMapAttributeBase.IsValidType(System.Type)
     name: IsValidType
-    nameWithType: ParameterMapAttribute.IsValidType
-    fullName: ArgentSea.ParameterMapAttribute.IsValidType
+    nameWithType: ParameterMapAttributeBase.IsValidType
+    fullName: ArgentSea.ParameterMapAttributeBase.IsValidType
   - name: (
     nameWithType: (
     fullName: (
@@ -2868,21 +2868,21 @@ references:
   name: Type
   nameWithType: Type
   fullName: System.Type
-- uid: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  commentId: M:ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  parent: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttributeBase
   isExternal: true
   name: AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
-  nameWithType: ParameterMapAttribute.AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
-  fullName: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
-  nameWithType.vb: ParameterMapAttribute.AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
-  fullName.vb: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType: ParameterMapAttributeBase.AppendInParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, Expression, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttributeBase.AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.Expression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
   name.vb: AppendInParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), Expression, Type, ParameterExpression, ILogger)
   spec.csharp:
-  - uid: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendInParameterExpressions
-    nameWithType: ParameterMapAttribute.AppendInParameterExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions
+    nameWithType: ParameterMapAttributeBase.AppendInParameterExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -2973,10 +2973,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendInParameterExpressions
-    nameWithType: ParameterMapAttribute.AppendInParameterExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendInParameterExpressions
+    nameWithType: ParameterMapAttributeBase.AppendInParameterExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendInParameterExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -3276,21 +3276,21 @@ references:
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
-- uid: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  commentId: M:ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  parent: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttributeBase
   isExternal: true
   name: AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
-  nameWithType: ParameterMapAttribute.AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
-  fullName: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
-  nameWithType.vb: ParameterMapAttribute.AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
-  fullName.vb: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType: ParameterMapAttributeBase.AppendSetOutParameterExpressions(IList<Expression>, ParameterExpression, ParameterExpression, HashSet<String>, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet<System.String>, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttributeBase.AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Collections.Generic.HashSet(Of System.String), System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
   name.vb: AppendSetOutParameterExpressions(IList(Of Expression), ParameterExpression, ParameterExpression, HashSet(Of String), ParameterExpression, ILogger)
   spec.csharp:
-  - uid: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendSetOutParameterExpressions
-    nameWithType: ParameterMapAttribute.AppendSetOutParameterExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions
+    nameWithType: ParameterMapAttributeBase.AppendSetOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -3365,10 +3365,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions(System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Collections.Generic.HashSet{System.String},System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendSetOutParameterExpressions
-    nameWithType: ParameterMapAttribute.AppendSetOutParameterExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendSetOutParameterExpressions
+    nameWithType: ParameterMapAttributeBase.AppendSetOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendSetOutParameterExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -3447,21 +3447,21 @@ references:
   name: AppendSetOutParameterExpressions
   nameWithType: MapToPgMoneyAttribute.AppendSetOutParameterExpressions
   fullName: ArgentSea.Pg.MapToPgMoneyAttribute.AppendSetOutParameterExpressions
-- uid: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  commentId: M:ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  parent: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttributeBase
   isExternal: true
   name: AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
-  nameWithType: ParameterMapAttribute.AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
-  fullName: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
-  nameWithType.vb: ParameterMapAttribute.AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
-  fullName.vb: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType: ParameterMapAttributeBase.AppendReadOutParameterExpressions(Expression, IList<Expression>, ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttributeBase.AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
   name.vb: AppendReadOutParameterExpressions(Expression, IList(Of Expression), ParameterExpression, ParameterExpression, Type, ParameterExpression, ILogger)
   spec.csharp:
-  - uid: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendReadOutParameterExpressions
-    nameWithType: ParameterMapAttribute.AppendReadOutParameterExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions
+    nameWithType: ParameterMapAttributeBase.AppendReadOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -3533,10 +3533,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendReadOutParameterExpressions
-    nameWithType: ParameterMapAttribute.AppendReadOutParameterExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendReadOutParameterExpressions
+    nameWithType: ParameterMapAttributeBase.AppendReadOutParameterExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendReadOutParameterExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -3612,21 +3612,21 @@ references:
   name: AppendReadOutParameterExpressions
   nameWithType: MapToPgMoneyAttribute.AppendReadOutParameterExpressions
   fullName: ArgentSea.Pg.MapToPgMoneyAttribute.AppendReadOutParameterExpressions
-- uid: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  commentId: M:ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
-  parent: ArgentSea.ParameterMapAttribute
+- uid: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  commentId: M:ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  parent: ArgentSea.ParameterMapAttributeBase
   isExternal: true
   name: AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
-  nameWithType: ParameterMapAttribute.AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
-  fullName: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.MethodCallExpression>, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
-  nameWithType.vb: ParameterMapAttribute.AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
-  fullName.vb: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.MethodCallExpression), System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType: ParameterMapAttributeBase.AppendReaderExpressions(Expression, IList<MethodCallExpression>, IList<Expression>, ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
+  fullName: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList<System.Linq.Expressions.MethodCallExpression>, System.Collections.Generic.IList<System.Linq.Expressions.Expression>, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
+  nameWithType.vb: ParameterMapAttributeBase.AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
+  fullName.vb: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression, System.Collections.Generic.IList(Of System.Linq.Expressions.MethodCallExpression), System.Collections.Generic.IList(Of System.Linq.Expressions.Expression), System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression, System.Int32, System.Type, System.Linq.Expressions.ParameterExpression, Microsoft.Extensions.Logging.ILogger)
   name.vb: AppendReaderExpressions(Expression, IList(Of MethodCallExpression), IList(Of Expression), ParameterExpression, ParameterExpression, ParameterExpression, Int32, Type, ParameterExpression, ILogger)
   spec.csharp:
-  - uid: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendReaderExpressions
-    nameWithType: ParameterMapAttribute.AppendReaderExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendReaderExpressions
+    nameWithType: ParameterMapAttributeBase.AppendReaderExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions
   - name: (
     nameWithType: (
     fullName: (
@@ -3733,10 +3733,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ArgentSea.ParameterMapAttribute.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
+  - uid: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.MethodCallExpression},System.Collections.Generic.IList{System.Linq.Expressions.Expression},System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Int32@,System.Type,System.Linq.Expressions.ParameterExpression,Microsoft.Extensions.Logging.ILogger)
     name: AppendReaderExpressions
-    nameWithType: ParameterMapAttribute.AppendReaderExpressions
-    fullName: ArgentSea.ParameterMapAttribute.AppendReaderExpressions
+    nameWithType: ParameterMapAttributeBase.AppendReaderExpressions
+    fullName: ArgentSea.ParameterMapAttributeBase.AppendReaderExpressions
   - name: (
     nameWithType: (
     fullName: (

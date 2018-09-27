@@ -30,7 +30,6 @@ items:
     content: 'public class SqlShardConnectionsConfiguration : IShardConnectionsConfiguration<TShard>'
     content.vb: >-
       Public Class SqlShardConnectionsConfiguration
-
           Implements IShardConnectionsConfiguration(Of TShard)
   inheritance:
   - System.Object

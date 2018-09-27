@@ -83,6 +83,8 @@ Often, due to different naming conventions or development drift, database column
 > [!IMPORTANT]
 > Database parameters and columns should be named as consistently as possible. In most cases, this means the parameters have the same name as the columns they reference. If you like to use varying parameter names or alias columns in your result, you may find the Mapper somewhat unhelpful.
 
+Properties without a mapping attribute are simply ignored.
+
 ### Attribute Types
 
 There is a mapping attribute defined for most common database types. Spatial data types, CLR types, XML, and JSON types are examples of missing attributes. These are absent because there is not a straightforward mapping between the core .NET base types and these database types. It is very possible to write custom handlers to render this from your database; indeed it is not much harder than writing the necessary custom code without this framework.
@@ -180,7 +182,7 @@ Because database columns often contain Null values, nullable .NET types are extr
 
 #### Strings and Arrays
 
-A .NET string with a value of *null* or a null array will be saved as a database null. Empty strings will save as a zero-length string.
+A .NET string with a value of *null* or a null array will be saved as a DbNull. Empty strings will save as a zero-length string.
 
 #### Integers
 
@@ -188,7 +190,7 @@ Integers cannot be null, so the advent of nullable types is a godsend for mappin
 
 #### Floating Point Numbers
 
-Like integer types, floating point types (Double and Float) can be wrapped in a nullable value. However, ArgentSea also handles *NaN* as a database Null. If the floating point value is presented as a nullable type, then ArgentSea will read or write NaN; if plain floating point type is presented, then NaN will be converted to a data Null.
+Like integer types, floating point types (Double and Float) can be wrapped in a nullable value. However, ArgentSea also handles *NaN* as a DbNull. If the floating point value is presented as a nullable type, then ArgentSea will read or write NaN; if plain floating point type is presented, then NaN will be converted to a data Null.
 
 #### Guids
 
@@ -198,13 +200,23 @@ Rather like floating point types, Guid.Empty (00000000-0000-0000-0000-0000000000
 
 .NET enum values can be stored as either numbers or strings. Writing to a text column will automatically save the *name* of the enum; writing to a numeric column saves the *number* value.
 
-Note that Enums can inherit from several base types (byte, short, int, etc.). The base type should correctly correspond to the database data type.
+Note that Enums can inherit from several base types (byte, short, int, etc.). The base type must correctly correspond to the database data type.
 
-Nullable Enum types will save or read as a database Null when the value is null.
+Nullable Enum types will read or write as a DbNull when the value is null.
 
 #### ShardKey and ShardChild
 
 These are special types and will be discussed in detail in the sharding section.
+
+#### The MapToModel attribute
+
+Complex object models may include properties that are objects with their *own* properties, which also need to be mapped to the underlying data. 
+
+For example, you might have an Address object that you use for Customers, Vendors, Contacts, Stores, and more. The Store object, then, has a property of type Address, as does the Vendor object, etc. Since the address information is included with the results from the database, the Mapper should Map the matching values to the Address object. The `MapToModel` attribute tells the Mapper to do this.
+
+Of course, the property’s type must also have data mapping attributes on the appropriate properties. The type referenced by a MapToModel attribute can *itself* have a object property with a MapToModel attribute. In other words, a *Store* object can have a property of type *Address*, which might in turn have a property of type *Coordinates*. If the *Coordinates* type has two properties, each with a `MapToDouble` attribute, the Mapper will be able to map the Latitude and Longitude values to the *Store.Address.Latitude* and *Store.Address.Longitude* fields respectively.
+
+Properties with the MapToModel attribute cannot be null, so the host object must be instantiate all of its properties when it is created. 
 
 ## Mapping Targets
 
@@ -367,7 +379,7 @@ When the circuit breaker is triggered, ArgentSea creates a log record each time 
 
 The logged events in the Debug level are intended to help diagnose internal processes that may not be returning the expected results.
 
-The first type of event is when a database Null value is presented to an object that then becomes null or empty, which happens with ShardKey, ShardChild, or any object with a Required argument set to true. When this happens unexpectedly, it can be difficult to determine which database value caused the problem (as now *no* properties exist to determine the culprit). This logging event identifies which database Null caused the result to be null or Empty.
+The first type of event is when a database Null value (DbNull) is presented to an object that then becomes null or empty, which happens with ShardKey, ShardChild, or any object with a Required argument set to true. When this happens unexpectedly, it can be difficult to determine which database value caused the problem (as now *no* properties exist to determine the culprit). This logging event identifies which DbNull caused the result to be null or Empty.
 
 The second type of event provides full visibility into the generated code used to build the Mapper’s activity. The Expression Tree is walked and the pseudo-code saved to the log before it is compiled. This can be extremely useful in understanding the complexities of the Mapping behavior. The log record will be rather long and the extraction may not be efficient, but it also runs only during the first data access.
 
