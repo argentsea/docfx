@@ -165,16 +165,11 @@ Here is catalog of the current attributes, along with their arguments and corres
 
 ### Required
 
-Finally, the the data attributes have an *optional* `required` parameter. It defaults to false. Generally, you might set a key value to “required”; this tell the Mapper that if the value is null, then the entire record is missing and the object result should be null.
+Finally, the the data attributes have an *optional* `required` parameter. It defaults to false. Generally, you might set a *key value* to “required”; this tell the Mapper that if the value is null, then the entire record is missing and the object result should be null.
 
 For example, suppose you are using a query’s output parameters to fetch a record. A null value in the key field means that the record doesn’t exist. Returning a valid new object with a null properties isn’t the correct behavior; the Mapper should return a null object.
 
-When using replicated or mirrored data, there can be latency between the primary and cloned databases. In high-performance scenarios, you may split your reads and writes and your application can attempt reads that *should* be successful but fail because of this latency. In this case, the `required` parameter enables the system to detect an unexpectedly missing record on a clone or mirror and retry on the master or primary.
-
-When `required` is set to true, then:
-
-* The Mapper will return a null object if this parameter or column is null.
-* The shard set will retry a data fetch on the a Write connection.
+When `required` is set to true, then, the Mapper will return a null object if this parameter or column is null.
 
 ### Nullable Types and Empty Types
 
