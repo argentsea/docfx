@@ -32,6 +32,7 @@ items:
     content: 'public abstract class SqlParameterMapAttribute : ParameterMapAttributeBase'
     content.vb: >-
       Public MustInherit Class SqlParameterMapAttribute
+
           Inherits ParameterMapAttributeBase
   inheritance:
   - System.Object

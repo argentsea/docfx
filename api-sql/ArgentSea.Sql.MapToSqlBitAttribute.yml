@@ -39,6 +39,7 @@ items:
     content: 'public class MapToSqlBitAttribute : SqlParameterMapAttribute'
     content.vb: >-
       Public Class MapToSqlBitAttribute
+
           Inherits SqlParameterMapAttribute
   inheritance:
   - System.Object

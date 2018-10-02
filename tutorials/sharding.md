@@ -32,40 +32,7 @@ ArgentSea offers essentially two services for managing sharded data:
 * The [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) unifies the many shard connections and directs queries to the correct shard and allows concurrent queries across all of them
 * The [ShardKey](/api/ArgentSea.ShardKey-2.html) (and related [ShardChild](/api/ArgentSea.ShardChild-3.html)) are a “virtual compound key” that uniquely identifies a record using the shard Id and the record key.
 
-### Sharded Queries
-
-The best way to understand the query architecture of ArgentSea is to describe a typical ADO.NET query then describe how this must change to account for concurrent multi-threaded queries across a shard set.
-
-A typical ADO.NET data access method follows these steps:
-
-1. Start with a *connection* object (generally declared with a outer `using` statement) created from a connection string.
-2. Create a *command* object, providing the *connection* object as an argument (usually with an inner `using` block).
-3. Next, the command's *Parameters* property is populated with the necessary input and output parameters.
-4. The command is executed on the opened connection.
-5. A result object is created and its properties are populated with the data results (output parameters and/or DataReader).
-
-In a sharded environment, however:
-
-* The same parameters must be executed on multiple connections — reversing the steps 1 to 3.
-* A distinct command object must be executed and the results processed on a separate thread for each connection. The parameters cannot be shared (different threads would overwrite each other’s values) and the result handler must be thread-safe.
-
-To simplify, ArgentSea manages the challenges of multi-threaded access access with a four-step approach:
-
-1. Declare the parameters and arguments that will be passed to the stored procedures.
-2. Create a thread for each connection, then create the *connection*, *command*, and *parameters* objects and execute the query on each thread.
-3. When each query completes, call a thread-safe result handling delegate.
-4. Combine the results and return them to the caller.
-
-Understanding this approach will help you understand the general ArgentSea paradigm: Parameters are created first, then provided to the query method. The query method gets the data and invokes a [QueryResultModelHandler](/api/ArgentSea.QueryResultModelHandler-3.html) delegate to turn the output parameters and/or DataReader results into an object result.  This ArgentSea query paradigm applies even to non-sharded queries using the Databases collection.
-
-In other words, the [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) manages the complexity of initializing multiple queries on multiple connections and multiple results, but it cannot 
-
-> [!NOTE]
-> Because the Mapper *is* a thread-safe, high-performance `QueryResultModelHandler` delegate, ArgentSea is able to use attributes to automatically convert query output to a result object. Developers able to consistently use the Mapper may be insulated from the need to write any data handlers.  
-> If the Mapper is not sufficient, or if you cannot add attributes to existing objects, you can handle the query results by simply writing your own delegate.
-
-Writing a `QueryResultModelHandler` delegate is nearly identical to writing any other ADO.NET result handling code. You have access to output parameters and the DataReader and you can construct a complex object and its properties any way you like. The delegate even has a parameter that allows you to provide custom data (through the query method) with which to construct your result object.
-
+ArgentSea’s querying architecture is designed to support concurrent queries across multiple shards. You can explore that further [here](querying.md).
 
 ## The [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html)
 
@@ -368,38 +335,6 @@ Access a shard in the ShardSet collection using a ShardId key, just like you wou
 
 Each [shard](/api/ArgentSea.ShardSetsBase-2.ShardInstance.html) has two data connections, exposed as `Read` property and a `Write` property. The `Read` and `Write` connection properties correspond to the read and write connections defined in your connection [configuration](configuration.md). If you have both connections defined in your configuration, then the query will execute on the corresponding read or write connection; if only Read or Write is configured, it doesn’t matter which you use since they will both have the same connection.
 
-Several database implementations — such as *SQL Server Availability Groups* or *AWS Aurora PostgreSQL* to name a couple of examples — enable a master server to handle both reads and writes and separate clone instances that can handle read-only traffic. Most applications have a greater percentage of reads than writes, so this is a great way to scale-out database access. However, there are two issues of concern:
-
-* ArgentSea has *no idea* which stored procedures or functions update data and which are read-only, so it is up to the application developer to select the right connection property.
-* There is often some latency between the time that data is saved and when it is available from the read instance. This temporary data inconsistency can cause problems or confusion.
-
-There are several architectural solutions to the latency-driven data inconsistency problem, such as intelligent caching, client observable collections, delayed retries, and retries on the Write connection. Due to the variations in environments, optimal solutions, and the challenge of simple determining when a missing record is really expected, ArgentSea does not attempt an automatic retries.
-
-To implement your own latency handling, you can easily implement an automatic retry using the write connection. In this example method we retrieve data by key value, so a missing record is unexpected and might be due to replication latency. The code assumes that the subscriber key has the “required” attribute set so that the Mapper returns a null object if the key is null. The resolution is to simply retry on the Write connection.
-
-```C#
-public async Task<Subscriber> GetSubscriber(ShardKey<byte, int> subscriberKey, CancellationToken cancellation)
-{
-
-    var prms = new QueryParameterCollection()
-        .AddSqlIntInParameter("@SubId", subscriberKey.RecordId);
-    Mapper.MapToOutParameters<Subscriber>(prms, _logger);
-    var sub = await _shardSet[subscriberKey.ShardId].Read.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
-    // add automatic retry on write connection if subscriber is not found.
-    if (sub is null)
-    {
-        var sub = await _shardSet[subscriberKey.ShardId].Write.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
-    }
-    return sub;
-}
-
-```
-
-> [!TIP]
-> Even if you are not using a scale-out strategy today, it would be a good idea to use the `Read` and `Write` properties as if you were. This would make a future migration to separate read and write instances a little easier. You might even consider using different database schemas for read-only and write-capable procedures or functions.  
-> You might also consider using different database schemas for read-only and write-capable procedures or functions. It is important prevent changes such that a procedure that was previously read-only is given a little updating work. Separate schemas would help underline the importance of this distinction for your database developers.  
-> Testing may be easier if each connection’s permissions is limited to the appropriate schema.
-
 ## [SQL Server](#tab/tabid-sql)
 
 ```C#
@@ -423,6 +358,31 @@ public async Task<Subscriber> GetSubscriber(ShardKey<short, int> subscriberKey, 
 ```
 
 ***
+
+Several database implementations — such as *SQL Server Availability Groups* or *AWS Aurora PostgreSQL* to name a couple of examples — enable a master server to handle both reads and writes and separate clone instances that can handle read-only traffic. Most applications have a greater percentage of reads than writes, so this is a great way to scale-out database access. However, there are two issues of concern:
+
+* ArgentSea has *no idea* which stored procedures or functions update data and which are read-only, so it is up to the application developer to select the right connection property.
+* There is often some latency between the time that data is saved and when it is available from the read instance. This temporary data inconsistency can cause problems or confusion.
+
+There are several architectural solutions to the latency-driven data inconsistency problem, such as intelligent caching, client observable collections, delayed retries, and retries on the Write connection. Due to the variations in environments, optimal solutions, and the challenge of simple determining when a missing record is really expected, ArgentSea does not attempt an automatic retries.
+
+To implement your own latency handling, you can easily implement an automatic retry using the write connection. In this example method we retrieve data by key value, so a missing record is unexpected and might be due to replication latency. The code assumes that the subscriber key has the “required” attribute set so that the Mapper returns a null object if the key is null. The resolution is to simply retry on the Write connection.
+
+```C#
+    var sub = await _shardSet[subscriberKey.ShardId].Read.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    // add automatic retry on write connection if subscriber is not found.
+    if (sub is null)
+    {
+        var sub = await _shardSet[subscriberKey.ShardId].Write.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    }
+    return sub;
+}
+
+```
+
+> [!TIP]
+> Even if you are not using a scale-out strategy today, it would be a good idea to use the `Read` and `Write` properties as if you were. This would make a future migration to separate read and write instances a little easier.  
+> You might also consider using different database schemas for read-only and write-capable procedures or functions. This helps underline the importance of separating read-only activity to your data developers. And testing may be easier if each connection’s permissions is limited to the appropriate schema.
 
 There are four query methods:
 
@@ -482,7 +442,7 @@ Set this argument `True` if only one result is expected. For example, suppose yo
 
 Technically, when this argument is True, ArgentSea checks each shard query to see if it has a non-null Model result. If it finds one, it fires the cancellation token for any shard connection that has not yet completed, and returns the result.
 
-Of course, if the search conditions were not unique (which is difficult to enforce with sharded data), the duplicate results will be lost.
+Of course, if the search conditions were not unique (which is difficult to enforce with sharded data), the duplicate result(s) will be lost.
 
 ### Querying Across Shards
 

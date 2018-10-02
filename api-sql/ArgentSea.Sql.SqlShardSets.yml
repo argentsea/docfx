@@ -30,7 +30,9 @@ items:
     content: 'public class SqlShardSets : ShardSetsBase<byte, SqlShardConnectionOptions<byte>>, ICollection, IEnumerable'
     content.vb: >-
       Public Class SqlShardSets
+
           Inherits ShardSetsBase(Of Byte, SqlShardConnectionOptions(Of Byte))
+
           Implements ICollection, IEnumerable
   inheritance:
   - System.Object

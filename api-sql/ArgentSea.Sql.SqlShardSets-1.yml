@@ -33,7 +33,9 @@ items:
       description: The type of the shardId index value.
     content.vb: >-
       Public Class SqlShardSets(Of TShard As IComparable)
+
           Inherits ShardSetsBase(Of TShard, SqlShardConnectionOptions(Of TShard))
+
           Implements ICollection, IEnumerable
   inheritance:
   - System.Object

@@ -31,6 +31,7 @@ items:
     content: 'public class SqlDbConnectionOptions : IDatabaseConfigurationOptions'
     content.vb: >-
       Public Class SqlDbConnectionOptions
+
           Implements IDatabaseConfigurationOptions
   inheritance:
   - System.Object

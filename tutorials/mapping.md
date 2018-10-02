@@ -220,7 +220,7 @@ The ArgentSea Mapper maps to:
 * Query input parameters
 * Query output parameters
 * Data reader columns
-* Table-value parameters (SQL Server only)
+* Table-valued parameters (SQL Server only)
 
 The mapper does *not* generate dynamic SQL statements. The Mapper may be useful in situations where dynamic SQL is used, but, philosophically, this is not encouraged. Stored procedures are generally more secure, more performant, and offer a less tightly-coupled architecture.
 
@@ -240,7 +240,7 @@ These extension methods can be combined with the other extension methods for a *
 For example, this code uses the fluent API to to set an output parameter and then the mapper to create and set all the other object properties from a transaction object.
 
 ```C#
-cmd.AddSqlIntOutParameter("@TransactionId").MapToInParameters<Transaction>(transaction, logger);
+cmd.Parameters.AddSqlIntOutParameter("@TransactionId").MapToInParameters<Transaction>(transaction, logger);
 ```
 
 # [PostgreSQL](#tab/tabid-pg)
@@ -248,7 +248,7 @@ cmd.AddSqlIntOutParameter("@TransactionId").MapToInParameters<Transaction>(trans
 For example, this code uses the fluent API to to set an output parameter and then the mapper to create and set all the other object properties from a transaction object.
 
 ```C#
-cmd.AddPgIntegerOutParameter("TransactionId").MapToInParameters<Transaction>(transaction, logger);
+cmd.Parameters.AddPgIntegerOutParameter("TransactionId").MapToInParameters<Transaction>(transaction, logger);
 ```
 
 ***
@@ -304,7 +304,7 @@ This example creates and sets the CustomerId parameter and creates all of the ou
 ```C#
 cmd.Parameters.AddSqlIntInParameter("@CustomerId", _Id).MapToOutParameters<Customer>(logger);
 await cmd.ExecuteNonQueryAsync();
-var customer = cmd.ReadOutParameters<Customer>(logger);
+var customer = cmd.Parameters.ReadOutParameters<Customer>(logger);
 ```
 
 # [PostgreSQL](#tab/tabid-pg)
@@ -314,7 +314,7 @@ This example creates and sets the CustomerId parameter and creates all of the ou
 ```C#
 cmd.Parameters.AddPgIntegerInParameter("CustomerId", _Id).MapToOutParameters<Customer>(logger);
 await cmd.ExecuteNonQueryAsync();
-var customer = cmd.ReadOutParameters<Customer>(logger);
+var customer = cmd.Parameters.ReadOutParameters<Customer>(logger);
 ```
 
 ***
@@ -328,7 +328,7 @@ Once the parameters are set and the procedure is executed, the Mapper can read t
 The Mapper also converts the rows presented by a DataReader object into a list of corresponding objects. For example:
 
 ```C#
-var customers = Mapper.FromDataReader<Customer>(datareader, logger);
+var customers = rdr.MapToList<Customer>(logger);
 ```
 
 The List result will contain an object instance for each row. If an attribute is marked “required” but the corresponding data field is Null, then a null reference will be that position in the listed results.

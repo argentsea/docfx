@@ -72,6 +72,7 @@ items:
   syntax:
     content: >-
       public static SqlDataRecord ToTvpRecord<TModel>(TModel model, ILogger logger)
+
           where TModel : class
     parameters:
     - id: model

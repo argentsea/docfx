@@ -30,7 +30,9 @@ items:
     content: 'public class SqlDatabases : DatabasesBase<SqlDbConnectionOptions>, ICollection, IEnumerable'
     content.vb: >-
       Public Class SqlDatabases
+
           Inherits DatabasesBase(Of SqlDbConnectionOptions)
+
           Implements ICollection, IEnumerable
   inheritance:
   - System.Object

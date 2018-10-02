@@ -58,7 +58,9 @@ items:
     content: 'public class SqlConnectionConfiguration : DataConnectionConfigurationBase, IConnectionConfiguration'
     content.vb: >-
       Public Class SqlConnectionConfiguration
+
           Inherits DataConnectionConfigurationBase
+
           Implements IConnectionConfiguration
   inheritance:
   - System.Object
