@@ -6,5 +6,7 @@
   href: configuration.md
 - name: Mapping
   href: mapping.md
+- name: Querying
+  href: querying.md
 - name: Sharding
   href: sharding.md
