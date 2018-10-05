@@ -43,7 +43,7 @@ This ArgentSea query paradigm applies even to non-sharded queries using the Data
 With the ArgentSea framework, you need to set parameter values *before* a connection or command is created. The ADO.NET standard parameter collections cannot be created without a command object host. Consequently, ArgentSea provides a QueryParameter object, which is simply a collection of ADO.NET DbParameters. You can create an instance with a simple `new` statement.
 
 ```C#
-var prms = new QueryParameterCollection();
+var parameters = new QueryParameterCollection();
 ```
 
 ArgentSea provides a variety of extension methods to work with the parameters collection.
@@ -66,12 +66,12 @@ Here are some examples:
 ## [SQL Server](#tab/tabid-sql)
 
 ````C#
-prms.AddSqlIntInParameter("@TransactionId", transactionId);
-prms.AddSqlDecimalInParameter("@Amount", amount, 16, 2);
-prms.AddSqlNVarCharInParameter("@Name", name, 255);
-prms.AddSqlFloatOutParameter("@Temperature");
+parameters.AddSqlIntInParameter("@TransactionId", transactionId);
+parameters.AddSqlDecimalInParameter("@Amount", amount, 16, 2);
+parameters.AddSqlNVarCharInParameter("@Name", name, 255);
+parameters.AddSqlFloatOutParameter("@Temperature");
 // These methods all support a fluent api, so these can be written instead as:
-var prms = new QueryParameterCollection()
+var parameters = new QueryParameterCollection()
     .AddSqlIntInParameter("@TransactionId", transactionId)
     .AddSqlDecimalInParameter("@Amount", amount, 16, 2)
     .AddSqlNVarCharInParameter("@Name", name, 255)
@@ -86,12 +86,12 @@ cmd.Parameters.AddSqlIntInParameter("@TransactionId", transactionId)
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
-prms.AddPgIntegerInParameter("TransactionId", transactionId);
-prms.AddPgDecimalInParameter("Amount", amount, 16, 4);
-prms.AddPgVarCharInParameter("Name", name, 255);
-prms.AddPgDoubleOutParameter("Temperature");
+parameters.AddPgIntegerInParameter("TransactionId", transactionId);
+parameters.AddPgDecimalInParameter("Amount", amount, 16, 4);
+parameters.AddPgVarCharInParameter("Name", name, 255);
+parameters.AddPgDoubleOutParameter("Temperature");
 // These methods all support a fluent api, so these can be written instead as:
-var prms = new QueryParameterCollection()
+var parameters = new QueryParameterCollection()
     .AddPgIntegerInParameter("TransactionId", transactionId)
     .AddPgDecimalInParameter("Amount", amount, 16, 2)
     .AddPgVarCharInParameter("Name", name, 255)
@@ -114,18 +114,18 @@ The Mapper uses Model property attributes to automatically generate code that is
 Assuming that the Model (in this example, a “Customer” class) has Mapping attributes associated with each of its properties, you can render all the corresponding input parameters and set their respective values with:
 
 ```C#
-prms.MapToInParameters<Customer>(customer, logger);
+parameters.MapToInParameters<Customer>(customer, logger);
 ```
 
-You can do somthing similar with output parameters, but it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (a key, probably). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
+You can do something similar with output parameters, but it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (a key, probably). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
 
 ## [SQL Server](#tab/tabid-sql)
 
 ```C#
-prms.AddSqlIntInParameter("@TransactionId", transactionId);
-prms.MapToOutParameters<Customer>(logger);
+parameters.AddSqlIntInParameter("@TransactionId", transactionId);
+parameters.MapToOutParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
-var prms = new QueryParameterCollection()
+var parameters = new QueryParameterCollection()
     .AddSqlIntInParameter("@TransactionId", transactionId)
     .MapToOutParameters<Customer>(logger);
 ```
@@ -133,10 +133,10 @@ var prms = new QueryParameterCollection()
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
-prms.AddPgIntegerInParameter("TransactionId", transactionId);
-prms.MapToOutParameters<Customer>(logger);
+parameters.AddPgIntegerInParameter("TransactionId", transactionId);
+parameters.MapToOutParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
-var prms = new QueryParameterCollection()
+var parameters = new QueryParameterCollection()
     .AddPgIntegerInParameter("TransactionId", transactionId)
     .MapToOutParameters<Customer>(logger);
 ```
@@ -146,10 +146,10 @@ var prms = new QueryParameterCollection()
 Finally, you can always add parameters using standard ADO.NET syntax:
 
 ```C#
-var prm = new System.Data.SqlClient.SqlParameter();
-prm.SqlDbType = System.Data.SqlDbType.Int;
-prm.Value = transactionId;
-cmd.Parameters.Add(prm);
+var parameter = new System.Data.SqlClient.SqlParameter();
+parameter.SqlDbType = System.Data.SqlDbType.Int;
+parameter.Value = transactionId;
+command.Parameters.Add(parameter);
 ```
 
 ## Fetching Data
@@ -183,7 +183,80 @@ These methods execute the same command more-or-less concurrently on all the shar
 | __GetOutAllAsync__ | • | Returns a List including any non-null objects that were created by invoking a procedure/function that returns results via output parameters *and* data reader results. The list count will not be larger than the shard count. |
 | __GetOutFirstAsync__ | • | Returns the first non-null object created by invoking a procedure/function that returns results via output parameters *and* data reader results. Use this when you are expecting a single result and using output parameters. |
 
-#### The Read* and GetOut* Methods
+### Method Arguments
+
+#### sprocName
+
+This is simply the name of the stored procedure or function to be invoked. This string value is required for every data access method.
+
+The general practice is to provide a stored procedure/function name with string constant, like this:
+
+```C#
+await database.RunAsync("ws.MyProcedureName", parameters, cancellationToken);
+```
+
+This works fine. As larger applications evolve, however, one can lose track of which database procedure are *actually being used* by the application. It is not unusual for a custom application to have hundreds of data procedures, only a fraction of which are used.  
+
+You might consider consistently referencing procedure names via a static class, like this.
+
+```C#
+internal static class DataProcedures
+{
+    //This is a COMPREHENSIVE list of stored procedure names.
+    //You can use the reference count to determine what is still in use.
+    public static string CustomerAdd { get;  } = "ws.CustomerAdd";
+    public static string CustomerList { get; } = "ws.CustomerList";
+    public static string CustomerLocationGet { get; } = "ws.CustomerLocationGet";
+    public static string CustomerLocationDetailsGet { get;  } = "ws.CustomerLocationDetailsGet";
+    public static string CustomerLocationsAllByUser { get; } = "ws.CustomerLocationsAllByUser";
+    public static string CustomerLocationsByGroupIDs { get; } = "ws.CustomerLocationsByGroupIDs";
+    // ...
+}
+// Now you can reference the procedure name
+await database.RunAsync(DataProcedures.CustomerAdd, parameters, cancellationToken);
+
+```
+
+Centralizing the procedure name list allows reviewers to see which procedures are actually used by the application (and ensure that non are misspelled). Surfacing them using static properties, as in the example, allows Visual Studio to provide a “reference count” for each procedure. When the method that once called this stored procedure/function is removed from the code, the zero “reference count” will make it obvious that even though the name defined, it is not in use.
+
+With this approach, you can even use the Visual Studio tooling to find all of the methods that invoke that stored procedure/function. This can be helpful as you discover different data procedures that seem to do the same thing.
+
+#### DbParameterCollection parameters
+
+The abstract DbParameterCollection is implemented by the QueryParameters object. Because it is also implemented by the provider-specific command.Parameters property, if you have a command with valid parameters defined (for some reason), you can use that too. This value can be null if there are no parameters.
+
+> [!WARNING]
+> When working with output parameters in standard ADO.NET, you may routinely maintain a reference to any output parameters you created before adding it to the collection. This made it easy to get the output parameter value after the query is executed.  
+> This approach will not work with sharded data, because ArgentSea will *copy* the parameter set before executing the stored procedure/function. Any referenced output parameters will *not* contain a data result.
+
+#### IEnumerable<TShard> exclude
+
+This optional parameter, lists the shard(s) that should *not* be included in the query.
+
+The need for this typically occurs when you already have some data. For example, suppose you have a Subscriber hosted on shard 5. The Subscriber has a list of Friends. The query that fetches the Subscriber details include a Friend list, but it can return more details for the subset of the Friends that are also hosted on shard 5 (avoiding multiple round trips). Subsequently, it is necessary to lookup all of the Friends on their respective shards, but there is no need to include shard 5 since that data has already been obtained. Shard 5 could be excluded from the subsequent query.
+
+on no longer exiUsing the list of Friends
+
+#### int shardParameterOrdinal
+
+(ShardSet only)
+
+#### resultHandler
+
+#### bool isTopOne
+
+#### TArg optionalArgument
+
+/// <typeparam name="TModel">The data object return type for the list</typeparam>
+/// <param name="sprocName">The name of the stored procedure or function to be invoked on every instance.</param>
+/// <param name="parameters">The parameters to be passed to the procedure or function.</param>
+/// <param name="exclude">A list of shards not to be called.</param>
+/// <param name="shardParameterOrdinal">The index of the ShardId parameter, to be set for each connection before it is called.</param>
+/// <param name="resultHandler">The thread-safe delegate that converts the data results into the return object type.</param>
+/// <param name="dataObject">An object of type TArg to be passed to the resultHandler, which may contain additional data.</param>
+/// <param name="cancellationToken">A token which allows the query to be cancelled.</param>
+
+### The Read* and GetOut* Methods
 
 The __Read__ and __GetOut__ methods are very similar. Both user the Mapping attributes. The __GetOut__ method uses *output parameters* to build the root result object; the __Read__ methods use a (single record) DataReader result instead. If you use output parameters (which is potentially more performant), use __GetOut__.
 
@@ -193,20 +266,20 @@ An example of calling each would be:
 
 ```C#
 // In this example, ws.GetOrderDetails returns Order data in output parameters:
-_database.GetOutAsync<Order>("ws.GetOrderDetails", prms, cancellation);
+_database.GetOutAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
 // Here, ws.GetOrderDetails returns simple Order data in a single-row SELECT:
-_database.ReadAsync<Order>("ws.GetOrderDetails", prms, cancellation);
+_database.ReadAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
 
 // Now ws.GetOrderDetails returns Order data in output parameters and a list of OrderItem from a SELECT:
-_database.GetOutAsync<Order, OrderItems>("ws.GetOrderDetails", prms, cancellation);
+_database.GetOutAsync<Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
 // Finally, ws.GetOrderDetails returns Order data in a single-row SELECT, then a list of OrderItems from a 2nd SELECT:
-_database.ReadAsync<Order, Order, OrderItems>("ws.GetOrderDetails", prms, cancellation);
+_database.ReadAsync<Order, Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
 
 // Expanding this, we now have output parameters and three SELECTs:
-_database.GetOutAsync<Customer, OrderHistory, Locations, Contact>("ws.GetCustomerDetails", prms, cancellation);
+_database.GetOutAsync<Customer, OrderHistory, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
 // Likewise, the procedure now returns four SELECTs, and the third one is a single-row SELECT with the base customer data,
 // the remaining select are used to build customer property lists (order history, locations, and contacts):
-_database.ReadAsync<Customer, OrderHistory, Customer, Locations, Contact>("ws.GetCustomerDetails", prms, cancellation);
+_database.ReadAsync<Customer, OrderHistory, Customer, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
 ```
 
 In both methods, the generic type in the *first* position is the return type. If additional results are included in the result stream, the subsequent types define the order in which they are expected in the DataReader results. You can have up to eight DataReader results streamed to distinct List properties.
@@ -214,36 +287,22 @@ In both methods, the generic type in the *first* position is the return type. If
 * In the __GetOut__ example, then, the result type is Order and the first DataReader result is a series of OrderItems.
 * In the __Read__ example, the result type is Order, and the first DataReader result is the Order data, and the second DataReader result is a series of OrderItems.
 
-#### The Query* Methods
+### The Query* Methods
 
 The __Query__ methods provide the most control, as you are given raw ADO.NET query results to construct whatever return value you like. The handler procedure must have a method signature that corresponds to the `QueryResultModelHandler` delegate.
 
 There are two obvious scenarios for the __Query__ methods:
 
-* The Model class is defined in a (sealed) library, so Mapping attributes cannot be added.
-* The return value is complex and beyond the capabilities of the Mapper.
+* The Model class is defined in a library, so Mapping attributes cannot be added.
+* The rendering a complex return value is beyond the capabilities of the Mapper.
 
 The delegate even has a parameter that allows you to provide custom data (through the query method) with which to construct your result object.
-
-
-
 
 In other words, the [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) manages the complexity of initializing multiple queries on multiple connections and multiple results, but it is the delegate that takes the database results (from each connection/thread) and creates an object result.
 
 > [!NOTE]
 > The Mapper provides several thread-safe, high-performance `QueryResultModelHandler` delegates. In fact, providing a Mapper delegate to the __Query__ method is exactly how the __Read__ an __GetOut__ methods are implemented.
 
-### The Optional Arguments
-
-#### int shardParameterOrdinal 
-
-(ShardSet only)
-
-#### bool isTopOne
-
-#### TArg optionalArgument
-
-#### IEnumerable<TShard> exclude
 
 ## Handling Data Results
 
@@ -252,9 +311,9 @@ In other words, the [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) man
 The methods to convert data types to .NET types are extension methods on the parameter object (not the collection).
 
 ```C#
-var transactionId = prms["@TransactionId"].GetInteger();
-var amount = prms["@Amount"].GetNullableDecimal();
-var name = prms["@Name"].GetString();
+var transactionId = parameters["@TransactionId"].GetInteger();
+var amount = parameters["@Amount"].GetNullableDecimal();
+var name = parameters["@Name"].GetString();
 ```
 
 
