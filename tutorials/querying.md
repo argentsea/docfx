@@ -1,6 +1,6 @@
 # Querying Data
 
-This deep dive assumes that you have your project correctly [configured](configuration.md) and that you have some understanding of ArgentSea’s [Mapping](mapping.md) capabilities
+This deep dive assumes that you have your project correctly [configured](configuration.md) and it is also helpful if you have some understanding of ArgentSea’s [Mapping](mapping.md) capabilities
 
 ArgentSea was originally built to support application data sharding. Even if you do not use data sharding in your application, a brief discussion of the issues will help explain the architecture behind of ArgentSea’s data access approach. It will not be more difficult than any other ADO.NET query.
 
@@ -10,11 +10,11 @@ The best way to understand the query architecture of ArgentSea is to describe a 
 
 A typical ADO.NET data access method follows these steps:
 
-1. Start with a *connection* object, created from a connection string.
-2. Create a *command* object that is associated with the *connection* object.
-3. Next, the command's *Parameters* property is populated with the necessary input and output parameters.
-4. The command is executed on the opened connection.
-5. That data results are used to create and populate a Model object, which is used by the application.
+1. Start with a __connection__ object, created from a connection string.
+2. Create a __command__ object that is associated with the __connection__ object.
+3. Next, the populate the command's *Parameters* property with the necessary input and output parameters.
+4. Open the connection and run the command.
+5. Create a Model object, which represents the data to the application, and use the __DataReader__ and/or output parameters to populate its properties.
 
 In a sharded environment, however:
 
@@ -24,23 +24,24 @@ In a sharded environment, however:
 ArgentSea manages the challenges of multi-threaded access access with a four-step approach:
 
 1. Declare the parameters and arguments that will be passed to the stored procedures.
-2. Create a thread for each shard connection, then create the *connection* (and *command*) object for each.
-3. Copy the parameter values to the parameter collection on each shard’s *command* object.
+2. Create a thread for each shard connection, then create the __connection__ (and __command__) object for each.
+3. Copy the parameter values to the parameter collection on each shard’s __command__ object.
 4. Call the stored procedure/function on each shard’s thread. When results are obtained, call (thread-safe) code to create and populate a Model object.
-5. Combine the results and return them to the caller.
+5. Merge the results and return them to the caller.
 
-Ultimately, using ArgentSea on multiple shards is no more difficult than writing simple ADO.NET database access code (and usually much easier). Previously, your data access procedure would set the ADO.NET parameters, run the query, then convert the results to a Model object. Now you simply need to split that process into *two* procedures:
+Ultimately, using ArgentSea on multiple shards is no more difficult than writing simple ADO.NET database access code (and usually much easier), but the code new needs to be grouped and sequenced differently. Previously, you would usually use just one data access procedure, which would set the ADO.NET parameters, run the query, then convert the results to a Model object. Now, because processing results is multi-threaded whereas setting up the query is not, you need to split that process into *two* procedures:
 
-* One procedure that sets the parameters and calls an ArgentSea query method
-* Another procedure that converts the results (data reader and/or output parameters) to a Model object result.
-
-The second step can use standard ADO.NET code, or you can use ArgentSea’s optional [Mapping](mapping.md) functionality, which enables the Model creation process to be automatic.
+* The __*caller*__ method sets the parameters and calls an ArgentSea query method. This executes on a single thread.
+* The __*handler*__ procedure converts the results (__DataReader__ and/or output parameters) to a Model object result. This can execute on many threads.
 
 This ArgentSea query paradigm applies even to non-sharded queries using the Databases collection. This provides some design consistency, but also enables the Mapper for both sharded and non-sharded data.
 
+> {!TIP]
+> If you use ArgentSea’s optional [Mapping](mapping.md) functionality, the multi-threaded results handling procedure is *already provided* by the Mapper. You do not have to write a handler.
+
 ## Setting Parameters
 
-With the ArgentSea framework, you need to set parameter values *before* a connection or command is created. The ADO.NET standard parameter collections cannot be created without a command object host. Consequently, ArgentSea provides a QueryParameter object, which is simply a collection of ADO.NET DbParameters. You can create an instance with a simple `new` statement.
+With the ArgentSea framework, you need to set parameter values *before* a connection or command is created. The ADO.NET standard parameter collections cannot be created without a command object host. To fill this need, ArgentSea provides a [QueryParameterCollection](/api/ArgentSea.QueryParameterCollection.html) object, which is simply a collection of ADO.NET DbParameters. This object allow you to create an instance with a simple `new` statement.
 
 ```C#
 var parameters = new QueryParameterCollection();
@@ -48,22 +49,26 @@ var parameters = new QueryParameterCollection();
 
 ArgentSea provides a variety of extension methods to work with the parameters collection.
 
-* Methods to easily add parameters to a collection
+* Methods to easily add parameters to any parameters collection
 * Methods to simplify obtaining values from parameters.
 * Methods to Map Models properties to parameters.
 
 ### Creating Parameters with Extension Methods
 
-ArgentSea offer a set of extension methods that simplify the code required to optimally create and populate parameters and also handle database nulls.
+ArgentSea offers a set of extension methods that simplify the code required to optimally create and populate parameters and also handle database nulls.
 
-The methods to add parameters to a collection are provider-specific, since they are converting .NET types to database types. This means that the extension methods won’t appear unless you have a `using` statement referencing ArgentSea.Sql or ArgentSea.Pg.
-
-> [!NOTE]
-> Because the QueryParameterCollection inherits from the same base class as SqlParameterCollection and NpgsqlParameterCollection, all of ArgentSea’s extension methods will work on any of them. In other words, you can also use these methods on either the `QueryParameterCollection` or on the `Parameters` property of the *command* object.
-
-Here are some examples:
+The methods to add parameters to a collection are provider-specific, since they are converting .NET types to database types. This means that the extension methods won’t appear unless you have a `using` statement referencing the provider.
 
 ## [SQL Server](#tab/tabid-sql)
+
+````C#
+using ArgentSea.Sql;
+````
+
+> [!NOTE]
+> The QueryParameterCollection and SqlParameterCollection inherit from the same base class. Not only can you use these methods on ArgentSea’s `QueryParameterCollection`, but you can also use them on the standard ADO.NET `SqlCommand.Parameters` property.
+
+Here are some code examples:
 
 ````C#
 parameters.AddSqlIntInParameter("@TransactionId", transactionId);
@@ -84,6 +89,13 @@ cmd.Parameters.AddSqlIntInParameter("@TransactionId", transactionId)
 ````
 
 ## [PostgreSQL](#tab/tabid-pg)
+
+````C#
+using ArgentSea.Pg;
+````
+
+> [!NOTE]
+> The QueryParameterCollection and NpgsqlParameterCollection inherit from the same base class. Not only can you use these methods on ArgentSea’s `QueryParameterCollection`, but you can also use them on the standard ADO.NET `NpgsqlCommand.Parameters` property.
 
 ```C#
 parameters.AddPgIntegerInParameter("TransactionId", transactionId);
@@ -117,7 +129,7 @@ Assuming that the Model (in this example, a “Customer” class) has Mapping at
 parameters.MapToInParameters<Customer>(customer, logger);
 ```
 
-You can do something similar with output parameters, but it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (a key, probably). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
+You can do something similar with output parameters — though it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (likely a key). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -162,12 +174,12 @@ These methods can be used on Database connections, and on a shard instance (read
 
 | Methods | Uses Mapper | Description |
 | --- |:---:| --- |
-| __ListAsync__ |  • | Returns a List of typed objects from the data results. Additional result sets will be discarded. |
-| __LookupAsync__ | • | Returns a value from the database. This may be a return value (int) or single output parameter. |
-| __RunAsync__ | • | Executes a database command. No results are returned. |
+| __LookupAsync__ |   | Returns a value from the database. This may be a return value (int) or single output parameter. |
+| __RunAsync__ |   | Executes a database command. No results are returned. |
 | __QueryAsync__ |   | Returns the typed object created by a handler delegate. |
-| __ReadAsync__ | • | Returns a typed object created from data reader results. |
-| __GetOutAsync__ | • | Returns a typed object created from output parameters *and* data reader results. |
+| __MapListAsync__ |  • | Returns a List of typed objects from the data results. |
+| __MapReaderAsync__ | • | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from __DataReader__ results. |
+| __MapOutputAsync__ | • | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from output parameters *and* __DataReader__ results. |
 
 ### ShardSet methods
 
@@ -175,17 +187,19 @@ These methods execute the same command more-or-less concurrently on all the shar
 
 | Methods | Uses Mapper | Description |
 | --- |:---:| --- |
-| __ListAsync__ |  • | Returns a *combined* List of typed objects from the data results, across all shards. Additional result sets will be discarded. |
 | __QueryAllAsync__ |   | Returns a List of any non-null objects created by a handler delegate in any shard. The list count will not be larger than the shard count. |
 | __QueryFirstAsync__ |   | Returns the first non-null object created by a handler delegate in any shard. Use this when you are expecting a single result. |
-| __ReadAllAsync__ | • | Returns a List including any non-null objects created from any shard’s data reader results (not using output parameters). The list count will not be larger than the shard count. |
-| __ReadFirstAsync__ | • | Returns the first non-null object created on any shard where the procedure/function returns data reader results. Use this when you are expecting a single result and not using output parameters.  |
-| __GetOutAllAsync__ | • | Returns a List including any non-null objects that were created by invoking a procedure/function that returns results via output parameters *and* data reader results. The list count will not be larger than the shard count. |
-| __GetOutFirstAsync__ | • | Returns the first non-null object created by invoking a procedure/function that returns results via output parameters *and* data reader results. Use this when you are expecting a single result and using output parameters. |
+| __MapListAsync__ |  • | Returns a *combined* List of typed objects from the data results, across all shards. Additional result sets will be discarded. |
+| __MapReaderAllAsync__ | • | Returns a List including any non-null objects created from any shard’s data reader results (not using output parameters). The list count will not be larger than the shard count. |
+| __MapReaderFirstAsync__ | • | Returns the first non-null object created on any shard where the procedure/function returns data reader results. Use this when you are expecting a single result and not using output parameters.  |
+| __MapOutputAllAsync__ | • | Returns a List including any non-null objects that were created by invoking a procedure/function that returns results via output parameters *and* data reader results. The list count will not be larger than the shard count. |
+| __MapOutputFirstAsync__ | • | Returns the first non-null object created by invoking a procedure/function that returns results via output parameters *and* data reader results. Use this when you are expecting a single result and using output parameters. |
 
 ### Method Arguments
 
-#### sprocName
+The arguments are largely consistent across all of the methods.
+
+#### Required Argument: (string) sprocName
 
 This is simply the name of the stored procedure or function to be invoked. This string value is required for every data access method.
 
@@ -195,15 +209,15 @@ The general practice is to provide a stored procedure/function name with string 
 await database.RunAsync("ws.MyProcedureName", parameters, cancellationToken);
 ```
 
-This works fine. As larger applications evolve, however, one can lose track of which database procedure are *actually being used* by the application. It is not unusual for a custom application to have hundreds of data procedures, only a fraction of which are used.  
+As larger applications evolve, however, one can lose track of which database procedures are *actually being used* by the application. It is not unusual for a custom application to have hundreds of data procedures, only a fraction of which are used.  
 
-You might consider consistently referencing procedure names via a static class, like this.
+Pro tip: you might consider consistently referencing procedure names via a static class, like this.
 
 ```C#
 internal static class DataProcedures
 {
-    //This is a COMPREHENSIVE list of stored procedure names.
-    //You can use the reference count to determine what is still in use.
+    //This should be a COMPREHENSIVE list of stored procedure names.
+    //You can use the reference count to determine what is in use.
     public static string CustomerAdd { get;  } = "ws.CustomerAdd";
     public static string CustomerList { get; } = "ws.CustomerList";
     public static string CustomerLocationGet { get; } = "ws.CustomerLocationGet";
@@ -212,103 +226,146 @@ internal static class DataProcedures
     public static string CustomerLocationsByGroupIDs { get; } = "ws.CustomerLocationsByGroupIDs";
     // ...
 }
-// Now you can reference the procedure name
+// Now you can reference the procedure name like this:
 await database.RunAsync(DataProcedures.CustomerAdd, parameters, cancellationToken);
 
 ```
 
-Centralizing the procedure name list allows reviewers to see which procedures are actually used by the application (and ensure that non are misspelled). Surfacing them using static properties, as in the example, allows Visual Studio to provide a “reference count” for each procedure. When the method that once called this stored procedure/function is removed from the code, the zero “reference count” will make it obvious that even though the name defined, it is not in use.
+Centralizing the procedure name list allows reviewers to see which procedures are actually used by the application (and ensure that non are misspelled). Surfacing them using static properties, as in the example, allows Visual Studio to provide a “reference count” for each procedure (constants do not do this). When the method that called this stored procedure/function is removed from the code, the zero “reference count” will make it obvious that, even though the name defined, it is not actually used.
 
-With this approach, you can even use the Visual Studio tooling to find all of the methods that invoke that stored procedure/function. This can be helpful as you discover different data procedures that seem to do the same thing.
+The reference count popup data even allows you to find all of the methods that invoke that stored procedure/function. This can be helpful as you prune different data procedures that seem to do the same thing.
 
-#### DbParameterCollection parameters
+#### Required Argument: (DbParameterCollection) parameters
 
-The abstract DbParameterCollection is implemented by the QueryParameters object. Because it is also implemented by the provider-specific command.Parameters property, if you have a command with valid parameters defined (for some reason), you can use that too. This value can be null if there are no parameters.
+The abstract `DbParameterCollection` is implemented by ArgentSea’s [QueryParameterCollection](/api/ArgentSea.QueryParameterCollection.html) object. Because it is also implemented by the provider-specific command.Parameters property, if you have a command with valid parameters defined (for some reason), you can use that too.
+
+This value can be null if there are no parameters.
 
 > [!WARNING]
-> When working with output parameters in standard ADO.NET, you may routinely maintain a reference to any output parameters you created before adding it to the collection. This made it easy to get the output parameter value after the query is executed.  
+> When working with output parameters in standard ADO.NET, you may habitually maintain a variable reference to any output parameters you created before adding it to the collection. This makes it easy to get the output parameter value after the query is executed.  
 > This approach will not work with sharded data, because ArgentSea will *copy* the parameter set before executing the stored procedure/function. Any referenced output parameters will *not* contain a data result.
 
-#### IEnumerable<TShard> exclude
+#### Optional ShardSet Argument: (IEnumerable&lt;ShardParameterValue&lt;TShard&gt;&gt;) shardParameterValues
 
-This optional parameter, lists the shard(s) that should *not* be included in the query.
+Some shard query method overloads accept a `ShardParameterValue` object. This object allows you to specify which shards should be queried and even provide distinct parameter values to each shard.
 
-The need for this typically occurs when you already have some data. For example, suppose you have a Subscriber hosted on shard 5. The Subscriber has a list of Friends. The query that fetches the Subscriber details include a Friend list, but it can return more details for the subset of the Friends that are also hosted on shard 5 (avoiding multiple round trips). Subsequently, it is necessary to lookup all of the Friends on their respective shards, but there is no need to include shard 5 since that data has already been obtained. Shard 5 could be excluded from the subsequent query.
+For example, suppose your User record returns a list of “Friends”. The Friend detail data may be hosted on other shards, but not on *every* shard. Building a list of `ShardParameterValue` objects from the User results would limit the subsequent queries to just the relevant shards.
 
-on no longer exiUsing the list of Friends
+The `ShardParameterValue` type has a ShardId and an optional parameter name and value. Only shards with at least one listed ShardId will be queried. If a parameter name is also specified, the corresponding parameter will be set to that value on the indicated shard. You can include multiple parameters/values on the same shard by repeating the shardId.
 
-#### int shardParameterOrdinal
+#### Optional ShardSet Argument: (string) shardParameterName
 
-(ShardSet only)
+Some shard query overloads also accept the name of the parameter that represents the name of the parameter that should be set to shardId value. If specified, ArgentSea will set this parameter value to the current shardId value as it executes each query.
 
-#### resultHandler
+For example, a query for a list of records that spans shards could be enhanced if the query new the value of its own ShardId. Alternatively, because a shard misconfiguration might result in catastrophic data corruption (due to the high likelihood of duplicate record identities between shards), you might require that stored procedures or functions that write to the database also have a ShardId parameter that they validate is correct.
 
-#### bool isTopOne
+#### Optional Argument: (QueryResultModelHandler&lt;TShard, TArg, TModel&gt;>) resultHandler
 
-#### TArg optionalArgument
+This is only used in the QueryAsync methods. As described earlier, the data query process is divided into two processes. The resultHandler is a delegate that may be invoked concurrently by distinct, shard-specific threads.
 
-/// <typeparam name="TModel">The data object return type for the list</typeparam>
-/// <param name="sprocName">The name of the stored procedure or function to be invoked on every instance.</param>
-/// <param name="parameters">The parameters to be passed to the procedure or function.</param>
-/// <param name="exclude">A list of shards not to be called.</param>
-/// <param name="shardParameterOrdinal">The index of the ShardId parameter, to be set for each connection before it is called.</param>
-/// <param name="resultHandler">The thread-safe delegate that converts the data results into the return object type.</param>
-/// <param name="dataObject">An object of type TArg to be passed to the resultHandler, which may contain additional data.</param>
-/// <param name="cancellationToken">A token which allows the query to be cancelled.</param>
+If you use a data access method prefixed with Map*, this argument is not required because the delegate provided by the Mapper is used. If the Mapper does not suit your purpose, then a custom delegate must be provided to a Query* method.
 
-### The Read* and GetOut* Methods
+Your custom delegate can have an argument that provides additional data or context information. Information on how to build a custom delegate is provided below.
 
-The __Read__ and __GetOut__ methods are very similar. Both user the Mapping attributes. The __GetOut__ method uses *output parameters* to build the root result object; the __Read__ methods use a (single record) DataReader result instead. If you use output parameters (which is potentially more performant), use __GetOut__.
+#### Optional Argument: (bool) isTopOne
 
-Both methods support properties that contain Lists of further data. For example, you might have an Order record with a property containing an OrderItem List. The list items come from (additional) DataReader results. You can have up to eight of these List properties.
+Some overloads expose the isTopOne option, which allows a minor optimization when only a single result is expected. For example, if you are looking up a record by its key, you don’t need to allocate space for multiple results when only a single result can ever be returned.
+
+#### Optional Argument: (TArg) optionalArgument
+
+If you are creating a custom data handling method, you may need to provide additional data or context information. This argument may be generically typed. The provided object is passed to your result handling delegate.
+
+#### Required Argument: (CancellationToken) cancellationToken
+
+The cancellation token allow you to cancel asynchronous operations. ASP.NET MVC provides cancellation tokens and these can be passed along. In this way, when a user abandons their session, any uncompleted queries can be cancelled.
+
+### The MapReader&ast; and MapOutput&ast; Methods
+
+The __MapReader&ast;__ and __MapOutput&ast;__ methods are similar. Both use the Mapping attributes to resolve data to Model objects. The __MapOutput&ast;__ method uses *output parameters* to build the root result object; the __MapReader__ methods use a (single record) __DataReader__ result instead.
+
+So, if you use output parameters (which is potentially more performant), use __MapOutput&ast;__. If you use standard SELECTs to return your data, use __MapReader&ast;__.
+
+Both methods support multiple result sets that populate properties that contain Lists of related data. For example, you might have an Order record with a property containing an OrderItem List. The list items come from (additional) DataReader results. You can have up to eight of these List properties.
+
+> [!TIP]
+> The order in which your attribute-mapped class appears in the generic definitions should be the same order as the list data results in the procedure output.
 
 An example of calling each would be:
 
 ```C#
 // In this example, ws.GetOrderDetails returns Order data in output parameters:
-_database.GetOutAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapOutputAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
 // Here, ws.GetOrderDetails returns simple Order data in a single-row SELECT:
-_database.ReadAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapReaderAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
 
 // Now ws.GetOrderDetails returns Order data in output parameters and a list of OrderItem from a SELECT:
-_database.GetOutAsync<Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapOutputAsync<Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
 // Finally, ws.GetOrderDetails returns Order data in a single-row SELECT, then a list of OrderItems from a 2nd SELECT:
-_database.ReadAsync<Order, Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapReaderAsync<Order, Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
 
 // Expanding this, we now have output parameters and three SELECTs:
-_database.GetOutAsync<Customer, OrderHistory, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
+_database.MapOutputAsync<Customer, OrderHistory, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
 // Likewise, the procedure now returns four SELECTs, and the third one is a single-row SELECT with the base customer data,
 // the remaining select are used to build customer property lists (order history, locations, and contacts):
-_database.ReadAsync<Customer, OrderHistory, Customer, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
+_database.MapReaderAsync<Customer, OrderHistory, Customer, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
 ```
 
 In both methods, the generic type in the *first* position is the return type. If additional results are included in the result stream, the subsequent types define the order in which they are expected in the DataReader results. You can have up to eight DataReader results streamed to distinct List properties.
 
-* In the __GetOut__ example, then, the result type is Order and the first DataReader result is a series of OrderItems.
-* In the __Read__ example, the result type is Order, and the first DataReader result is the Order data, and the second DataReader result is a series of OrderItems.
+* In the __MapOutput&ast;__ example, then, the result type is Order and the first DataReader result is a series of OrderItems.
+* In the __MapOutput&ast;__ example, the result type is Order, and the first DataReader result is the Order data, and the second DataReader result is a series of OrderItems.
 
-### The Query* Methods
+### The Query&ast; Methods
 
-The __Query__ methods provide the most control, as you are given raw ADO.NET query results to construct whatever return value you like. The handler procedure must have a method signature that corresponds to the `QueryResultModelHandler` delegate.
+The __Query&ast;__ methods provide the most control, as you are given raw ADO.NET query results to construct whatever return value you like. You can return a list, a dictionary, or any type of Model object. When you call a __Query&ast;__ method, you must provide a handler method whose signature corresponds to the `QueryResultModelHandler` delegate.
 
-There are two obvious scenarios for the __Query__ methods:
+There are two obvious scenarios for the __Query&ast;__ methods:
 
 * The Model class is defined in a library, so Mapping attributes cannot be added.
 * The rendering a complex return value is beyond the capabilities of the Mapper.
 
 The delegate even has a parameter that allows you to provide custom data (through the query method) with which to construct your result object.
 
-In other words, the [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) manages the complexity of initializing multiple queries on multiple connections and multiple results, but it is the delegate that takes the database results (from each connection/thread) and creates an object result.
+The delegate must be thread-safe.  The [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) manages the complexity of initializing multiple queries on multiple connections and multiple results, but it is the delegate that takes the database results (from each connection/thread) and creates an object result.
 
 > [!NOTE]
-> The Mapper provides several thread-safe, high-performance `QueryResultModelHandler` delegates. In fact, providing a Mapper delegate to the __Query__ method is exactly how the __Read__ an __GetOut__ methods are implemented.
+> The Mapper provides several thread-safe, high-performance `QueryResultModelHandler` delegates. In fact, providing a Mapper delegate to the __Query&ast;__ method is exactly how the __MapOutput&ast;__ an __MapOutput&ast;__ methods are implemented. You can use this yourself to extend the Mapper; just provide your own delegate that calls the Mapper in turn.
 
+Details on implementing the `QueryResultModelHandler` delegate is in the next section.
 
 ## Handling Data Results
 
+If you are using data mapping attributes in your Model classes, the __MapReader&ast;__, __MapOutput&ast;__, and __MapList&ast;__ methods make handling data results unnecessary. This section is for queries that use the __Query&ast;__ methods, which allow you to return an arbitrary object from the data input.
 
+If you are familiar with ADO.NET programming, this will be very familiar. The delegate simply receives the standard ADO.NET query results and processes them like it would in most other ADO.NET scenarios.
 
-The methods to convert data types to .NET types are extension methods on the parameter object (not the collection).
+In this example, a method with the correct signature for returning a Customer model looks like this:
+
+```C#
+public static Customer MyCustomerHandler (
+    short shardId,
+    string sprocName,
+    Department department, // this is an optional custom argument
+    DbDataReader reader,
+    DbParameterCollection parameters,
+    string connectionDescription,
+    ILogger logger)
+{
+    var result = new Customer();
+    // use the reader argument and/or parameters collection to build your result.
+    return result;
+}
+```
+
+Both the return type (“Customer”, in the example) and the optional data argument (“Department”, in the example) are generic, so they can be of any type.
+
+The shardId argument will be a default value, like null or zero, when not using a ShardSet; otherwise it will be set to the current ShardId. This value is essential when building ShardKey or ShardChild types, where the shard identity is a component of the record identity.
+
+The third argument type is a generic parameter; the type is defined when you declare the delegate. If not used (i.e. most cases), define the type as `object`. This allows you to use the __Query&ast;__ overloads that do not require this parameter; in those cases, this value will be null.
+
+The reader argument is a standard data reader. You can call `reader.MoveNext()` to get the next row and `reader.NextResult()` to get the next result set. You do not need to dispose of it when you are done.
+
+The parameters collection contains the input and output parameters for the query. ArgentSea offers a set of extension methods to simplify converting parameter values to .NET types. These are extension methods on the parameter object (not the collection).
 
 ```C#
 var transactionId = parameters["@TransactionId"].GetInteger();
@@ -316,10 +373,6 @@ var amount = parameters["@Amount"].GetNullableDecimal();
 var name = parameters["@Name"].GetString();
 ```
 
+The connectionDescription argument allows your logger to include the connection that raised the error or event. This is something you need to include yourself in any logging or errors in your procedures. Because your delegate could run on multiple connections, this can be essential debugging information.
 
-When you execute the query, you pass in the parameters you set, and ArgentSea will run your second
-
-The second section needs to conform to a delegate method signature that can be invoked by the framework. 
-
-
-
+Finally, the logger argument allows you to write debugging, warning, and error information to the application logs.
