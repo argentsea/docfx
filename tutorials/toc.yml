@@ -1,7 +1,7 @@
 - name: Home
   href: index.md
 - name: Quick Start
-  href: quickstart.md
+  href: quickstart1.md
 - name: Configuration
   href: configuration.md
 - name: Mapping

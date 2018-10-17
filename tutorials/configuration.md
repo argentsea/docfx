@@ -18,8 +18,6 @@ There are two types of database connections in ArgentSea:
 
 ArgentSea configuration supports any number of *database connections* and any number of *shard sets*. And of course each *shard set* can have many database connections.
 
-### Limiting Redundancy Across Multiple Connection Definitions
-
 This creates a potentially large number of database connections. Many of these will likely have similar connection information. In many scenarios, all of the connections in a shard set would use the same login information. Likewise, in a given datacenter environment it only makes sense that all connections use the same resiliency strategy.
 
 To manage this redundancy, the ArgentSea configuration data is broken into four parts:
@@ -29,7 +27,7 @@ To manage this redundancy, the ArgentSea configuration data is broken into four 
 * Database connection information
 * Shard set connection information
 
-#### Credentials
+### Credentials
 
 If you are using json configuration files to manage your configuration, the credentials section in your configuration might look like this:
 
@@ -58,7 +56,7 @@ You should put this configuration section into a secure location. In a developme
 
 The *SecurityKey* property must be unique and exactly match the security string key that you specify on your connection (i.e. both must have the same casing).
 
-#### Resilience Strategies
+### Resilience Strategies
 
 Resilience strategies define how ArgentSea recovers from unexpected failures, usually through some combination of retry logic and circuit breaking. Because one typically requires only a few resilience strategies across datacenters (perhaps one for local connections and another for across the WAN), to reduce redundancy we use the same keyed approach as for security.
 
@@ -87,9 +85,9 @@ An example resiliency configuration section might look like this:
     }
 ````
 
-**Retries**
+#### Retries
 
-Not that retries only occur on errors that are defined as *transient*.
+Note that retries only occur on errors that are defined as *transient*.
 A permissions error or invalid object reference would be pointless to retry.
 (The list of errors defined as *transient* is in the provider-specific implementation
 of IDataProviderServiceFactory. You can view this in the source code).
@@ -133,7 +131,7 @@ With these values, the default resilience strategy would take a total of five se
 
 Note that a high `RetryCount` could create a very long delay before a connection is allowed to ultimately fail.
 
-**Circuit Breaking**
+#### Circuit Breaking
 
 When a database connection is unavailable, this can cause serious downstream problems. Processes may pile-on further requests even while earlier requests are simply waiting
 to time out. As this continues, the queue of backlogged requests becomes so large that the caller itself can manage no more. This bottleneck can block other systems too. What started as a broken connection to a single database eventually becomes fatal to the calling system too!
@@ -145,7 +143,7 @@ When the circuit breaker is tripped, subsequent connections will fail *immediate
 The `CircuitBreakerFailureCount` value determines how many sequential failures will trigger the circuit breaker. The `CircuitBreakerTestInterval` value determines
 how often (in milliseconds) the circuit breaker will allow a single transaction through.
 
-### Database Connections
+## Database Connections
 
 The database configuration architecure allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code.
 
@@ -486,7 +484,7 @@ For PostgreSQL, a simple configuration would look like this (assuming that the S
 
 ***
 
-If the *shardid* were a string you should enclose the value in quotes (`ShardId: "0"`).
+If the *shardid* is a string you should enclose the value in quotes (`ShardId: "0"`).
 
 The configuration file can repeat the ShardSet section (the object with ShardSetKey and Shards entries) for each shard set. Likewise, the entries in the Shards array can repeat for every data shard in the shard set. As illustrated by Shard 1’s Write Connection, any connection can include a any number of provider-specific connection attributes.
 

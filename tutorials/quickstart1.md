@@ -1,6 +1,6 @@
 ﻿# QuickStart One
 
-This article will breeze you through a simple setup of ArgentSea for non-sharded data access. This presentation introduces concepts which are further elaborated in the [subsequent article](sharding.html). It assumes that you are using *.NET Core* in some flavor of *Visual Studio*.
+This article will breeze you through a simple setup of ArgentSea for non-sharded data access. This presentation introduces concepts which are further elaborated in the [subsequent article](quickstart2.html). It assumes that you are using *.NET Core* in some flavor of *Visual Studio*.
 
 If you get stuck or have questions, click on one of the links to the other more in-depth articles.
 
@@ -31,7 +31,7 @@ If you have [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/
 set up (preferred), add the json below to your User Secrets file (right-click
 on the project and select *Manage User Secrets*).
 
-If you are not using User Secrets, you can simply one of the json sections to your appsettings.json configuration file.
+If you are not using User Secrets, you can simply add the json sections to your appsettings.json configuration file.
 
 > [!TIP]
 > The sample application *does* use User Secrets, so if you are following along at home you will need to manually copy the credentials section below into the secrets.json file in the sample app.
@@ -72,7 +72,7 @@ The database settings tell ArgentSea how to build the (non-security) part of you
 
 In your appsettings.json file, add the following section:
 
-# [SQL Server](#tab/tabid-sql)
+## [SQL Server](#tab/tabid-sql)
 
 Configure the *DataSource* and *InitialCatalog* properties below.
 
@@ -89,7 +89,7 @@ Configure the *DataSource* and *InitialCatalog* properties below.
   ]
 ```
 
-# [PostgreSQL](#tab/tabid-pg)
+## [PostgreSQL](#tab/tabid-pg)
 
 Configure the *Host* and *Database* properties below.
 
@@ -118,7 +118,7 @@ is available [here](/tutorials/configuration.html).
 
 ArgentSea is an injectable service, so it needs to be registered on application startup.
 
-# [SQL Server](#tab/tabid-sql)
+## [SQL Server](#tab/tabid-sql)
 
 Open your project’s *Startup* class. At the top, add the following *using* statement:
 
@@ -135,7 +135,7 @@ services.AddSqlServices(Configuration);
 This step creates an injectable *SqlServices* object that we can use in all
 of our data access clients.
 
-# [PostgreSQL](#tab/tabid-pg)
+## [PostgreSQL](#tab/tabid-pg)
 
 Open your project’s *Startup* class. At the top, add the following *using* statement:
 
@@ -156,7 +156,7 @@ of our data access clients.
 
 ## 7. Create a Model Class
 
-A model class has properties that correspond the the fields of a data entity. ArgentSea can automatically map these properties to input or output parameters, the columns of a datareader object, or (in SQL Server) a table-valued parameter.
+A model class has properties that correspond the the fields of a data entity. ArgentSea can automatically map these properties to input or output parameters, the columns of a DataReader object, or (in SQL Server) a table-valued parameter.
 
 For example, suppose your subscriber data can be represented by a class like this:
 
@@ -175,7 +175,7 @@ public class Subscriber
 
 We can simply add mapping attributes to this class:
 
-# [SQL Server](#tab/tabid-sql)
+## [SQL Server](#tab/tabid-sql)
 
 ```C#
 using System;
@@ -196,7 +196,7 @@ public class Subscriber
 
 The “@” parameter prefix is optional — ArgentSea will add the “@” automatically for parameters and remove it automatically when reading data reader rows.
 
-# [PostgreSQL](#tab/tabid-pg)
+## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
 using System;
@@ -226,7 +226,7 @@ Note that the property name *does not* need to match the parameter or column nam
 
 Create one more class, called *SubscriberStore*. This is the class that will call the database stored procedure or function and return the specified subscriber.
 
-# [SQL Server](#tab/tabid-sql)
+## [SQL Server](#tab/tabid-sql)
 
 Our very simple stored procedure can be something like this:
 
@@ -259,14 +259,14 @@ public class SubscriberStore
   {
     var db = _dbs.DbConnections["MyDatabase"];
     var prms = new QueryParameterCollection()
-      .AddSqlIntInParameter("@SubId", subscriberId);
-    Mapper.MapToOutParameters(prms, typeof(Subscriber), _logger);
-    return await db.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+      .AddSqlIntInParameter("@SubId", subscriberId)
+      .MapToOutParameters<>(Subscriber, _logger);
+    return await db.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, _logger, cancellation);
   }
 }
 ```
 
-# [PostgreSQL](#tab/tabid-pg)
+## [PostgreSQL](#tab/tabid-pg)
 
 Our very simple PostgreSQL function can be something like this:
 
@@ -304,8 +304,8 @@ public async Task<Subscriber> GetSubscriber(int subscriberId, CancellationToken 
 {
   var db = _dbs.DbConnections["MyDatabase"];
   var prms = new QueryParameterCollection()
-    .AddPgIntegerInParameter("_subid", subscriberId);
-  Mapper.MapToOutParameters(prms, typeof(Subscriber), _logger);
+    .AddPgIntegerInParameter("_subid", subscriberId)
+    .MapToOutParameters<>(Subscriber, _logger);
   return await db.QueryAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
 }
 ```

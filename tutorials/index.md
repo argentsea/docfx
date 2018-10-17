@@ -1,18 +1,18 @@
 ﻿# Overview
 
-The genesis of ArgentSea was to support the complex requirements of data sharding, but will likely be useful for high-performance data access even if you are not accessing sharded data.
+The genesis of ArgentSea was to support the complex requirements of data sharding, but it will likely be useful for high-performance data access even if you are not accessing sharded data.
 
-These deep-dive tutorials explain each area in depth.
+These deep-dive tutorials explain each area in depth. If you’d prefer to learn by being hands-on, you can explore [QuickStart 1](quickstart1.md), which guides you through a project setup, and [QuickStart 2](quickstart2.md), which extends that to sharding.
 
 ## [Setup](setup.md)
 
 The ArgentSea documentation assumes that your project is essentially new. Data sharding is very difficult to retroactively add to an existing project without rewriting it. 
 
-And it you are creating a new project, it certainly makes sense to use .NET Core/Standard (rather than then legacy .NET Framework). ArgentSea would probably work in a .NET Framework application, it is not tested for this purpose, and it uses services — such as dependency injection, configuration, and logging — that are implemented differently in the legacy framework. If you do use the .NET Framework, please help build out our documentation with any guidance you can share.
+And it you are creating a new project, it certainly makes sense to use .NET Core/Standard (rather than then legacy .NET Framework). ArgentSea would probably work in a .NET Framework application, it is not tested for this purpose, and it uses services — such as dependency injection, configuration, and logging — that are implemented differently in the legacy framework. If you *do* use the legacy .NET Framework, please help build out our documentation with any guidance you can share.
 
 ## [Configuration](configuration.md)
 
-ArgentSea uses the new configuration infrastructure in .NET Core, including strongly typed Options classes and injectable services. The configuration information can be stored in a JSON file, environment variables, key stores, and more. Registering the ArgentSea services is easy with an extension method.
+ArgentSea uses the new configuration infrastructure in .NET Core, including strongly typed Options classes and injectable services. The configuration information can be stored in a JSON file, environment variables, key stores, and more. Registering the ArgentSea services is easy with our extension method.
 
 The configuration approach is intended to make it easy to manage lots of connections (including separate read and write endpoints), store credential information securely, and also capture resilience preferences (retries and circuit breaking).
 
@@ -26,7 +26,7 @@ The mapping metadata is set by property attributes, which sets the SQL data type
 
 ## [Querying](querying.md)
 
-The ArgentSea framework allows querying both Databases and ShardSets. When you can use the Mapping capabilities, this is dead simple. However, sometimes you need to write a custom data handler. ArgentSea isn’t much difficult than other ADO.NET code. Understanding the logic behind the architecture will make the design more transparent.
+The ArgentSea framework allows querying both Databases and ShardSets. When you can use the Mapping capabilities, this is dead simple. However, sometimes you need to write a custom data handler. Using ArgentSea isn’t much difficult than other ADO.NET code. Understanding the logic behind the architecture will make the design more transparent.
 
 ## [Sharding](sharding.md)
 
