@@ -54,6 +54,19 @@ If you prefer to set the properties of an Options class directly, you can use th
 
 You should put this configuration section into a secure location. In a development environment, you should consider using the *UserSecrets* functionality, which prevents this information from being checked into your source code repository. In other environments, you might consider using you should use AWS Secrets Manager, Azure Key Vault, or something similar.
 
+In non-JSON configuration contexts, like environment variables, you can specify these values as key-value pairs. This is the equivalent of the JSON above:
+
+| Key | Value |
+| --- | --- |
+| Credentials:0:SecurityKey | 0 |
+| Credentials:0:Password | webuser |
+| Credentials:0:UserName | 123456 |
+| Credentials:1:SecurityKey | 1 |
+| Credentials:1:WindowsAuth | true |
+| Credentials:2:SecurityKey | 2 |
+| Credentials:2:Password | admin |
+| Credentials:2:UserName | 7890 |
+
 The *SecurityKey* property must be unique and exactly match the security string key that you specify on your connection (i.e. both must have the same casing).
 
 ### Resilience Strategies
@@ -190,7 +203,8 @@ For SQL Server, the entire set of attributes would look like this:
 ]
 ````
 
-You do *not* need include all of these attributes in your connection! Any value not included in your configuration will be set to the provider default — except as described in the next paragraphs.
+> [!CAUTION]
+> You do *not* need include all of these attributes in your connection! Any value not included in your configuration will be set to the provider default — except as described in the next paragraphs.
 
 The `ConnectRetryCount`, `ConnectRetryInterval` values default to 0 because the ArgentSea retry logic duplicates this functionality. If you prefer to use the SqlClient retry functionality instead, set these to their desired values and specify a `ResilienceStrategy` with no retries. If you use both connection retries *and* ArgentSea retries, no harm will come, other than a lot of retries.
 
@@ -304,7 +318,7 @@ From a configuration perspective, sharded data introduces three concerns:
 
 ### Managing Database Connections
 
-Sharded data sets may run to hundreds of servers (or more). ArgentSea manages any number of distinct shard sets and any number of connections in each shard set.
+Sharded data sets *may* run to hundreds of servers (or more). ArgentSea manages any number of distinct shard sets and any number of connections in each shard set.
 
 You could have a distinct shard set for, say, all of your subscriber information and a separate shard set for all of your operational data. You define the shard set name in your configuration; when you query a shard set, you simply specify the shard set name.
 
@@ -321,6 +335,9 @@ To accommodate replication latency when an expected read-only result is not retr
 * The query arguments indicate that it is read-only data fetch.
 * The read connection is different than the write connection.
 * The query handler returns a null object (i.e. a parameter attribute is marked *required* but the database value is (db) null or a custom handler returns null).
+
+> [!TIP]
+> You can easily have distinct Read and Write database connections for your non-sharded database connections too. Simply define two connections, one for read access and the other for write access. In your code, select the Read connection or Write connection as appropriate.
 
 ### The Shard Identifier Type
 

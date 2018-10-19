@@ -126,7 +126,7 @@ The Mapper uses Model property attributes to automatically generate code that is
 Assuming that the Model (in this example, a “Customer” class) has Mapping attributes associated with each of its properties, you can render all the corresponding input parameters and set their respective values with:
 
 ```C#
-parameters.MapToInParameters<Customer>(customer, logger);
+parameters.MapInputParameters<Customer>(customer, logger);
 ```
 
 You can do something similar with output parameters — though it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (likely a key). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
@@ -135,22 +135,22 @@ You can do something similar with output parameters — though it would be unlik
 
 ```C#
 parameters.AddSqlIntInParameter("@TransactionId", transactionId);
-parameters.MapToOutParameters<Customer>(logger);
+parameters.MapCreateOutputParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
 var parameters = new QueryParameterCollection()
     .AddSqlIntInParameter("@TransactionId", transactionId)
-    .MapToOutParameters<Customer>(logger);
+    .MapCreateOutputParameters<Customer>(logger);
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
 parameters.AddPgIntegerInParameter("TransactionId", transactionId);
-parameters.MapToOutParameters<Customer>(logger);
+parameters.MapCreateOutputParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
 var parameters = new QueryParameterCollection()
     .AddPgIntegerInParameter("TransactionId", transactionId)
-    .MapToOutParameters<Customer>(logger);
+    .MapCreateOutputParameters<Customer>(logger);
 ```
 
 ***

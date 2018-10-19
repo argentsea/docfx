@@ -1,27 +1,30 @@
 # ArgentSea Documentation
 
-## Getting Started
+Modern web applications need to be built for performance and scalability, as well as security, monitoring, and configuration. ArgentSea offers a framework that consistently represents best practices for all of these concerns.
 
-If you want to understand everything first, explore the [deep dives](#deep-dives); if you prefer to learn by getting your hands dirty, jump into the [walkthroughs](#walkthroughs).
+Highly scalable data means data “sharding” — the practice of spreading data across many database servers. The genesis of ArgentSea was to support the complex requirements of data sharding, although it will likely be useful for high-performance data access even if you are not accessing sharded data.
+
+To simplify development without compromising performance, ArgentSea offers a Mapper that performs as well as native code.
 
 ## Overview
 
-In essence, ArgentSea data library consists of four areas of functionality. These are complementary but independent enough to be able to use some without the others:
+ArgentSea is structured to optimize the performance of your data servers and also the performance of your data developers. It establishes a clear pattern for accessing data that minimizes the complexity of accessing both sharded and non-sharded data.
 
-* __Configuring connections__ - is particularly useful with the large number of connections necessary for sharded data.
-* __Querying data__ - in a way that supports multi-threaded concurrent queries on multiple shards.
-* __Mapping__ - simplifies and dramatically shortens the code required to map data (result sets and/or parameters) to or from .NET objects.
-* __Tooling__ - a simple UI to generate starter model classes and/or CRUD procedures based on a table or view. A time saver for generating boilerplate code.
+ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures, security, and managing connection configuration. These and other benefits may be useful even if you are not using sharded data.
 
-> [!TIP]
-> Because ArgentSea enhances the familiar ADO.NET data access classes, you can still use ADO.NET to resolve any capability gaps or distinctive query requirements.
+Data sharding offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate your data across regional datacenters, so that data is located closer to your customers.
+
+## Getting Started
+
+If you like to understand everything first, explore the [deep dives](tutorials/index.md); if you prefer to learn by getting your hands dirty, jump into the [walkthroughs](#walkthroughs).
 
 ## Deep Dives
 
 1. Installing ArgentSea (coming soon).
 2. [Setting up your configuration](tutorials/configuration.md)
-3. [Mapping](tutorials/mapping.md)
-4. [Using shards](tutorials/sharding.md)
+3. [Querying](tutorials/querying.md)
+4. [Mapping](tutorials/mapping.md)
+5. [Using shards](tutorials/sharding.md)
 
 ## Walkthroughs
 
