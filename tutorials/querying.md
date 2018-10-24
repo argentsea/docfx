@@ -71,21 +71,21 @@ using ArgentSea.Sql;
 Here are some code examples:
 
 ````C#
-parameters.AddSqlIntInParameter("@TransactionId", transactionId);
-parameters.AddSqlDecimalInParameter("@Amount", amount, 16, 2);
-parameters.AddSqlNVarCharInParameter("@Name", name, 255);
-parameters.AddSqlFloatOutParameter("@Temperature");
+parameters.AddSqlIntInputParameter("@TransactionId", transactionId);
+parameters.AddSqlDecimalInputParameter("@Amount", amount, 16, 2);
+parameters.AddSqlNVarCharInputParameter("@Name", name, 255);
+parameters.AddSqlFloatOutputParameter("@Temperature");
 // These methods all support a fluent api, so these can be written instead as:
 var parameters = new QueryParameterCollection()
-    .AddSqlIntInParameter("@TransactionId", transactionId)
-    .AddSqlDecimalInParameter("@Amount", amount, 16, 2)
-    .AddSqlNVarCharInParameter("@Name", name, 255)
-    .AddSqlRealOutParameter("@Temperature");
+    .AddSqlIntInputParameter("@TransactionId", transactionId)
+    .AddSqlDecimalInputParameter("@Amount", amount, 16, 2)
+    .AddSqlNVarCharInputParameter("@Name", name, 255)
+    .AddSqlRealOutputParameter("@Temperature");
 // And these methods also work on the data provider’s command parameters collection.
-cmd.Parameters.AddSqlIntInParameter("@TransactionId", transactionId)
-    .AddSqlDecimalInParameter("@Amount", amount, 16, 2)
-    .AddSqlNVarCharInParameter("@Name", name, 255)
-    .AddSqlRealOutParameter("@Temperature");
+cmd.Parameters.AddSqlIntInputParameter("@TransactionId", transactionId)
+    .AddSqlDecimalInputParameter("@Amount", amount, 16, 2)
+    .AddSqlNVarCharInputParameter("@Name", name, 255)
+    .AddSqlRealOutputParameter("@Temperature");
 ````
 
 ## [PostgreSQL](#tab/tabid-pg)
@@ -98,21 +98,21 @@ using ArgentSea.Pg;
 > The QueryParameterCollection and NpgsqlParameterCollection inherit from the same base class. Not only can you use these methods on ArgentSea’s `QueryParameterCollection`, but you can also use them on the standard ADO.NET `NpgsqlCommand.Parameters` property.
 
 ```C#
-parameters.AddPgIntegerInParameter("TransactionId", transactionId);
-parameters.AddPgDecimalInParameter("Amount", amount, 16, 4);
-parameters.AddPgVarCharInParameter("Name", name, 255);
-parameters.AddPgDoubleOutParameter("Temperature");
+parameters.AddPgIntegerInputParameter("TransactionId", transactionId);
+parameters.AddPgDecimalInputParameter("Amount", amount, 16, 4);
+parameters.AddPgVarCharInputParameter("Name", name, 255);
+parameters.AddPgDoubleOutputParameter("Temperature");
 // These methods all support a fluent api, so these can be written instead as:
 var parameters = new QueryParameterCollection()
-    .AddPgIntegerInParameter("TransactionId", transactionId)
-    .AddPgDecimalInParameter("Amount", amount, 16, 2)
-    .AddPgVarCharInParameter("Name", name, 255)
-    .AddPgDoubleOutParameter("Temperature");
+    .AddPgIntegerIputnParameter("TransactionId", transactionId)
+    .AddPgDecimalInputParameter("Amount", amount, 16, 2)
+    .AddPgVarCharInputParameter("Name", name, 255)
+    .AddPgDoubleOutputParameter("Temperature");
 // And these methods also work on the data provider’s command parameters collection.
-cmd.Parameters..AddPgIntegerInParameter("TransactionId", transactionId)
-    .AddPgDecimalInParameter("Amount", amount, 16, 2)
-    .AddPgVarCharInParameter("Name", name, 255)
-    .AddPgDoubleOutParameter("Temperature");
+cmd.Parameters..AddPgIntegerInputParameter("TransactionId", transactionId)
+    .AddPgDecimalInputParameter("Amount", amount, 16, 2)
+    .AddPgVarCharInputParameter("Name", name, 255)
+    .AddPgDoubleOutputParameter("Temperature");
 ```
 
 ***
@@ -126,7 +126,7 @@ The Mapper uses Model property attributes to automatically generate code that is
 Assuming that the Model (in this example, a “Customer” class) has Mapping attributes associated with each of its properties, you can render all the corresponding input parameters and set their respective values with:
 
 ```C#
-parameters.MapInputParameters<Customer>(customer, logger);
+parameters.CreateInputParameters<Customer>(customer, logger);
 ```
 
 You can do something similar with output parameters — though it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (likely a key). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
@@ -134,23 +134,23 @@ You can do something similar with output parameters — though it would be unlik
 ## [SQL Server](#tab/tabid-sql)
 
 ```C#
-parameters.AddSqlIntInParameter("@TransactionId", transactionId);
-parameters.MapCreateOutputParameters<Customer>(logger);
+parameters.AddSqlIntInputParameter("@TransactionId", transactionId);
+parameters.CreateOutputParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
 var parameters = new QueryParameterCollection()
-    .AddSqlIntInParameter("@TransactionId", transactionId)
-    .MapCreateOutputParameters<Customer>(logger);
+    .AddSqlIntInputParameter("@TransactionId", transactionId)
+    .CreateOutputParameters<Customer>(logger);
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
-parameters.AddPgIntegerInParameter("TransactionId", transactionId);
-parameters.MapCreateOutputParameters<Customer>(logger);
+parameters.AddPgIntegerInputParameter("TransactionId", transactionId);
+parameters.CreateOutputParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
 var parameters = new QueryParameterCollection()
-    .AddPgIntegerInParameter("TransactionId", transactionId)
-    .MapCreateOutputParameters<Customer>(logger);
+    .AddPgIntegerInputParameter("TransactionId", transactionId)
+    .CreateOutputParameters<Customer>(logger);
 ```
 
 ***
@@ -317,7 +317,7 @@ In both methods, the generic type in the *first* position is the return type. If
 
 ### The Query&ast; Methods
 
-The __Query&ast;__ methods provide the most control, as you are given raw ADO.NET query results to construct whatever return value you like. You can return a list, a dictionary, or any type of Model object. When you call a __Query&ast;__ method, you must provide a handler method whose signature corresponds to the `QueryResultModelHandler` delegate.
+The __Query&ast;__ methods provide the most control, as you are given raw ADO.NET query results to construct whatever return value you like. You can return a list, a dictionary, or any type of Model object. When you call a __Query&ast;__ method, you must provide a handler method whose signature corresponds to the [QueryResultModelHandler](/api/ArgentSea.QueryResultModelHandler-3.html) delegate.
 
 There are two obvious scenarios for the __Query&ast;__ methods:
 
@@ -329,9 +329,9 @@ The delegate even has a parameter that allows you to provide custom data (throug
 The delegate must be thread-safe.  The [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) manages the complexity of initializing multiple queries on multiple connections and multiple results, but it is the delegate that takes the database results (from each connection/thread) and creates an object result.
 
 > [!NOTE]
-> The Mapper provides several thread-safe, high-performance `QueryResultModelHandler` delegates. In fact, providing a Mapper delegate to the __Query&ast;__ method is exactly how the __MapOutput&ast;__ an __MapOutput&ast;__ methods are implemented. You can use this yourself to extend the Mapper; just provide your own delegate that calls the Mapper in turn.
+> The Mapper provides several thread-safe, high-performance [QueryResultModelHandler](/api/ArgentSea.QueryResultModelHandler-3.html) delegates. In fact, providing a Mapper delegate to the __Query&ast;__ method is exactly how the __MapOutput&ast;__ an __MapOutput&ast;__ methods are implemented. You can use this yourself to extend the Mapper; just provide your own delegate that calls the Mapper in turn.
 
-Details on implementing the `QueryResultModelHandler` delegate is in the next section.
+Details on implementing the [QueryResultModelHandler](/api/ArgentSea.QueryResultModelHandler-3.html) delegate is in the next section.
 
 ## Handling Data Results
 
@@ -352,7 +352,7 @@ public static Customer MyCustomerHandler (
     ILogger logger)
 {
     var result = new Customer();
-    // use the reader argument and/or parameters collection to build your result.
+    // use the reader argument and/or parameters collection to set your result properties.
     return result;
 }
 ```

@@ -257,8 +257,8 @@ public class SubscriberStore
   {
     var db = _dbs["MyDatabase"];
     var parameters = new QueryParameterCollection()
-        .AddSqlIntInParameter("@SubId", subscriberId)
-        .MapToOutParameters<Subscriber>(_logger);
+        .AddSqlIntInputParameter("@SubId", subscriberId)
+        .CreateOutputParameters<Subscriber>(_logger);
     return await db.MapOutputAsync<Subscriber>("ws.GetSubscriber", parameters, cancellation);
   }
 }
@@ -302,8 +302,8 @@ public async Task<Subscriber> GetSubscriber(int subscriberId, CancellationToken 
 {
     var db = _dbs["MyDatabase"];
     var parameters = new QueryParameterCollection()
-      .AddPgIntegerInParameter("_subid", subscriberId)
-      .MapToOutParameters<Subscriber>(_logger);
+      .AddPgIntegerInputParameter("_subid", subscriberId)
+      .CreateOutputParameters<Subscriber>(_logger);
     return await db.MapOutputAsync<Subscriber>("ws.GetSubscriber", parameters, cancellation);
 }
 ```

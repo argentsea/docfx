@@ -31,8 +31,8 @@ data access code changes, also to ensure that indexes exist to support the new q
 
 #### Q: How can I make sure that my data is secure?
 
-A: Start by hiring an knowledgeable DBA. ArgentSea helps in a few ways:
+A: Start by hiring an knowledgeable DBA. ArgentSea helps in a few additional ways:
 
 * ArgentSea’s configuration design helps protect against unsafe storage of login passwords within connection strings.
-* Because it uses stored procedures, users cannot run arbitrary SQL statements. This reduces the opportunity for mistaken SQL statements that corrupt data and SQL injection attacks.
+* Because it uses stored procedures, users cannot run arbitrary SQL statements. This reduces the opportunity for mistaken SQL statements that corrupt data, SQL injection attacks, and data operations to which the DBAs do not have visibility.
 * Because you can run your application with only EXECUTE permissions, no user would have access  to operations that are not explicitly enabled by a procedure.

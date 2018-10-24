@@ -16,7 +16,7 @@ There are two types of database connections in ArgentSea:
 * __A *database connection*__ - a data set which is hosted by a single database
 * __A *shard set*__  - a single data set spread over multiple database connections
 
-ArgentSea configuration supports any number of *database connections* and any number of *shard sets*. And of course each *shard set* can have many database connections.
+ArgentSea configuration supports any number of *database connections* and any number of *shard sets*. And of course each *shard set* can have many database connections, even separate read and write connections.
 
 This creates a potentially large number of database connections. Many of these will likely have similar connection information. In many scenarios, all of the connections in a shard set would use the same login information. Likewise, in a given datacenter environment it only makes sense that all connections use the same resiliency strategy.
 
@@ -50,7 +50,7 @@ If you are using json configuration files to manage your configuration, the cred
   ]
 ````
 
-If you prefer to set the properties of an Options class directly, you can use the ArgentSea.DataSecurityOptions class.
+If you prefer to set the properties of an [Options class](/api/ArgentSea.DataSecurityOptions.html) directly, you can use the ArgentSea.DataSecurityOptions class.
 
 You should put this configuration section into a secure location. In a development environment, you should consider using the *UserSecrets* functionality, which prevents this information from being checked into your source code repository. In other environments, you might consider using you should use AWS Secrets Manager, Azure Key Vault, or something similar.
 
@@ -71,10 +71,9 @@ The *SecurityKey* property must be unique and exactly match the security string 
 
 ### Resilience Strategies
 
-Resilience strategies define how ArgentSea recovers from unexpected failures, usually through some combination of retry logic and circuit breaking. Because one typically requires only a few resilience strategies across datacenters (perhaps one for local connections and another for across the WAN), to reduce redundancy we use the same keyed approach as for security.
+[Resilience strategies](/api/ArgentSea.DataResilienceConfiguration.html) define how ArgentSea recovers from unexpected failures, usually through some combination of retry logic and circuit breaking. Because one typically requires only a few resilience strategies across datacenters (perhaps one for local connections and another for across the WAN), to reduce redundancy we use the same keyed approach as for security.
 
-A general Resilience Strategy is implicit. If a connection does not specify a Resilience Strategy, this
-default one will be used. If it is defined, the corresponding connection(s) must specify the key (again, casing matters).
+A general Resilience Strategy is implicit. If a connection does not specify a Resilience Strategy, this default one will be used. If it is defined, the corresponding connection(s) must specify the key (again, casing matters).
 
 An example resiliency configuration section might look like this:
 
@@ -115,7 +114,7 @@ Then, if the retry is not successful, it should wait a bit longer for the error 
 retrying again. The `RetryLengthening1 value is what determines how much longer it will pause
 on subsequent retries before giving up.
 
-The `RetryLengthening` values are:
+The [Retry Sequence Lengthening](/api/ArgentSea.DataResilienceConfiguration.SequenceLengthening.html) values are:
 
 * __Linear__ - each retry is the same duration as specified in `RetryInterval`
 * __Fibonacci__ - The first retry is at `RetryInterval`, each subsequent retry interval pauses for the duration of the previous two combined.
@@ -158,7 +157,7 @@ how often (in milliseconds) the circuit breaker will allow a single transaction 
 
 ## Database Connections
 
-The database configuration architecure allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code.
+The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code.
 
 The connection information is specific to the database provider.
 
@@ -166,7 +165,7 @@ The connection information is specific to the database provider.
 
 ### SQL Server Database Connections
 
-For SQL Server, the entire set of attributes would look like this:
+For SQL Server, the [entire set of attributes]/api-sql/ArgentSea.Sql.SqlDbConnectionConfiguration.html) would look like this:
 
 ````json
 
@@ -232,7 +231,7 @@ If you accept the defaults, the only required parameter values are:
 
 ### PostgreSQL Database Connections
 
-For SQL Server, the entire set of attributes would look like this:
+For PostgreSQL, the [entire set of attributes](/api-pg/ArgentSea.Pg.PgDbConnectionConfiguration.html) would look like this:
 
 ````json
 "PgDbConnections": [
@@ -534,7 +533,7 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter.
+This example assumes that your shardId type is *short*. If you use any other type, change the generic parameter.
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
@@ -544,8 +543,8 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
             ...
             // add your injectable logging provider
             services.AddLogging();
-            // add the ArgentSea SQL database connections (shardId type: byte)
-            services.AddPgServices<byte>(Configuration);
+            // add the ArgentSea SQL database connections (shardId type: short)
+            services.AddPgServices<short>(Configuration);
             // now add your custom data classes, which use the data components
             services.AddSingleton<MyDataStore>();
             ...
@@ -642,12 +641,12 @@ Again, the assumes a ShardId type of *byte*; replace this as appropriate.
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
-using ShardSets = ArgentSea.Pg.PgShardSets<byte>;
+using ShardSets = ArgentSea.Pg.PgShardSets<short>;
 // and/or
-using ShardSet = ArgentSea.Pg.PgShardSets<byte>.ShardDataSet;
+using ShardSet = ArgentSea.Pg.PgShardSets<short>.ShardDataSet;
 ```
 
-Again, the assumes a ShardId type of *byte*; replace this as appropriate.
+Again, the assumes a ShardId type of *short*; replace this as appropriate.
 
 ***
 
@@ -674,10 +673,10 @@ By creating a local class that inherits from then generic class, you can simplif
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```C#
-    public class ShardSets : PgShardSets<byte>
+    public class ShardSets : PgShardSets<short>
     {
         public ShardSets(
-            IOptions<SqlShardConnectionOptions<byte>> configOptions,
+            IOptions<SqlShardConnectionOptions<short>> configOptions,
             IOptions<DataSecurityOptions> securityOptions,
             IOptions<DataResilienceOptions> resilienceStrategiesOptions,
             ILogger<ShardSets> logger
