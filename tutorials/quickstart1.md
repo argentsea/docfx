@@ -59,8 +59,10 @@ Alternatively, for a connection using Windows authentication, use:
   ],
 ```
 
+> [!TIP]
+> If you are using Windows authentication *exclusively*, you can store your credential information within your appsettings.json file. There is no need to secure your credential information.
 > [!CAUTION]
-> In a production deployment, the Credential section should be hosted in Azure Key Vault, AWS Secrets Manager, or some other secure resource.
+> In a production deployment, the Credential section should be hosted in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), or some other secure resource.
 
 Storing passwords more securely is an incidental benefit of having a separate Credentials section. The principal purpose is to simplify login management when the system has many connections across multiple shard sets.
 

@@ -7,7 +7,7 @@ ArgentSea fully leverages the configuration architecture of .NET core/.NET stand
 * A configuration dictionary, which can be loaded from multiple sources, one of which is a file called *appsettings.json*
 * An “options” architecture, which casts the configuration entries into a strongly-typed configuration object.
 
-One of the key improvements of the configuration architecture in .NET standard is the dictionary architecture, which allows entries to be loaded from multiple sources. So, for example, you might load the account names from an *appsettings.json* configuration file, the passwords from a usersecrets.json file (or Key Vault), and the server names from environment variables. Properly managed, this can make deployments both easier and more secure.
+One of the key improvements of the configuration architecture in .NET standard is the dictionary architecture, which allows entries to be loaded from multiple sources. So, for example, you might load the account names from an *appsettings.json* configuration file, the passwords from a usersecrets.json file (or [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) or [Secrets Manager](https://aws.amazon.com/secrets-manager/)), and the server names from environment variables. Properly managed, this can make deployments both easier and more secure.
 
 ## ArgentSea Database Connections
 
@@ -52,7 +52,7 @@ If you are using json configuration files to manage your configuration, the cred
 
 If you prefer to set the properties of an [Options class](/api/ArgentSea.DataSecurityOptions.html) directly, you can use the ArgentSea.DataSecurityOptions class.
 
-You should put this configuration section into a secure location. In a development environment, you should consider using the *UserSecrets* functionality, which prevents this information from being checked into your source code repository. In other environments, you might consider using you should use AWS Secrets Manager, Azure Key Vault, or something similar.
+You should put this configuration section into a secure location. In a development environment, you should consider using the *UserSecrets* functionality, which prevents this information from being checked into your source code repository. In other environments, you might consider using [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), or something similar.
 
 In non-JSON configuration contexts, like environment variables, you can specify these values as key-value pairs. This is the equivalent of the JSON above:
 
