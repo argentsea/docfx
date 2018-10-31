@@ -22,7 +22,7 @@ The data framework will attempt to recover from transient errors by automaticall
 
 ### Code Clarity and Maintenance
 
-Supportability is about more than operational management. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a natural path to resolving bugs. When applications must be supported by teams that are not the original authors, this becomes especially critical.
+Supportability is about more than operational management. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a natural path to resolving bugs. When long-lived applications must be supported by teams that are not the original authors, this becomes especially critical.
 
 The ArgentSea Mapper helps reduce the burden of code maintenance by simplifying data access code. The logging functionality can also provide substantial insight to developers, including the dynamic code compilation behind the Mapper, misconfigurations, and data errors.
 
@@ -39,7 +39,7 @@ However, one of the top ways that ArgentSea help with ongoing code maintenance i
                         Although it might sound cozy, “tight coupling” isn’t a good thing in software design. It happens when one system’s integration with another system depends on the internal implementation of the other system. Usually the result of haphazard design, it makes it nearly impossible to switch to a different provider.
                     </p>
                     <p>
-                        Like, say, when accessing your database *depends upon how tables and columns are implemented*.
+                        For example, when your database client code <i>depends upon how tables and columns are implemented</i>, you have tightly implemented these layers.
                     </p>
                 </div>
             </div>
@@ -50,7 +50,9 @@ However, one of the top ways that ArgentSea help with ongoing code maintenance i
                 <div>
                     <h4>Loose Coupling</h4>
                     <p>
-                    “Loosely coupled” systems have well-defined interfaces. You can change the implementation as long as you maintain the interface contract. These systems are more robust, testable, and manageable — and those are good things.
+                    <i>Loosely coupled</i> systems have well-defined interfaces. Because of this, you can change the <i>implementation</i> as long as you maintain the interface “contract”. These systems are more robust, testable, and manageable.
+                    </p><p>
+                    Such systems are more robust because the services provided by each layer is well-defined, and therefore the systems can be optimized for known requirements.
                     </p><p>
                     Stored procedures or functions allow you to change the underlying database structures, but as long as the same results are returned you will not break the application.
                     </p>

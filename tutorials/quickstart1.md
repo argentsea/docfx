@@ -10,29 +10,38 @@ A sample QuickStart project is [here](https://github.com/argentsea/quickstarts).
 
 If you prefer to start by creating a new, empty project, ensure that appsettings.json is added.
 
-## 2. Add ArgentSea to your project
+## 2. Setup your Database
 
-Use NuGet to add ArgentSea to your project. Select the package that corresponds to your database platform.
+If you are using the QuickStart1 project, a setup script is including in the project. You can run the script against the database server to create the sample database.
+
+Since ArgentSea works with stored procedures, it can use an account that has only EXECUTE permissions. An elegant way to implement this is to create a distinct schema, then grant the user EXECUTE permission only to that schema. Henceforth, any procedure or function belonging to that schema can be executed by this client — but nothing else.
+
+> [!CAUTION]
+> A password is embedded in the setup script (and corresponds to the credential sections below); you might consider changing this value. However, this is also a low-privileged user, so it is not high-risk if you leave things as they are.
+
+## 3. Add ArgentSea to your project
+
+If you have loaded the QuickStart project, you can skip this step. If you are creating a new project, use NuGet to add ArgentSea to your project. Select the package that corresponds to your database platform.
 
 As of today, you can add one of the following NuGet packages:
 
 * For Microsoft SQL Server databases, use **ArgentSea.Sql**
 * For PostgreSQL, use **ArgentSea.Pg**
 
-Both packages will automatically include the shared ArgentSea package and any other dependencies. Using both packages in the same project is not a tested or scenario.
+Both packages will automatically include the shared ArgentSea package and any other dependencies. Using both packages in the same project is not a tested scenario.
 
 You can learn more about adding a reference to ArgentSea [here](https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio).
 
-## 3. Define your Login Information
+## 4. Define your Login Information
 
 There are two required configuration sections. The first of these provides security information.
 
-If you have [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets)
-set up (preferred), add the json below to your User Secrets file (right-click
-on the project and select *Manage User Secrets*). If you are not using User Secrets, you can simply add the json sections to your appsettings.json configuration file.
+If you are creating a new project, we recommend adding [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets). This provides a means of keeping passwords out of your source control. You can add UserSecrets to your project by loading the *Microsoft.Extensions.Configuration.UserSecrets* NuGet package.
 
 > [!TIP]
-> The sample application *does* use User Secrets, so if you are following along at home you will need to manually copy the credentials to the User Secrets in the sample app.
+> The QuickStart1 sample application *does* use User Secrets, so, if you are following along at home, you will need to manually copy the credentials to the User Secrets in the sample app.
+
+If you are using UserSecrets, right-click on the project and select *Manage User Secrets* to open the secrets JSON file. Otherwise, you can simply add the security information to your appsettings.json file.
 
 To connect using username and password authentication, use:
 
@@ -60,17 +69,18 @@ Alternatively, for a connection using Windows authentication, use:
 ```
 
 > [!TIP]
-> If you are using Windows authentication *exclusively*, you can store your credential information within your appsettings.json file. There is no need to secure your credential information.
+> If you are using Windows or Kerberos authentication *exclusively*, you can store your credential information within your appsettings.json file. There is no need to secure your credential information.
 > [!CAUTION]
 > In a production deployment, the Credential section should be hosted in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), or some other secure resource.
 
-Storing passwords more securely is an incidental benefit of having a separate Credentials section. The principal purpose is to simplify login management when the system has many connections across multiple shard sets.
+## 6. Define Your Database Settings
 
-## 4. Define Your Database Settings
+The database settings tell ArgentSea how to build the (non-security) part of your connection string. Any attribute not specified will use a default value, so the required information is quite minimal. A deep-dive into configuration settings, including a complete list of configuration attributes, is available [here](/tutorials/configuration.md).
 
-The database settings tell ArgentSea how to build the (non-security) part of your connection string. Any attribute not specified will use a default value, so the required information is quite minimal.
+> [!TIP]
+> The new configuration architecture in .NET core allows values to be hosted in multiple places, including environment variables — which can be very useful for managing a release pipeline. Again, the details are described in the [configuration](/tutorials/configuration.md) tutorial.
 
-In your appsettings.json file, add the following section:
+In your appsettings.json file, add the following section if you are creating a new project; otherwise, edit any values that you might need to change:
 
 # [SQL Server](#tab/tabid-sql)
 
@@ -80,8 +90,8 @@ Configure the *DataSource* and *InitialCatalog* properties below.
   "SqlDbConnections": [
     {
       "DatabaseKey": "MyDatabase",
-      "SecurityKey": "SecKey1",
       "DataConnection": {
+        "SecurityKey": "SecKey1",
         "DataSource": "localhost",
         "InitialCatalog": "MyDb"
       }
@@ -97,8 +107,8 @@ Configure the *Host* and *Database* properties below.
   "PgDbConnections": [
     {
       "DatabaseKey": "MyDatabase",
-      "SecurityKey": "SecKey1",
       "DataConnection": {
+        "SecurityKey": "SecKey1",
         "Host": "localhost",
         "Database": "MyDb"
       }
@@ -108,59 +118,51 @@ Configure the *Host* and *Database* properties below.
 
 ***
 
-A deep-dive into configuration settings, including a complete list of configuration attributes,
-is available [here](/tutorials/configuration.html).
-
-> [!TIP]
-> In a production deployment, environment-specific connection information could be stored in server environment variables rather than configuration files. This may make deployments easier to manage.
-
-## 6. Load ArgentSea on Application Start
+## 7. Load ArgentSea on Application Start
 
 ArgentSea is an injectable service, so it needs to be registered on application startup.
 
 # [SQL Server](#tab/tabid-sql)
 
-Open your project’s *Startup* class. At the top, add the following *using* statement:
+Open your project’s *Startup* class. At the top, there should be the following *using* statement:
 
-```C#
+```csharp
 using ArgentSea.Sql;
 ```
 
 Then, in the `Startup` class’ `ConfigureServices` method, add:
 
-```C#
+```csharp
 services.AddSqlServices(Configuration);
 ```
 
-This step creates an injectable *SqlServices* object that we can use in all
-of our data access clients.
+This step creates an injectable *SqlServices* object that we can consume in all of our data access clients.
 
 # [PostgreSQL](#tab/tabid-pg)
 
-Open your project’s *Startup* class. At the top, add the following *using* statement:
+Open your project’s *Startup* class. At the top, there should be the following *using* statement:
 
-```C#
+```csharp
 using ArgentSea.Pg;
 ```
 
 Then, in the `Startup` class’ `ConfigureServices` method, add:
 
-```C#
+```csharp
 services.AddPgServices(Configuration);
 ```
 
-This step creates an injectable *PgServices* object that we can use in all
-of our data access clients.
+This step creates an injectable *SqlServices* object that we can consume in all of our data access clients.
 
 ***
 
-## 7. Create a Model Class
+## 8. Create a Model Class
 
 A model class has properties that correspond the the fields of a data entity. ArgentSea can automatically map these properties to input or output parameters, the columns of a DataReader object, or (in SQL Server) a table-valued parameter.
 
 For example, suppose your subscriber data can be represented by a class like this:
 
-```C#
+```csharp
 using System;
 
 public class Subscriber
@@ -177,7 +179,7 @@ We can simply add mapping attributes to this class:
 
 # [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
 using System;
 using ArgentSea.Sql;
 
@@ -198,7 +200,7 @@ The “@” parameter prefix is optional — ArgentSea will add the “@” auto
 
 # [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
 using System;
 using ArgentSea.Pg;
 
@@ -224,11 +226,11 @@ Note that the property name *does not* need to match the parameter or column nam
 
 ## 5. Call a Stored Procedure or Function
 
-Create one more class, called *SubscriberStore*. This is the class that will call the database stored procedure or function and return the specified subscriber.
+Your application needs a repository class to actually retrieve the data. In the sample application, this is called the *SubscriberStore*. This is the class that will call the database stored procedure or function and return the specified subscriber. If you are creating your own project, you need to construct something similar.
 
 # [SQL Server](#tab/tabid-sql)
 
-Our very simple stored procedure can be something like this:
+In the simple [QuickStart](https://github.com/argentsea/quickstarts/blob/master/QuickStart1.Sql/QuickStart1.Sql/Sql/SetupDB.sql), the stored procedure looks like this:
 
 ```SQL
 CREATE PROCEDURE dbo.GetSubscriber (@SubscriberId int)
@@ -240,107 +242,118 @@ BEGIN
 END;
 ```
 
-You can find the complete project setup SQL [here](https://github.com/argentsea/quickstarts/blob/master/QuickStart1.Sql/QuickStart1.Sql/Sql/SetupDB.sql).
-
 Our implementation of the data access code requires only a few lines:
 
-```C#
+```csharp
 public class SubscriberStore
 {
-  private readonly SqlDatabases _dbs;
-  private readonly ILogger<SubscriberStore> _logger;
-  public SubscriberStore(SqlDatabases dbs, ILogger<SubscriberStore> logger)
-  {
-    _dbs = dbs;
-    _logger = logger;
-  }
+    private readonly SqlDatabases.DataConnection _db;
+    private readonly ILogger<SubscriberStore> _logger;
+    public SubscriberStore(SqlDatabases dbs, ILogger<SubscriberStore> logger)
+    {
+        _db = dbs["MyDatabase"];
+        _logger = logger;
+    }
 
-  public async Task<Subscriber> GetSubscriber(int subscriberId, CancellationToken cancellation)
-  {
-    var db = _dbs["MyDatabase"];
-    var parameters = new QueryParameterCollection()
-        .AddSqlIntInputParameter("@SubId", subscriberId)
-        .CreateOutputParameters<Subscriber>(_logger);
-    return await db.MapOutputAsync<Subscriber>("ws.GetSubscriber", parameters, cancellation);
-  }
+    public async Task<Subscriber> GetSubscriber(int subscriberId, CancellationToken cancellation)
+    {
+        var parameters = new QueryParameterCollection()
+            .AddSqlIntegerInputParameter("@subid", subscriberId)
+            .CreateOutputParameters<Subscriber>(_logger);
+        return await _db.MapOutputAsync<Subscriber>("ws.GetSubscriber", parameters, cancellation);
+    }
 }
 ```
 
 # [PostgreSQL](#tab/tabid-pg)
 
-Our very simple PostgreSQL function can be something like this:
+In the simple [QuickStart](https://github.com/argentsea/quickstarts/blob/master/QuickStart1.Pg/QuickStart1.Pg/Sql/SetupDB.sql), the function looks like this:
 
 ```SQL
-CREATE FUNCTION ws.GetSubscriber (
+CREATE OR REPLACE FUNCTION ws.GetSubscriber (
   _subid integer,
   OUT _subname varchar(255),
-  OUT _enddate timestamp
+  OUT _enddate timestamp 
 )
 SECURITY DEFINER
 AS $$
   SELECT Subscribers.SubName,
     Subscribers.EndDate
-  FROM Subscribers
+  FROM qs1.Subscribers
   WHERE Subscribers.SubId = _subid;
 $$ LANGUAGE sql;
 ```
 
-You can find the complete project setup SQL [here](https://github.com/argentsea/quickstarts/blob/master/QuickStart1.Pg/QuickStart1.Pg/Sql/SetupDB.sql).
-
 Our implementation of the data access code requires only a few lines:
 
-```C#
+```csharp
 public class SubscriberStore
 {
-  private readonly PgDatabases _dbs;
-  private readonly ILogger<SubscriberStore> _logger;
-  public SubscriberStore(PgDatabases dbs, ILogger<SubscriberStore> logger)
-  {
-    _dbs = dbs;
-    _logger = logger;
-  }
+    private readonly PgDatabases.DataConnection _db;
+    private readonly ILogger<SubscriberStore> _logger;
+    public SubscriberStore(PgDatabases dbs, ILogger<SubscriberStore> logger)
+    {
+        _db = dbs["MyDatabase"];
+        _logger = logger;
+    }
 
-public async Task<Subscriber> GetSubscriber(int subscriberId, CancellationToken cancellation)
-{
-    var db = _dbs["MyDatabase"];
-    var parameters = new QueryParameterCollection()
-      .AddPgIntegerInputParameter("_subid", subscriberId)
-      .CreateOutputParameters<Subscriber>(_logger);
-    return await db.MapOutputAsync<Subscriber>("ws.GetSubscriber", parameters, cancellation);
+    public async Task<Subscriber> GetSubscriber(int subscriberId, CancellationToken cancellation)
+    {
+        var prms = new QueryParameterCollection()
+            .AddPgIntegerInputParameter("_subid", subscriberId)
+            .CreateOutputParameters<Subscriber>(_logger);
+        return await _db.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    }
 }
 ```
 
 ***
 
-The ArgentSea database service is injected into the *SubscriberStore* class. Don’t forget to add the *SubscriberStore* class to `services.Configure()` in Startup, so that it can be injected to any classes that need to access a subscriber.
+The ArgentSea database service is injected into the *SubscriberStore* class by the .NET framework. The *SubscriberStore* itself is in turn injected into the controller. Don’t forget to add the *SubscriberStore* class to `services.Configure()` in Startup, so that injection works.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddSingleton<SubscriberStore>();
+    ...
+}
+```
 
 The code only needs to set the required input parameter value (the subscriber id to be retrieved). The Mapper sets the remaining parameters automatically. The QueryAsync method retrieves the data and creates the model instance automatically.
 
 The controller for a web API example, can be very simple:
 
-```C#
+```csharp
 [Route("api/[controller]")]
 [ApiController]
 public class SubscriberController : ControllerBase
 {
-  private readonly SubscriberStore _store;
-  private readonly ILogger<SubscriberController> _logger;
+    private readonly SubscriberStore _store;
+    private readonly ILogger<SubscriberController> _logger;
 
-  public SubscriberController(SubscriberStore store, ILogger<SubscriberController> logger)
-  {
-    _store = store;
-    _logger = logger;
-  }
+    public SubscriberController(SubscriberStore store, ILogger<SubscriberController> logger)
+    {
+        _store = store;
+        _logger = logger;
+    }
 
-  [HttpGet("{id}")]
-  public async Task<ActionResult<Subscriber>> Get(int id, CancellationToken cancellation)
-  {
-    return await _store.GetSubscriber(id, cancellation);
-  }
+    // GET api/subscriber/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Subscriber>> Get(int id, CancellationToken cancellation)
+    {
+        var result = await _store.GetSubscriber(id, cancellation);
+        if (result is null)
+        {
+            return NotFound();
+        }
+        return result;
+    }
 }
-
 ```
 
 Due to the work of the Mapper, the controller code would not increase in complexity even if the model had a hundred properties mapped to a hundred parameters.
 
-You should be able to build and run your project. The QuickStart code has a test project that validates that the web service returns the expected results.
+You should be able to build and run your project. You can test the web service by specifying http://<projectUrl>/api/subscriber/1.
+
+The QuickStart code has a test project that validates that the web service returns the expected results.

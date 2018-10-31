@@ -15,7 +15,7 @@ By defining metadata about the names of parameters or result columns, the Mapper
 
 You use properties attributes to define the metadata that the Mapper requires. For example, given this very simple model class:
 
-```cs
+```csharp
 using System;
 
 public class Subscriber
@@ -32,7 +32,7 @@ Adding mapping attributes to this class provides the metadata to automatically m
 
 ## [SQL Server](#tab/tabid-sql)
 
-```cs
+```csharp
 using System;
 using ArgentSea.Sql;
 
@@ -53,7 +53,7 @@ The “@” parameter prefix is optional — ArgentSea will add the “@” auto
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```cs
+```csharp
 using System;
 using ArgentSea.Pg;
 
@@ -226,7 +226,7 @@ The mapper does *not* generate dynamic SQL statements. The Mapper may be useful 
 
 The Mapper’s parameter methods are implemented as an extension method to the (abstract) DbParametersCollection, which is inherited by each provider implementation of the DbCommand.Parameters property. This means that you can call the Mapper through the command object of any provider.
 
-```cs
+```csharp
 cmd.Parameters.CreateInputParameters<MyDataClass>(myDataClass, logger);
 // or
 cmd.Parameters.CreateOutputParameters<MyDataClass>(logger);
@@ -238,7 +238,7 @@ These extension methods can be combined with the other extension methods for a *
 
 For example, this code uses the fluent API to to set an output parameter and then the mapper to create and set all the other object properties from a transaction object.
 
-```cs
+```csharp
 cmd.Parameters.AddSqlIntOutputParameter("@TransactionId")
     .CreateInputParameters<Transaction>(transaction, logger);
 ```
@@ -247,7 +247,7 @@ cmd.Parameters.AddSqlIntOutputParameter("@TransactionId")
 
 For example, this code uses the fluent API to to set an output parameter and then the mapper to create and set all the other object properties from a transaction object.
 
-```cs
+```csharp
 cmd.Parameters.AddPgIntegerOutputParameter("TransactionId")
     .CreateInputParameters<Transaction>(transaction, logger);
 ```
@@ -264,7 +264,7 @@ Enter the [QueryParameterCollection](/api/ArgentSea.QueryParameterCollection.htm
 
 Again, the optional fluent API makes setting an input parameter and a mapped set of output parameters quite simple:
 
-```cs
+```csharp
 var prms = new QueryParameterCollection()
     .AddSqlBigIntInputParameter("@ID", _id)
     .CreateOutputParameters<MyClass>(logger);
@@ -274,7 +274,7 @@ var prms = new QueryParameterCollection()
 
 Again, the optional fluent API makes setting an input parameter and a mapped set of output parameters quite simple:
 
-```cs
+```csharp
 var prms = new QueryParameterCollection()
     .AddPgBigintInputParameter("ID", _id)
     .CreateOutputParameters<MyClass>(logger);
@@ -306,7 +306,7 @@ Working with output parameters is done in two steps:
 
 This example creates and sets the CustomerId parameter and creates all of the output parameters. It then executes the query and reads the output values into a new object.
 
-```cs
+```csharp
 cmd.Parameters.AddSqlIntInputParameter("@CustomerId", _Id)
     .CreateOutputParameters<Customer>(logger);
 await cmd.ExecuteNonQueryAsync();
@@ -317,7 +317,7 @@ var customer = cmd.Parameters.ToModel<Customer>(logger);
 
 This example creates and sets the CustomerId parameter and creates all of the output parameters. It then executes the query and reads the output values into a new object.
 
-```cs
+```csharp
 cmd.Parameters.AddPgIntegerInputParameter("CustomerId", _Id)
     .CreateOutputParameters<Customer>(logger);
 await cmd.ExecuteNonQueryAsync();
@@ -339,7 +339,7 @@ The Mapper also converts the rows presented by a DataReader object into a list o
 
 For example, to map to a list of objects:
 
-```cs
+```csharp
 var customers = rdr.ToList<Customer>(logger);
 ```
 
@@ -347,7 +347,7 @@ The IList result will contain an object instance for each valid row. If an attri
 
 To map to a single Model instance:
 
-````cs
+````csharp
 var customer = rdr.ToModel<Customer>(logger);
 ````
 

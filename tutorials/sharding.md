@@ -115,7 +115,7 @@ The simplest implementation is to simply add the [MapShardKey](/api/ArgentSea.Ma
 
 ## [SQL Server](#tab/tabid-sql)
 
-````C#
+````csharp
 [MapShardKey('c', "@CustomerId")]
 [MapToSqlInt("@CustomerId")]
 public ShardKey<byte, int> CustomerKey { get; set; }
@@ -124,7 +124,7 @@ public ShardKey<byte, int> CustomerKey { get; set; }
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-````C#
+````csharp
 [MapShardKey('c', "CustomerId")]
 [MapToPgInteger("CustomerId")]
 public ShardKey<short, int> CustomerKey { get; set; }
@@ -142,7 +142,7 @@ The [MapShardChild](/api/ArgentSea.MapShardChildAttribute.html) attribute is nea
 
 ## [SQL Server](#tab/tabid-sql)
 
-````C#
+````csharp
 [MapShardChild('O', "@OrderId", "@OrderItemId")]
 [MapToSqlBigInt("@OrderId")]
 [MapToSqlSmallInt("@OrderItemId")]
@@ -152,7 +152,7 @@ public ShardChild<byte, long, short> OrderItemKey { get; set; }
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-````C#
+````csharp
 [MapShardChild('O', "OrderId", "OrderItemId")]
 [MapToPgBigint("OrderId")]
 [MapToPgInteger("OrderItemId")]
@@ -165,7 +165,7 @@ In both previous examples, the ShardId will be *implicitly* obtained from the co
 
 ## [SQL Server](#tab/tabid-sql)
 
-````C#
+````csharp
 [MapShardKey('c', "@CustomerShardId", "@CustomerId")]
 [MapToSqlTinyInt("@CustomerShardId")]
 [MapToSqlInt("@CustomerId")]
@@ -181,7 +181,7 @@ public ShardChild<byte, long, short> OrderItemKey { get; set; }
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-````C#
+````csharp
 [MapShardKey('c', "CustomerId")]
 [MapToSqlTinyint("CustomerShardId")]
 [MapToPgInteger("CustomerId")]
@@ -231,7 +231,7 @@ Because it is unlikely that you would need to access more than one ShardSet in t
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
     public class SubscriberStore
     {
         private readonly SqlShardSets<string>.ShardSet _shardSet;
@@ -247,7 +247,7 @@ Because it is unlikely that you would need to access more than one ShardSet in t
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
 public class SubscriberStore
 {
     private readonly PgShardSets<string>.ShardSet _shardSet;
@@ -278,7 +278,7 @@ Each [shard](/api/ArgentSea.ShardSetsBase-2.ShardInstance.html) has two data con
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
 public async Task<Subscriber> GetSubscriber(ShardKey<byte, int> subscriberKey, CancellationToken cancellation)
 {
     var prms = new QueryParameterCollection()
@@ -289,7 +289,7 @@ public async Task<Subscriber> GetSubscriber(ShardKey<byte, int> subscriberKey, C
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
 public async Task<Subscriber> GetSubscriber(ShardKey<short, int> subscriberKey, CancellationToken cancellation)
 {
     var prms = new QueryParameterCollection()
@@ -309,7 +309,7 @@ There are several architectural solutions to the latency-driven data inconsisten
 
 To implement your own latency handling, you can easily implement an automatic retry using the Write connection after an unexpectedly missing record on the Read connection. In this example method we retrieve data by key value, so a missing record is unexpected and might be due to replication latency. The code assumes that the subscriber key has the “required” attribute set so that the Mapper returns a null object if the key is null. The resolution is to simply retry on the Write connection.
 
-```C#
+```csharp
     var sub = await _shardSet[subscriberKey.ShardId].Read.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
     // add automatic retry on write connection if subscriber is not found.
     if (sub is null)

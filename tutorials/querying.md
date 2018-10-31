@@ -43,7 +43,7 @@ This ArgentSea query paradigm applies even to non-sharded queries using the Data
 
 With the ArgentSea framework, you need to set parameter values *before* a connection or command is created. The ADO.NET standard parameter collections cannot be created without a command object host. To fill this need, ArgentSea provides a [QueryParameterCollection](/api/ArgentSea.QueryParameterCollection.html) object, which is simply a collection of ADO.NET DbParameters. This object allow you to create an instance with a simple `new` statement.
 
-```C#
+```csharp
 var parameters = new QueryParameterCollection();
 ```
 
@@ -61,7 +61,7 @@ The methods to add parameters to a collection are provider-specific, since they 
 
 ## [SQL Server](#tab/tabid-sql)
 
-````C#
+````csharp
 using ArgentSea.Sql;
 ````
 
@@ -70,7 +70,7 @@ using ArgentSea.Sql;
 
 Here are some code examples:
 
-````C#
+````csharp
 parameters.AddSqlIntInputParameter("@TransactionId", transactionId);
 parameters.AddSqlDecimalInputParameter("@Amount", amount, 16, 2);
 parameters.AddSqlNVarCharInputParameter("@Name", name, 255);
@@ -90,14 +90,14 @@ cmd.Parameters.AddSqlIntInputParameter("@TransactionId", transactionId)
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-````C#
+````csharp
 using ArgentSea.Pg;
 ````
 
 > [!NOTE]
 > The QueryParameterCollection and NpgsqlParameterCollection inherit from the same base class. Not only can you use these methods on ArgentSea’s `QueryParameterCollection`, but you can also use them on the standard ADO.NET `NpgsqlCommand.Parameters` property.
 
-```C#
+```csharp
 parameters.AddPgIntegerInputParameter("TransactionId", transactionId);
 parameters.AddPgDecimalInputParameter("Amount", amount, 16, 4);
 parameters.AddPgVarCharInputParameter("Name", name, 255);
@@ -125,7 +125,7 @@ The Mapper uses Model property attributes to automatically generate code that is
 
 Assuming that the Model (in this example, a “Customer” class) has Mapping attributes associated with each of its properties, you can render all the corresponding input parameters and set their respective values with:
 
-```C#
+```csharp
 parameters.CreateInputParameters<Customer>(customer, logger);
 ```
 
@@ -133,7 +133,7 @@ You can do something similar with output parameters — though it would be unlik
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
 parameters.AddSqlIntInputParameter("@TransactionId", transactionId);
 parameters.CreateOutputParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
@@ -144,7 +144,7 @@ var parameters = new QueryParameterCollection()
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
 parameters.AddPgIntegerInputParameter("TransactionId", transactionId);
 parameters.CreateOutputParameters<Customer>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
@@ -157,7 +157,7 @@ var parameters = new QueryParameterCollection()
 
 Finally, you can always add parameters using standard ADO.NET syntax:
 
-```C#
+```csharp
 var parameter = new System.Data.SqlClient.SqlParameter();
 parameter.SqlDbType = System.Data.SqlDbType.Int;
 parameter.Value = transactionId;
@@ -205,7 +205,7 @@ This is simply the name of the stored procedure or function to be invoked. This 
 
 The general practice is to provide a stored procedure/function name with string constant, like this:
 
-```C#
+```csharp
 await database.RunAsync("ws.MyProcedureName", parameters, cancellationToken);
 ```
 
@@ -213,7 +213,7 @@ As larger applications evolve, however, one can lose track of which database pro
 
 Pro tip: you might consider consistently referencing procedure names via a static class, like this.
 
-```C#
+```csharp
 internal static class DataProcedures
 {
     //This should be a COMPREHENSIVE list of stored procedure names.
@@ -292,7 +292,7 @@ Both methods support multiple result sets that populate properties that contain 
 
 An example of calling each would be:
 
-```C#
+```csharp
 // In this example, ws.GetOrderDetails returns Order data in output parameters:
 _database.MapOutputAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
 // Here, ws.GetOrderDetails returns simple Order data in a single-row SELECT:
@@ -341,7 +341,7 @@ If you are familiar with ADO.NET programming, this will be very familiar. The de
 
 As an example, a method with the correct signature for returning a Customer model looks like this:
 
-```C#
+```csharp
 public static Customer MyCustomerHandler (
     short shardId,
     string sprocName,
@@ -383,7 +383,7 @@ The reader argument is a standard data reader. You can call `reader.MoveNext()` 
 
 The parameters collection contains the input and output parameters for the query. ArgentSea offers a set of extension methods to simplify converting parameter values to .NET types. These are extension methods on the parameter object (not the collection).
 
-```C#
+```csharp
 var transactionId = parameters["@TransactionId"].GetInteger();
 var amount = parameters["@Amount"].GetNullableDecimal();
 var name = parameters["@Name"].GetString();

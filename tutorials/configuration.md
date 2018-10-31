@@ -514,7 +514,7 @@ This example assumes that your shardId type is *byte*. If you use any other type
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
-````C#
+````csharp
         public void ConfigureServices(IServiceCollection services)
         {
             ...
@@ -537,7 +537,7 @@ This example assumes that your shardId type is *short*. If you use any other typ
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
-````C#
+````csharp
         public void ConfigureServices(IServiceCollection services)
         {
             ...
@@ -567,7 +567,7 @@ if you any experience in .NET Core, requesting the database connection in any da
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
 
         public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
         {
@@ -577,7 +577,7 @@ if you any experience in .NET Core, requesting the database connection in any da
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
 
         public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
         {
@@ -593,7 +593,7 @@ To simplify the data access code, you can instead store only the relevant connec
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
         private readonly SqlDatabases.DataConnection _data;
 
         public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
@@ -607,7 +607,7 @@ Subsequent calls to the SQL database can be on methods directly on the `_data` o
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
         private readonly PgDatabases.DataConnection _data;
 
         public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
@@ -630,7 +630,7 @@ To simplify calling a ShardSet *within a single file*, simply add:
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
 using ShardSets = ArgentSea.Sql.SqlShardSets<byte>;
 // and/or
 using ShardSet = ArgentSea.Sql.SqlShardSets<byte>.ShardDataSet;
@@ -640,7 +640,7 @@ Again, the assumes a ShardId type of *byte*; replace this as appropriate.
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
 using ShardSets = ArgentSea.Pg.PgShardSets<short>;
 // and/or
 using ShardSet = ArgentSea.Pg.PgShardSets<short>.ShardDataSet;
@@ -654,7 +654,7 @@ By creating a local class that inherits from then generic class, you can simplif
 
 ## [SQL Server](#tab/tabid-sql)
 
-```C#
+```csharp
     public class ShardSets : SqlShardSets<byte>
     {
         public ShardSets(
@@ -672,7 +672,7 @@ By creating a local class that inherits from then generic class, you can simplif
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```C#
+```csharp
     public class ShardSets : PgShardSets<short>
     {
         public ShardSets(
