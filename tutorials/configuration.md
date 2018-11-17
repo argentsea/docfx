@@ -2,117 +2,578 @@
 
 ## Introduction
 
-ArgentSea fully leverages the configuration architecture of .NET core/.NET standard. If this architecture is new to you, it essentially consists of two parts:
+Geo-dispersed deployments and SDLC staging processes require application deployments in many distinct environments. Managing configurations in each environment is already a challenge. Worse, sharded data sets can create a very large number of connections, amplifying the configuration problem further. Then, scale-out of read and write endpoints doubles the number of connections. In the end, there can be a lot of connections to manage.
 
-* A configuration dictionary, which can be loaded from multiple sources, one of which is a file called *appsettings.json*
-* An “options” architecture, which casts the configuration entries into a strongly-typed configuration object.
+ArgentSea is designed to make this potentially large number connections manageable. Using the configuration architecture in .NET core and a unique *configuration hierarchy*, ArgentSea allows application changes to be promoted through staging environments and deployed into multiple production environments. It does this while storing passwords securely and without the need for messy transformations.
 
-One of the key improvements of the configuration architecture in .NET standard is the dictionary architecture, which allows entries to be loaded from multiple sources. So, for example, you might load the account names from an *appsettings.json* configuration file, the passwords from a usersecrets.json file (or [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) or [Secrets Manager](https://aws.amazon.com/secrets-manager/)), and the server names from environment variables. Properly managed, this can make deployments both easier and more secure.
-
-## ArgentSea Database Connections
+## ArgentSea Data Connections
 
 There are two types of database connections in ArgentSea:
 
 * __A *database connection*__ - a data set which is hosted by a single database
-* __A *shard set*__  - a single data set spread over multiple database connections
+* __A *shard set*__  - a data set spread over multiple database connections
 
-ArgentSea configuration supports any number of *database connections* and any number of *shard sets*. And of course each *shard set* can have many database connections, even separate read and write connections.
+ArgentSea configuration supports any number of [database connections](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) and any number of [shard sets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html). Each [shard set](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) can have any number of database connections (shard instances). 
 
-This creates a potentially large number of database connections. Many of these will likely have similar connection information. In many scenarios, all of the connections in a shard set would use the same login information. Likewise, in a given datacenter environment it only makes sense that all connections use the same resiliency strategy.
+All data connections have the option of separate read and write connections. 
+If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes *SQL Server Availability Groups*, *Amazon RDS* Read Replicas, *Azure SQL* geo-replication, *Amazon Aurora* reader endpoints, etc.
 
-To manage this redundancy, the ArgentSea configuration data is broken into four parts:
+All this creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *configuration hierarchy*.
 
-* Login credential information, which can be referenced by any connection.
-* Data resilience strategies, any of which can be referenced by any connection.
-* Database connection information
-* Shard set connection information
+## Connection Attributes
 
-### Credentials
+ArgentSea essentially dispenses with traditional connection strings (although you can use them if you really want to). Instead, it uses the .NET configuration architecture to manage each attribute as a discrete property. Each property can be managed globally, or at the shardSet, database, or connection level. Lower-level settings inherit values from their parent, which they can also overwrite if their own values are set differently.
 
-If you are using json configuration files to manage your configuration, the credentials section in your configuration might look like this:
+For example, if your network infrastructure supports jumbo frames, you can configure the network packet size *once* in the global configuration section and every ArgentSea connection will default to this value.
+
+The set of available properties depends upon the provider:
+
+## [SQL Server](#tab/tabid-sql)
 
 ````json
-  "Credentials": [
-    {
-      "SecurityKey": "0",
-      "UserName": "webuser",
-      "Password": "123456"
-    },
-    {
-      "SecurityKey": "1",
-      "WindowsAuth": true,
-    },
-    {
-      "SecurityKey": "2",
-      "UserName": "admin",
-      "Password": "7890"
-    }
-  ]
+{
+  "ApplicationIntent": "ReadWrite",
+  "ApplicationName": "MyWebApp",
+  "CircuitBreakerFailureCount": 20,
+  "CircuitBreakerTestInterval": 5000,
+  "ConnectTimeout": 2,
+  "CurrentLanguage": "english",
+  "DataSource": "localhost",
+  "Encrypt": false,
+  "FailoverPartner": "MyMirror",
+  "InitialCatalog": "MyDb",
+  "LoadBalanceTimeout": 0,
+  "MaxPoolSize": 100,
+  "MinPoolSize": 0,
+  "MultipleActiveResultSets": false,
+  "MultiSubnetFailover": true,
+  "PacketSize": 4096,
+  "Password": "pwd1234",
+  "PersistSecurityInfo": false,
+  "Pooling": true,
+  "Replication": true,
+  "RetryCount": 6,
+  "RetryInterval": 256,
+  "RetryLengthening": "Fibonacci",
+  "TransactionBinding": "",
+  "TrustServerCertificate": true,
+  "TypeSystemVersion": "Latest",
+  "UserInstance": "",
+  "UserName": "webUser",
+  "WindowsAuth": false,
+  "WorkstationID": "MyPC"
+}
 ````
 
-If you prefer to set the properties of an [Options class](/api/ArgentSea.DataSecurityOptions.html) directly, you can use the ArgentSea.DataSecurityOptions class.
+## [PostgreSQL](#tab/tabid-pg)
 
-You should put this configuration section into a secure location. In a development environment, you should consider using the *UserSecrets* functionality, which prevents this information from being checked into your source code repository. In other environments, you might consider using [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), or something similar.
+````json
+{
+  "ApplicationName": "MyWebApp",
+  "AutoPrepareMinUsages": 5,
+  "CheckCertificateRevocation": false,
+  "CircuitBreakerFailureCount": 20,
+  "CircuitBreakerTestInterval": 25,
+  "ClientEncoding": "UTF8",
+  "CommandTimeout": 5,
+  "ConnectionIdleLifetime": 300,
+  "ConnectionPruningInterval": 10,
+  "ConvertInfinityDateTime": false,
+  "Database": "MyDb",
+  "Encoding": "UTF8",
+  "Enlist": true,
+  "Host": "10.10.25.1",
+  "IncludeRealm": false,
+  "InternalCommandTimeout": -1,
+  "KeepAlive": null,
+  "KerberosServiceName": "postgres",
+  "LoadTableComposites": false,
+  "MaxAutoPrepare": 0,
+  "MaxPoolSize": 100,
+  "MinPoolSize": 1,
+  "NoResetOnClose": false,
+  "Password": "pwd1234",
+  "PersistSecurityInfo": false,
+  "Pooling": true,
+  "Port": 5432,
+  "ReadBufferSize": 8192,
+  "RetryCount": 15,
+  "RetryInterval": 10,
+  "RetryLengthening": "Fibonacci",
+  "SearchPath": null,
+  "ServerCompatibilityMode": "none",
+  "SocketReceiveBufferSize": 8192,
+  "SocketSendBufferSize": 8192,
+  "SslMode": "Require",
+  "TcpKeepAlive": true,
+  "Timeout": 2,
+  "Timezone": "America/Los_Angeles",
+  "TrustServerCertificate": true,
+  "UsePerfCounters": false,
+  "UserName": "webUser",
+  "UseSslStream": true,
+  "WindowsAuth": false,
+  "WriteBufferSize": 8192
+}
+````
 
-In non-JSON configuration contexts, like environment variables, you can specify these values as key-value pairs. This is the equivalent of the JSON above:
+> [!CAUTION]
+> Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is typically required for most connections is login information, a server or host name, and a database name.
+
+## The Configuration Hierarchy
+
+The root of the configuration hierarchy is the “global settings” section. All properties set here are applied to every data connection — unless the value is overwritten by lower-level properties (i.e. database, shard set, shard, etc.).
+
+## [SQL Server](#tab/tabid-sql)
+
+The SQL Server global section is `SqlGlobalSettings`. Any attributes specified in this section are applied to all SQL Server connections.
+
+For example, to globally change both the connection timeout property and packet size:
+
+````json
+{
+  "SqlGlobalSettings": {
+    "ConnectTimeout": 3,
+    "PacketSize": 8196
+  }
+}
+````
+
+## [PostgreSQL](#tab/tabid-pg)
+
+The PostgreSQL global section is `PgGlobalSettings`. Any attributes specified in this section are applied to all PostgreSQL connections.
+
+For example, to globally change both the connection timeout property and packet size:
+
+````json
+{
+  "PgGlobalSettings": {
+    "Timeout": 3,
+    "SocketReceiveBufferSize": 8192,
+    "SocketSendBufferSize": 8192
+  }
+}
+````
+
+### (Non-Sharded) Database Connections
+
+The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code.
+
+Non-sharded database connections have a three-level hierarchy: global values, connection settings, and settings for distinct read and write endpoints.
+
+[IMAGE! database connection]
+
+## [SQL Server](#tab/tabid-sql)
+
+The JSON section for SQL database connections is `SqlDbConnections`. This is an array of connections. Each connection has a required `DatabaseKey` property, and whatever connection properties are needed for the connection.
+
+````json
+{
+  "SqlDbConnections": [
+    {
+      "DatabaseKey": "MainDb",
+      "DataSource": "DbServer1",
+      "InitialCatalog": "MainDb",
+      "WindowsAuth": true
+    },
+    {
+      "DatabaseKey": "OtherDb",
+      "DataSource": "DbServer1",
+      "InitialCatalog": "OtherDb",
+      "WindowsAuth": true,
+      "WriteConnection": {
+        "DataSource": "DbServer2"
+      }
+    },
+    {
+      "DatabaseKey": "ThirdDb",
+      "ReadConnection": {
+        "DataSource": "DbServer3",
+        "InitialCatalog": "Db1",
+        "UserName": "apiUser",
+        "Password": "pwd1234"
+      },
+      "WriteConnection": {
+        "DataSource": "DbServer4",
+        "InitialCatalog": "Db2",
+        "UserName": "webUser",
+        "Password": "pwd5678"
+      }
+    }
+  ]
+}
+````
+
+***
+
+## [PostgreSQL](#tab/tabid-pg)
+
+The JSON section for PostgreSQL database connections is `PgDbConnections`. This is an array of connections. Each connection has a required `DatabaseKey` property, and whatever connection properties are needed for the connection. The application obtains a connection by this `DatabaseKey` and the characters must be an exact match.
+
+````json
+  "PgDbConnections": [
+    {
+      "DatabaseKey": "MainDb",
+      "Host": "10.10.25.1",
+      "Database": "MainDb",
+      "WindowsAuth": true
+    },
+    {
+      "DatabaseKey": "OtherDb",
+      "Host": "10.10.25.2",
+      "Database": "OtherDb",
+      "WindowsAuth": true,
+      "WriteConnection": {
+        "Host": "10.10.25.2"
+      }
+    },
+    {
+      "DatabaseKey": "ThirdDb",
+      "ReadConnection": {
+        "Host": "10.10.25.4",
+        "Database": "MainDb",
+        "UserName": "apiUser",
+        "Password": "pwd1234"
+      },
+      "WriteConnection": {
+        "Host": "10.10.20.25",
+        "Database": "MainDb",
+        "UserName": "webUser",
+        "Password": "pwd5678"
+      }
+    }
+  ]
+}
+````
+
+***
+
+Each connection has two optional child sections, `ReadConnection` and `WriteConnection`. These can be set explicitly if you want different values between read and write connections; otherwise, both read and write connections these will inherit from the parent properties.
+
+In the example above, the first connection has the same values for read and write connections (both Read and Write connections inherit the same values from the parent). The second connection will access a different server for read connections than write connections. The third connection explicitly defines connection information for both the Read and Write connections.
+
+As mentioned before, *any* connection property from the complete property list (as listed earlier), can be included in the database definition, read connection, or write connection.
+
+### Shard Set Connections
+
+A shard set represents a single set of data  that is spread among multiple database servers. This structure is common for high-performance data access, since it is usually more cost effective and predictably scalable to have multiple smaller database servers than to build one massive server. Global applications might try to improve performance for their global users by distributing shards in datacenters around the globe. The ArgentSea data access components allow you to query across multiple servers or a find specific record on its corresponding host server.
+
+ArgentSea shard sets have up to four inheritance levels: global values, shard sets, shards, and distinct read and write endpoint settings.
+
+[IMAGE! shardset connection]
+
+## [SQL Server](#tab/tabid-sql)
+
+The root JSON section for SQL shard connections is `SqlShardSets`. This is an array of shard sets, each of which has an array of shards. Presumably, most applications will not require multiple shard sets, but the capability exists if required.
+
+Each shard set has a required `ShardSetName` property. This value is how the shard set retrieved from within the application, so the characters must *exactly* match.
+
+````json
+{
+  "SqlShardSets": [
+    {
+      "ShardSetName": "Primary",
+      "DataSource": "DbServer1",
+      "FailoverPartner": "Mirror1",
+      "UserName": "webUser",
+      "Password": "pwd1234",
+      "Shards": [
+        {
+          "ShardId": 0,
+          "InitialCatalog": "ShardDb1",
+          "ReadConnection": {
+            "ApplicationIntent": "ReadOnly",
+            "DataSource": "Mirror1",
+          }
+        },
+        {
+          "ShardId": 1,
+          "InitialCatalog": "ShardDb2",
+          "ReadConnection": {
+            "ApplicationIntent": "ReadOnly",
+            "DataSource": "Mirror1",
+          }
+        }
+      ]
+    }
+  ]
+}
+````
+
+In this example, there is one shard set with two shards as two databases on the same server. The read connections are directed to a mirror by overwriting the inherited `DataSource` value with the name of the mirror.
+
+## [PostgreSQL](#tab/tabid-pg)
+
+````json
+{
+  "PgShardSets": [
+    {
+      "ShardSetName": "Primary",
+      "Host": "DbServer1",
+      "UserName": "webUser",
+      "Password": "pwd1234",
+      "Shards": [
+        {
+          "ShardId": 0,
+          "Database": "ShardDb1",
+          "ReadConnection": {
+            "DataSource": "HotStandby1",
+          }
+        },
+        {
+          "ShardId": 1,
+          "Database": "ShardDb2",
+          "ReadConnection": {
+            "DataSource": "HotStandby1",
+          }
+        }
+      ]
+    }
+  ]
+}
+````
+
+In this example, there is one shard set with two shards as two databases on the same server. The read connections are directed to a hot standby replication instance by overwriting the inherited `DataSource` value with the name of the mirror.
+
+***
+
+Again, *any* connection property from the complete property list (as listed earlier), can be included in the shard set definition (to be used by all connections in the shard set), or shard instance (to be used by both Read and Write connections), or to specifically configure the Read and/or Write connection.
+
+In a typical data sharding implementation, all shard connections are likely to use same login information and each server may even use the same database name. The configuration hierarchy makes this easy to manage because the login information and database can be defined once for the shard set, then used by every connection.
+
+### The Shard Identifier Type
+
+End each shard instance has a `ShardId` property, which identifies a specific subset (“shard”) of the data. This value is *critical* because it is not simply a key for a shard instance; the ShardId is generally used in combination with the record key to *uniquely identify* a record.
+
+Put another way, records in the shard set are identified with a sort of virtual compound key, consisting of the shard identifier and the record key. Because record in a data shard may refer to records in *other* shards, the “foreign key” reference requires saving the shard identifier too.
+
+Because of the need to persist the ShardId inside database records, the data type of the ShardId is critical. ArgentSea uses a generic ShardId to allow you to defined any data type you prefer.
+
+> [!IMPORTANT]
+> Once established, the ShardId *type* cannot be easily changed. The ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets. Make sure that you will not outgrow your ShardId type’s maximum value, nor unnecessarily require space that will never be used.  
+> If you are uncertain, consider using a `short` (Int16/smallint) data type for your ShardId.
+
+The JSON ShardId type must correspond to whatever type you have defined for your application’s ShardId. If your application defines its ShardId as a string, then the JSON should be a string value (i.e. be in quotes); if a number, it should be numeric (i.e. a number, without quotes).
+
+More details about the ShardId type is in the [Sharding](sharding.md) section
+
+## The .NET Core Configuration Architecture
+
+ArgentSea fully leverages the configuration architecture of .NET Core. If this architecture is new to you, it essentially consists of two parts:
+
+* A configuration *Dictionary*, which can be loaded from multiple sources — one of which is typically a file called *appsettings.json*
+* An “Options” architecture, which casts the configuration entries into a strongly-typed configuration objects.
+
+One of the key improvements of the configuration architecture in .NET standard is the dictionary architecture, which allows entries to be loaded and combined from multiple sources. So, for example, you might load the account names from an *appsettings.json* configuration file, the passwords from a *secrets.json* file (or [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) or [Secrets Manager](https://aws.amazon.com/secrets-manager/)), and the server names from environment variables. Properly managed, this can make deployments both easier and more secure.
+
+The previous examples all used JSON for configuration. This is not a requirement. In non-JSON configuration contexts, like environment variables, you can specify these values as key-value pairs. The key concatenates the hierarchy separated by “:”. Arrays and lists should include an index.
+
+The same configuration information listed above can be stored and loaded as key-value pairs. An example of the same shard set configuration in non-JSON format would be:
+
+## [SQL Server](#tab/tabid-sql)
 
 | Key | Value |
 | --- | --- |
-| Credentials:0:SecurityKey | 0 |
-| Credentials:0:Password | webuser |
-| Credentials:0:UserName | 123456 |
-| Credentials:1:SecurityKey | 1 |
-| Credentials:1:WindowsAuth | true |
-| Credentials:2:SecurityKey | 2 |
-| Credentials:2:Password | admin |
-| Credentials:2:UserName | 7890 |
+| SqlShardSets:0:ShardSetName | Primary |
+| SqlShardSets:0:DataSource | DbServer1 |
+| SqlShardSets:0:FailoverPartner | Mirror1 |
+| SqlShardSets:0:UserName | webUser |
+| SqlShardSets:0:Password | pwd1234 |
+| SqlShardSets:0:Shards:0:ShardId | 0 |
+| SqlShardSets:0:Shards:0:InitialCatalog | ShardDb1 |
+| SqlShardSets:0:Shards:0:ReadConnection:ApplicationIntent | ReadOnly |
+| SqlShardSets:0:Shards:0:ReadConnection:DataSource | Mirror1 |
+| SqlShardSets:0:Shards:1:ShardId | 1 |
+| SqlShardSets:0:Shards:1:InitialCatalog | ShardDb2 |
+| SqlShardSets:0:Shards:1:ReadConnection:ApplicationIntent | ReadOnly |
+| SqlShardSets:0:Shards:1:ReadConnection:DataSource | Mirror1 |
 
-The *SecurityKey* property must be unique and exactly match the security string key that you specify on your connection (i.e. both must have the same casing).
+## [PostgreSQL](#tab/tabid-pg)
 
-### Resilience Strategies
+| Key | Value |
+| --- | --- |
+| PgShardSets:0:ShardSetName | Primary |
+| PgShardSets:0:DataSource | DbServer1 |
+| PgShardSets:0:UserName | webUser |
+| PgShardSets:0:Password | pwd1234 |
+| PgShardSets:0:Shards:0:ShardId | 0 |
+| PgShardSets:0:Shards:0:InitialCatalog | ShardDb1 |
+| PgShardSets:0:Shards:0:ReadConnection:DataSource | HotStandby1 |
+| PgShardSets:0:Shards:1:ShardId | 1 |
+| PgShardSets:0:Shards:1:InitialCatalog | ShardDb2 |
+| PgShardSets:0:Shards:1:ReadConnection:DataSource | HotStandby1 |
 
-[Resilience strategies](/api/ArgentSea.DataResilienceConfiguration.html) define how ArgentSea recovers from unexpected failures, usually through some combination of retry logic and circuit breaking. Because one typically requires only a few resilience strategies across datacenters (perhaps one for local connections and another for across the WAN), to reduce redundancy we use the same keyed approach as for security.
+***
 
-A general Resilience Strategy is implicit. If a connection does not specify a Resilience Strategy, this default one will be used. If it is defined, the corresponding connection(s) must specify the key (again, casing matters).
+Because .NET Core’s configuration architecture allows values to be aggregated from multiple data stores, we can create configuration entries where they can be most conveniently managed. Gone are the days of needing to transform configuration files upon deployment (unless you really like that type of thing).
 
-An example resiliency configuration section might look like this:
+Typically, there are three types of configuration entries:
+
+* Secure values, like passwords or keys, which should not be readily accessible.
+* Environment-specific values, like server names, which change as releases are promoted through various environments.
+* Application values, which specify how the application should behave.
+
+This capability is critical for managing configuration outside of the application. Using key-value pairs allows configuration values to be hosted in environment variables and secure stores.
+
+### Securing Passwords
+
+In a development environment, you should consider using the [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) functionality, which prevents this information from being checked into your source code repository.
+
+UserSecrets uses a JSON file, so the password entries can be simply removed from the appsettings.json file and stored in the *secrets.json* file. Note that the object counts must be consistent between your *appsettings.json* file and the *secrets.json* file.
+
+## [SQL Server](#tab/tabid-sql)
+
+### User Secrets
 
 ````json
-  "ResilienceStrategies": [
+{
+  "SqlDbConnections": [
     {
-      "DataResilienceKey": "local",
-      "RetryCount": "6",
-      "RetryInterval": "150",
-      "RetryLengthening": "Linear",
-      "CircuitBreakerFailureCount": "10",
-      "CircuitBreakerTestInterval": "5000"
     },
     {
-      "DataResilienceKey": "remote",
-      "RetryCount": "6",
-      "RetryInterval": "250",
-      "RetryLengthening": "Fibonacci",
-      "CircuitBreakerFailureCount": "20",
-      "CircuitBreakerTestInterval": "5000"
+    },
+    {
+      "ReadConnection": {
+        "Password": "pwd1234"
+      },
+      "WriteConnection": {
+        "Password": "pwd5678"
+      }
     }
+  ]
+}
 ````
 
-#### Retries
+***
 
-Note that retries only occur on errors that are defined as *transient*.
-A permissions error or invalid object reference would be pointless to retry.
-(The list of errors defined as *transient* is in the provider-specific implementation
-of IDataProviderServiceFactory. You can view this in the source code).
+## [PostgreSQL](#tab/tabid-pg)
 
-The `RetryCount` setting determines how many times the connection retries before aborting
-and raising an error back to the caller.
-The `RetryInterval` determines the length of time (in milliseconds) between retries.
-The `RetryLengthening` value can add an additional pause between subsequent retries.
+### User Secrets
 
-One might presume that if the system encounters a transient error, it should retry quickly.
-Then, if the retry is not successful, it should wait a bit longer for the error to clear before
-retrying again. The `RetryLengthening1 value is what determines how much longer it will pause
-on subsequent retries before giving up.
+````json
+  "PgDbConnections": [
+    {
+    },
+    {
+    },
+    {
+      "ReadConnection": {
+        "Password": "pwd1234"
+      },
+      "WriteConnection": {
+        "Password": "pwd5678"
+      }
+    }
+  ]
+}
+````
+
+***
+
+In other environments, you might consider using [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Docker secrets](https://docs.docker.com/engine/swarm/secrets/), a secure file share, or something similar.
+
+Most of these secrets stores store key value pairs. The .NET configuration manager resolves the hierarchical JSON files with a semi-colon, “:”, separator between the property hierarchy. Array elements are referenced with an index value.
+
+> [!TIP]
+> Systems that don’t support semi-colon separators in their keys (AWS Secrets Manager, for example) can use double underscores (“__”) instead.
+
+Consequently, the previous JSON values could be saved as corresponding key-value pairs as:
+
+## [SQL Server](#tab/tabid-sql)
+
+| Key | Value |
+| --- | --- |
+| SqlDbConnections:2:ReadConnection:Password | pwd1234 |
+| SqlDbConnections:2:WriteConnection:Password | pwd5678 |
+
+## [PostgreSQL](#tab/tabid-pg)
+
+| Key | Value |
+| --- | --- |
+| PgDbConnections:2:ReadConnection:Password | pwd1234 |
+| PgDbConnections:2:WriteConnection:Password | pwd5678 |
+
+***
+
+In reality, most implementations would have a single secure password used for every shard connection, in which case the key in your secrets store is simply:
+
+## [SQL Server](#tab/tabid-sql)
+
+| Key | Value |
+| --- | --- |
+| SqlShardSets:0:Password | pwd1234 |
+
+## [PostgreSQL](#tab/tabid-pg)
+
+| Key | Value |
+| --- | --- |
+| PgShardSets:0:Password | pwd1234 |
+
+***
+
+### Environment-specific Configuration
+
+Managing configuration through multiple staging and release environments works the same way. You can store environment-specific settings — like server names or database names — in server [environment variables](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.1#environment-variables-configuration-provider). These are also key-value pairs, so the .NET Core configuration hierarchy would be rendered to keys in the same way as described in the previous section.
+
+The database configuration JSON presented previously would be saved in environment variables as:
+
+| Key | Value |
+| --- | --- |
+| SqlDbConnections:0:DataSource | DbServer1 |
+| SqlDbConnections:0:InitialCatalog | MainDb |
+| SqlDbConnections:1:DataSource | DbServer1 |
+| SqlDbConnections:1:InitialCatalog | OtherDb |
+| SqlDbConnections:1:WriteConnection:DataSource | DbServer2 |
+| SqlDbConnections:1:ReadConnection:DataSource | DbServer3 |
+| SqlDbConnections:1:ReadConnection:InitialCatalog | Db1 |
+| SqlDbConnections:1:WriteConnection:DataSource | DbServer4 |
+| SqlDbConnections:1:WriteConnection:InitialCatalog | Db2 |
+
+> [!NOTE]
+> The order of configuration loading matters. Your Startup class should load *appsettings.json* first. When the environment variables are subsequently loaded, any existing values in *appsettings.json* will be overwritten.
+
+ArgentSea uses the configuration dictionary built into .NET Core, so you can use any compatible configuration provider — including files, command line arguments, databases, and [more](https://rimdev.io/speech-recognition-configuration-provider-for-asp.net-core/).
+
+There are no restrictions on which configuration entries belong to which providers (data sources). You can store passwords in environment variables or even command arguments, if you want to. Pick the right platform to management your data effectively, ArgentSea can use it as long as the values are consolidated correctly into the configuration dictionary.
+
+### Configuration *Options*
+
+The next phase in .NET Core’s configuration processing is the Options rendering. This converts the aggregated dictionary entries into strongly typed configuration objects, called Options. ArgentSea uses these typed Options objects to build its ShardSets and Databases services.
+
+Unfortunately, a misconfigured property or entry can cause the Options class to be null when a value was expected. This can be difficult to debug, as there are often no error messages, just a null result. You can debug the Options classes during startup to see which values are unexpectedly null. Experiment with removing configuration values until the Options classes render as expected.
+
+The JSON object hierarchy and property types should exactly match those of the Options objects, so if you have any doubts, explore the Options classes using C# or other strongly typed language.
+
+## Resilience Strategies
+
+Unexpected failures happen, and business-critical applications must be able to recover gracefully. ArgentSea uses [Polly](http://www.thepollyproject.org/) to offer a combination of retry logic and circuit breaking.
+
+The properties specific to a resilience strategy are:
+
+````json
+{
+  "CircuitBreakerFailureCount": 20,
+  "CircuitBreakerTestInterval": 5000,
+  "ConnectTimeout": 2,
+  "RetryCount": 6,
+  "RetryInterval": 256,
+  "RetryLengthening": "Fibonacci",
+}
+````
+
+If no retry or circuit breaking properties are configured, ArgentSea uses a default resilience strategy using automatic retries and circuit breaking. Like everything else, these values participate in the ArgentSea configuration hierarchy — you can set these values globally (most likely) or at any level down to the individual Read or Write connection.
+
+### Retries
+
+Retries occur on errors that are defined as *transient*. A network interruption may quickly resolve itself, so it makes sense to retry after a short interval; it doesn’t make sense to retry after a permission exception. (The list of errors defined as *transient* is in the provider-specific implementation of IDataProviderServiceFactory. You can view this in the source code).
+
+The properties that define the retry behavior are:
+
+* The `RetryCount` setting determines how many times the connection retries before aborting and raising an error back to the caller.
+* The `RetryInterval` determines the length of time (in milliseconds) between retries.
+* The `RetryLengthening` value can add an additional pause between subsequent retries.
+
+Presumably, if the system encounters a transient error, it should retry quickly, then, if the retry is not successful, it should wait a bit longer for the error to clear before retrying again. The `RetryLengthening` value is what determines how much longer it will pause on subsequent retries before giving up.
 
 The [Retry Sequence Lengthening](/api/ArgentSea.DataResilienceConfiguration.SequenceLengthening.html) values are:
 
@@ -138,379 +599,37 @@ If a Resilience Strategy is not defined, ArgentSea will use a default strategy. 
 | RetryCount | 6 tries |
 |RetryInterval | 256 milliseconds |
 | Lengthening | Fibonacci |
+| (Connect) Timeout | 2 |
 
-With these values, the default resilience strategy would take a total of five seconds to finally fail.
+> [!NOTE]
+> SQL Server’s ADO.NET provider also offers automatic retries. ArgentSea disables this in lieu of its own functionality, which logs these automatic retries. This valuable environment diagnostic information should not be invisible.
 
-Note that a high `RetryCount` could create a very long delay before a connection is allowed to ultimately fail.
+#### Connection Timeout
 
-#### Circuit Breaking
+The connection timeout value is critical to determining the duration of connection attempts before failure. The ADO.NET default of 15 seconds is far too long, so the ArgentSea default is 2 seconds. Datacenter connections are generally resolved in that time unless something is wrong. If you have a WAN or high-latency connection, you should consider increasing this value.
+
+It is not guaranteed that any defaults will remain unchanged in future versions.
+
+Note that a high `RetryCount` and/or connection timeout could create a very long delay before a connection is allowed to ultimately fail.
+
+### Circuit Breaking
 
 When a database connection is unavailable, this can cause serious downstream problems. Processes may pile-on further requests even while earlier requests are simply waiting
-to time out. As this continues, the queue of backlogged requests becomes so large that the caller itself can manage no more. This bottleneck can block other systems too. What started as a broken connection to a single database eventually becomes fatal to the calling system too!
+to time out. As this continues, the queue of backlogged requests becomes so large that the caller itself can manage no more. The bottleneck will then start blocking other systems too. What started as a broken connection to a single database eventually becomes fatal to the entire system!
 
 This is the reason to add a “circuit breaker” — a fail-fast mechanism to ensure that callers do not wait needlessly for queued connections that are unlikely to succeed, and which are blocking other processes too.
 
-When the circuit breaker is tripped, subsequent connections will fail *immediately*. This prevents queuing, bottleneck blocking, and downstream failures. While tripped, the circuit breaker will periodically allow a single transaction to proceed; if it successful the circuit breaker is reopened. In this way, a system restoration will automatically close the circuit breaker too so that connections can resume.
+Once the circuit breaker is tripped, subsequent connections will fail *immediately*. This prevents queuing, bottleneck blocking, and downstream failures. While tripped, the circuit breaker will periodically allow a single transaction to proceed; if it successful the circuit breaker is reopened. In this way, a system restoration will automatically close the circuit breaker too so that connections can resume.
 
-The `CircuitBreakerFailureCount` value determines how many sequential failures will trigger the circuit breaker. The `CircuitBreakerTestInterval` value determines
-how often (in milliseconds) the circuit breaker will allow a single transaction through.
-
-## Database Connections
-
-The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code.
-
-The connection information is specific to the database provider.
-
-## [SQL Server](#tab/tabid-sql)
-
-### SQL Server Database Connections
-
-For SQL Server, the [entire set of attributes]/api-sql/ArgentSea.Sql.SqlDbConnectionConfiguration.html) would look like this:
-
-````json
-
-"SqlDbConnections": [
-  {
-    "DatabaseKey": "MyDb",
-    "DataConnection": {
-      "SecurityKey": "0",
-      "DataResilienceKey": "remote",
-      "ApplicationIntent": "ReadWrite",
-      "ApplicationName": "MyWebApp",
-      "ConnectRetryCount": 0,
-      "ConnectRetryInterval": 0,
-      "ConnectTimeout": 2,
-      "CurrentLanguage": "english",
-      "DataSource": "localhost",
-      "Encrypt": false,
-      "FailoverPartner": "",
-      "InitialCatalog": "MyDb",
-      "LoadBalanceTimeout": 0,
-      "MaxPoolSize": 100,
-      "MinPoolSize": 0,
-      "MultipleActiveResultSets": false,
-      "MultiSubnetFailover": true,
-      "PacketSize": 8000,
-      "PersistSecurityInfo": false,
-      "Pooling": true,
-      "Replication": false,
-      "TrustServerCertificate": true,
-      "TypeSystemVersion": "Latest",
-      "WorkstationID": ""
-    }
-  }
-]
-````
-
-> [!CAUTION]
-> You do *not* need include all of these attributes in your connection! Any value not included in your configuration will be set to the provider default — except as described in the next paragraphs.
-
-The `ConnectRetryCount`, `ConnectRetryInterval` values default to 0 because the ArgentSea retry logic duplicates this functionality. If you prefer to use the SqlClient retry functionality instead, set these to their desired values and specify a `ResilienceStrategy` with no retries. If you use both connection retries *and* ArgentSea retries, no harm will come, other than a lot of retries.
-
-The other exception to the provider default values is the `ConnectTimeout` value. The provider default is 15 seconds, but with the ArgentSea’s retry logic, this could create
-unnecessarily long connection timeouts. The ArgentSea default is 2 seconds because datacenter connections are easily resolved in that time unless something is wrong.
-If you have a WAN or high-latency connection (or are using ConnectRetryCount), you should consider increasing this value.
-
-If you accept the defaults, the only required parameter values are:
-
-````json
-"SqlDbConnections": [
-  {
-    "DatabaseKey": 1,
-    "DataConnection ": {
-      "SecurityKey": "2",
-      "DataResilienceKey": "remote",
-      "DataSource": "localhost",
-      "InitialCatalog": "MyDb",
-    }
-  }
-]
-````
-
-## [PostgreSQL](#tab/tabid-pg)
-
-### PostgreSQL Database Connections
-
-For PostgreSQL, the [entire set of attributes](/api-pg/ArgentSea.Pg.PgDbConnectionConfiguration.html) would look like this:
-
-````json
-"PgDbConnections": [
-  {
-    "DatabaseKey": "MyDB",
-    "DataConnection": {
-      "SecurityKey": "MyCredentials",
-      "ResilienceKey": "local",
-      "ApplicationName": "MyWebApp",
-      "AutoPrepareMinUsages": 5,
-      "CheckCertificateRevocation": false,
-      "ClientEncoding": "UTF8",
-      "CommandTimeout": 15,
-      "ConnectionIdleLifetime": 300,
-      "ConnectionPruningInterval": 10,
-      "ConvertInfinityDateTime": false,
-      "Database": "MyDB",
-      "Encoding": "UTF8",
-      "Enlist": true,
-      "Host": "10.10.1.22",
-      "IncludeRealm": false,
-      "InternalCommandTimeout": -1,
-      "KeepAlive": 0,
-      "KerberosServiceName": "postgres",
-      "MaxAutoPrepare": 0,
-      "MaxPoolSize": 100,
-      "MinPoolSize": 1,
-      "NoResetOnClose": false,
-      "PersistSecurityInfo": true,
-      "Pooling": true,
-      "Port": 5432,
-      "ReadBufferSize": 8192,
-      "SearchPath": "",
-      "ServerCompatibilityMode": "Redshift",
-      "SocketReceiveBufferSize": 8192,
-      "SocketSendBufferSize": 8192,
-      "SslMode": "Disable",
-      "TcpKeepAliveInterval": 0,
-      "TcpKeepAliveTime": 0,
-      "Timeout": 2,
-      "TrustServerCertificate": false,
-      "UsePerfCounters": false,
-      "UseSslStream": false,
-      "WriteBufferSize": 8192
-    }
-  }
-]
-````
-
-You do *not* need include all of these attributes in your connection! Any value not included in your configuration will be set to the provider default — except as described in the next paragraph.
-
-The principal change to the provider default values is the `ConnectTimeout` value. The provider default is 15 seconds, but with the ArgentSea’s retry logic, this could create
-unnecessarily long connection timeouts. The ArgentSea default is 2 seconds because datacenter connections are easily resolved in that time unless something is wrong.
-If you have a WAN or high-latency connection (or are using ConnectRetryCount), you should consider increasing this value.
-
-If you accept the defaults and are running on the default port (5432), the only required parameter values are:
-
-````json
-"PgDbConnections": [
-  {
-    "DatabaseKey": "MyDB",
-    "DataConnection": {
-      "SecurityKey": "MyCredentials",
-      "Host": "localhost",
-      "Database": "MyDb",
-    }
-  }
-]
-
-````
-
-***
-
-## Shard Set Connections
-
-A shard set represents a single set of data  that is spread among multiple database servers. This structure is common for high-performance data access, since it is usually more cost effective and predictably scalable to have multiple smaller database servers than to build one massive server. Global applications might try to improve performance for their global users by distributing shards in datacenters around the globe. The ArgentSea data access components allow you to query across multiple servers or a find specific record on its corresponding host server.
-
-From a configuration perspective, sharded data introduces three concerns:
-
-* Sharded data requires a larger number of database connections to manage.
-* Scaled out data often uses different connections for read operations and write operations.
-* Because sharded records often need to refer to related records hosted in other shards, the shard identifier become part of the record key.
-
-### Managing Database Connections
-
-Sharded data sets *may* run to hundreds of servers (or more). ArgentSea manages any number of distinct shard sets and any number of connections in each shard set.
-
-You could have a distinct shard set for, say, all of your subscriber information and a separate shard set for all of your operational data. You define the shard set name in your configuration; when you query a shard set, you simply specify the shard set name.
-
-### Distinct Read and Write Endpoints
-
-If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes SQL Availability Groups, RDS Read Replicas, Azure SQL geo-replication, Aurora reader endpoints, etc.
-
-An ArgentSea `ShardSet` has both read connections and write connections. Only one of these *must* be defined. If only one is defined, it will be used for both reads and writes.
-
-Complicating this is the replication latency between the write/read servers. A read immediately following a write might fail because the expected data has not yet been copied to the read server.
-
-To accommodate replication latency when an expected read-only result is not retrieved, ArgentSea will immediately retry the query on the write connection under the following conditions:
-
-* The query arguments indicate that it is read-only data fetch.
-* The read connection is different than the write connection.
-* The query handler returns a null object (i.e. a parameter attribute is marked *required* but the database value is (db) null or a custom handler returns null).
-
-> [!TIP]
-> You can easily have distinct Read and Write database connections for your non-sharded database connections too. Simply define two connections, one for read access and the other for write access. In your code, select the Read connection or Write connection as appropriate.
-
-### The Shard Identifier Type
-
-Each database in a shard set has a shard identifier *(shardId)*. The shardId is used in combination with the record key to uniquely identify a record. In other words, records in the shard set are identified with a sort of virtual compound key, consisting of the shard identifier and the record key.
-
-> [!NOTE]
-> Records within a shard set are uniquely identified with a sort of virtual compound key — a ShardKey — consisting of the shardId and the record identifier.
-
-The data type of the ShardId is important because a record in a data shard may refer to records in *other* shards. Persisting the remote shard reference means saving the shard identifier too.
-
-In other words, the ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets. Your configuration must also be aware of the nature of this shard key; the ShardId value in your json configuration file must be cast to your ShardId type.
-
-> [!IMPORTANT]
-> Once established, the ShardId *type* cannot be easily changed.
-
-More details about the sharId type is in the [Sharding](sharding.md) section
-
-## ShardSet JSON
-
-## [SQL Server](#tab/tabid-sql)
-
-For SQL Server, a simple configuration would look like this (assuming that the ShardId type is an integer value):
-
-````json
-"SqlShardSets": [
-  {
-    "ShardSetKey": "Set1",
-    "Shards": [
-      {
-        "ShardId": 0,
-        "ReadConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "local",
-          "DataSource": "LocalServer",
-          "InitialCatalog": "dbName1"
-        },
-        "WriteConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "remote",
-          "DataSource": "RemoteServer",
-          "InitialCatalog": "dbName1"
-        }
-      },
-      {
-        "ShardId": 1,
-        "ReadConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "remote",
-          "DataSource": "RemoteServer",
-          "InitialCatalog": "dbName2"
-        },
-        "WriteConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "local",
-          "ApplicationIntent": "ReadWrite",
-          "ApplicationName": "MyWebApp",
-          "ConnectRetryCount": 0,
-          "ConnectRetryInterval": 0,
-          "ConnectTimeout": 2,
-          "CurrentLanguage": "english",
-          "DataSource": "LocalServer",
-          "Encrypt": false,
-          "FailoverPartner": "",
-          "InitialCatalog": "dbName2",
-          "LoadBalanceTimeout": 0,
-          "MaxPoolSize": 100,
-          "MinPoolSize": 0,
-          "MultipleActiveResultSets": false,
-          "MultiSubnetFailover": true,
-          "PacketSize": 8000,
-          "PersistSecurityInfo": false,
-          "Pooling": true,
-          "Replication": false,
-          "TrustServerCertificate": true,
-          "TypeSystemVersion": "Latest",
-          "WorkstationID": ""
-        }
-      }
-    ]
-  }
-]
-````
-
-## [PostgreSQL](#tab/tabid-pg)
-
-For PostgreSQL, a simple configuration would look like this (assuming that the ShardId type is an integer value):
-
-````json
-"SqlShardSets": [
-  {
-    "ShardSetKey": "Set1",
-    "Shards": [
-      {
-        "ShardId": 0,
-        "ReadConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "local",
-          "Host": "LocalServer",
-          "Database": "dbName1",
-        },
-        "WriteConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "remote",
-          "Host": "RemoteServer",
-          "Database": "dbName1",
-        }
-      },
-      {
-        "ShardId": 1,
-        "ReadConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "remote",
-          "Host": "RemoteServer",
-          "Database": "dbName2",
-        },
-        "WriteConnection": {
-          "SecurityKey": "0",
-          "DataResilienceKey": "local",
-          "ApplicationName": "MyWebApp",
-          "AutoPrepareMinUsages": 5,
-          "CheckCertificateRevocation": false,
-          "ClientEncoding": "UTF8",
-          "CommandTimeout": 15,
-          "ConnectionIdleLifetime": 300,
-          "ConnectionPruningInterval": 10,
-          "ConvertInfinityDateTime": false,
-          "Database": "dbName2",
-          "Encoding": "UTF8",
-          "Enlist": true,
-          "Host": "LocalServer",
-          "IncludeRealm": false,
-          "InternalCommandTimeout": -1,
-          "KeepAlive": 0,
-          "KerberosServiceName": "postgres",
-          "MaxAutoPrepare": 0,
-          "MaxPoolSize": 100,
-          "MinPoolSize": 1,
-          "NoResetOnClose": false,
-          "PersistSecurityInfo": true,
-          "Pooling": true,
-          "Port": 5432,
-          "ReadBufferSize": 8192,
-          "SearchPath": "",
-          "ServerCompatibilityMode": "Redshift",
-          "SocketReceiveBufferSize": 8192,
-          "SocketSendBufferSize": 8192,
-          "SslMode": "Disable",
-          "TcpKeepAliveInterval": 0,
-          "TcpKeepAliveTime": 0,
-          "Timeout": 2,
-          "TrustServerCertificate": false,
-          "UsePerfCounters": false,
-          "UseSslStream": false,
-          "WriteBufferSize": 8192
-        }
-      }
-    ]
-  }
-]
-````
-
-***
-
-If the *shardid* is a string you should enclose the value in quotes (`ShardId: "0"`).
-
-The configuration file can repeat the ShardSet section (the object with ShardSetKey and Shards entries) for each shard set. Likewise, the entries in the Shards array can repeat for every data shard in the shard set. As illustrated by Shard 1’s Write Connection, any connection can include a any number of provider-specific connection attributes.
+The `CircuitBreakerFailureCount` value determines how many sequential failures will trigger the circuit breaker. The `CircuitBreakerTestInterval` value determines how often (in milliseconds) the circuit breaker will allow a single transaction through.
 
 ## Loading the Configuration
 
-ArgentSea uses the built-in Options configuration and dependency injection architecture in .NET Core. The complexity of turning a JSON configuration file into a connection object is as simple as adding the `services.AddSqlServices<TShard>(Configuration)` extension method to the `ConfigureServices` method in your `Startup` class.
+ArgentSea uses .NET Core’s built-in Options configuration and dependency injection architecture. The complexity of turning a JSON configuration file into a connection object is as simple as calling an extension method in the `ConfigureServices` method of your `Startup` class.
 
 ## [SQL Server](#tab/tabid-sql)
 
-This example assumes that your shardId type is *byte*. If you use any other type, change the generic parameter.
+This example assumes that your ShardId type is *byte*. If you use any other type, change the generic parameter.
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
@@ -520,7 +639,7 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
             ...
             // add your injectable logging provider
             services.AddLogging();
-            // add the ArgentSea SQL database connections (shardId type: byte)
+            // add the ArgentSea SQL database connections (ShardId type: byte)
             services.AddSqlServices<byte>(Configuration);
             // now add your custom data classes, which use the data components
             services.AddSingleton<MyDataStore>();
@@ -533,7 +652,7 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-This example assumes that your shardId type is *short*. If you use any other type, change the generic parameter.
+This example assumes that your ShardId type is *short*. If you use any other type, change the generic parameter.
 
 If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
 
@@ -543,7 +662,7 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
             ...
             // add your injectable logging provider
             services.AddLogging();
-            // add the ArgentSea SQL database connections (shardId type: short)
+            // add the ArgentSea SQL database connections (ShardId type: short)
             services.AddPgServices<short>(Configuration);
             // now add your custom data classes, which use the data components
             services.AddSingleton<MyDataStore>();
@@ -558,6 +677,14 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 ***
 
 This code references a `Configuration` property. It is common practice to obtain the configuration object from the constructor of the `Startup` class, then use this to set the `Configuration` property.
+
+## Immutability
+
+Configuration entries can be updated until the moment when the `Shardsets` or `Databases` objects are first created (i.e. at first injection). Once these singleton objects exist, further configuration changes are ignored. Further, the object use immutable collections, so once they are created, they cannot be changed directly either.
+
+Similarly, the first time a connection is used and ADO.NET the connection string is created, the same connection string will be provided to all subsequent requests.
+
+There is no way to update connection configuration once it has been used, other than to destroy and reload the ShardSets or Databases service.
 
 ### Simplified Data Connections
 
@@ -587,9 +714,7 @@ if you any experience in .NET Core, requesting the database connection in any da
 
 ***
 
-The injected data access component allows the class to access *any* connection, which means that you would need to specify the connection name. In most cases, however, the class will only access a *single* data source.
-
-To simplify the data access code, you can instead store only the relevant connection instance:
+The injected data access component allows the class to access any defined database connection. This means that you would need to specify the collection key to access a particular database or shard set. In most cases, a class will only access a *single* data source, so, to simplify the data access code, you can instead store only the relevant connection instance:
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -599,11 +724,11 @@ To simplify the data access code, you can instead store only the relevant connec
         public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
         {
             ...
-            _data = dbs.DbConnections["MyConnectionName"];
+            _data = dbs.DbConnections["MyConnectionKey"];
           ...
 ```
 
-Subsequent calls to the SQL database can be on methods directly on the `_data` object.
+Setup this way, subsequent calls to the SQL database can be on methods directly on the `_data` object.
 
 ## [PostgreSQL](#tab/tabid-pg)
 
@@ -617,7 +742,7 @@ Subsequent calls to the SQL database can be on methods directly on the `_data` o
           ...
 ```
 
-Subsequent calls to the SQL database can be on methods directly on the `_data` object.
+Setup this way, calls to the SQL database (or shard set) can be on methods directly on the `_data` object. Subsequent calls within the class do not need to specify a key.
 
 ***
 
@@ -690,4 +815,4 @@ By creating a local class that inherits from then generic class, you can simplif
 
 ***
 
-This approach will be helpful in reducing the number of times the generic *shardId* type must be specified in project.
+This approach will be helpful in reducing the number of times the generic *ShardId* type must be specified in project.

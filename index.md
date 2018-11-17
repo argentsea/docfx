@@ -10,7 +10,7 @@ ArgentSea is primarily intended to address two problems: scalability and support
 
 Highly scalable data means data “sharding” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
 
-High-performance data access means simultaneous queries across shards, data-to-object mapping without the overhead of reflection, and the consistent use of stored procedures/functions to reduce SQL compilation overhead.
+High-performance data access means simultaneous queries across shards, data-to-object mapping without the overhead of reflection, and the consistent use of stored procedures/functions to reduce SQL compilation overhead. Because ArgentSea can handle multiple results from the same query, the number of server round-trips is reduced — a huge performance win.
 
 While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data.
 
