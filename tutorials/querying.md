@@ -123,10 +123,10 @@ Where appropriate, the methods have overloads that accept nullable value types. 
 
 The Mapper uses Model property attributes to automatically generate code that is much like what would be created in the previous section. Technically, the Mapper procedures are also extension methods, but we are discussing them separately in this section.
 
-Assuming that the Model (in this example, a “Customer” class) has Mapping attributes associated with each of its properties, you can render all the corresponding input parameters and set their respective values with:
+Assuming that the Model (in this example, a “Store” class) has Mapping attributes associated with each of its properties, you can render all the corresponding input parameters and set their respective values with:
 
 ```csharp
-parameters.CreateInputParameters<Customer>(customer, logger);
+parameters.CreateInputParameters<Store>(customer, logger);
 ```
 
 You can do something similar with output parameters — though it would be unlikely that you would want to want to create *only* output parameters. You will probably need at least one input parameter (likely a key). If you create the input parameter first, it will not be duplicated by the Mapper as it generates output parameters.
@@ -135,22 +135,22 @@ You can do something similar with output parameters — though it would be unlik
 
 ```csharp
 parameters.AddSqlIntInputParameter("@TransactionId", transactionId);
-parameters.CreateOutputParameters<Customer>(logger);
+parameters.CreateOutputParameters<Store>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
 var parameters = new QueryParameterCollection()
     .AddSqlIntInputParameter("@TransactionId", transactionId)
-    .CreateOutputParameters<Customer>(logger);
+    .CreateOutputParameters<Store>(logger);
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```csharp
 parameters.AddPgIntegerInputParameter("TransactionId", transactionId);
-parameters.CreateOutputParameters<Customer>(logger);
+parameters.CreateOutputParameters<Store>(logger);
 // Again, these methods all support a fluent api, so this can be written instead as:
 var parameters = new QueryParameterCollection()
     .AddPgIntegerInputParameter("TransactionId", transactionId)
-    .CreateOutputParameters<Customer>(logger);
+    .CreateOutputParameters<Store>(logger);
 ```
 
 ***
@@ -168,9 +168,15 @@ command.Parameters.Add(parameter);
 
 Retrieving database data consists of running a stored procedure or function on each connection. ArgentSea provides various methods to offer the best approach:
 
-### Database methods
+### Connection methods
 
-These methods can be used on Database connections, and on a shard instance (read connection or write connection) within a ShardSet:
+Both database connections and shards have distinct Read and Write connections. The query methods are the same for both Read and Write connections, but the distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or functions; the Write connection should be used for everything else.
+
+Even if you do not currently have read-only endpoints, like mirrors or active standbys, consistent determination of Read and Write access will allow you to scale-out in the future. If you want to enforce this, you might consider placing read procedures and write procedures into different database schemas, then granting EXECUTE permission only the login corresponding to the Read or Write connection.
+
+If only the Read or Write connection is set, the other connection will also have that same value.
+
+These methods can be used on Read or Write connections on both a Database object or a single Shard instance within a ShardSet:
 
 | Methods | Uses Mapper | Description |
 | --- |:---:| --- |
@@ -216,18 +222,18 @@ Pro tip: you might consider consistently referencing procedure names via a stati
 ```csharp
 internal static class DataProcedures
 {
-    //This should be a COMPREHENSIVE list of stored procedure names.
-    //You can use the reference count to determine what is in use.
-    public static string CustomerAdd { get;  } = "ws.CustomerAdd";
-    public static string CustomerList { get; } = "ws.CustomerList";
-    public static string CustomerLocationGet { get; } = "ws.CustomerLocationGet";
-    public static string CustomerLocationDetailsGet { get;  } = "ws.CustomerLocationDetailsGet";
-    public static string CustomerLocationsAllByUser { get; } = "ws.CustomerLocationsAllByUser";
-    public static string CustomerLocationsByGroupIDs { get; } = "ws.CustomerLocationsByGroupIDs";
-    // ...
+  //This should be a COMPREHENSIVE list of stored procedure names.
+  //You can use the reference count to determine what is in use.
+  public static string StoreAdd { get;  } = "ws.StoreAdd";
+  public static string StoreList { get; } = "ws.StoreList";
+  public static string StoreLocationGet { get; } = "ws.StoreLocationGet";
+  public static string StoreLocationDetailsGet { get;  } = "ws.StoreLocationDetailsGet";
+  public static string StoreLocationsAllByUser { get; } = "ws.StoreLocationsAllByUser";
+  public static string StoreLocationsByGroupIDs { get; } = "ws.StoreLocationsByGroupIDs";
+  // ...
 }
 // Now you can reference the procedure name like this:
-await database.RunAsync(DataProcedures.CustomerAdd, parameters, cancellationToken);
+await database.RunAsync(DataProcedures.StoreAdd, parameters, cancellationToken);
 
 ```
 
@@ -304,10 +310,10 @@ _database.MapOutputAsync<Order, OrderItems>("ws.GetOrderDetails", parameters, ca
 _database.MapReaderAsync<Order, Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
 
 // Expanding this, we now have output parameters and three SELECTs:
-_database.MapOutputAsync<Customer, OrderHistory, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
+_database.MapOutputAsync<Store, OrderHistory, Locations, Contact>("ws.GetStoreDetails", parameters, cancellation);
 // Likewise, the procedure now returns four SELECTs, and the third one is a single-row SELECT with the base customer data,
 // the remaining select are used to build customer property lists (order history, locations, and contacts):
-_database.MapReaderAsync<Customer, OrderHistory, Customer, Locations, Contact>("ws.GetCustomerDetails", parameters, cancellation);
+_database.MapReaderAsync<Store, OrderHistory, Store, Locations, Contact>("ws.GetStoreDetails", parameters, cancellation);
 ```
 
 In both methods, the generic type in the *first* position is the return type. If additional results are included in the result stream, the subsequent types define the order in which they are expected in the DataReader results. You can have up to eight DataReader results streamed to distinct List properties.
@@ -339,10 +345,10 @@ If you are using data mapping attributes in your Model classes, the __MapReader&
 
 If you are familiar with ADO.NET programming, this will be very familiar. The delegate simply receives the standard ADO.NET query results and processes them like it would in most other ADO.NET scenarios.
 
-As an example, a method with the correct signature for returning a Customer model looks like this:
+As an example, a method with the correct signature for returning a Store model looks like this:
 
 ```csharp
-public static Customer MyCustomerHandler (
+public static Store MyStoreHandler (
     short shardId,
     string sprocName,
     Department department, // this is an optional custom argument
@@ -351,7 +357,7 @@ public static Customer MyCustomerHandler (
     string connectionDescription,
     ILogger logger)
 {
-    var result = new Customer();
+    var result = new Store();
     // use the reader argument and/or parameters collection to set your result properties.
     return result;
 }
@@ -359,7 +365,7 @@ public static Customer MyCustomerHandler (
 
 ### The Arguments
 
-Both the return type (“Customer”, in the example) and the optional data argument (“Department”, in the example) are generic, so they can be of any type.
+Both the return type (“Store”, in the example) and the optional data argument (“Department”, in the example) are generic, so they can be of any type.
 
 #### (TShard) shardId
 

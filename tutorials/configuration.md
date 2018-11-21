@@ -347,10 +347,10 @@ End each shard instance has a `ShardId` property, which identifies a specific su
 
 Put another way, records in the shard set are identified with a sort of virtual compound key, consisting of the shard identifier and the record key. Because record in a data shard may refer to records in *other* shards, the “foreign key” reference requires saving the shard identifier too.
 
-Because of the need to persist the ShardId inside database records, the data type of the ShardId is critical. ArgentSea uses a generic ShardId to allow you to defined any data type you prefer.
+Because of the need to persist the ShardId inside database records, the data type of the ShardId is critical. ArgentSea uses a generic ShardId to allow you to define any data type you prefer.
 
 > [!IMPORTANT]
-> Once established, the ShardId *type* cannot be easily changed. The ShardId *type* is used in configuration, throughout your code, in the database, and across all shard sets. Make sure that you will not outgrow your ShardId type’s maximum value, nor unnecessarily require space that will never be used.  
+> Once established, the ShardId *type* cannot be easily changed. The ShardId type is used in configuration, throughout your code, in the database, and across all shard sets. Make sure that you will not outgrow your ShardId type’s maximum value, nor unnecessarily require space that will never be used.  
 > If you are uncertain, consider using a `short` (Int16/smallint) data type for your ShardId.
 
 The JSON ShardId type must correspond to whatever type you have defined for your application’s ShardId. If your application defines its ShardId as a string, then the JSON should be a string value (i.e. be in quotes); if a number, it should be numeric (i.e. a number, without quotes).
@@ -411,7 +411,7 @@ Typically, there are three types of configuration entries:
 
 * Secure values, like passwords or keys, which should not be readily accessible.
 * Environment-specific values, like server names, which change as releases are promoted through various environments.
-* Application values, which specify how the application should behave.
+* Application values, which specify how the application should consistently behave.
 
 This capability is critical for managing configuration outside of the application. Using key-value pairs allows configuration values to be hosted in environment variables and secure stores.
 
@@ -686,72 +686,87 @@ Similarly, the first time a connection is used and ADO.NET the connection string
 
 There is no way to update connection configuration once it has been used, other than to destroy and reload the ShardSets or Databases service.
 
-### Simplified Data Connections
+## Simplifying Data Connections
 
-In .NET Core, any data repository class can use the ArgentSea data access component by adding and argument to its constructor.
+As per standard practice in .NET Core, any data repository class can use the ArgentSea data access component by having the service injected into its constructor.
 
-if you any experience in .NET Core, requesting the database connection in any data access class is straightforward:
-
-## [SQL Server](#tab/tabid-sql)
-
-```csharp
-
-        public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
-        {
-          ...
-
-```
-
-## [PostgreSQL](#tab/tabid-pg)
-
-```csharp
-
-        public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
-        {
-          ...
-
-```
-
-***
-
-The injected data access component allows the class to access any defined database connection. This means that you would need to specify the collection key to access a particular database or shard set. In most cases, a class will only access a *single* data source, so, to simplify the data access code, you can instead store only the relevant connection instance:
+For example, requesting the databases collection in your data access class is straightforward:
 
 ## [SQL Server](#tab/tabid-sql)
 
 ```csharp
-        private readonly SqlDatabases.DataConnection _data;
-
-        public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
-        {
-            ...
-            _data = dbs.DbConnections["MyConnectionKey"];
-          ...
+public class MyDataAccessStore
+{
+  public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
+  {
+     _dbs = dbs;  // capturing injected SqlDatabases collection
+    ...
 ```
 
-Setup this way, subsequent calls to the SQL database can be on methods directly on the `_data` object.
+The injected data access component allows the class to access any database in the SqlDatabases connection. This means that you would need to specify the collection key to access a particular database or shard set.
+
+In most cases, a class will only access a *single* data source, so, to simplify the data access code, you can instead store only the relevant connection instance:
+
+```csharp
+public class MyDataAccessStore
+{
+    private readonly SqlDatabases.DataConnection _data;
+
+    public MyDataAccessStore(SqlDatabases dbs, ILogger<MyDataAccessStore> logger)
+    {
+      _data = dbs["MyConnectionKey"];  // capturing relevant database
+      ...
+```
+
+Setup this way, subsequent calls to the SQL database can be on methods directly on the `_data` object. Now, calls within the class do not need to specify a key.
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```csharp
-        private readonly PgDatabases.DataConnection _data;
+public class MyDataAccessStore
+{
+  private readonly PgDatabases  _dbs;
 
-        public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
-        {
-            ...
-            _data = dbs.DbConnections["MyConnectionName"];
-          ...
+  public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
+  {
+     _dbs = dbs;   // capturing injected PgDatabases collection
+    ...
+
 ```
 
-Setup this way, calls to the SQL database (or shard set) can be on methods directly on the `_data` object. Subsequent calls within the class do not need to specify a key.
+The injected data access component allows the class to access any database in the PgDatabases connection. This means that you would need to specify the collection key to access a particular database or shard set.
+
+In most cases, a class will only access a *single* data source, so, to simplify the data access code, you can instead store only the relevant connection instance:
+
+```csharp
+public class MyDataAccessStore
+{
+  private readonly PgDatabases.DataConnection _data;
+
+  public MyDataAccessStore(PgDatabases dbs, ILogger<MyDataAccessStore> logger)
+  {
+    _data = dbs["MyConnectionName"]; // capturing relevant database
+    ...
+```
+
+Setup this way, calls to the SQL database (or shard set) can be on methods directly on the `_data` object. Now, calls within the class do not need to specify a key.
 
 ***
 
-The flexibility of the `ShardSets` object stands in more need of this simplification. Using the ArgentSea components requires that the generic *ShardId* type (which can never change) is declared redundantly. You can simplify this is two ways:
+### Simplifying The ShardId Generic Type
+
+The `ShardSets` object has even more need of simplification. As with Databases, a single class typically does not need to access multiple ShardSets, so one can follow the same approach as with the Databases example to reference only the relevant ShardSet within your class.
+
+The other ShardSet complexity is the need to repeatedly declare the *ShardId* type. Within your project, this will always be the same value, but programming against the ArgentSea library directly means declaring the type over and over again.
+
+There are two solutions to this:
 
 * Use the `using` statement to alias the ShardSet declaration.
-* Declare a internal class which inherits from ShardSet
+* Declare classes in your project which inherit from ShardSet, ShardKey, and ShardChild, but with the generic defined. Use these classes in your project.
 
-To simplify calling a ShardSet *within a single file*, simply add:
+#### Using “using”
+
+As an example of the first approach, to simplify calling a ShardSet *within a single file*, simply add these `using` statements:
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -761,7 +776,24 @@ using ShardSets = ArgentSea.Sql.SqlShardSets<byte>;
 using ShardSet = ArgentSea.Sql.SqlShardSets<byte>.ShardDataSet;
 ```
 
-Again, the assumes a ShardId type of *byte*; replace this as appropriate.
+This example assumes a ShardId type of *byte*; replace this as appropriate.
+
+An example of how this might be used in the same class we showed before:
+
+```csharp
+using ShardSets = ArgentSea.Sql.SqlShardSets<byte>;
+using ShardSet = ArgentSea.Sql.SqlShardSets<byte>.ShardDataSet;
+
+public class MyDataAccessStore
+{
+  private readonly ShardSet _data;
+
+  public MyDataAccessStore(ShardSets shards, ILogger<MyDataAccessStore> logger)
+  {
+    _data = shards["MyShardSetName"]; //select relevant shard set
+    ...
+
+```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
@@ -771,48 +803,89 @@ using ShardSets = ArgentSea.Pg.PgShardSets<short>;
 using ShardSet = ArgentSea.Pg.PgShardSets<short>.ShardDataSet;
 ```
 
-Again, the assumes a ShardId type of *short*; replace this as appropriate.
+This example assumes a ShardId type of *short*; replace this as appropriate.
+
+An example of how this might be used in the same class we showed before:
+
+```csharp
+using ShardSets = ArgentSea.Pg.PgShardSets<short>;
+using ShardSet = ArgentSea.Pg.PgShardSets<short>.ShardDataSet;
+
+public class MyDataAccessStore
+{
+  private readonly ShardSet _data;
+
+  public MyDataAccessStore(ShardSets shards, ILogger<MyDataAccessStore> logger)
+  {
+    _data = shards["MyShardSetName"]; //select relevant shard set
+    ...
+
+```
 
 ***
 
-By creating a local class that inherits from then generic class, you can simplify the shard set reference throughout your project.
+The downside to the `using` approach is that it works for only the current file.
+
+#### Child Classes
+
+By creating a local class that inherits from the ArgentSea generic class, you can simplify the shard set reference throughout your project.
 
 ## [SQL Server](#tab/tabid-sql)
 
+These are the classes you might create in your SQL project to simplify the ShardSet within our project.
+
 ```csharp
-    public class ShardSets : SqlShardSets<byte>
+public class MyShardSets : SqlShardSets<byte>
+{
+  public SqlShardSets(
+	  IOptions<SqlShardConnectionOptions<TShard>> configOptions,
+    IOptions<SqlGlobalPropertiesOptions> globalOptions,
+    ILogger<SqlShardSets<TShard>> logger
+  ) : base(configOptions, globalOptions, logger)
     {
-        public ShardSets(
-            IOptions<SqlShardConnectionOptions<byte>> configOptions,
-            IOptions<DataSecurityOptions> securityOptions,
-            IOptions<DataResilienceOptions> resilienceStrategiesOptions,
-            ILogger<ShardSets> logger
-        ) : base(configOptions, securityOptions, resilienceStrategiesOptions, logger)
-        {
-            //
-        }
+        //
     }
+}
+
+public class MyShardKey : ShardKey<byte>
+{
+    //
+}
+
+public class MyShardChild : ShardChild<byte>
+{
+    //
+}
 
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```csharp
-    public class ShardSets : PgShardSets<short>
+public class MyShardSets : PgShardSets<short>
+{
+  public SqlShardSets(
+	  IOptions<PgShardConnectionOptions<TShard>> configOptions,
+    IOptions<PgGlobalPropertiesOptions> globalOptions,
+    ILogger<PgShardSets<TShard>> logger
+  ) : base(configOptions, globalOptions, logger)
     {
-        public ShardSets(
-            IOptions<SqlShardConnectionOptions<short>> configOptions,
-            IOptions<DataSecurityOptions> securityOptions,
-            IOptions<DataResilienceOptions> resilienceStrategiesOptions,
-            ILogger<ShardSets> logger
-        ) : base(configOptions, securityOptions, resilienceStrategiesOptions, logger)
-        {
-            //
-        }
+        //
     }
+}
+
+public class MyShardKey : ShardKey<short>
+{
+    //
+}
+
+public class MyShardChild : ShardChild<short>
+{
+    //
+}
 
 ```
 
 ***
 
-This approach will be helpful in reducing the number of times the generic *ShardId* type must be specified in project.
+This approach will be helpful in reducing the number of times the generic *ShardId* type must be specified in your project code.

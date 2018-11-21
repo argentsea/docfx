@@ -56,9 +56,9 @@ Both the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/Argent
 For example, keys representing a *Customer* record might have a [DataOrigin](/api/ArgentSea.DataOrigin.html) of “c”, whereas keys representing a *Product* record might have a [DataOrigin](/api/ArgentSea.DataOrigin.html) of “p”. Because this simple tag identifies the data source, two different [ShardKeys](/api/ArgentSea.ShardKey-2.html) from the same shard and with the same record number will still not be equal because they represent different source data.
 
 > [!IMPORTANT]
-> One [DataOrigin](/api/ArgentSea.DataOrigin.html) character value is reserved: “0” (Unicode charactor Zero, Unicode numeric value 30).
+> One [DataOrigin](/api/ArgentSea.DataOrigin.html) character value is reserved: “0” (Unicode character Zero, Unicode numeric value 30).
 >
-> This is used for the [DataOrigin](/api/ArgentSea.DataOrigin.html) of `ShardKey.Empty` and `ShardChild.Empty`. Creating a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) with a “zero” [DataOrigin](/api/ArgentSea.DataOrigin.html) character but non-default (i.e. not zero or not null) *ShardId* or *RecordId* will throw an [InvalidShardArgumentsException](/api/ArgentSea.InvalidShardArgumentsException.html) error.
+> This is used for the [DataOrigin](/api/ArgentSea.DataOrigin.html) of `ShardKey.Empty` and `ShardChild.Empty`. Creating a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) with a “zero” [DataOrigin](/api/ArgentSea.DataOrigin.html) character but non-default (i.e. not zero or not null) *ShardId* or *RecordId* values will throw an [InvalidShardArgumentsException](/api/ArgentSea.InvalidShardArgumentsException.html) error.
 
 This capability is useful for helping prevent data from being accessed with the wrong type of key — like an inventory key inadvertently passed to fetch an account record. Also, this may be helpful for caching data, since you can use the same dictionary to cache objects of different types without key collision.
 

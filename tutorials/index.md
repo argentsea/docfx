@@ -1,6 +1,6 @@
 ﻿# Overview
 
-These deep-dive tutorials explain distinct functional areas in depth. If you’d prefer to learn by being hands-on, you can explore [QuickStart 1](quickstart1.md), which guides you through a project setup, and [QuickStart 2](quickstart2.md), which extends that to sharding.
+These deep-dive tutorials explain distinct functional areas in depth. If you’d prefer to learn by being hands-on, you can explore [QuickStart 1](quickstart1.md), which guides you through a project setup, and [QuickStart 2](quickstart2.md), which extends that to sharding and more advanced issues.
 
 ArgentSea is built on top of ADO.NET, so an understanding of basic .NET data access is be essential to understanding ArgentSea. Once you understand the architecture of the framework, you will find it no more difficult to use (and generally less difficult) than other .NET data access approaches. You can always still use ADO.NET to resolve any capability gaps or distinctive query requirements.
 
