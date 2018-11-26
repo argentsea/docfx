@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457.79 289.05">
+  <path d="M557.59,313.44c-4.89,10.62-12.39,21.45-22.5,26.49s-21.28,9.55-33.51,9.55A240.14,240.14,0,0,1,461,346.05a290.48,290.48,0,0,0-38.65-2.88c-16.64,0-32.74,1.48-48.32,8.44s-27.68,14-36.32,27.08h-1c-9-14-21.08-21.27-36.33-27.77s-30.86-7.75-46.84-7.75a290.48,290.48,0,0,0-38.65,2.88,240.14,240.14,0,0,1-40.61,3.43c-12.07,0-23.32-4.52-33.76-9.55s-17.69-15.87-21.77-26.49h-9q6.6,24.18,34.74,37.84A134.33,134.33,0,0,0,203.87,365,276.47,276.47,0,0,0,244,361.86a264.61,264.61,0,0,1,38.16-3.09q15.17,0,30.94,7.62T333.27,390h9.3Q347,374,362.75,366.39t30.95-7.62a264.83,264.83,0,0,1,38.16,3.09A276.36,276.36,0,0,0,472,365a134.08,134.08,0,0,0,59.56-13.67q28-13.66,34.62-37.84Z" transform="translate(-108.36 -100.9)" fill="#231f20"/>
+  <rect y="57.25" width="142.86" height="142.86" fill="black"/>
+  <rect x="157.47" y="57.25" width="142.86" height="142.86" fill="black"/>
+  <rect x="314.94" y="57.25" width="142.86" height="142.86" fill="black"/>
+  <text text-anchor="middle" font-size="48" x="228.895" y="40" fill="black" font-family="'Trebuchet MS', Helvetica, sans-serif">ShardKey</text>
+  <text text-anchor="middle" font-size="32" x="71.4" y="137.36" fill="white" font-family="'Trebuchet MS', Helvetica, sans-serif">Origin</text>
+  <text text-anchor="middle" font-size="32" x="228.9" y="137.36" fill="white" font-family="'Trebuchet MS', Helvetica, sans-serif">ShardId</text>
+  <text text-anchor="middle" font-size="32" x="386.3" y="137.36" fill="white" font-family="'Trebuchet MS', Helvetica, sans-serif">RecordId</text>
+</svg>

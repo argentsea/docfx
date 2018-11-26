@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+ xmlns:svg="http://www.w3.org/2000/svg"
+ xmlns="http://www.w3.org/2000/svg"
+ viewBox="0 0 210 194"
+ version="1.1"
+>
+
+ <g
+>
+
+ <rect
+ style="fill:#90846c;stroke:#000000;stroke-width:0.27203092"
+ id="rect4242"
+ width="208.64507"
+ height="192.88077"
+ x="0.20456235"
+ y="0.59638244" />
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:22.57777786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="7.0092497"
+ y="21.49688"
+ id="text4246">
+   <tspan
+ id="tspan4244"
+ x="7.0092497"
+ y="21.49688"
+ style="font-size:22.57777786px;fill:#e3dbdb;stroke-width:0.26458332">Databases</tspan>
+ </text>
+
+ <rect
+ id="rect3713-81-3-0-7"
+ width="152.63649"
+ height="63.609882"
+ x="9.1543255"
+ y="28.804268"
+ style="fill:#90a09c;stroke:#000000;stroke-width:0.25973672" />
+
+ <rect
+ id="rect3713-81-1-9-6-3-0"
+ width="122.07066"
+ height="14.862688"
+ x="22.372284"
+ y="52.637566"
+ style="fill:#6b8e23;stroke:#000000;stroke-width:0.11227839" />
+
+ <rect
+ id="rect3713-81-1-9-3-3-4-9"
+ width="122.07066"
+ height="14.862688"
+ x="22.372284"
+ y="72.745842"
+ style="fill:#b8860b;stroke:#000000;stroke-width:0.11227839" />
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="28.350098"
+ y="63.949654"
+ id="text3803-5-4-1">
+<tspan
+ id="tspan3801-2-3-4"
+ x="28.350098"
+ y="63.949654"
+ style="stroke-width:0.26458332">Read connection</tspan>
+</text>
+
+ <g
+ id="g3862-6-1-7"
+ transform="matrix(0.22760213,0,0,0.2651606,160.18984,35.556547)">
+
+ <path
+ id="path3819-1-6-7-7"
+ transform="scale(0.26458333)"
+ d="m -432.26172,284.34961 v 125.54687 a 61.114226,17.172593 0 0 0 -0.084,0.46875 61.114226,17.172593 0 0 0 61.11523,17.17383 61.114226,17.172593 0 0 0 61.08008,-16.99218 h 0.0293 v -0.16016 a 61.114226,17.172593 0 0 0 0.004,-0.0215 61.114226,17.172593 0 0 0 -0.004,-0.0312 V 284.34961 Z"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.99999994"
+ />
+
+ <ellipse
+ ry="4.543582"
+ rx="16.169806"
+ cy="75.171661"
+ cx="-98.22155"
+ id="path3819-0-9-1"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.26458332" />
+
+ <path
+ id="path3857-6-5-5"
+ d="m -131.86795,76.857711 -0.39909,28.957209 20.75257,-14.319492 z"
+ style="fill:#000000;stroke:#000000;stroke-width:0.35278076px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+
+ </g>
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:14.11111069px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="15.475676"
+ y="44.105553"
+ id="text4075-0-6">
+<tspan
+ id="tspan4073-0-5"
+ x="15.475676"
+ y="44.105553"
+ style="font-size:14.11111069px;stroke-width:0.26458332">Database</tspan>
+</text>
+
+ <rect
+ id="rect3713-81-3-0-7-7"
+ width="152.63649"
+ height="63.609882"
+ x="29.656231"
+ y="75.336418"
+ style="fill:#90a09c;stroke:#000000;stroke-width:0.25973672" />
+
+ <rect
+ id="rect3713-81-1-9-6-3-0-4"
+ width="122.07066"
+ height="14.862688"
+ x="42.874187"
+ y="99.169716"
+ style="fill:#6b8e23;stroke:#000000;stroke-width:0.11227839" />
+
+ <rect
+ id="rect3713-81-1-9-3-3-4-9-7"
+ width="122.07066"
+ height="14.862688"
+ x="42.874187"
+ y="119.278"
+ style="fill:#b8860b;stroke:#000000;stroke-width:0.11227839" />
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="48.852001"
+ y="110.48177"
+ id="text3803-5-4-1-2">
+<tspan
+ id="tspan3801-2-3-4-4"
+ x="48.852001"
+ y="110.48177"
+ style="stroke-width:0.26458332">Read connection</tspan>
+</text>
+
+ <g
+ id="g3862-6-1-7-3"
+ transform="matrix(0.22760213,0,0,0.2651606,180.69168,82.08869)">
+
+ <path
+ id="path3819-1-6-7-7-0"
+ transform="scale(0.26458333)"
+ d="m -432.26172,284.34961 v 125.54687 a 61.114226,17.172593 0 0 0 -0.084,0.46875 61.114226,17.172593 0 0 0 61.11523,17.17383 61.114226,17.172593 0 0 0 61.08008,-16.99218 h 0.0293 v -0.16016 a 61.114226,17.172593 0 0 0 0.004,-0.0215 61.114226,17.172593 0 0 0 -0.004,-0.0312 V 284.34961 Z"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.99999994"
+ />
+
+ <ellipse
+ ry="4.543582"
+ rx="16.169806"
+ cy="75.171661"
+ cx="-98.22155"
+ id="path3819-0-9-1-1"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.26458332" />
+
+ <path
+ id="path3857-6-5-5-7"
+ d="m -131.86795,76.857711 -0.39909,28.957209 20.75257,-14.319492 z"
+ style="fill:#000000;stroke:#000000;stroke-width:0.35278076px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+
+ </g>
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:14.11111069px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="35.977581"
+ y="90.637703"
+ id="text4075-0-6-5">
+<tspan
+ id="tspan4073-0-5-8"
+ x="35.977581"
+ y="90.637703"
+ style="font-size:14.11111069px;stroke-width:0.26458332">Database</tspan>
+</text>
+
+ <rect
+ id="rect3713-81-3-0"
+ width="152.63649"
+ height="63.609882"
+ x="49.522953"
+ y="122.61015"
+ style="fill:#90a09c;stroke:#000000;stroke-width:0.25973672" />
+
+ <rect
+ id="rect3713-81-1-9-6-3"
+ width="122.07066"
+ height="14.862688"
+ x="62.740898"
+ y="146.44345"
+ style="fill:#6b8e23;stroke:#000000;stroke-width:0.11227839" />
+
+ <rect
+ id="rect3713-81-1-9-3-3-4"
+ width="122.07066"
+ height="14.862688"
+ x="62.740898"
+ y="166.55173"
+ style="fill:#b8860b;stroke:#000000;stroke-width:0.11227839" />
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="68.718712"
+ y="157.75554"
+ id="text3803-5-4">
+<tspan
+ id="tspan3801-2-3"
+ x="68.718712"
+ y="157.75554"
+ style="stroke-width:0.26458332">Read connection</tspan>
+</text>
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="68.451439"
+ y="178.39305"
+ id="text3813-6-3">
+<tspan
+ id="tspan3811-8-6"
+ x="68.451439"
+ y="178.39305"
+ style="stroke-width:0.26458332">Write connection</tspan>
+</text>
+
+ <g
+ id="g3862-6-1"
+ transform="matrix(0.22760213,0,0,0.2651606,200.55843,129.36241)">
+
+ <path
+ id="path3819-1-6-7"
+ transform="scale(0.26458333)"
+ d="m -432.26172,284.34961 v 125.54687 a 61.114226,17.172593 0 0 0 -0.084,0.46875 61.114226,17.172593 0 0 0 61.11523,17.17383 61.114226,17.172593 0 0 0 61.08008,-16.99218 h 0.0293 v -0.16016 a 61.114226,17.172593 0 0 0 0.004,-0.0215 61.114226,17.172593 0 0 0 -0.004,-0.0312 V 284.34961 Z"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.99999994"
+ />
+ <ellipse
+ ry="4.543582"
+ rx="16.169806"
+ cy="75.171661"
+ cx="-98.22155"
+ id="path3819-0-9"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.26458332" />
+
+ <path
+ id="path3857-6-5"
+ d="m -131.86795,76.857711 -0.39909,28.957209 20.75257,-14.319492 z"
+ style="fill:#000000;stroke:#000000;stroke-width:0.35278076px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+
+ </g>
+
+ <g
+ id="g3862-4-4-4"
+ transform="matrix(0.22760213,0,0,0.2651606,200.48933,149.22444)">
+
+ <path
+ id="path3819-1-2-0-1"
+ transform="scale(0.26458333)"
+ d="m -432.26172,284.34961 v 125.54687 a 61.114226,17.172593 0 0 0 -0.084,0.46875 61.114226,17.172593 0 0 0 61.11523,17.17383 61.114226,17.172593 0 0 0 61.08008,-16.99218 h 0.0293 v -0.16016 a 61.114226,17.172593 0 0 0 0.004,-0.0215 61.114226,17.172593 0 0 0 -0.004,-0.0312 V 284.34961 Z"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.99999994"
+ />
+
+ <ellipse
+ ry="4.543582"
+ rx="16.169806"
+ cy="75.171661"
+ cx="-98.22155"
+ id="path3819-3-9-1"
+ style="fill:#ffdd55;stroke:#000000;stroke-width:0.26458332" />
+
+ <path
+ id="path3857-8-4-5"
+ d="m -131.86795,76.857711 -0.39909,28.957209 20.75257,-14.319492 z"
+ style="fill:#000000;stroke:#000000;stroke-width:0.35278076px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+
+ </g>
+
+ <text
+  style="font-style:normal;font-weight:normal;font-size:14.11111069px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+ x="55.844288"
+ y="137.91144"
+ id="text4075-0">
+<tspan
+ id="tspan4073-0"
+ x="55.844288"
+ y="137.91144"
+ style="font-size:14.11111069px;stroke-width:0.26458332">Database</tspan>
+</text>
+
+ </g>
+
+</svg>

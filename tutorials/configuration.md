@@ -8,15 +8,18 @@ ArgentSea is designed to make this potentially large number connections manageab
 
 ## ArgentSea Data Connections
 
-There are two types of database connections in ArgentSea:
+There are two types of data connections in ArgentSea:
 
 * __A *database connection*__ - a data set which is hosted by a single database
 * __A *shard set*__  - a data set spread over multiple database connections
 
-ArgentSea configuration supports any number of [database connections](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) and any number of [shard sets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html). Each [shard set](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) can have any number of database connections (shard instances). 
+A shard set represents a set of data that is spread among multiple database servers. This structure is common for high-performance data access, since it is usually more cost effective and predictably scalable to have multiple smaller database servers than to build one massive server. Global applications might try to improve performance for their global users by distributing shards in datacenters around the globe. The ArgentSea data access components allow you to query across multiple servers or a find specific record on its corresponding host server.
 
-All data connections have the option of separate read and write connections. 
-If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes *SQL Server Availability Groups*, *Amazon RDS* Read Replicas, *Azure SQL* geo-replication, *Amazon Aurora* reader endpoints, etc.
+ArgentSea configuration supports any number of database definitions in the [Databases collection](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html), and any number of [shard sets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) in the [ShardSets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.html) collection. Each [shard set](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) can have any number of database connections (shard instances).
+
+<table border="0" margin="0" padding="0"><tr><td width="50%"><img src="/images/databases.svg"></td><td width="50%"><img src="/images/shardsets.svg"></td></tr></table>
+
+All data connections have the option of separate read and write connections. If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes *SQL Server Availability Groups*, *Amazon RDS* Read Replicas, *Azure SQL* geo-replication, *Amazon Aurora* reader endpoints, etc.
 
 All this creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *configuration hierarchy*.
 
@@ -117,6 +120,8 @@ The set of available properties depends upon the provider:
 }
 ````
 
+***
+
 > [!CAUTION]
 > Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is typically required for most connections is login information, a server or host name, and a database name.
 
@@ -155,13 +160,16 @@ For example, to globally change both the connection timeout property and packet 
 }
 ````
 
+***
+
 ### (Non-Sharded) Database Connections
 
-The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code.
+The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code. The key in your configuration must *exactly* match the keys used in your code (i.e casing, accents, and kana must match).
 
-Non-sharded database connections have a three-level hierarchy: global values, connection settings, and settings for distinct read and write endpoints.
+Database connections have a three-level hierarchy: global properties, database properties, and properties for distinct read and write endpoints. This illustration shows how various “parent” configuration properties are applied to the child values. Ultimately, these values are combined to build a Read or Write connection.
 
-[IMAGE! database connection]
+![Non-Sharded Configuration](../images/databases-config.svg)
+
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -203,8 +211,6 @@ The JSON section for SQL database connections is `SqlDbConnections`. This is an 
   ]
 }
 ````
-
-***
 
 ## [PostgreSQL](#tab/tabid-pg)
 
@@ -256,11 +262,9 @@ As mentioned before, *any* connection property from the complete property list (
 
 ### Shard Set Connections
 
-A shard set represents a single set of data  that is spread among multiple database servers. This structure is common for high-performance data access, since it is usually more cost effective and predictably scalable to have multiple smaller database servers than to build one massive server. Global applications might try to improve performance for their global users by distributing shards in datacenters around the globe. The ArgentSea data access components allow you to query across multiple servers or a find specific record on its corresponding host server.
+ArgentSea shard sets have up to four inheritance levels: global properties, shard set properties, shard properties, and distinct read and write endpoint properties. The corresponding illustration again shows how various “parent” configuration properties are applied to the child values. As with non-sharded databases, these values are combined to build a Read or Write connection.
 
-ArgentSea shard sets have up to four inheritance levels: global values, shard sets, shards, and distinct read and write endpoint settings.
-
-[IMAGE! shardset connection]
+![Non-Sharded Configuration](../images/shardsets-config.svg)
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -443,8 +447,6 @@ UserSecrets uses a JSON file, so the password entries can be simply removed from
   ]
 }
 ````
-
-***
 
 ## [PostgreSQL](#tab/tabid-pg)
 

@@ -34,28 +34,100 @@ You can learn more about adding a reference to ArgentSea [here](https://docs.mic
 
 ## 4. Define your Login Information
 
-There are two required configuration sections. The first of these provides security information.
-
-If you are creating a new project, we recommend adding [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets). This provides a means of keeping passwords out of your source control. You can add UserSecrets to your project by loading the *Microsoft.Extensions.Configuration.UserSecrets* NuGet package.
+ArgentSea leverages the .NET Core configuration architecture, which means that the configuration information is combined from multiple providers. In this example, we will store most connection information in the *appsettings.json* file, but store the login password securely in a separate store.
 
 > [!TIP]
-> The QuickStart1 sample application *does* use User Secrets, so, if you are following along at home, you will need to manually copy the credentials to the User Secrets in the sample app.
+> Because the new configuration architecture in .NET core allows values to be hosted in multiple places, we can also use environment variables — which can be very useful for managing a release pipeline. In that case, we might store the server or database information there, instead of *appsettings.json*. Again, the details are described in the [configuration](/tutorials/configuration.md) tutorial.
+
+If you are creating a new project, add [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) to your project. This provides a means of keeping passwords out of your source control. You can add UserSecrets to your project by loading the *Microsoft.Extensions.Configuration.UserSecrets* NuGet package.
+
+> [!TIP]
+> Because the QuickStart1 sample application uses User Secrets, if you are following along at home with the downloaded project, you will still need to manually copy the credentials to the User Secrets in the sample app.
 
 If you are using UserSecrets, right-click on the project and select *Manage User Secrets* to open the secrets JSON file. Otherwise, you can simply add the security information to your appsettings.json file.
 
-To connect using username and password authentication, use:
+# [SQL Server](#tab/tabid-sql)
+
+To connect using username and password authentication, add this to your User Secrets:
 
 ```json
-"Credentials": [
-  {
-    "SecurityKey": "SecKey1",
-    "UserName": "webuser",
-    "Password": "Pwd123456"
-  }
-]
+{
+  "SqlDbConnections": [
+    {
+      "Password": "<password>"
+    }
+  ]
+}
 ```
 
 Change the values, as appropriate, to represent a valid login.
+
+Configure the *DataSource* and *InitialCatalog* properties in your *appsettings.json* configuration file:
+
+```json
+  "SqlDbConnections": [
+    {
+      "DatabaseKey": "MyDatabase",
+      "DataSource": "localhost",
+      "InitialCatalog": "MyDb"
+    }
+  ]
+```
+
+Note that if you are using Windows authentication, you can just specify this in *appsettings.json* and you don’t need to manage secrets:
+
+```json
+  "SqlDbConnections": [
+    {
+      "DatabaseKey": "MyDatabase",
+      "DataSource": "localhost",
+      "InitialCatalog": "MyDb",
+      "WindowsAuth": true
+    }
+  ]
+```
+
+# [PostgreSQL](#tab/tabid-pg)
+
+To connect using username and password authentication, add this to your User Secrets:
+
+```json
+{
+  "SqlDbConnections": [
+    {
+      "Password": "<password>"
+    }
+  ]
+}
+```
+
+Configure the *Host* and *Database* properties in your *appsettings.json* configuration file:
+
+```json
+  "PgDbConnections": [
+    {
+      "DatabaseKey": "MyDatabase",
+      "Host": "localhost",
+      "Database": "MyDb"
+    }
+  ]
+```
+
+Note that if you are using Windows authentication, you can just specify this in *appsettings.json* and you don’t need to manage secrets:
+
+```json
+  "SqlDbConnections": [
+    {
+      "DatabaseKey": "MyDatabase",
+      "Host": "localhost",
+      "Database": "MyDb",
+      "WindowsAuth": true
+    }
+  ]
+```
+
+***
+
 
 Alternatively, for a connection using Windows authentication, use:
 
@@ -68,55 +140,10 @@ Alternatively, for a connection using Windows authentication, use:
   ],
 ```
 
-> [!TIP]
-> If you are using Windows or Kerberos authentication *exclusively*, you can store your credential information within your appsettings.json file. There is no need to secure your credential information.
+***
+
 > [!CAUTION]
 > In a production deployment, the Credential section should be hosted in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), or some other secure resource.
-
-## 6. Define Your Database Settings
-
-The database settings tell ArgentSea how to build the (non-security) part of your connection string. Any attribute not specified will use a default value, so the required information is quite minimal. A deep-dive into configuration settings, including a complete list of configuration attributes, is available [here](/tutorials/configuration.md).
-
-> [!TIP]
-> The new configuration architecture in .NET core allows values to be hosted in multiple places, including environment variables — which can be very useful for managing a release pipeline. Again, the details are described in the [configuration](/tutorials/configuration.md) tutorial.
-
-In your appsettings.json file, add the following section if you are creating a new project; otherwise, edit any values that you might need to change:
-
-# [SQL Server](#tab/tabid-sql)
-
-Configure the *DataSource* and *InitialCatalog* properties below.
-
-```json
-  "SqlDbConnections": [
-    {
-      "DatabaseKey": "MyDatabase",
-      "DataConnection": {
-        "SecurityKey": "SecKey1",
-        "DataSource": "localhost",
-        "InitialCatalog": "MyDb"
-      }
-    }
-  ]
-```
-
-# [PostgreSQL](#tab/tabid-pg)
-
-Configure the *Host* and *Database* properties below.
-
-```json
-  "PgDbConnections": [
-    {
-      "DatabaseKey": "MyDatabase",
-      "DataConnection": {
-        "SecurityKey": "SecKey1",
-        "Host": "localhost",
-        "Database": "MyDb"
-      }
-    }
-  ]
-```
-
-***
 
 ## 7. Load ArgentSea on Application Start
 

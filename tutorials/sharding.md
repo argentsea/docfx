@@ -49,6 +49,8 @@ ArgentSea will work with either design. The [ShardKey](/api/ArgentSea.ShardKey-2
 
 A [ShardKey](/api/ArgentSea.ShardKey-2.html) consists of three components: a *[DataOrigin](/api/ArgentSea.DataOrigin.html)*, a *ShardId*, and a *RecordId*. A [ShardChild](/api/ArgentSea.ShardChild-3.html) has the same values plus an additional *ChildId*.
 
+<table border="0" margin="0" padding="0"><tr><td width="43%"><img src="/images/shardkey.svg"></td><td width="57%"><img src="/images/shardchild.svg"></td></tr></table>
+
 #### The [DataOrigin](/api/ArgentSea.DataOrigin.html)
 
 Both the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) have a [DataOrigin](/api/ArgentSea.DataOrigin.html) value. The purpose of this value is to represent a data source. It is little more than a character value that you can choose to differentiate the data source.
@@ -214,7 +216,7 @@ The root injectable service is a [ShardSets](/api/ArgentSea.ShardSetsBase-2.html
 
 The [ShardSets](/api/ArgentSea.ShardSets-2.html) collection is the root of an object hierarchy. The child objects in the hierarchy are implemented as nested classes. This simplifies the implementation, but can also make declarations somewhat verbose.
 
-![ShardSetHierarchy](../images/shardSetHierarchy.jpg)
+![ShardSetHierarchy](../images/shardsets.svg)
 
 ### Nested classes
 
