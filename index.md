@@ -2,31 +2,37 @@
 
 Modern web applications need to be built for performance and scalability, as well as security, monitoring, and configuration. ArgentSea offers a framework that consistently represents best practices for all of these concerns.
 
-When you select a solution, it is important to know which problems they are intended to fix. Some data libraries are designed to make it easier for non-SQL developers to work with database data. Others are intended to make developers more productive by reducing the coding effort.
-
-ArgentSea is primarily intended to address two problems: scalability and supportability. ArgentSea optimizes the work of your developers without compromising the performance or security of your infrastructure.
+The goal of ArgentSea is to simplify the development process for delivering highly scalable and supportable applications.
 
 ## Massive Scalability
 
-Highly scalable data means data “sharding” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
+Highly efficient code, reduced server round-trips, and the scale-out of reads and writes — these are the components of a service that can grow to serve any demand.
 
-High-performance data access means simultaneous queries across shards, data-to-object mapping without the overhead of reflection, and the consistent use of stored procedures/functions to reduce SQL compilation overhead. Because ArgentSea can handle multiple results from the same query, the number of server round-trips is reduced — a huge performance win.
+In most cases, highly scalable data means data “sharding” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
 
 While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data.
 
+ArgentSea also helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection, and the consistent use of stored procedures/functions to reduce SQL compilation overhead. Because ArgentSea can handle multiple results from the same query, the number of server round-trips may be reduced — a huge performance win.
+
 ## Mission Critical Supportability
 
-ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures, security best-practices, and managing connection configuration.
+ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures, security best-practices, and managing connection configuration elegantly.
 
-The data framework will attempt to recover from transient errors by automatically retrying the data access; you have control over how long and how often. If repeated failures occur, the system will “circuit break”, so that data failures have less chance of bringing down the whole application. The logging implementation allows you to log to any provider, including [Application Insights](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-asp-net-core), [CloudWatch](https://github.com/aws/aws-logging-dotnet#aspnet-core-logging), the file system, Windows event logs, and more. Database passwords can be [secured](tutorials/security.md) using [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets), or other secure storage, while connection information can be separately managed per environment.
+The data framework will attempt to recover from transient errors by automatically retrying the data access; you have control over how long and how often. If repeated failures occur, the system will “circuit break”, so that data failures have less chance of bringing down the whole application. 
 
-### Code Clarity and Maintenance
+The robust logging implementation allows you to log to any provider, including [Application Insights](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-asp-net-core), [CloudWatch](https://github.com/aws/aws-logging-dotnet#aspnet-core-logging), the file system, Windows event logs, and more.
+
+Database passwords can be [secured](tutorials/security.md) using [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets), [Docker secrets](https://docs.docker.com/engine/swarm/secrets/), or other secure storage.
+
+The configuration architecture simplifies the management of large numbers of data connections, while making it easy to deploy a release though staging environments.
+
+## Code Clarity and Maintenance
 
 Supportability is about more than operational management. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a natural path to resolving bugs. When long-lived applications must be supported by teams that are not the original authors, this becomes especially critical.
 
 The ArgentSea Mapper helps reduce the burden of code maintenance by simplifying data access code. The logging functionality can also provide substantial insight to developers, including the dynamic code compilation behind the Mapper, misconfigurations, and data errors.
 
-However, one of the top ways that ArgentSea help with ongoing code maintenance is that it enforces the use of stored procedures or functions.
+However, one of the principal ways that ArgentSea help with ongoing code maintenance is that it enforces the use of stored procedures or functions.
 
 <div>
     <div style="padding-left:10px;padding-right:10px;display:flex;flex-flow:row wrap;justify-content:space-around;">
