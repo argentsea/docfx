@@ -23,13 +23,17 @@ All data connections have the option of separate read and write connections. If 
 
 All this creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *configuration hierarchy*.
 
-## Connection Attributes
+## The Configuration Hierarchy
+
+The Configuration Hierarchy, allows users to configure their data connection information at multiple levels. Child nodes “inherit” any settings of their parent. By dramatically reducing configuration redundancy, it makes handling multiple connections much more manageable.
+
+### Connection Attributes
 
 ArgentSea essentially dispenses with traditional connection strings (although you can use them if you really want to). Instead, it uses the .NET configuration architecture to manage each attribute as a discrete property. Each property can be managed globally, or at the shardSet, database, or connection level. Lower-level settings inherit values from their parent, which they can also overwrite if their own values are set differently.
 
 For example, if your network infrastructure supports jumbo frames, you can configure the network packet size *once* in the global configuration section and every ArgentSea connection will default to this value.
 
-The set of available properties depends upon the provider:
+The complete set of available properties is:
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -109,7 +113,7 @@ The set of available properties depends upon the provider:
   "SocketSendBufferSize": 8192,
   "SslMode": "Require",
   "TcpKeepAlive": true,
-  "Timeout": 2,
+  "Timeout": 5,
   "Timezone": "America/Los_Angeles",
   "TrustServerCertificate": true,
   "UsePerfCounters": false,
@@ -125,7 +129,9 @@ The set of available properties depends upon the provider:
 > [!CAUTION]
 > Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is typically required for most connections is login information, a server or host name, and a database name.
 
-## The Configuration Hierarchy
+Each level in the Configuration Hierarchy can use any of the properties on this list.
+
+### The Global Section
 
 The root of the configuration hierarchy is the “global settings” section. All properties set here are applied to every data connection — unless the value is overwritten by lower-level properties (i.e. database, shard set, shard, etc.).
 
@@ -161,6 +167,8 @@ For example, to globally change both the connection timeout property and packet 
 ````
 
 ***
+
+Note that these examples include only the attributes (from the previous section) that we want to change.
 
 ### (Non-Sharded) Database Connections
 
@@ -556,7 +564,7 @@ The properties specific to a resilience strategy are:
 {
   "CircuitBreakerFailureCount": 20,
   "CircuitBreakerTestInterval": 5000,
-  "ConnectTimeout": 2,
+  "ConnectTimeout": 5,
   "RetryCount": 6,
   "RetryInterval": 256,
   "RetryLengthening": "Fibonacci",
@@ -601,7 +609,7 @@ If a Resilience Strategy is not defined, ArgentSea will use a default strategy. 
 | RetryCount | 6 tries |
 |RetryInterval | 256 milliseconds |
 | Lengthening | Fibonacci |
-| (Connect) Timeout | 2 |
+| (Connect) Timeout | 5 |
 
 > [!NOTE]
 > SQL Server’s ADO.NET provider also offers automatic retries. ArgentSea disables this in lieu of its own functionality, which logs these automatic retries. This valuable environment diagnostic information should not be invisible.
@@ -680,13 +688,11 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 
 This code references a `Configuration` property. It is common practice to obtain the configuration object from the constructor of the `Startup` class, then use this to set the `Configuration` property.
 
-## Immutability
+## Failover
 
-Configuration entries can be updated until the moment when the `Shardsets` or `Databases` objects are first created (i.e. at first injection). Once these singleton objects exist, further configuration changes are ignored. Further, the object use immutable collections, so once they are created, they cannot be changed directly either.
+ArgentSea itself does not currently include functionality that enables an automatic failover to a standby database server. This is often managed through DNS changes or via configuration of the .NET data provider (such as the *FailoverPartner* property), which may not even require client connection string changes. Furthermore, business continuity plans typically do not expect disaster recovery plans to be fully “automatic” at the individual client level; a lot of infrastructure must be coordinated in a robust failover, and a rogue client should not failover without a coordinated signal.
 
-Similarly, the first time a connection is used and ADO.NET the connection string is created, the same connection string will be provided to all subsequent requests.
-
-There is no way to update connection configuration once it has been used, other than to destroy and reload the ShardSets or Databases service.
+Once created, both the [ShardSets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) and [Databases](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) singleton collections are immutable, but any property in the configuration hierarchy can still be updated. In other words, after the configuration hierarchy is created, you cannot change the *structure* of the hierarchy, but the connection properties of the members can still be changed and will update the client connections. Child objects will also continue to inherit any updates from their parents. This allows you to build failover logic that updates the connection information — server endpoints, database names, etc. — given whatever trigger you prefer.
 
 ## Simplifying Data Connections
 
