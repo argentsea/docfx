@@ -11,6 +11,6 @@ This repostitory contains the markdown and links that enables DocFx to create th
 * https://github.com/argentsea/pg cloned to \ArgentSea.Pg
 * https://github.com/argentsea/docs cloned to \ArgentSea.DocFx\_site
 
-DocFx should generate a web site to the “_site” folder. The _site folder is it’s own repostoriry; pushing that site to GitHub will publish the updated documentation.
+DocFx should generate a web site to the “_site” folder. The _site folder is it’s own repository; pushing that site to GitHub will publish the updated documentation.
 
 This repository uses the MIT license.

@@ -10,3 +10,5 @@ _site
 api-sql
 api-pg
 api
+log.txt
+docs.csproj.user

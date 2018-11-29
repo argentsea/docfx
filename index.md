@@ -18,11 +18,11 @@ ArgentSea also helps deliver highly optimized data access through data-to-object
 
 ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures, security best-practices, and managing connection configuration elegantly.
 
-The data framework will attempt to recover from transient errors by automatically retrying the data access; you have control over how long and how often. If repeated failures occur, the system will “circuit break”, so that data failures have less chance of bringing down the whole application. 
+The data framework will attempt to recover from transient errors by automatically retrying the data access; you have control over how long and how often. If repeated failures occur, the system will “circuit break”, so that data failures have less chance of bringing down the whole application.
 
 The robust logging implementation allows you to log to any provider, including [Application Insights](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-asp-net-core), [CloudWatch](https://github.com/aws/aws-logging-dotnet#aspnet-core-logging), the file system, Windows event logs, and more.
 
-Database passwords can be [secured](tutorials/security.md) using [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets), [Docker secrets](https://docs.docker.com/engine/swarm/secrets/), or other secure storage.
+Database passwords can be secured using [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets), [Docker secrets](https://docs.docker.com/engine/swarm/secrets/), or other secure storage.
 
 The configuration architecture simplifies the management of large numbers of data connections, while making it easy to deploy a release though staging environments.
 

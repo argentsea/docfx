@@ -1,6 +1,6 @@
 ﻿# QuickStart One
 
-This article will step you through a simple setup of ArgentSea for non-sharded data access. This presentation introduces concepts which are further elaborated in the [subsequent article](quickstart2.html). It assumes that you are using *.NET Core* in some flavor of *Visual Studio*.
+This article will step you through a simple setup of ArgentSea for non-sharded data access. This presentation introduces concepts which are further elaborated in the [subsequent article](quickstart2.md). It assumes that you are using *.NET Core* in some flavor of *Visual Studio*.
 
 If you get stuck or have questions, click on one of the links to the other, more in-depth, articles.
 

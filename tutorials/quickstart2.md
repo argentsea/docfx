@@ -1,7 +1,5 @@
 # QuickStart Two
 
-The [previous QuickStart](quickstart1.html) introduced configuration and mapping. This tutorial extends that information while working with a sharded data set.
+## This document is still under construction
 
-Create local ShardSet
-
-More robust, including versioning and swagger
+The [previous QuickStart](quickstart1.md) introduced configuration and mapping. This tutorial extends that information while working with a sharded data set.

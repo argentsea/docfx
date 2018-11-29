@@ -1,2 +1,8 @@
 - name: API Reference
   href: apis.md
+- name: Shared objects
+  href: /api/ArgentSea.html
+- name: SQL Server
+  href: /api-sql/ArgentSea.Sql.html
+- name: PostgreSQL
+  href: /api-pg/ArgentSea.Pg.html
