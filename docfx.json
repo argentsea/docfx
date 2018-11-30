@@ -43,7 +43,7 @@
   "build": {
     "template": [
       "default",
-      "templates/as"
+      "_exported_templates\\default"
     ],
     "content": [
       {
