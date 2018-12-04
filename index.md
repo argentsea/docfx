@@ -6,13 +6,13 @@ The goal of ArgentSea is to simplify the development process for delivering high
 
 ## Massive Scalability
 
-Highly efficient code, reduced server round-trips, and the scale-out of reads and writes — these are the components of a service that can grow to serve any demand.
+The essential ingredients for building a service that can scale to any demand include highly efficient code, reducing server round-trips, and the scale-out of reads and writes.
 
-In most cases, highly scalable data means data “sharding” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
+Highly scalable data typically means data “[sharding](tutorials/sharding.md)” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
 
-While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data.
+While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data. Especially with a cloud infrastructure, more efficient code requires fewer resources and this translates into ongoing cost savings.
 
-ArgentSea also helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection, and the consistent use of stored procedures/functions to reduce SQL compilation overhead. Because ArgentSea can handle multiple results from the same query, the number of server round-trips may be reduced — a huge performance win.
+ArgentSea helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection. The consistent use of stored procedures/functions reduces both SQL compilation overhead and support/maintenance costs. Because ArgentSea can handle multiple results from the same query, the number of server round-trips can be reduced — a huge performance win.
 
 ## Mission Critical Supportability
 

@@ -178,7 +178,6 @@ Database connections have a three-level hierarchy: global properties, database p
 
 ![Non-Sharded Configuration](../images/databases-config.svg)
 
-
 ## [SQL Server](#tab/tabid-sql)
 
 The JSON section for SQL database connections is `SqlDbConnections`. This is an array of connections. Each connection has a required `DatabaseKey` property, and whatever connection properties are needed for the connection.
@@ -851,7 +850,7 @@ These are the classes you might create in your SQL project to simplify the Shard
 public class MyShardSets : SqlShardSets<byte>
 {
   public SqlShardSets(
-	  IOptions<SqlShardConnectionOptions<TShard>> configOptions,
+    IOptions<SqlShardConnectionOptions<TShard>> configOptions,
     IOptions<SqlGlobalPropertiesOptions> globalOptions,
     ILogger<SqlShardSets<TShard>> logger
   ) : base(configOptions, globalOptions, logger)
@@ -878,7 +877,7 @@ public class MyShardChild : ShardChild<byte>
 public class MyShardSets : PgShardSets<short>
 {
   public SqlShardSets(
-	  IOptions<PgShardConnectionOptions<TShard>> configOptions,
+    IOptions<PgShardConnectionOptions<TShard>> configOptions,
     IOptions<PgGlobalPropertiesOptions> globalOptions,
     ILogger<PgShardSets<TShard>> logger
   ) : base(configOptions, globalOptions, logger)
