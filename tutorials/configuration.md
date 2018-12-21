@@ -4,7 +4,7 @@
 
 Geo-dispersed deployments and SDLC staging processes require application deployments in many distinct environments. Managing configurations in each environment is already a challenge. Worse, sharded data sets can create a very large number of connections, amplifying the configuration problem further. Then, scale-out of read and write endpoints doubles the number of connections. In the end, there can be a lot of connections to manage.
 
-ArgentSea is designed to make this potentially large number connections manageable. Using the configuration architecture in .NET core and a unique *configuration hierarchy*, ArgentSea allows application changes to be promoted through staging environments and deployed into multiple production environments. It does this while storing passwords securely and without the need for messy transformations.
+ArgentSea is designed to make this potentially large number connections manageable. Using the configuration architecture in .NET core and a unique *Hereditary Configuration Hierarchy*, ArgentSea allows application changes to be promoted through staging environments and deployed into multiple production environments. It does this while storing passwords securely and without the need for messy transformations.
 
 ## ArgentSea Data Connections
 
@@ -19,117 +19,17 @@ ArgentSea configuration supports any number of database definitions in the [Data
 
 <table border="0" margin="0" padding="0"><tr><td width="50%"><img src="/images/databases.svg"></td><td width="50%"><img src="/images/shardsets.svg"></td></tr></table>
 
-All data connections have the option of separate read and write connections. If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this includes *SQL Server Availability Groups*, *Amazon RDS* Read Replicas, *Azure SQL* geo-replication, *Amazon Aurora* reader endpoints, etc.
+All data connections have the option of separate read and write connections. If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this include [SQL Server Availability Groups](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/active-secondaries-readable-secondary-replicas-always-on-availability-groups), [PostgreSQL Hot Standby](https://www.postgresql.org/docs/11/hot-standby.html),[Amazon RDS Read Replicas](https://aws.amazon.com/rds/details/read-replicas/), [Azure SQL Geo-Replication](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-active-geo-replication), [Amazon Aurora Low-Latency Read Replicas](https://aws.amazon.com/rds/aurora/details/postgresql-details/), etc.
 
-All this creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *configuration hierarchy*.
+All this creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *Hereditary Configuration Hierarchy*.
 
-## The Configuration Hierarchy
+## The Hereditary Configuration Hierarchy
 
-The Configuration Hierarchy, allows users to configure their data connection information at multiple levels. Child nodes “inherit” any settings of their parent. By dramatically reducing configuration redundancy, it makes handling multiple connections much more manageable.
+ArgentSea essentially dispenses with traditional connection strings (although you can use them if you really want to). Instead, it uses the new .NET configuration architecture to manage each attribute as a discrete property. Each property can be managed globally, or at the shardSet, database, or connection level. Lower-level settings inherit values from their parent, which they can also overwrite if their own values are set differently.
 
-### Connection Attributes
+The Hereditary Configuration Hierarchy allows users to configure their data connection information at multiple levels. Child nodes “inherit” any settings of their parent. By dramatically reducing configuration redundancy, it makes handling many connections much more manageable.
 
-ArgentSea essentially dispenses with traditional connection strings (although you can use them if you really want to). Instead, it uses the .NET configuration architecture to manage each attribute as a discrete property. Each property can be managed globally, or at the shardSet, database, or connection level. Lower-level settings inherit values from their parent, which they can also overwrite if their own values are set differently.
-
-For example, if your network infrastructure supports jumbo frames, you can configure the network packet size *once* in the global configuration section and every ArgentSea connection will default to this value.
-
-The complete set of available properties is:
-
-## [SQL Server](#tab/tabid-sql)
-
-````json
-{
-  "ApplicationIntent": "ReadWrite",
-  "ApplicationName": "MyWebApp",
-  "CircuitBreakerFailureCount": 20,
-  "CircuitBreakerTestInterval": 5000,
-  "ConnectTimeout": 2,
-  "CurrentLanguage": "english",
-  "DataSource": "localhost",
-  "Encrypt": false,
-  "FailoverPartner": "MyMirror",
-  "InitialCatalog": "MyDb",
-  "LoadBalanceTimeout": 0,
-  "MaxPoolSize": 100,
-  "MinPoolSize": 0,
-  "MultipleActiveResultSets": false,
-  "MultiSubnetFailover": true,
-  "PacketSize": 4096,
-  "Password": "pwd1234",
-  "PersistSecurityInfo": false,
-  "Pooling": true,
-  "Replication": true,
-  "RetryCount": 6,
-  "RetryInterval": 256,
-  "RetryLengthening": "Fibonacci",
-  "TransactionBinding": "",
-  "TrustServerCertificate": true,
-  "TypeSystemVersion": "Latest",
-  "UserInstance": "",
-  "UserName": "webUser",
-  "WindowsAuth": false,
-  "WorkstationID": "MyPC"
-}
-````
-
-## [PostgreSQL](#tab/tabid-pg)
-
-````json
-{
-  "ApplicationName": "MyWebApp",
-  "AutoPrepareMinUsages": 5,
-  "CheckCertificateRevocation": false,
-  "CircuitBreakerFailureCount": 20,
-  "CircuitBreakerTestInterval": 25,
-  "ClientEncoding": "UTF8",
-  "CommandTimeout": 5,
-  "ConnectionIdleLifetime": 300,
-  "ConnectionPruningInterval": 10,
-  "ConvertInfinityDateTime": false,
-  "Database": "MyDb",
-  "Encoding": "UTF8",
-  "Enlist": true,
-  "Host": "10.10.25.1",
-  "IncludeRealm": false,
-  "InternalCommandTimeout": -1,
-  "KeepAlive": null,
-  "KerberosServiceName": "postgres",
-  "LoadTableComposites": false,
-  "MaxAutoPrepare": 0,
-  "MaxPoolSize": 100,
-  "MinPoolSize": 1,
-  "NoResetOnClose": false,
-  "Password": "pwd1234",
-  "PersistSecurityInfo": false,
-  "Pooling": true,
-  "Port": 5432,
-  "ReadBufferSize": 8192,
-  "RetryCount": 15,
-  "RetryInterval": 10,
-  "RetryLengthening": "Fibonacci",
-  "SearchPath": null,
-  "ServerCompatibilityMode": "none",
-  "SocketReceiveBufferSize": 8192,
-  "SocketSendBufferSize": 8192,
-  "SslMode": "Require",
-  "TcpKeepAlive": true,
-  "Timeout": 5,
-  "Timezone": "America/Los_Angeles",
-  "TrustServerCertificate": true,
-  "UsePerfCounters": false,
-  "UserName": "webUser",
-  "UseSslStream": true,
-  "WindowsAuth": false,
-  "WriteBufferSize": 8192
-}
-````
-
-***
-
-> [!CAUTION]
-> Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is typically required for most connections is login information, a server or host name, and a database name.
-
-Each level in the Configuration Hierarchy can use any of the properties on this list.
+For example, if your network infrastructure supports jumbo frames, you can configure the network packet size *once*, in the global configuration section, and every ArgentSea connection will default to this value.
 
 ### The Global Section
 
@@ -168,7 +68,7 @@ For example, to globally change both the connection timeout property and packet 
 
 ***
 
-Note that these examples include only the attributes (from the previous section) that we want to change.
+Note that these examples include only the attributes that we want to change. The complete attribute list is described below.
 
 ### (Non-Sharded) Database Connections
 
@@ -269,21 +169,26 @@ As mentioned before, *any* connection property from the complete property list (
 
 ### Shard Set Connections
 
-ArgentSea shard sets have up to four inheritance levels: global properties, shard set properties, shard properties, and distinct read and write endpoint properties. The corresponding illustration again shows how various “parent” configuration properties are applied to the child values. As with non-sharded databases, these values are combined to build a Read or Write connection.
+ArgentSea shard sets have up to five inheritance levels: global properties, shard set properties, shard set read/write properties, shard properties, and distinct read and write endpoint properties. The corresponding illustration again shows how various “parent” configuration properties are applied to the child values. As with non-sharded databases, these values are combined to build a Read or Write connection.
 
 ![Non-Sharded Configuration](../images/shardsets-config.svg)
+
+When using a scale-out read strategy, all or most of your read connections might have consistent values (a login, for example), which could likely be different than the consistent values used for all of your write connections. A straightforward parent-child inheritance would require you to redundantly specify the same values for every shard’s read or write connection. To better manage this, the ShardSet has an exception to the parent-child hierarchy: a Read and Write configuration section. Values set in the ShardSet Read section will be used by only the read connections in the shards within the set. Likeswise, write connections in the shard set inherit from the write parameters.
+
+Consequently, the inheritance hierarchy for a sharded database connection is: Global settings > shard set settings > read or write settings > shard settings > connection settings.
 
 ## [SQL Server](#tab/tabid-sql)
 
 The root JSON section for SQL shard connections is `SqlShardSets`. This is an array of shard sets, each of which has an array of shards. Presumably, most applications will not require multiple shard sets, but the capability exists if required.
 
-Each shard set has a required `ShardSetName` property. This value is how the shard set retrieved from within the application, so the characters must *exactly* match.
+Each shard set has two require properties. The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. The `DefaultShardId` value determines which shard to use when creating new records.
 
 ````json
 {
   "SqlShardSets": [
     {
       "ShardSetName": "Primary",
+      "DefaultShardId": 1,
       "DataSource": "DbServer1",
       "FailoverPartner": "Mirror1",
       "UserName": "webUser",
@@ -315,11 +220,16 @@ In this example, there is one shard set with two shards as two databases on the 
 
 ## [PostgreSQL](#tab/tabid-pg)
 
+The root JSON section for SQL shard connections is `PgShardSets`. This is an array of shard sets, each of which has an array of shards. Presumably, most applications will not require multiple shard sets, but the capability exists if required.
+
+Each shard set has two require properties. The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. The `DefaultShardId` value determines which shard to use when creating new records.
+
 ````json
 {
   "PgShardSets": [
     {
       "ShardSetName": "Primary",
+      "DefaultShardId": 1,
       "Host": "DbServer1",
       "UserName": "webUser",
       "Password": "pwd1234",
@@ -350,7 +260,107 @@ In this example, there is one shard set with two shards as two databases on the 
 
 Again, *any* connection property from the complete property list (as listed earlier), can be included in the shard set definition (to be used by all connections in the shard set), or shard instance (to be used by both Read and Write connections), or to specifically configure the Read and/or Write connection.
 
-In a typical data sharding implementation, all shard connections are likely to use same login information and each server may even use the same database name. The configuration hierarchy makes this easy to manage because the login information and database can be defined once for the shard set, then used by every connection.
+In a typical data sharding implementation, all shard connections are likely to use same login information and each server may even use the same database name. The Hereditary Configuration Hierarchy makes this easy to manage because the login information and database can be defined once for the shard set, then used by every connection.
+
+### Connection Attributes
+
+The complete set of available properties is:
+
+## [SQL Server](#tab/tabid-sql)
+
+````json
+{
+  "ApplicationIntent": "ReadWrite",
+  "ApplicationName": "MyWebApp",
+  "CircuitBreakerFailureCount": 20,
+  "CircuitBreakerTestInterval": 5000,
+  "ConnectTimeout": 2,
+  "CurrentLanguage": "english",
+  "DataSource": "localhost",
+  "Encrypt": false,
+  "FailoverPartner": "MyMirror",
+  "InitialCatalog": "MyDb",
+  "LoadBalanceTimeout": 0,
+  "MaxPoolSize": 100,
+  "MinPoolSize": 0,
+  "MultipleActiveResultSets": false,
+  "MultiSubnetFailover": true,
+  "PacketSize": 4096,
+  "Password": "pwd1234",
+  "PersistSecurityInfo": false,
+  "Pooling": true,
+  "Replication": true,
+  "RetryCount": 6,
+  "RetryInterval": 256,
+  "RetryLengthening": "Fibonacci",
+  "TransactionBinding": "",
+  "TrustServerCertificate": true,
+  "TypeSystemVersion": "Latest",
+  "UserInstance": "",
+  "UserName": "webUser",
+  "WindowsAuth": false,
+  "WorkstationID": "MyPC"
+}
+````
+
+## [PostgreSQL](#tab/tabid-pg)
+
+````json
+{
+  "ApplicationName": "MyWebApp",
+  "AutoPrepareMinUsages": 5,
+  "CheckCertificateRevocation": false,
+  "CircuitBreakerFailureCount": 20,
+  "CircuitBreakerTestInterval": 25,
+  "ClientEncoding": "UTF8",
+  "CommandTimeout": 5,
+  "ConnectionIdleLifetime": 300,
+  "ConnectionPruningInterval": 10,
+  "ConvertInfinityDateTime": false,
+  "Database": "MyDb",
+  "Encoding": "UTF8",
+  "Enlist": true,
+  "Host": "10.10.25.1",
+  "IncludeRealm": false,
+  "InternalCommandTimeout": -1,
+  "KeepAlive": null,
+  "KerberosServiceName": "postgres",
+  "LoadTableComposites": false,
+  "MaxAutoPrepare": 0,
+  "MaxPoolSize": 100,
+  "MinPoolSize": 1,
+  "NoResetOnClose": false,
+  "Password": "pwd1234",
+  "PersistSecurityInfo": false,
+  "Pooling": true,
+  "Port": 5432,
+  "ReadBufferSize": 8192,
+  "RetryCount": 15,
+  "RetryInterval": 10,
+  "RetryLengthening": "Fibonacci",
+  "SearchPath": null,
+  "ServerCompatibilityMode": "none",
+  "SocketReceiveBufferSize": 8192,
+  "SocketSendBufferSize": 8192,
+  "SslMode": "Require",
+  "TcpKeepAlive": true,
+  "Timeout": 5,
+  "Timezone": "America/Los_Angeles",
+  "TrustServerCertificate": true,
+  "UsePerfCounters": false,
+  "UserName": "webUser",
+  "UseSslStream": true,
+  "WindowsAuth": false,
+  "WriteBufferSize": 8192
+}
+````
+
+***
+
+> [!CAUTION]
+> Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is typically required for most connections is login information, a server or host name, and a database name.
+
+Each level in the Hereditary Configuration Hierarchy can use any of the properties on this list.
 
 ### The Shard Identifier Type
 
@@ -362,7 +372,7 @@ Because of the need to persist the ShardId inside database records, the data typ
 
 > [!IMPORTANT]
 > Once established, the ShardId *type* cannot be easily changed. The ShardId type is used in configuration, throughout your code, in the database, and across all shard sets. Make sure that you will not outgrow your ShardId type’s maximum value, nor unnecessarily require space that will never be used.  
-> If you are uncertain, consider using a `short` (Int16/smallint) data type for your ShardId.
+> If you are uncertain, consider using a `short` (Int16/SmallInt) data type for your ShardId.
 
 The JSON ShardId type must correspond to whatever type you have defined for your application’s ShardId. If your application defines its ShardId as a string, then the JSON should be a string value (i.e. be in quotes); if a number, it should be numeric (i.e. a number, without quotes).
 
@@ -570,7 +580,7 @@ The properties specific to a resilience strategy are:
 }
 ````
 
-If no retry or circuit breaking properties are configured, ArgentSea uses a default resilience strategy using automatic retries and circuit breaking. Like everything else, these values participate in the ArgentSea configuration hierarchy — you can set these values globally (most likely) or at any level down to the individual Read or Write connection.
+If no retry or circuit breaking properties are configured, ArgentSea uses a default resilience strategy using automatic retries and circuit breaking. Like everything else, these values participate in the ArgentSea Hereditary Configuration Hierarchy — you can set these values globally (most likely) or at any level down to the individual Read or Write connection.
 
 ### Retries
 
@@ -694,9 +704,9 @@ ArgentSea itself does not currently include specific functionality that enables 
 Consequently, ArgentSea makes it *possible* easily build failover capability, but does not natively offer this. All of the connection properties in the configuration hierarchy are updatable. This allows you to build failover logic that updates the connection information — server endpoints, database names, etc. — given whatever trigger you prefer.
 
 > [!NOTE]
-> Once created, both the [ShardSets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) and [Databases](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) singleton collections themselves are immutable, although any connection property in the configuration hierarchy can still be updated. In other words, after the configuration hierarchy is created, you cannot change the layout of the hierarchy, but the connection properties of the members can still be changed and will update the client connections. Child objects will also continue to inherit any updates from their parents. Of course, updating connection properties is not thread-safe, but it will not impact queries that have already started.
+> Once created, both the [ShardSets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) and [Databases](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) singleton collections themselves are immutable, although any connection property in the configuration hierarchy can still be updated. In other words, after the Hereditary Configuration Hierarchy is created, you cannot change the layout of the hierarchy, but the connection properties of the members can still be changed and will update the client connections. Child objects will also continue to inherit any updates from their parents. Of course, updating connection properties is not fully thread-safe, but it will not impact queries that have already started.
 
-The configuration objects are [.NET Options](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-2.1) classes, which are obtained through an `IOptions<>` injection. One possible point of confusion is that the you reference objects in the [ShardSets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) and [Databases](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) *collections* by their (string) key; however, the Options objects are *arrays* that reflect your configuration layout. You must use an integer index to reference a shard set or connection. The value of this index depends on the order in your configuration files and the order in which they are loaded. You can verify the configuration object by checking the key property.
+The configuration objects are [.NET Options](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-2.1) classes, which are obtained through an `IOptions<>` injection. One possible point of confusion is that the you reference objects in the [ShardSets](http://docs.argentsea.com/api/ArgentSea.ShardSetsBase-2.DataConnection.html) and [Databases](http://docs.argentsea.com/api/ArgentSea.DatabasesBase-1.html) *collections* by their (string) key; however, the Options objects themselves originate as *arrays* that reflect your configuration layout. You must use an integer index to reference a shard set or connection. The value of this index depends on the order in your configuration files and the order in which they are loaded. In other words, you can verify the configuration options object by checking the key property, but you cannot use the key as an indexer.
 
 ## Simplifying Data Connections
 

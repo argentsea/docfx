@@ -164,42 +164,45 @@ parameter.Value = transactionId;
 command.Parameters.Add(parameter);
 ```
 
+> [!TIP]
+> As you define parameters in your stored procedures or functions, being as consistent as possible will make using the Mapper easy. For example, every time you save or retrieve a Model, you should always use the same parameters or fields results. Occiasionally missing parameters or columns will likely be maddening.
+
 ## Fetching Data
 
 Retrieving database data consists of running a stored procedure or function on each connection. ArgentSea provides various methods to offer the best approach:
 
 ### Connection methods
 
-Both database connections and shards have distinct Read and Write connections. The query methods are the same for both Read and Write connections, but the distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or functions; the Write connection should be used for everything else.
+Both database connections and shards have distinct Read and Write connections. The distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or functions; the Write connection should be used for everything else. For example, you could direct reads to a mirror, active standby, or read-only endpoint, and direct writes to the master or source database. 
 
-Even if you do not currently have read-only endpoints, like mirrors or active standbys, consistent determination of Read and Write access will allow you to scale-out in the future. If you want to enforce this, you might consider placing read procedures and write procedures into different database schemas, then granting EXECUTE permission only the login corresponding to the Read or Write connection.
+> [!TIP]
+> Even if you do not *currently* have separate read-only endpoints like mirrors or active standbys, consistent discrimination of Read and Write access will allow you to scale-out in the future. 
 
-If only the Read or Write connection is set, the other connection will also have that same value.
+If only the Read or Write connection is configured, both the Read and Write connections will have the same value.
 
-These methods can be used on Read or Write connections on both a Database object or a single Shard instance within a ShardSet:
+These are the methods that can be invoked on a connection:
 
-| Methods | Uses Mapper | Description |
-| --- |:---:| --- |
-| __LookupAsync__ |   | Returns a value from the database. This may be a return value (int) or single output parameter. |
-| __RunAsync__ |   | Executes a database command. No results are returned. |
-| __QueryAsync__ |   | Returns the typed object created by a handler delegate. |
-| __MapListAsync__ |  • | Returns a List of typed objects from the data results. |
-| __MapReaderAsync__ | • | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from __DataReader__ results. |
-| __MapOutputAsync__ | • | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from output parameters *and* __DataReader__ results. |
+| Method | Description |
+| --- | --- |
+| __LookupAsync__ | Returns a value from the database. This may be a return value (int) or single output parameter. |
+| __RunAsync__ | Executes a database procedure. No results are returned. |
+| __QueryAsync__ | Returns the typed object created by a handler delegate. |
+| __MapListAsync__ | Returns a List of typed objects from the data results. |
+| __MapReaderAsync__ | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from __DataReader__ results. |
+| __MapOutputAsync__  | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from output parameters *and* __DataReader__ results. |
 
-### ShardSet methods
+Database objects and shard intances have both `Write` and `Read` connections, which executes a stored procedure or function on a single database. All the methods listed are available on either connection (even though it may not make sense to use `RunAsync` on a read connection).
 
-These methods execute the same command more-or-less concurrently on all the shards in a ShardSet. The ShardSet methods always use the Read connection.
+The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute the procedure or function on every shard. They return either the combined result or the first valid (non-null) result. For example, if you need to look up a user by their login name (rather than their user key), use `ReadFirst` to query all shards for a matching record, and to return the single expected matching result. Whereas, `ReadAll` could be used to retrieve all users in any shard with particular attribute. Note that `ReadAll` methods always return list results.
 
-| Methods | Uses Mapper | Description |
-| --- |:---:| --- |
-| __QueryAllAsync__ |   | Returns a List of any non-null objects created by a handler delegate in any shard. The list count will not be larger than the shard count. |
-| __QueryFirstAsync__ |   | Returns the first non-null object created by a handler delegate in any shard. Use this when you are expecting a single result. |
-| __MapListAsync__ |  • | Returns a *combined* List of typed objects from the data results, across all shards. Additional result sets will be discarded. |
-| __MapReaderAllAsync__ | • | Returns a List including any non-null objects created from any shard’s data reader results (not using output parameters). The list count will not be larger than the shard count. |
-| __MapReaderFirstAsync__ | • | Returns the first non-null object created on any shard where the procedure/function returns data reader results. Use this when you are expecting a single result and not using output parameters.  |
-| __MapOutputAllAsync__ | • | Returns a List including any non-null objects that were created by invoking a procedure/function that returns results via output parameters *and* data reader results. The list count will not be larger than the shard count. |
-| __MapOutputFirstAsync__ | • | Returns the first non-null object created by invoking a procedure/function that returns results via output parameters *and* data reader results. Use this when you are expecting a single result and using output parameters. |
+| Method | Uses Mapper | Db.Read | Db.Write | ShardSet.ReadAll | ShardSet.ReadFirst | ShardSet.Write |
+| --- |:---:| :---: | :---: | :---: | :---: | :---: |
+| __LookupAsync__ |   | • | • |  |  |  |
+| __RunAsync__ |   | • | • |  |  | • |
+| __QueryAsync__ |   | • | • | • | • | • |
+| __MapListAsync__ | • | • | • | • |  |  |
+| __MapReaderAsync__ | • | • | • | • | • | • |
+| __MapOutputAsync__ | • | • | • | • | • | • |
 
 ### Method Arguments
 
@@ -217,7 +220,7 @@ await database.RunAsync("ws.MyProcedureName", parameters, cancellationToken);
 
 As larger applications evolve, however, one can lose track of which database procedures are *actually being used* by the application. It is not unusual for a custom application to have hundreds of data procedures, only a fraction of which are used.  
 
-Pro tip: you might consider consistently referencing procedure names via a static class, like this.
+__Pro tip:__ you might consider consistently referencing procedure names via a static class, like this.
 
 ```csharp
 internal static class DataProcedures
@@ -233,7 +236,7 @@ internal static class DataProcedures
   // ...
 }
 // Now you can reference the procedure name like this:
-await database.RunAsync(DataProcedures.StoreAdd, parameters, cancellationToken);
+await database.Write.RunAsync(DataProcedures.StoreAdd, parameters, cancellationToken);
 
 ```
 

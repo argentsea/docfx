@@ -227,7 +227,7 @@ The [ShardSets](/api/ArgentSea.ShardSets-2.html) collection is the root of an ob
 
 ## Accessing the ShardSets
 
-In .NET Core, the ShardSets collection is an injectable service. The instructions in the [Configuration](configuration.md) section can help you with setup. You can reference any ShardSet by name (i.e. a string key), which is also defined during configuration.
+In .NET Core, the ShardSets collection is an injectable service. The instructions in the [Configuration](configuration.md) section can help you with setup. You can reference any ShardSet by name (i.e. a string key), which is also defined during configuration. Note that the key name is case/accent/kana sensitive; it must exactly match the value used in your configuration.
 
 Because it is unlikely that you would need to access more than one ShardSet in the same data access class, your class-level variable should capture only the relevant ShardSet. You can access a ShardSet by name (i.e. a string key value):
 
@@ -270,11 +270,33 @@ public class SubscriberStore
 There are two types of ShardSet queries:
 
 * *Queries on a particular shard* - usually to obtain a specific record, like when you have a ShardKey.
-* *Queries across all shards* - when you need a list or when don’t know the specific shard(s) to search.
+* *Queries across all shards* - when you need a combined list or when don’t know the specific shard(s) to search.
 
-### Querying a Shard
+### Accessing a Shard
 
-Access a shard in the ShardSet collection using a ShardId key, just like you would with any other collection. The ShardId would typically be contained in a ShardKey or ShardChild. If you have implemented a solution using identity ranges, just call your custom resolver to get the shard index.
+Access any shard in the ShardSet collection using a shardId key value, just like you would with any other collection. The ShardId value often comes from the ShardId property of a `ShardKey` or `ShardChild`; for convenience, you can simply provide the `ShardKey` or `ShardChild` object instead.
+
+```csharp
+/// all of these are equally valid:
+var shard = myShardSet[myShardId];
+var shard = myShardSet[myShardKey.ShardId];
+var shard = myShardSet[myShardKey];
+var shard = myShardSet[myShardChild];
+```
+
+If you have implemented a solution using identity ranges, just call your custom resolver to get the shard index.
+
+### The Default Shard
+
+When your data clients need to insert a new record, they need to know which shard within the ShardSet to put it in. If, for example, your shards are segmented by region, your regional clients should “default” to the appropriate shard when creating new records. This is configured by the `DefaultShardId` property in your ShardSet configuration. 
+
+The default shard works exactly like any other shard, except that you do not need to specify a collection key; instead you can get it from the `DefaultShard` property.
+
+```csharp
+var shard = myShardSet.DefaultShard;
+```
+
+### Shard Connections
 
 Each [shard](/api/ArgentSea.ShardSetsBase-2.ShardInstance.html) has two data connections, exposed as `Read` property and a `Write` property. The `Read` and `Write` connection properties correspond to the read and write connections defined in your connection [configuration](configuration.md). If you have both connections defined in your configuration, then the query will execute on the corresponding read or write connection; if only Read or Write is configured, it doesn’t matter which you use since they will both have the same connection.
 
@@ -285,7 +307,7 @@ public async Task<Subscriber> GetSubscriber(ShardKey<byte, int> subscriberKey, C
 {
     var prms = new QueryParameterCollection()
         .AddSqlIntInputParameter("@SubId", subscriberKey.RecordId);
-    return await _shardSet[subscriberKey.ShardId].Read.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    return await _shardSet[subscriberKey].Read.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
 }
 ```
 
@@ -296,7 +318,7 @@ public async Task<Subscriber> GetSubscriber(ShardKey<short, int> subscriberKey, 
 {
     var prms = new QueryParameterCollection()
         .AddPgIntegerInputParameter("SubId", subscriberKey.RecordId);
-    return await _shardSet[subscriberKey.ShardId].Read.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    return await _shardSet[subscriberKey].Read.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
 }
 ```
 
@@ -312,12 +334,12 @@ There are several architectural solutions to the latency-driven data inconsisten
 To implement your own latency handling, you can easily implement an automatic retry using the Write connection after an unexpectedly missing record on the Read connection. In this example method we retrieve data by key value, so a missing record is unexpected and might be due to replication latency. The code assumes that the subscriber key has the “required” attribute set so that the Mapper returns a null object if the key is null. The resolution is to simply retry on the Write connection.
 
 ```csharp
-    var sub = await _shardSet[subscriberKey.ShardId].Read.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    var sub = await _shardSet[subscriberKey].Read.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
     // add automatic retry on write connection if subscriber is not found.
     if (sub is null)
     {
         // consider logging the retry on the write connection
-        var sub = await _shardSet[subscriberKey.ShardId].Write.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+        var sub = await _shardSet[subscriberKey].Write.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
     }
     return sub;
 }
@@ -327,6 +349,9 @@ To implement your own latency handling, you can easily implement an automatic re
 > [!TIP]
 > Even if you are not using a scale-out strategy today, it would be a good idea to use the `Read` and `Write` properties as if you were. This would make a future migration to separate read and write instances a little easier.  
 > You might also consider using different database schemas for read-only and write-capable procedures or functions. This helps underline the importance of separating read-only activity to your data developers. And testing may be easier if each connection’s permissions is limited to the appropriate schema.
+
+
+### Shard Query Methods
 
 There are several query methods, described briefly below and in more detail in the [querying](querying.md) tutorial. The arguments for these query methods are described in the next section.
 
