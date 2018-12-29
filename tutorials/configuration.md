@@ -181,7 +181,10 @@ Consequently, the inheritance hierarchy for a sharded database connection is: Gl
 
 The root JSON section for SQL shard connections is `SqlShardSets`. This is an array of shard sets, each of which has an array of shards. Presumably, most applications will not require multiple shard sets, but the capability exists if required.
 
-Each shard set has two require properties. The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. The `DefaultShardId` value determines which shard to use when creating new records.
+Each shard set has two required properties:
+
+* The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. 
+* The `DefaultShardId` value can be used to determine which shard should be used when this client creates new records.
 
 ````json
 {
@@ -193,12 +196,15 @@ Each shard set has two require properties. The `ShardSetName` property is how th
       "FailoverPartner": "Mirror1",
       "UserName": "webUser",
       "Password": "pwd1234",
+      "Read": {
+        "ApplicationIntent": "ReadOnly",
+        "UserName": "webReader"
+      },
       "Shards": [
         {
           "ShardId": 0,
           "InitialCatalog": "ShardDb1",
           "ReadConnection": {
-            "ApplicationIntent": "ReadOnly",
             "DataSource": "Mirror1",
           }
         },
@@ -216,13 +222,16 @@ Each shard set has two require properties. The `ShardSetName` property is how th
 }
 ````
 
-In this example, there is one shard set with two shards as two databases on the same server. The read connections are directed to a mirror by overwriting the inherited `DataSource` value with the name of the mirror.
+In this example, there is one shard set with two shards as two databases on the same server. The read connections are directed to a mirror by overwriting the inherited `DataSource` value with the name of the mirror. Of course, in reality the password should be moved to a different, more secure configuration provider.
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 The root JSON section for SQL shard connections is `PgShardSets`. This is an array of shard sets, each of which has an array of shards. Presumably, most applications will not require multiple shard sets, but the capability exists if required.
 
-Each shard set has two require properties. The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. The `DefaultShardId` value determines which shard to use when creating new records.
+Each shard set has two required properties:
+
+* The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. 
+* The `DefaultShardId` value can be used to determine which shard should be used when this client creates new records.
 
 ````json
 {
@@ -233,6 +242,9 @@ Each shard set has two require properties. The `ShardSetName` property is how th
       "Host": "DbServer1",
       "UserName": "webUser",
       "Password": "pwd1234",
+      "Read": {
+        "UserName": "webReader"
+      },
       "Shards": [
         {
           "ShardId": 0,
@@ -254,13 +266,13 @@ Each shard set has two require properties. The `ShardSetName` property is how th
 }
 ````
 
-In this example, there is one shard set with two shards as two databases on the same server. The read connections are directed to a hot standby replication instance by overwriting the inherited `DataSource` value with the name of the mirror.
+In this example, there is one shard set with two shards as two databases on the same server. The read connections are directed to a hot standby replication instance by overwriting the inherited `DataSource` value with the name of the mirror. Of course, in reality the password should be moved to a different, more secure configuration provider.
 
 ***
 
-Again, *any* connection property from the complete property list (as listed earlier), can be included in the shard set definition (to be used by all connections in the shard set), or shard instance (to be used by both Read and Write connections), or to specifically configure the Read and/or Write connection.
+Again, *any* connection property from the complete property list — as enumerated in the next section — can be included in the shard set definition (to be used by all connections in the shard set), or shard instance (to be used by both Read and Write connections), or to specifically configure the Read and/or Write connection.
 
-In a typical data sharding implementation, all shard connections are likely to use same login information and each server may even use the same database name. The Hereditary Configuration Hierarchy makes this easy to manage because the login information and database can be defined once for the shard set, then used by every connection.
+In a typical data sharding implementation, all shard read or write connections are likely to use same login information. Each server may even use the same database name. The Hereditary Configuration Hierarchy makes this easy to manage because the login information and database can be defined once for the shard set, or shard set read/write connection type, then used by every connection.
 
 ### Connection Attributes
 
@@ -358,9 +370,9 @@ The complete set of available properties is:
 ***
 
 > [!CAUTION]
-> Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is typically required for most connections is login information, a server or host name, and a database name.
+> Displayed are all of the available properties. It is neither necessary nor wise to set all of them. All that is minimally required for most connections is login information, a server or host name, and a database name.
 
-Each level in the Hereditary Configuration Hierarchy can use any of the properties on this list.
+Each level in the Hereditary Configuration Hierarchy can use *any* of the properties on this list.
 
 ### The Shard Identifier Type
 
