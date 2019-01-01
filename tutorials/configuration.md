@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Geo-dispersed deployments and SDLC staging processes require application deployments in many distinct environments. Managing configurations in each environment is already a challenge. Worse, sharded data sets can create a very large number of connections, amplifying the configuration problem further. Then, scale-out of read and write endpoints doubles the number of connections. In the end, there can be a lot of connections to manage.
+The many environments required by SDLC processes — and possibly several Geo-dispersed production instances too — require application deployments in many distinct environments; managing configurations in each environment is already a challenge. Worse, sharded data sets can create a *very large* number of client connections, amplifying the configuration problem further. Then, scale-out of read and write endpoints doubles the number of connections. In the end, there can be a *lot* of connections to manage.
 
 ArgentSea is designed to make this potentially large number connections manageable. Using the configuration architecture in .NET core and a unique *Hereditary Configuration Hierarchy*, ArgentSea allows application changes to be promoted through staging environments and deployed into multiple production environments. It does this while storing passwords securely and without the need for messy transformations.
 
@@ -21,7 +21,7 @@ ArgentSea configuration supports any number of database definitions in the [Data
 
 All data connections have the option of separate read and write connections. If you are scaling-out your data access by sharding your data, you are likely also scaling-out by separating read activity from write operations. Examples of this include [SQL Server Availability Groups](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/active-secondaries-readable-secondary-replicas-always-on-availability-groups), [PostgreSQL Hot Standby](https://www.postgresql.org/docs/11/hot-standby.html),[Amazon RDS Read Replicas](https://aws.amazon.com/rds/details/read-replicas/), [Azure SQL Geo-Replication](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-active-geo-replication), [Amazon Aurora Low-Latency Read Replicas](https://aws.amazon.com/rds/aurora/details/postgresql-details/), etc.
 
-All this creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *Hereditary Configuration Hierarchy*.
+This creates a potentially large number of connections. Many of these will likely have similar connection information. For example, all of the connections in a shard set might use the same login information or database name, varying only the server address. To manage this redundancy, ArgentSea offers a unique *Hereditary Configuration Hierarchy*.
 
 ## The Hereditary Configuration Hierarchy
 
@@ -72,11 +72,13 @@ Note that these examples include only the attributes that we want to change. The
 
 ### (Non-Sharded) Database Connections
 
-The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code. The key in your configuration must *exactly* match the keys used in your code (i.e casing, accents, and kana must match).
+The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code. The key in your configuration must *exactly* match the keys used in your code (i.e casing, accents, and kana must match — and spelling too).
 
 Database connections have a three-level hierarchy: global properties, database properties, and properties for distinct read and write endpoints. This illustration shows how various “parent” configuration properties are applied to the child values. Ultimately, these values are combined to build a Read or Write connection.
 
 ![Non-Sharded Configuration](../images/databases-config.svg)
+
+The upshot is that if you have a simple database connection that handles both reads and writes, you can define this once at the database level; both Read and Write connections will “inherit” this value.
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -171,20 +173,17 @@ As mentioned before, *any* connection property from the complete property list (
 
 ArgentSea shard sets have up to five inheritance levels: global properties, shard set properties, shard set read/write properties, shard properties, and distinct read and write endpoint properties. The corresponding illustration again shows how various “parent” configuration properties are applied to the child values. As with non-sharded databases, these values are combined to build a Read or Write connection.
 
-![Non-Sharded Configuration](../images/shardsets-config.svg)
-
 When using a scale-out read strategy, all or most of your read connections might have consistent values (a login, for example), which could likely be different than the consistent values used for all of your write connections. A straightforward parent-child inheritance would require you to redundantly specify the same values for every shard’s read or write connection. To better manage this, the ShardSet has an exception to the parent-child hierarchy: a Read and Write configuration section. Values set in the ShardSet Read section will be used by only the read connections in the shards within the set. Likeswise, write connections in the shard set inherit from the write parameters.
 
-Consequently, the inheritance hierarchy for a sharded database connection is: Global settings > shard set settings > read or write settings > shard settings > connection settings.
+![Non-Sharded Configuration](../images/shardsets-config.svg)
 
 ## [SQL Server](#tab/tabid-sql)
 
 The root JSON section for SQL shard connections is `SqlShardSets`. This is an array of shard sets, each of which has an array of shards. Presumably, most applications will not require multiple shard sets, but the capability exists if required.
 
-Each shard set has two required properties:
+Each shard set has a required `ShardSetName` property. This is how the shard set retrieved from within the application, so the characters must *exactly* match.
 
-* The `ShardSetName` property is how the shard set retrieved from within the application, so the characters must *exactly* match. 
-* The `DefaultShardId` value can be used to determine which shard should be used when this client creates new records.
+In addition, a shard set can include a `DefaultShardId` value, which can be used to determine which shard should be used when this client creates new records.
 
 ````json
 {
@@ -192,8 +191,6 @@ Each shard set has two required properties:
     {
       "ShardSetName": "Primary",
       "DefaultShardId": 1,
-      "DataSource": "DbServer1",
-      "FailoverPartner": "Mirror1",
       "UserName": "webUser",
       "Password": "pwd1234",
       "Read": {
@@ -203,6 +200,8 @@ Each shard set has two required properties:
       "Shards": [
         {
           "ShardId": 0,
+          "DataSource": "DbServer1",
+          "FailoverPartner": "Mirror1",
           "InitialCatalog": "ShardDb1",
           "ReadConnection": {
             "DataSource": "Mirror1",
@@ -210,10 +209,11 @@ Each shard set has two required properties:
         },
         {
           "ShardId": 1,
+          "DataSource": "DbServer2",
+          "FailoverPartner": "Mirror2",
           "InitialCatalog": "ShardDb2",
           "ReadConnection": {
-            "ApplicationIntent": "ReadOnly",
-            "DataSource": "Mirror1",
+            "DataSource": "Mirror2",
           }
         }
       ]

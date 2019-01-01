@@ -10,13 +10,13 @@ The essential ingredients for building a service that can scale to any demand in
 
 Highly scalable data typically means data “[sharding](tutorials/sharding.md)” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
 
-While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data. Especially with a cloud infrastructure, more efficient code requires fewer resources and this translates into ongoing cost savings.
-
 ArgentSea helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection. The consistent use of stored procedures/functions reduces both SQL compilation overhead and support/maintenance costs. Because ArgentSea can handle multiple results from the same query, the number of server round-trips can be reduced — a huge performance win.
+
+While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data. Especially with a cloud infrastructure, more efficient code requires fewer resources and this translates into ongoing cost savings.
 
 ## Mission Critical Supportability
 
-ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures, security best-practices, and managing connection configuration elegantly.
+ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures (circuit breaking), security best-practices, and a unique approach to managing connection configuration elegantly.
 
 The data framework will attempt to recover from transient errors by automatically retrying the data access; you have control over how long and how often. If repeated failures occur, the system will “circuit break”, so that data failures have less chance of bringing down the whole application.
 
@@ -24,13 +24,15 @@ The robust logging implementation allows you to log to any provider, including [
 
 Database passwords can be secured using [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets), [Docker secrets](https://docs.docker.com/engine/swarm/secrets/), or other secure storage.
 
-The configuration architecture simplifies the management of large numbers of data connections, while making it easy to deploy a release though staging environments.
+The configuration architecture simplifies the management of large numbers of data connections, reducing redunancy while making it easy to deploy a release though staging environments.
 
 ## Code Clarity and Maintenance
 
-Supportability is about more than operational management. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a natural path to resolving bugs. When long-lived applications must be supported by teams that are not the original authors, this becomes especially critical.
+Supportability is about more than managing the operational burden. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a discoverable path to resolving bugs. When long-lived applications must be supported by teams that are not the original authors, this becomes especially critical.
 
-The ArgentSea Mapper helps reduce the burden of code maintenance by simplifying data access code. The logging functionality can also provide substantial insight to developers, including the dynamic code compilation behind the Mapper, misconfigurations, and data errors.
+The ArgentSea Mapper helps reduce the burden of code maintenance by simplifying data access code. Schema mapping throughout the application can be managed with simple attributes on the Model classes.
+
+The logging functionality can also provide substantial insight to developers, including the dynamic code compilation behind the Mapper, misconfigurations, and data errors.
 
 However, one of the principal ways that ArgentSea help with ongoing code maintenance is that it enforces the use of stored procedures or functions.
 
@@ -42,10 +44,10 @@ However, one of the principal ways that ArgentSea help with ongoing code mainten
                 <div>
                     <h4>Tight Coupling</h4>
                     <p>
-                        Although it might sound cozy, “tight coupling” isn’t a good thing in software design. It happens when one system’s integration with another system depends on the internal implementation of the other system. Usually the result of haphazard design, it makes it nearly impossible to switch to a different provider.
+                        Although it might sound cozy, “tight coupling” isn’t a good thing in software design. It happens when a system’s integration with a second system depends on the internal implementation of the other system. Usually the result of haphazard design, this dependency makes it nearly impossible to switch to a different provider.
                     </p>
                     <p>
-                        For example, when your database client code <i>depends upon how tables and columns are implemented</i>, you have tightly implemented these layers.
+                        For example, when your database client code contains <i>SQL that depends upon how tables and columns are implemented</i>, you have tightly implemented these layers. ArgentSea is about untangling these layers.
                     </p>
                 </div>
             </div>
@@ -58,9 +60,9 @@ However, one of the principal ways that ArgentSea help with ongoing code mainten
                     <p>
                     <i>Loosely coupled</i> systems have well-defined interfaces. Because of this, you can change the <i>implementation</i> as long as you maintain the interface “contract”. These systems are more robust, testable, and manageable.
                     </p><p>
-                    Such systems are more robust because the services provided by each layer is well-defined, and therefore the systems can be optimized for known requirements.
+                    These systems are more robust because the services provided by each layer is well-defined, and therefore the systems can be optimized for known requirements — because the requirements are easily discovered.
                     </p><p>
-                    Stored procedures or functions allow you to change the underlying database structures, but as long as the same results are returned you will not break the application.
+                    Stored procedures or functions allow you to change the underlying database structures, but as long as the same results are returned you will not break the application. You can separate tables, create views, hint, rewrite queries, and fully manage how data is stored and accessed, without disrupting the application. 
                     </p>
                 </div>
             </div>
@@ -68,13 +70,13 @@ However, one of the principal ways that ArgentSea help with ongoing code mainten
     </div>
 </div>
 
-Stored procedures enable *loose coupling* between the app domain and the data domain. They generally perform better and offer better security too. This is why ArgentSea was built to work with stored procedures. Because ArgentSea encourages you to do your data-domain work in SQL and your application work in .NET, both your developers and your database administrators have far better control over your data.
+Stored procedures enable *loose coupling* between the application domain and the data domain. They generally perform better and offer better security too. This is why ArgentSea was built to work with stored procedures. Because ArgentSea encourages you to do your data-domain work in SQL and your application work in .NET, both your developers and your database administrators have far better control over your data.
 
 ## Getting Started
 
 If you like to understand everything first, explore the [deep dives](tutorials/index.md); if you prefer to learn by getting your hands dirty, jump into the [walkthroughs](#walkthroughs).
 
-## Deep Dives
+### Deep Dives
 
 1. Installing ArgentSea (coming soon).
 2. [Setting up your configuration](tutorials/configuration.md)
@@ -82,7 +84,7 @@ If you like to understand everything first, explore the [deep dives](tutorials/i
 4. [Mapping](tutorials/mapping.md)
 5. [Using shards](tutorials/sharding.md)
 
-## Walkthroughs
+### Walkthroughs
 
 1. [QuickStart 1](tutorials/quickstart1.md) - Setting up and configuring an initial project
 2. [QuickStart 2](tutorials/quickstart2.md) - Adding shard handling and queries
