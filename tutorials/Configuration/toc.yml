@@ -1,0 +1,12 @@
+- name: Introduction
+  href: configuration.md
+- name: The Configuration Hierarchy
+  href: hierarchy.md
+- name: The ShardId Data Type
+  href: shardtype.md
+- name: Simplifying Data Access Code
+  href: simplifying.md
+- name: Resilience Strategies
+  href: resilience.md
+- name: Loading the Configuration
+  href: loading.md

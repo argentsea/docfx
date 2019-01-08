@@ -37,7 +37,7 @@ You can learn more about adding a reference to ArgentSea [here](https://docs.mic
 ArgentSea leverages the .NET Core configuration architecture, which means that the configuration information is combined from multiple providers. In this example, we will store most connection information in the *appsettings.json* file, but store the login password securely in a separate store.
 
 > [!TIP]
-> Because the new configuration architecture in .NET core allows values to be hosted in multiple places, we can also use environment variables — which can be very useful for managing a release pipeline. In that case, we might store the server or database information there, instead of *appsettings.json*. Again, the details are described in the [configuration](/tutorials/configuration.md) tutorial.
+> Because the new configuration architecture in .NET core allows values to be hosted in multiple places, we can also use environment variables — which can be very useful for managing a release pipeline. In that case, we might store the server or database information there, instead of *appsettings.json*. Again, the details are described in the [configuration](/tutorials/configuration/configuration.md) tutorial.
 
 If you are creating a new project, add [UserSecrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) to your project. This provides a means of keeping passwords out of your source control. You can add UserSecrets to your project by loading the *Microsoft.Extensions.Configuration.UserSecrets* NuGet package.
 

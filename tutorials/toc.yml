@@ -1,10 +1,14 @@
 - name: Home
   href: index.md
 - name: Configuration
-  href: configuration.md
+  href: configuration/toc.yml
+  topicHref: configuration/configuration.md
 - name: Mapping
-  href: mapping.md
+  href: mapping/toc.yml
+  topicHref: mapping/mapping.md
 - name: Querying
-  href: querying.md
+  href: querying/toc.yml
+  topicHref: querying/querying.md
 - name: Sharding
-  href: sharding.md
+  href: sharding/toc.yml
+  topicHref: sharding/sharding.md

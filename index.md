@@ -1,3 +1,5 @@
+![ArgentSea](/images/ArgentSeaTitle.jpg)
+
 # ArgentSea Documentation
 
 Modern web applications need to be built for performance and scalability, as well as security, monitoring, and configuration. ArgentSea offers a framework that consistently represents best practices for all of these concerns.
@@ -79,10 +81,10 @@ If you like to understand everything first, explore the [deep dives](tutorials/i
 ### Deep Dives
 
 1. Installing ArgentSea (coming soon).
-2. [Setting up your configuration](tutorials/configuration.md)
-3. [Querying](tutorials/querying.md)
-4. [Mapping](tutorials/mapping.md)
-5. [Using shards](tutorials/sharding.md)
+2. [Setting up your configuration](tutorials/configuration/configuration.md)
+3. [Querying](tutorials/querying/querying.md)
+4. [Mapping](tutorials/mapping/mapping.md)
+5. [Using shards](tutorials/sharding/sharding.md)
 
 ### Walkthroughs
 
