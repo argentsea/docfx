@@ -1,5 +1,7 @@
 ﻿# ArgentSea Setup
 
+ArgnetSea is a .NET Standard application, which means it should work with .NET Core, Xamarin, and the .NET Framework 4.6.1 or higher. However, ArgentSea depends on services provided by .NET Core — like logging and dependency injection — that may require coercion in the other environments. Because data sharded is so difficult to add to an existing application, the assumption is that consumers would be new applications created using .Net Core.
+
 ## NuGet Package
 
 The first, obvious step is to add a reference to the relevant ArgentSea NuGet package. Currently, this is not available as we are finalizing code before springing for a code signing certificate (which is necessary for publishing a NuGet package).

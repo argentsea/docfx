@@ -237,3 +237,5 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 ***
 
 This code references a `Configuration` property. It is common practice to obtain the configuration object from the constructor of the `Startup` class, then use this to set the `Configuration` property.
+
+Next: [Simplifying Your Data Access Code](simplifying.md)

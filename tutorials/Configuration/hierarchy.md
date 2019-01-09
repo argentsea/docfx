@@ -349,4 +349,4 @@ The complete set of available properties is:
 
 Each level in the Hereditary Configuration Hierarchy can use *any* of the properties on this list.
 
-Next: [The ShardId Data Type](shardtype.md)
+Next: [The Shard Id Data Type](shardtype.md)

@@ -202,4 +202,4 @@ public class MyShardChild : ShardChild<short>
 
 This approach will be helpful in reducing the number of times the generic *ShardId* type must be specified in your project code.
 
-Next: [Resilience Strategies](resilience.md)
+Next: [Data Mapping](../mapping/mapping.md)

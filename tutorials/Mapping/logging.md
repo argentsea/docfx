@@ -42,3 +42,5 @@ Finally, the Mapper logs when it did not find an cached delegate so an Expressio
 ### Trace
 
 The Mapper creates a trace log record as it iterates over properties. This can provide insight into the current context when other error conditions occur. Also, the logger will report the execution time for commands sent to a database connection or shard sets.
+
+Next: [Querying](../querying/querying.md)

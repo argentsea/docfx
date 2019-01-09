@@ -61,3 +61,5 @@ The connectionDescription argument allows the logger to include the connection t
 ### (ILogger) logger
 
 Finally, the logger argument allows you to write debugging, warning, and error information to the application logs. This is the same logger instance as is passed in through the various query methods.
+
+Next: [Sharding](../sharding/sharding.md)

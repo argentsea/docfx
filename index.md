@@ -10,7 +10,7 @@ The goal of ArgentSea is to simplify the development process for delivering high
 
 The essential ingredients for building a service that can scale to any demand include highly efficient code, reducing server round-trips, and the scale-out of reads and writes.
 
-Highly scalable data typically means data “[sharding](tutorials/sharding.md)” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
+Highly scalable data typically means data “[sharding](tutorials/sharding/sharding.md)” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
 
 ArgentSea helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection. The consistent use of stored procedures/functions reduces both SQL compilation overhead and support/maintenance costs. Because ArgentSea can handle multiple results from the same query, the number of server round-trips can be reduced — a huge performance win.
 
@@ -26,9 +26,9 @@ The robust logging implementation allows you to log to any provider, including [
 
 Database passwords can be secured using [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets), [Docker secrets](https://docs.docker.com/engine/swarm/secrets/), or other secure storage.
 
-The configuration architecture simplifies the management of large numbers of data connections, reducing redunancy while making it easy to deploy a release though staging environments.
+The configuration architecture simplifies the management of large numbers of data connections, reducing redundancy while making it easy to deploy a release though staging environments.
 
-## Code Clarity and Maintenance
+## Maintainability via Code Clarity
 
 Supportability is about more than managing the operational burden. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a discoverable path to resolving bugs. When long-lived applications must be supported by teams that are not the original authors, this becomes especially critical.
 
@@ -76,21 +76,6 @@ Stored procedures enable *loose coupling* between the application domain and the
 
 ## Getting Started
 
-If you like to understand everything first, explore the [deep dives](tutorials/index.md); if you prefer to learn by getting your hands dirty, jump into the [walkthroughs](#walkthroughs).
+Explore the [deep dives](tutorials/index.md) to understand the logic and services or ArgentSea; if you prefer to learn by getting your hands dirty, jump into the [walkthroughs](tutorials.quickstart1.md). You can find the most detailed information in the [API section](/reference/apis.html).
 
-### Deep Dives
-
-1. Installing ArgentSea (coming soon).
-2. [Setting up your configuration](tutorials/configuration/configuration.md)
-3. [Querying](tutorials/querying/querying.md)
-4. [Mapping](tutorials/mapping/mapping.md)
-5. [Using shards](tutorials/sharding/sharding.md)
-
-### Walkthroughs
-
-1. [QuickStart 1](tutorials/quickstart1.md) - Setting up and configuring an initial project
-2. [QuickStart 2](tutorials/quickstart2.md) - Adding shard handling and queries
-
-## Reference
-
-You can find the most detailed information in the [API section](/reference/apis.html).
+Next: [Explore ArgentSea’s functionality](tutorials/index.md)

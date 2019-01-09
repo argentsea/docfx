@@ -1,4 +1,4 @@
-# The Shard Identifier Type
+# The Shard Id Type
 
 End each shard instance has a `ShardId` property, which identifies a specific subset (“shard”) of the data. ArgentSea uses a generic ShardId to allow you to define any data type you prefer.
 
@@ -15,4 +15,4 @@ The JSON configuration ShardId type must correspond to whatever type you have de
 
 More details about the ShardId type is in the [Sharding](../sharding/sharding.md) section.
 
-Next: [Simplifying Your Data Access Code](simplifying.md)
+Next: [Resilience Strategies](resilience.md)
