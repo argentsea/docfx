@@ -141,7 +141,7 @@ Here is catalog of the current attributes, along with their arguments and corres
 
 ¹ The Enum name is saved as string.
 
-² The Enum value is saved based on its underlying numeric value. The Enum integer *base type* (int, short, byte, etc.) must match the database type.
+² The Enum value is saved based on its underlying numeric value. The Enum integer *base type* (int, short, etc.) must match the database type.
 
 ³ This data type is not intended for general use.
 
@@ -182,20 +182,20 @@ Rather like floating point types, Guid.Empty (00000000-0000-0000-0000-0000000000
 
 Nullable Enum types will read or write as a DbNull when the value is null.
 
-### [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html)
+## Model Inheritance
 
-These are special types and are discussed in detail in the [sharding](../sharding/sharding.md) section.
+Models which inherit from other Model classes also inherit the attributes of the parent class. This can be very useful when some queries return a subset of the data entities overall columns.
 
-### The [MapToModel](/api/ArgentSea.MapToModel.html) attribute
+## Properties with Object Types
 
-Complex object models may include properties that are objects with their *own* properties, which also need to be mapped to the underlying data.
+This page has described simple 1:1 mapping between database columns and model properties. This is the heart of the Mapper. However, mapping sometimes requires more complex types, built from these simple relationships.
 
-For example, you might have an Address object that you use for Customers, Vendors, Contacts, Stores, and more. The Vendor class, then, has a property of type Address, and the Customer class has an Address property too. Since the address information is included with the results from the database, the Mapper should map the matching values to the Address object. The `MapToModel` attribute tells the Mapper to do this.
+In addition to the types already described, the Mapper supports three additional types of Model properties:
 
-Of course, the property’s type must also have data mapping attributes on the appropriate class properties. The type referenced by a MapToModel attribute can *itself* have a object property with a MapToModel attribute.
+* Properties which contain a second Model class
+* Properties which contain lists of Model classes
+* Sharded record identifiers
 
-In other words, a *Store* object can have a property of type *Address*, which might in turn have a property of type *Coordinates*. If the *Coordinates* type has two properties, each with a `MapToDouble` attribute, the Mapper will be able to map the Latitude and Longitude values to the *Store.Address.Latitude* and *Store.Address.Longitude* fields respectively.
+These will be explored in the next section.
 
-Properties with the [MapToModel](/api/ArgentSea.MapToModel.html) attribute cannot be null, so the root object must be instantiate all of its properties when it is created.
-
-Next: [Mapping Targets](targets.md)
+Next: [Complex Attributes](complexattributes.md)

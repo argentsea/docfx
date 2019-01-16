@@ -1,17 +1,17 @@
 # QuickStart Two
 
-The [previous QuickStart](quickstart1.md) introduced configuration and mapping. This tutorial extends that information while working with a sharded data set. I also extends the mapping functionality to include list and object properties on the model class.
+The [previous QuickStart](quickstart1.md) introduced configuration and mapping. This tutorial extends that information while working with a sharded data set. This tutorial also extends the mapping functionality to include list and object properties on the model class.
 
 Sharded data introduces two complexities:
 
 * How do I uniquely identify and locate a record, which could be on any shard?
 * How do I manage data on one shard and related data on a foreign shard?
 
-This walkthrough will illustrate how both challenges are met.
-
-Although you can download QuickStart2 as a completed project, this walkthrough will guide you as if this is a new project. 
+This walkthrough illustrates how both challenges are met.
 
 ## Create the Project
+
+Although you can download QuickStart2 as a completed project, this walkthrough will guide you as if this is a new project.
 
 Create a new “ASP.NET Core Web Application” project. When prompted, select the “API” project type. Once the solutions is created, open your dependencies and add the following NuGet packages.
 
@@ -23,6 +23,8 @@ To follow a standard convention for an MVC project, create folders for __Models_
 ## The Sample Data
 
 Our sample application is going to track Customers. Customers can have multiple Locations (1:∞). Customers can also have Contacts, but the Contacts can belong to more than one Customer (∞:∞). The Contact may not exist in the same shard as the Customer.
+
+The data is set up this way to illustrate one of the difficulties with sharded data: managing relationships between sharded records. In this case, a Customer may be associated with a Contact on any shard. Consequently, querying the Customer’s Contacts may require accessing multiple shards, deleting a customer means removing the Customer link from each Contact, which could be on any shard, and updating a Customer’s Contacts could also impact multiple shards.
 
 The SQL for the sample data is found in the GitHub source repository.
 
@@ -37,7 +39,7 @@ To create the QuickStart data sources, first run the __ServerSetup.sql__ file. T
 
 ### The ShardId
 
-Each of the four databases needs an identifier. This is more significant and may more fraught than it sounds. A thorough discussion of the options and impact is [here](sharding/shardkey.md). The précis is that once established, the type (and values) of the *ShardId* cannot be easily changed. The ShardId is a part of record identification, so confusion in configuration could result in data corruption.
+Each of the four databases needs an identifier. This is more significant and may more fraught than it sounds. A thorough discussion of the options and impact is [here](sharding/shardkey.md). The précis is that once established, the type (and values) of the *ShardId* cannot be easily changed. The ShardId is a part of record identification, so confusion or misconfiguration could result in data corruption.
 
 In this sample application, the type of the ShardId for SQL Server is a `byte` (SQL TinyInt); for PostgreSQL it is a `short` (SQL SmallInt).
 
@@ -177,7 +179,7 @@ So the configuration settings looks like this (with annotations):
 
 This hierarchy, then, defines a server name once, to be used for the entire shard set. The read and write logins are also defined once, to be used by all read or write connections in the shard set. Each shard has a distinct database name. ArgentSea can build read and write connections to each data store without the need to configure any of this data redundantly — the login, server name, and database names are each managed only once.
 
-In your project, open the appsettings file and add this configuration, updating the JSON to the appropriate server references. 
+When you save this configuration to project’s appsettings file, be sure to update the JSON to the appropriate server references.
 
 You might consider moving the login password information to the UserSecrets store, which is a best practice. Simply remove the password entries from the appsettings.json hierarchy and add them to the usersecrets.json file.
 
@@ -226,3 +228,87 @@ You might consider moving the login password information to the UserSecrets stor
 
 ## Creating the Models
 
+The process of creating a model class was introduced in [Quickstart 1](quickstart1.md). Essentially, it simply requires adding attributes to properties, which the Mapper can then use. This quickstart adds four new wrinkles: object properties, list properties, enums, and shard keys.
+
+### Object Properties
+
+Our data contains location data with *latitude* and *longitude* values. Generally, these are usually managed as a value pair. Geographic functions would likely expect a single geographic *coordinates* argument, rather than the two separate values. It would be handy to map data directly to/from a coordinates class, which would be a property of the location class.
+
+That is exactly what the `MapToModel` attribute does. This attribute tells the mapper that the property is a child object that also has properties to be included in the mapping.
+
+## [SQL Server](#tab/tabid-sql)
+
+```csharp
+// The coordinates class:
+public class CoordinatesModel
+{
+    [MapToSqlFloat("Latitude")]
+    public double Latitude { get; set; }
+
+    [MapToSqlFloat("Longitude")]
+    public double Longitude { get; set; }
+}
+
+// The location, which contains the coordinates class as a property:
+public class LocationModel
+{
+    //include other properties here...
+
+    [MapToModel]
+    public CoordinatesModel Coordinates { get; } = new CoordinatesModel();
+}
+
+```
+
+## [PostgreSQL](#tab/tabid-pg)
+
+```csharp
+// The coordinates class:
+public class CoordinatesModel
+{
+    [MapToPgDouble("Latitude")]
+    public double Latitude { get; set; }
+
+    [MapToPgDouble("Longitude")]
+    public double Longitude { get; set; }
+}
+
+// The location, which contains the coordinates class as a property:
+public class LocationModel
+{
+    //include other properties here...
+
+    [MapToModel]
+    public CoordinatesModel Coordinates { get; } = new CoordinatesModel();
+}
+
+```
+
+***
+
+Note that the MapToModel object must:
+
+* Be instantiated on the parent object (i.e. the parent model’s property cannot be null)
+* Not be a list
+* Be a class and not a struct.
+* Have Mapping attributes itself
+
+A MapToModel class can itself have a MapToModel property
+
+1. Have map attributes
+2. Be Instantiated
+3. 1:1
+
+The 
+
+
+ArgentSea will map data to a lets you do
+
+### List Properties
+
+### The ShardKey and ShardChild
+
+
+Our sharded data set
+
+## using ShardKey = ArgentSea.ShardKey<short, int>;

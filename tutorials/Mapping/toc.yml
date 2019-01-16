@@ -2,6 +2,8 @@
   href: mapping.md
 - name: Attributes
   href: attributes.md
+- name: Complex Attributes
+  href: complexattributes.md
 - name: Targets
   href: targets.md
 - name: Logging
