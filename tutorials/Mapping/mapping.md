@@ -7,7 +7,7 @@ The Mapper make data-access coding simpler and more productive by using  propert
 Using the Mapper consists of two parts:
 
 * Add attributes to a model class define how each property should be mapped to a data store (if at all)
-* Call a method which maps data results using the attribute metadata to populate the properties
+* Call a method which maps properties to parameters and/or maps data results to properties
 
 By defining metadata about the names of parameters or result columns, the Mapper can automatically map properties to columns and/or parameters. Several query methods on both Database connections and ShardSets implicitly use the Mapper.
 
@@ -19,5 +19,13 @@ Property attributes can only be retrieved using *reflection*, which is relativel
 
 > [!WARNING]
 > The Mapper will be relatively slow (and CPU intensive) the *first time* each model class is mapped to parameters or data. The initial compilation usually takes less than a second. Subsequent calls will execute the data to property mapping at native machine-code speeds. When the application is restarted, the memory is cleared and the compilation overhead occurs again.
+
+## Missing Parameters or Columns
+
+In some cases, the Model may have more properties than are defined in a parameter list or in data reader columns. When this happens, ArgentSea is somewhat forgiving.
+
+If a data reader result does not contain an expected column, the property is simply ignored. If the logging level is “Debug” or lower, a log message will be created including the Model name and column name.
+
+If the Mapper sets/reads/writes parameters and the query does not include that parameter, ADO.NET will return an error if the query is sent to the database. One solution is to simply manually remove unwanted parameters from the parameters collection. However, a better approach is to include parameter names in the query definition (`QueryStatement` or `QueryProcedure` class). This allows the Mapper to only include the subset of parameters whose names match the query definition.
 
 Next: [Property Attributes](attributes.md)

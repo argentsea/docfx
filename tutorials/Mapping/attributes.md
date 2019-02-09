@@ -36,7 +36,8 @@ public class Subscriber
 }
 ```
 
-The “@” parameter prefix is optional — ArgentSea will add the “@” automatically for parameters and remove it automatically when reading data reader rows.
+> [!NOTE]
+> The “@” parameter prefix is optional — ArgentSea will always add the “@” automatically for parameters and remove it automatically when reading data reader rows.
 
 ## [PostgreSQL](#tab/tabid-pg)
 
@@ -49,13 +50,16 @@ public class Subscriber
     [MapToPgInteger("SubId", true)]
     public int SubscriberId { get; set; }
 
-    [MapToPgVarChar("SubscriberName", 255)]
+    [MapToPgVarchar("SubscriberName", 255)]
     public string Name { get; set; }
 
     [MapToPgTimestamp("EndDate")]
     public DateTime Expiration { get; set; }
 }
 ```
+
+> [!NOTE]
+> ArgentSea will automatically convert the casing of parameter names and column names to *lowercase*.
 
 ***
 
@@ -115,7 +119,7 @@ Here is catalog of the current attributes, along with their arguments and corres
 
 | Attribute | Arguments | .NET types | SQL Type |
 | --- |--- | --- | --- |
-| [MapToPgVarcharAttribute](/api-pg/ArgentSea.Pg.MapToPgVarCharAttribute.html) | length | String, Enum¹, Nullable&lt;Enum&gt; | VarChar |
+| [MapToPgVarcharAttribute](/api-pg/ArgentSea.Pg.MapToPgVarcharAttribute.html) | length | String, Enum¹, Nullable&lt;Enum&gt; | VarChar |
 | [MapToPgCharAttribute](/api-pg/ArgentSea.Pg.MapToPgCharAttribute.html) | length | String, Enum¹, Nullable&lt;Enum&gt; |  Char |
 | [MapToPgTextAttribute](/api-pg/ArgentSea.Pg.MapToPgTextAttribute.html) | | String, Enum¹, Nullable&lt;Enum&gt; | VarChar |
 | [MapToPgBigintAttribute](/api-pg/ArgentSea.Pg.MapToPgBigintAttribute.html) | | Int64, Enum², Nullable&lt;Int64&gt;, Nullable&lt;Enum&gt; | Bigint |

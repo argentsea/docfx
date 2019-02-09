@@ -12,3 +12,6 @@
 - name: Sharding
   href: sharding/toc.yml
   topicHref: sharding/sharding.md
+- name: QuickStarts
+  href: quickstarts/toc.yml
+  topicHref: quickstarts/configuration.md

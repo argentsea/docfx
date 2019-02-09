@@ -1,6 +1,6 @@
 ﻿# ArgentSea Setup
 
-ArgentSea is a *.NET Standard* application, which means it should work with .NET Core, Xamarin, and the .NET Framework 4.6.1 or higher. However, ArgentSea depends on services provided by .NET Core — like logging and dependency injection — that may require “coercion” in the other environments. Because data sharding is so difficult to add to an existing application, the general assumption is that consumers would be new applications created using .Net Core. If you use another framework, please help with the documentation! (And tell us if there is demand for a NuGet package targeting your framework).
+ArgentSea is a *.NET Standard* application, which means it should work with .NET Core, Xamarin, and the .NET Framework 4.6.1 or higher. However, ArgentSea depends on services provided by .NET Core — like logging and dependency injection — that may require “coercion” in the other environments. Because data sharding is difficult to add to an existing application, the general assumption is that consumers would be new applications created using .Net Core. If you use another framework, please help with the documentation! (And tell us if there is demand for a NuGet package targeting your framework).
 
 ## Setup Steps
 

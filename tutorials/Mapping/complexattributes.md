@@ -103,16 +103,16 @@ public class Customer
 
 public class Address
 {
-        [MapToPgVarChar("StreetAddress", 255)]
+        [MapToPgVarchar("StreetAddress", 255)]
         public string StreetAddress { get; set; }
 
-        [MapToPgVarChar("Locality", 100)]
+        [MapToPgVarchar("Locality", 100)]
         public string Locality { get; set; }
 
-        [MapToPgVarChar("Region", 100)]
+        [MapToPgVarchar("Region", 100)]
         public string Region { get; set; }
 
-        [MapToPgVarChar("PostalCode", 25)]
+        [MapToPgVarchar("PostalCode", 25)]
         public string PostalCode { get; set; }
 }
 ```
@@ -157,7 +157,9 @@ Mapping to a List works quite differently than [MapToModel](/api/ArgentSea.MapTo
 
 Models in a List may themselves have child lists, but unlike [MapToModel](/api/ArgentSea.MapToModel.html) properties, they will be ignored by the Mapper. In cases where a result set must be transformed into a complete Model hierarchy, you can use the [Query](../querying/handling.md) methods to bypass the Mapper. This allows you to hydrate the results in your own code, optionally invoking Mapper on parts of the result stream.
 
-For the details on how to populate Models with `List<Model>` properties, see the discussion on [querying](../querying/fetching.md).
+List properties cannot be read-only.
+
+For the details on how to populate Models with `List<Model>` properties, see the discussion on [querying](../querying/fetching.md#the-mapreader-and-mapoutput-methods).
 
 ## [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) and [MapShardChild](/api/ArgentSea.MapShardChildAttribute.html) Attributes
 

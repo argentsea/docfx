@@ -1,6 +1,6 @@
 # The Hereditary Configuration Hierarchy
 
-ArgentSea essentially dispenses with traditional connection strings (although you can use them if you really want to). Instead, it uses the new .NET configuration architecture to manage each attribute as a discrete property. Each property can be managed globally, or at the shardSet, database, or connection level. Lower-level settings inherit values from their parent, which they can also overwrite if their own values are set differently.
+ArgentSea essentially dispenses with traditional connection strings. Instead, it uses the new .NET configuration architecture to manage each attribute as a discrete property. Each property can be managed globally, or at the shardSet, database, or connection level. Lower-level settings inherit values from their parent, which they can also overwrite if their own values are set differently.
 
 The Hereditary Configuration Hierarchy allows users to configure their data connection information at multiple levels. Child nodes “inherit” any settings of their parent. By dramatically reducing configuration redundancy, it makes handling many connections much more manageable.
 

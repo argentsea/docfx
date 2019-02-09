@@ -1,46 +1,53 @@
-# Querying Data
+# Queries
 
-This deep dive assumes that you have your project correctly [configured](configuration.md) and it is also helpful if you have some understanding of ArgentSea’s [Mapping](mapping.md) capabilities
+The twin goals of performance and supportability help drive ArgentSea’s approach to SQL queries. One of the areas in which ArgentSea’s design is most distinctive is its attempt to avoid *tight coupling* between the application and the database.
 
-ArgentSea was originally built to support application data sharding. Even if you do not use data sharding in your application, a brief discussion of the issues will help explain the architecture behind of ArgentSea’s data access approach. It will not be more difficult than any other ADO.NET query.
+<div>
+    <div style="padding-left:10px;padding-right:10px;display:flex;flex-flow:row wrap;justify-content:space-around;">
+        <div style="display:flex;flex-direction:column;">
+            <div style="display:flex;flex-direction:row;">
+                <img style="height:75px;width:75px;" src="/images/tightly-coupled.svg" />
+                <div>
+                    <h4>Tight Coupling</h4>
+                    <p>
+                        <i>Tight coupling</i> describes when a system’s integration with a second system depends on the <i>internal implementation</i> of the other system. Often the result of haphazard design, this interdependency makes it nearly impossible to change systems or even improve the implementation due to the difficulty of fully accounting for potential inter-system impact.
+                    </p>
+                    <p>
+                        When your database client code depends upon how tables and columns are implemented, the application layer and database layer have a type of tight coupling. ArgentSea tries to minimize this by ensuring that SQL is segregated and explicit.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;width:98%;flex-direction:column;">
+            <div style="display:flex;flex-direction:row;">
+                <img style="height:75px;width:75px;" src="/images/loosely-coupled.svg" />
+                <div>
+                    <h4>Loose Coupling</h4>
+                    <p>
+                    <i>Loosely coupled</i> systems have well-defined interfaces. Because of this, you can change the <i>implementation</i> as long as you maintain the interface “contract”. These systems are more robust, testable, and manageable. Because of the well-defined interface between services, systems can be optimized without concern about inadvertent downstream impacts.
+                    </p><p>
+                    ArgentSea’s use of static, parameterized queries are intended to make the data “contract” as explicit as possible, and managed independently of application code. The goal is to enable the changing of database structures — you can rewrite queries, partition tables, add hints, materialize views, and more — and as long as the same parameters are provided and the same results returned, the application should not break.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-## Accommodating Sharding
+To keep database interactions as manageable as possible, ArgentSea seeks to keep SQL *static*, *consolidated*, and *segregated*.
 
-The best way to understand the query architecture of ArgentSea is to describe a typical ADO.NET query then describe how this must change to account for concurrent multi-threaded queries across a shard set. These changes are not complicated, and they should be helpful even if your project does not use sharding.
+#### Static
 
-A typical ADO.NET data access method follows these steps:
+ArgentSea discourages dynamic SQL queries. Dynamic SQL may have slightly poorer performance due to the overhead of a SQL compiler, and the potential for [SQL injection](https://www.owasp.org/index.php/SQL_injection) may make some dynamic SQL less secure. Primarily, though, it can be difficult to parse, understand, and — especially — improve SQL created from a C# object model. This is why ArgentSea is intended to work with static SQL and [parameters](setparameters.md).
 
-1. Start with a __connection__ object, created from a connection string.
-2. Create a __command__ object that is associated with the __connection__ object.
-3. Next, the populate the command's *Parameters* property with the necessary input and output parameters.
-4. Open the connection and run the command.
-5. Create a Model object, which represents the data to the application, and use the __DataReader__ and/or output parameters to populate its properties.
+#### Consolidated
 
-In a sharded environment, however:
+Large applications routinely have “orphaned” procedures, tables, views, etc. As functionality changes, once necessary objects are no longer required. Application developers often have no easy way to confidently drop these objects, yet there is a continuing maintenance cost to preserving them. By consolidating SQL queries, ArgentSea helps provide visibility to query usage. Especially helpful is Visual Studio’s reference count: if the count is zero, the query is no longer in use.
 
-* The same parameters must be executed on multiple connections — reversing the steps 1 to 3.
-* A distinct command object must be executed and the results processed on a separate thread for each connection. The parameters cannot be shared (different threads would overwrite each other’s values) and the result handler must be thread-safe because it could be simultaneously executing on different connections.
+#### Segregated
 
-ArgentSea manages the challenges of multi-threaded access access with a four-step approach:
+ArgentSea avoids compiling SQL implementation code into application binaries. Well-written application code, running in the same environment, will likely continue to run well indefinitely; however, a query that initially worked efficiently may need to be rewritten as the data set grows or cardinality changes. By separating SQL and C# files, queries can be adapted as data changes over the lifetime of an application.
 
-1. Declare the parameters and arguments that will be passed to the stored procedures.
-2. Create a thread for each shard connection, then create the __connection__ (and __command__) object for each.
-3. Copy the parameter values to the parameter collection on each shard’s __command__ object.
-4. Call the stored procedure/function on each shard’s thread. When results are obtained, call (thread-safe) code to create and populate a Model object.
-5. Merge the results and return them to the caller.
+This also encourages SQL for data-domain work, and .NET for application work. People expert at optimizing SQL do not always welcome dealing with C# projects and concomitant build processes.
 
-Ultimately, using ArgentSea on multiple shards is no more difficult than writing simple ADO.NET database access code (and usually much easier), but the code new needs to be grouped and sequenced differently.
-
-## The ArgentSea Query Paradigm
-
-Previously, you would usually use just one data access command object, which would host the ADO.NET parameters, and run the query, converting the results to a Model object. Now, because processing results is multi-threaded whereas setting up the query is not, you need to split that process into *two* procedures:
-
-* The __*caller*__ method sets the parameters and calls an ArgentSea query method. This executes on a single thread.
-* The __*handler*__ procedure converts the results to a Model object result. This can execute on many threads.
-
-This ArgentSea query paradigm applies even to non-sharded queries using the Databases collection. This provides some design consistency, and also enables the Mapper for both sharded and non-sharded data.
-
-> [!TIP]
-> If you use ArgentSea’s optional [Mapping](../mapping/mapping.md) functionality, the multi-threaded results handling procedure is *already provided* by the Mapper. You do not have to write a handler.
-
-Next: [Setting Parameters](setparameters.md)
+Next: [Creating SQL Queries](sql.md)

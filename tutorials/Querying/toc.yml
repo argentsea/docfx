@@ -1,5 +1,9 @@
 - name: Querying
   href: querying.md
+- name: Creating SQL Queries
+  href: sql.md
+- name: The Coding Sequence
+  href: sequence.md
 - name: Setting Parameters
   href: setparameters.md
 - name: Fetching Data

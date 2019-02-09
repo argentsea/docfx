@@ -1,6 +1,6 @@
 ![ArgentSea](/images/ArgentSeaTitle.jpg)
 
-# Documentation
+# ArgentSea Documentation
 
 Modern web applications need to be built for performance and scalability, as well as security, monitoring, and configuration. ArgentSea offers a framework that consistently represents best practices for all of these concerns.
 
@@ -12,13 +12,15 @@ The essential ingredients for building a service that can scale to any demand in
 
 Highly scalable data typically means data “[sharding](tutorials/sharding/sharding.md)” — the practice of spreading data across many database servers. [Data sharding](tutorials/sharding/sharding.md) offers the most cost effective way to scale your data application as demand grows. To scale your application globally, data sharding offers the ability locate copies of your data across regional datacenters, so that data is located closer to your customers.
 
-ArgentSea helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection. The consistent use of stored procedures/functions reduces both SQL compilation overhead and support/maintenance costs. Because ArgentSea can handle multiple results from the same query, the number of server round-trips can be reduced — a huge performance win.
+ArgentSea uses explicit read and write connections to enable further scale-out. By directing read activity to a mirror or cloned data set, the data load can be spread among multiple servers. Examples include [SQL Server Availability Groups](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/active-secondaries-readable-secondary-replicas-always-on-availability-groups), [PostgreSQL Hot Standby](https://www.postgresql.org/docs/11/hot-standby.html), [Amazon RDS Read Replicas](https://aws.amazon.com/rds/details/read-replicas/), [Azure SQL Geo-Replication](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-active-geo-replication), [Amazon Aurora Low-Latency Read Replicas](https://aws.amazon.com/rds/aurora/details/postgresql-details/), etc.
+
+ArgentSea helps deliver highly optimized data access through data-to-object mapping without the overhead of reflection. The consistent use of stored procedures (SQL Server) or prepared statements (PostgreSQL) reduces both SQL compilation overhead and support/maintenance costs. Because ArgentSea can handle multiple results from the same query, the number of server round-trips can be reduced — a huge performance win.
 
 While the genesis of ArgentSea was to support the complex requirements of data sharding, it will likely be useful for high-performance data access even if you are not accessing sharded data. Especially with a cloud infrastructure, more efficient code requires fewer resources and this translates into ongoing cost savings.
 
 ## Mission Critical Supportability
 
-ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures (circuit breaking), security best-practices, and a unique approach to managing connection configuration elegantly.
+ArgentSea also addresses production concerns with built-in features like monitoring/logging, automatic retries after failures, controlling cascading failures (circuit breaking), security best-practices, and an elegant approach to managing connection configuration.
 
 The data framework will attempt to recover from transient errors by automatically retrying the data access; you have control over how long and how often. If repeated failures occur, the system will “circuit break”, so that data failures have less chance of bringing down the whole application.
 
@@ -32,52 +34,14 @@ The configuration architecture simplifies the management of large numbers of dat
 
 Supportability is about more than managing the operational burden. It also includes simplicity in understanding application behavior, ease in extending it with new features and requirements, and a discoverable path to resolving bugs. When long-lived applications must be supported by teams that are not the original authors, this becomes especially critical.
 
-The ArgentSea Mapper helps reduce the burden of code maintenance by simplifying data access code. Schema mapping throughout the application can be managed with simple attributes on the Model classes.
+The ArgentSea Mapper helps reduce the burden of code maintenance by simplifying and reducing data access code. This makes the code easier to understand and therefore easier to enhance and maintain. Further, the framework helps consolidate and segregate the SQL data access statements so that they can be more easily managed and optimized.
 
 The logging functionality can also provide substantial insight to developers, including the dynamic code compilation behind the Mapper, misconfigurations, and data errors.
-
-However, one of the principal ways that ArgentSea help with ongoing code maintenance is that it enforces the use of stored procedures or functions.
-
-<div>
-    <div style="padding-left:10px;padding-right:10px;display:flex;flex-flow:row wrap;justify-content:space-around;">
-        <div style="display:flex;flex-direction:column;">
-            <div style="display:flex;flex-direction:row;">
-                <img style="height:75px;width:75px;" src="/images/tightly-coupled.svg" />
-                <div>
-                    <h4>Tight Coupling</h4>
-                    <p>
-                        Although it might sound cozy, “tight coupling” isn’t a good thing in software design. It happens when a system’s integration with a second system depends on the internal implementation of the other system. Usually the result of haphazard design, this dependency makes it nearly impossible to switch to a different provider.
-                    </p>
-                    <p>
-                        For example, when your database client code contains <i>SQL that depends upon how tables and columns are implemented</i>, you have tightly implemented these layers. ArgentSea is about untangling these layers.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div style="display:flex;width:98%;flex-direction:column;">
-            <div style="display:flex;flex-direction:row;">
-                <img style="height:75px;width:75px;" src="/images/loosely-coupled.svg" />
-                <div>
-                    <h4>Loose Coupling</h4>
-                    <p>
-                    <i>Loosely coupled</i> systems have well-defined interfaces. Because of this, you can change the <i>implementation</i> as long as you maintain the interface “contract”. These systems are more robust, testable, and manageable.
-                    </p><p>
-                    These systems are more robust because the services provided by each layer is well-defined, and therefore the systems can be optimized for known requirements — because the requirements are easily discovered.
-                    </p><p>
-                    Stored procedures or functions allow you to change the underlying database structures, but as long as the same results are returned you will not break the application. You can separate tables, create views, hint, rewrite queries, and fully manage how data is stored and accessed, without disrupting the application. 
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-Stored procedures enable *loose coupling* between the application domain and the data domain. They generally perform better and offer better security too. This is why ArgentSea was built to work with stored procedures. Because ArgentSea encourages you to do your data-domain work in SQL and your application work in .NET, both your developers and your database administrators have far better control over your data.
 
 ## Getting Started
 
 Explore the [deep dives](tutorials/index.md) to understand the logic and services of ArgentSea. An ArgentSea implementation consists of the [NuGet library packages](tutorials/setup.md), loading the [configuration and services](tutorials/configuration/configuration.md) at startup, decorating the models classes with [data attributes](tutorials/mapping/mapping.md), and calling the various [query methods](tutorials/querying/querying.md).
 
-If you prefer to learn by getting your hands dirty, jump into the [walkthroughs](tutorials.quickstart1.md). You can find the most detailed information in the [API section](/reference/apis.html).
+If you prefer to learn by getting your hands dirty, jump into the [walkthroughs](tutorials/quickstarst/configuration.md). You can find the most detailed information in the [API section](/reference/apis.html).
 
 Next: [Explore ArgentSea’s functionality](tutorials/index.md)

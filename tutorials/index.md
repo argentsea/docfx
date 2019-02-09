@@ -4,7 +4,7 @@ ArgentSea is built on top of ADO.NET, so an understanding of basic .NET data acc
 
 ## [Setup Tutorial](setup.md)
 
-Because data sharding is difficult to retroactively add to an existing project without rewriting it, if you are creating a new project, it makes sense to use .NET Core rather than then legacy .NET Framework.
+Because data sharding is difficult to retroactively add to an existing project without rewriting it, if you are creating a new project, it makes sense to use .NET Core rather than the legacy .NET Framework.
 
 ArgentSea would probably work in a legacy .NET Framework application (i.e. it is .NET standard compatible), but it is not tested for this purpose and it uses services — such as dependency injection, configuration, and logging — that are implemented differently in the different .NET versions. If you *do* use the legacy .NET Framework, please help build out our documentation with any guidance you can share.
 
@@ -18,7 +18,7 @@ ArgentSea uses the new configuration infrastructure in .NET Core, including stro
 
 ## [Mapping Tutorial](mapping/mapping.md)
 
-Native data access can require a lot of boilerplate code, but libraries that try to reduce this often come with performance tradeoffs. ArgentSea contains a unique ORM (Object-Relational Mapper) that is focused on parameters and procedures/functions rather than generating dynamic SQL.
+ADO.NET data access can require a lot of boilerplate code but libraries that try to reduce this often come with performance tradeoffs. ArgentSea contains a unique ORM (Object-Relational Mapper) that is focused on parameters and data results rather than generating dynamic SQL.
 
 Like most ORMs, simple property attributes provide metadata which makes the coding easy and simple. Unlike many ORMs, ArgentSea removes the reflection overhead by *compiling* the property-to-data mapping; subsequent mapping invocations are as fast as optimized ADO.NET code.
 

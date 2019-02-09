@@ -1,13 +1,13 @@
 # Fetching Data
 
-Retrieving database data consists of running a stored procedure or function on each connection. ArgentSea provides various methods to offer the best approach:
+Retrieving database data consists of running a query on each connection. ArgentSea provides various methods to offer the best approach.
 
 ## Connection methods
 
-Both database connections and shards have distinct Read and Write connections. The distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or functions; the Write connection should be used for everything else. For example, you could direct reads to a mirror, active standby, or read-only endpoint, and direct writes to the master or source database. 
+Both database connections and shards have distinct Read and Write connections. The distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or functions; the Write connection should be used for everything else. For example, you could direct reads to a mirror, active standby, or read-only endpoint, and direct writes to the master or source database.
 
 > [!TIP]
-> Even if you do not *currently* have separate read-only endpoints like mirrors or active standbys, consistent discrimination of Read and Write access will allow you to scale-out in the future. 
+> Even if you do not *currently* have separate read-only endpoints like mirrors or active standbys, consistent discrimination of Read and Write access will allow you to scale-out in the future.
 
 If only the Read or Write connection is configured, both the Read and Write connections will have the same value.
 
@@ -39,7 +39,7 @@ The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute 
 
 The arguments are largely consistent across all of the methods.
 
-### Required Argument: (string) sprocName
+### Required Argument: (Query) query
 
 This is simply the name of the stored procedure or function to be invoked. This string value is required for every data access method.
 
@@ -50,30 +50,6 @@ await database.RunAsync("ws.MyProcedureName", parameters, cancellationToken);
 ```
 
 As larger applications evolve, however, one can lose track of which database procedures are *actually being used* by the application. It is not unusual for a custom application to have hundreds of data procedures, only a fraction of which are used.  
-
-__Pro tip:__ you might consider consistently referencing procedure names via a static class, like this.
-
-```csharp
-internal static class DataProcedures
-{
-  //This should be a COMPREHENSIVE list of stored procedure names.
-  //You can use the reference count to determine what is in use.
-  public static string StoreAdd { get;  } = "ws.StoreAdd";
-  public static string StoreList { get; } = "ws.StoreList";
-  public static string StoreLocationGet { get; } = "ws.StoreLocationGet";
-  public static string StoreLocationDetailsGet { get;  } = "ws.StoreLocationDetailsGet";
-  public static string StoreLocationsAllByUser { get; } = "ws.StoreLocationsAllByUser";
-  public static string StoreLocationsByGroupIDs { get; } = "ws.StoreLocationsByGroupIDs";
-  // ...
-}
-// Now you can reference the procedure name like this:
-await database.Write.RunAsync(DataProcedures.StoreAdd, parameters, cancellationToken);
-
-```
-
-Centralizing the procedure name list allows reviewers to see which procedures are actually used by the application (and ensure that non are misspelled). Surfacing them using static properties, as in the example, allows Visual Studio to provide a “reference count” for each procedure (constants do not do this). When the method that called this stored procedure/function is removed from the code, the zero “reference count” will make it obvious that, even though the name defined, it is not actually used.
-
-The reference count popup data even allows you to find all of the methods that invoke that stored procedure/function. This can be helpful as you prune different data procedures that seem to do the same thing.
 
 ### Required Argument: (DbParameterCollection) parameters
 
@@ -125,9 +101,9 @@ The __MapReader&ast;__ and __MapOutput&ast;__ methods are similar. Both use the 
 
 So, if you use output parameters (which is potentially more performant), use __MapOutput&ast;__. If you use standard SELECTs to return your data, use __MapReader&ast;__.
 
-Both methods support multiple result sets that populate properties that contain Lists of related data. For example, you might have an Order record with a property containing an OrderItem List. The list items come from (additional) DataReader results. You can have up to eight of these List properties.
+Both methods support multiple result sets that populate properties that contain Lists (`List<Model>` or `IList<Mopdel>`) of related data. For example, you might have an Order record with a property containing an OrderItem List. The list items come from (additional) DataReader results. A single root Model may have up to eight of these List properties. The List property must be settable.
 
-> [!TIP]
+> [!NOTE]
 > The order in which your attribute-mapped class appears in the generic definitions should be the same order as the list data results in the procedure output.
 
 An example of calling each would be:
