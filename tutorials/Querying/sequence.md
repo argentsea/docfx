@@ -18,10 +18,10 @@ In a sharded environment, however, the same parameters must be executed on multi
 
 ArgentSea manages the challenges of multi-threaded access with a differently ordered sequence:
 
-1. Declare the parameters and arguments that will be passed to the stored procedures.
+1. Declare the parameters and arguments that will be passed to the stored procedure or SQL statement.
 2. Create a thread for each shard connection, then create the __connection__ (and __command__) object for each.
 3. Copy the parameter values to the parameter collection on each shard’s __command__ object.
-4. Call the stored procedure/function on each shard’s thread. When results are obtained, call (thread-safe) code to create and populate a Model object.
+4. Run the query on each shard’s thread. When results are obtained, call (thread-safe) code to create and populate a Model object.
 5. Merge the results and return them to the caller.
 
 Ultimately, using ArgentSea on multiple shards is no more difficult than writing simple ADO.NET database access code (and usually much easier), but the code new needs to be grouped and sequenced differently.

@@ -32,7 +32,7 @@ The shardId argument will be a default value, like null or zero, when not using 
 
 ### (string) sprocName
 
-This is the name of the stored procedure or function that was executed. It is provided to the procedure for logging purposes.
+This is the name of the stored procedure or SQL statement that was executed. It is provided to the procedure for logging purposes.
 
 ### (TArg) optionalArgument
 
@@ -56,7 +56,7 @@ var name = parameters["@Name"].GetString();
 
 ### (string) connectionDescription
 
-The connectionDescription argument allows the logger to include the connection that raised the error or event. You should include this (and also the stored/function procedure name) in any logging or errors in your procedures. Because your delegate could run on multiple connections, this can be essential debugging information.
+The connectionDescription argument allows the logger to include the connection that raised the error or event. You should include this (and also the stored procedure or statement name) in any logging or errors in your procedures. Because your delegate could run on multiple connections, this can be essential debugging information.
 
 ### (ILogger) logger
 

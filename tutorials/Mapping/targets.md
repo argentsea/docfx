@@ -5,9 +5,9 @@ The ArgentSea Mapper maps to:
 * Query input parameters
 * Query output parameters
 * Data reader columns
-* Table-valued parameters (SQL Server only)
+* Table-valued parameters (SQL Server) or Copy statements (PostgreSQL)
 
-The mapper does *not* generate dynamic SQL statements. The Mapper may be useful in situations where dynamic SQL is used, but, philosophically, this is not encouraged. Stored procedures are generally more secure, more performant, and offer a less tightly-coupled architecture.
+The mapper does *not* generate dynamic SQL statements. The Mapper may be useful in situations where dynamic SQL is used, but, philosophically, this is not encouraged. Stored procedures and parameterized SQL statements are generally more secure, more performant, and offer a less tightly-coupled architecture.
 
 ## The Parameter Collection
 
@@ -115,7 +115,7 @@ var customer = cmd.Parameters.ToModel<Customer>(logger);
 
 Of course, it would be quite unusual to have a query that *only* uses output parameters. Because the input parameter is added to the collection first, the output parameter will be automatically skipped. As with input parameters, you can also provide a list of parameter names that you want to explicitly skip. And also like input parameters, the `CreateOutputParameters` method simply creates output parameters; you can modify the collection as needed.
 
-Once the parameters are set and the procedure is executed, the Mapper can read the values of the output parameters into the corresponding properties of a new object instance. The `ToModel` method returns a new object with the properties set.
+Once the parameters are set and the query is executed, the Mapper can read the values of the output parameters into the corresponding properties of a new object instance. The `ToModel` method returns a new object with the properties set.
 
 > [!NOTE]
 > The `MapOutput*;` methods of the Database or ShardSet objects fetch results from the database and implicitly use the Mapper to return a Model based upon output parameters. In most cases, you would use one of those methods rather than `ToModel` on the Mapper directly.

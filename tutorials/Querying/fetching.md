@@ -4,7 +4,7 @@ Retrieving database data consists of running a query on each connection. ArgentS
 
 ## Connection methods
 
-Both database connections and shards have distinct Read and Write connections. The distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or functions; the Write connection should be used for everything else. For example, you could direct reads to a mirror, active standby, or read-only endpoint, and direct writes to the master or source database.
+Both database connections and shards have distinct Read and Write connections. The distinction allows the system to “scale out” reads and writes. The Read connection should be used for SELECT-only stored procedures or SQL statements; the Write connection should be used for everything else. For example, you could direct reads to a mirror, active standby, or read-only endpoint, and direct writes to the master or source database.
 
 > [!TIP]
 > Even if you do not *currently* have separate read-only endpoints like mirrors or active standbys, consistent discrimination of Read and Write access will allow you to scale-out in the future.
@@ -16,15 +16,15 @@ These are the methods that can be invoked on a connection:
 | Method | Description |
 | --- | --- |
 | __LookupAsync__ | Returns a value from the database. This may be a return value (int) or single output parameter. |
-| __RunAsync__ | Executes a database procedure. No results are returned. |
+| __RunAsync__ | Executes a database statement, procedure, or batch. No results are returned (except possibly batch results). |
 | __QueryAsync__ | Returns the typed object created by a handler delegate. |
 | __MapListAsync__ | Returns a List of typed objects from the data results. |
 | __MapReaderAsync__ | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from __DataReader__ results. |
 | __MapOutputAsync__  | Returns a typed object created by the [Mapper](/api/ArgentSea.Mapper.html) from output parameters *and* __DataReader__ results. |
 
-Database objects and shard intances have both `Write` and `Read` connections, which executes a stored procedure or function on a single database. All the methods listed are available on either connection (even though it may not make sense to use `RunAsync` on a read connection).
+Database objects and shard instances have both `Write` and `Read` connections, which executes a query on a single database. All the methods listed are available on either connection (even though it may not make sense to use `RunAsync` on a read connection).
 
-The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute the procedure or function on every shard. They return either the combined result or the first valid (non-null) result. For example, if you need to look up a user by their login name (rather than their user key), use `ReadFirst` to query all shards for a matching record, and to return the single expected matching result. Whereas, `ReadAll` could be used to retrieve all users in any shard with particular attribute. Note that `ReadAll` methods always return list results.
+The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute the procedure or SQL statement on every shard. They return either the combined result or the first valid (non-null) result. For example, if you need to look up a user by their login name (rather than their user key), use `ReadFirst` to query all shards for a matching record, and to return the single expected matching result. Whereas, `ReadAll` could be used to retrieve all users in any shard with particular attribute. Note that `ReadAll` methods always return list results.
 
 | Method | Uses Mapper | Db.Read | Db.Write | ShardSet.ReadAll | ShardSet.ReadFirst | ShardSet.Write |
 | --- |:---:| :---: | :---: | :---: | :---: | :---: |
@@ -37,19 +37,22 @@ The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute 
 
 ## Method Arguments
 
-The arguments are largely consistent across all of the methods.
+The arguments are largely consistent across all of the methods, except running a query batch which is discussed later.
 
 ### Required Argument: (Query) query
 
-This is simply the name of the stored procedure or function to be invoked. This string value is required for every data access method.
+There are two types of query objects:
 
-The general practice is to provide a stored procedure/function name with string constant, like this:
+* __Stored procedures__ are parameterized statements stored within the database server. This is the preferred approach with SQL Server.
+* __Statements__ are parameterized SQL files stored in a application folder (rather than compiled into the source code). This is useful for PostgreSQL databases and situations with less-than-full ownership of the target database.
+
+The recommended practice is to create a single static class rendering all SQL statements and procedures. This approach is simple and also provides a reference count indicating which procedures/statements are in use, which can be a problem when an application has grown large. Sample code and more detail is discussed in [SQL queries](/tutorials/querying/sql.md) and the [configuration quickstart](/tutorials/quickstarts/configuration.md).
+
+An example invocation is like this:
 
 ```csharp
-await database.RunAsync("ws.MyProcedureName", parameters, cancellationToken);
+await database.RunAsync(Queries.MyProcedure, parameters, cancellationToken);
 ```
-
-As larger applications evolve, however, one can lose track of which database procedures are *actually being used* by the application. It is not unusual for a custom application to have hundreds of data procedures, only a fraction of which are used.  
 
 ### Required Argument: (DbParameterCollection) parameters
 
@@ -59,7 +62,7 @@ This value can be null if there are no parameters.
 
 > [!WARNING]
 > When working with output parameters in standard ADO.NET, you may habitually maintain a variable reference to any output parameters you created before adding it to the collection. This makes it easy to get the output parameter value after the query is executed.  
-> This approach will not work with sharded data, because ArgentSea will *copy* the parameter set before executing the stored procedure/function. Any referenced output parameters will *not* contain a data result.
+> This approach will not work with sharded data, because ArgentSea will *copy* the parameter set before executing the query. Any referenced output parameters will *not* contain a data result.
 
 ### Optional ShardSet Argument: (IEnumerable&lt;ShardParameterValue&lt;TShard&gt;&gt;) shardParameterValues
 
@@ -73,7 +76,7 @@ The `ShardParameterValue` type has a ShardId and an optional parameter name and 
 
 Some shard query overloads also accept the name of the parameter that represents the name of the parameter that should be set to shardId value. If specified, ArgentSea will set this parameter value to the current shardId value as it executes each query.
 
-For example, a query for a list of records that spans shards could be enhanced if the query new the value of its own ShardId. Alternatively, because a shard misconfiguration might result in catastrophic data corruption (due to the high likelihood of duplicate record identities between shards), you might require that stored procedures or functions that write to the database also have a ShardId parameter that they validate is correct.
+For example, a query for a list of records that spans shards could be enhanced if the query new the value of its own ShardId. Alternatively, because a shard misconfiguration might result in catastrophic data corruption (due to the high likelihood of duplicate record identities between shards), you might require that queries that write to the database also have a ShardId parameter that they validate is correct.
 
 ### Optional Argument: (QueryResultModelHandler&lt;TShard, TArg, TModel&gt;>) resultHandler
 
@@ -101,29 +104,29 @@ The __MapReader&ast;__ and __MapOutput&ast;__ methods are similar. Both use the 
 
 So, if you use output parameters (which is potentially more performant), use __MapOutput&ast;__. If you use standard SELECTs to return your data, use __MapReader&ast;__.
 
-Both methods support multiple result sets that populate properties that contain Lists (`List<Model>` or `IList<Mopdel>`) of related data. For example, you might have an Order record with a property containing an OrderItem List. The list items come from (additional) DataReader results. A single root Model may have up to eight of these List properties. The List property must be settable.
+Both methods support multiple result sets that populate properties that contain Lists (`List<Model>` or `IList<Model>`) of related data. For example, you might have an Order record with a property containing an OrderItem List. The list items come from (additional) DataReader results. A single root Model may have up to eight of these List properties. The List property must be settable.
 
 > [!NOTE]
-> The order in which your attribute-mapped class appears in the generic definitions should be the same order as the list data results in the procedure output.
+> The order in which your attribute-mapped class appears in the generic definitions should be the same order as the list data results in the procedure or statement output.
 
 An example of calling each would be:
 
 ```csharp
 // In this example, ws.GetOrderDetails returns Order data in output parameters:
-_database.MapOutputAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapOutputAsync<Order>(Queries.GetOrderDetails, parameters, cancellation);
 // Here, ws.GetOrderDetails returns simple Order data in a single-row SELECT:
-_database.MapReaderAsync<Order>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapReaderAsync<Order>(Queries.GetOrderDetails, parameters, cancellation);
 
 // Now ws.GetOrderDetails returns Order data in output parameters and a list of OrderItem from a SELECT:
-_database.MapOutputAsync<Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapOutputAsync<Order, OrderItems>(Queries.GetOrderDetails, parameters, cancellation);
 // Finally, ws.GetOrderDetails returns Order data in a single-row SELECT, then a list of OrderItems from a 2nd SELECT:
-_database.MapReaderAsync<Order, Order, OrderItems>("ws.GetOrderDetails", parameters, cancellation);
+_database.MapReaderAsync<Order, Order, OrderItems>(Queries.GetOrderDetails, parameters, cancellation);
 
 // Expanding this, we now have output parameters and three SELECTs:
-_database.MapOutputAsync<Store, OrderHistory, Locations, Contact>("ws.GetStoreDetails", parameters, cancellation);
-// Likewise, the procedure now returns four SELECTs, and the third one is a single-row SELECT with the base customer data,
+_database.MapOutputAsync<Store, OrderHistory, Locations, Contact>(Queries.GetStoreDetails, parameters, cancellation);
+// Likewise, the query now returns four SELECTs, and the third one is a single-row SELECT with the base customer data,
 // the remaining select are used to build customer property lists (order history, locations, and contacts):
-_database.MapReaderAsync<Store, OrderHistory, Store, Locations, Contact>("ws.GetStoreDetails", parameters, cancellation);
+_database.MapReaderAsync<Store, OrderHistory, Store, Locations, Contact>(Queries.GetStoreDetails, parameters, cancellation);
 ```
 
 In both methods, the generic type in the *first* position is the return type. If additional results are included in the result stream, the subsequent types define the order in which they are expected in the DataReader results. You can have up to eight DataReader results streamed to distinct List properties.

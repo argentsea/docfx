@@ -15,7 +15,7 @@ public class Subscriber
 }
 ```
 
-Adding mapping attributes to this class provides the metadata to automatically map these properties to stored procedures:
+Adding mapping attributes to this class provides the metadata to automatically map these properties to stored procedures or SQL statements:
 
 ## [SQL Server](#tab/tabid-sql)
 

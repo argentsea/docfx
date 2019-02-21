@@ -11,22 +11,25 @@ ArgentSea will work with either design. The [ShardKey](/api/ArgentSea.ShardKey-2
 
 ## Components
 
-A [ShardKey](/api/ArgentSea.ShardKey-2.html) consists of three components: a *[DataOrigin](/api/ArgentSea.DataOrigin.html)*, a *ShardId*, and a *RecordId*. A [ShardChild](/api/ArgentSea.ShardChild-3.html) has the same values plus an additional *ChildId*.
+A [ShardKey](/api/ArgentSea.ShardKey-2.html) consists of three components: a *DataOrigin* char value, a *ShardId*, and a *RecordId*. A [ShardChild](/api/ArgentSea.ShardChild-3.html) has the same values plus an additional *ChildId*.
 
 <table border="0" margin="0" padding="0"><tr><td width="43%"><img src="/images/shardkey.svg"></td><td width="57%"><img src="/images/shardchild.svg"></td></tr></table>
 
-### The [DataOrigin](/api/ArgentSea.DataOrigin.html)
+### The DataOrigin
 
-Both the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) have a [DataOrigin](/api/ArgentSea.DataOrigin.html) value. The purpose of this value is to represent a data source. It is little more than a character value that you can choose to differentiate the data source.
+Both the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) have a *DataOrigin* value. The purpose of this value is to represent a data source. It is simply a character value that you can choose to differentiate the data source.
 
-For example, keys representing a *Customer* record might have a [DataOrigin](/api/ArgentSea.DataOrigin.html) of “c”, whereas keys representing a *Product* record might have a [DataOrigin](/api/ArgentSea.DataOrigin.html) of “p”. Because this simple tag identifies the data source, two different [ShardKeys](/api/ArgentSea.ShardKey-2.html) from the same shard and with the same record number will still not be equal because they represent different source data.
+For example, keys representing a *Customer* record might have a *DataOrigin* of “c”, whereas keys representing a *Product* record might have a *DataOrigin* of “p”. Because this simple tag identifies the data source, two different [ShardKeys](/api/ArgentSea.ShardKey-2.html) from the same shard and with the same record number will still not be equal because they represent different source data.
 
 > [!IMPORTANT]
-> One [DataOrigin](/api/ArgentSea.DataOrigin.html) character value is reserved: “0” (Unicode character Zero, Unicode numeric value 30).
+> One *DataOrigin* character value is reserved: “0” (Unicode character Zero, Unicode numeric value 30).
 >
-> This is used for the [DataOrigin](/api/ArgentSea.DataOrigin.html) of `ShardKey.Empty` and `ShardChild.Empty`. Creating a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) with a “zero” [DataOrigin](/api/ArgentSea.DataOrigin.html) character but non-default (i.e. not zero or not null) *ShardId* or *RecordId* values will throw an [InvalidShardArgumentsException](/api/ArgentSea.InvalidShardArgumentsException.html) error.
+> This is used for the *DataOrigin* of `ShardKey.Empty` and `ShardChild.Empty`. Creating a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) with a “zero” *DataOrigin* character but non-default (i.e. not zero or not null) *ShardId* or *RecordId* values will throw an [InvalidShardArgumentsException](/api/ArgentSea.InvalidShardArgumentsException.html) error.
 
 This capability is useful for helping prevent data from being accessed with the wrong type of key — like an inventory key inadvertently passed to fetch an account record. Also, this may be helpful for caching data, since you can use the same dictionary to cache objects of different types without key collision.
+
+> [!CAUTION]
+> Although the *DataOrigin* is a char, it is serialized as an 8-bit ANSI charactor value. You should avoid using non-alphanumeric charactors for this value. And definately no emojis.
 
 ### The ShardId
 
@@ -39,7 +42,7 @@ If you really can’t decide and have no particular requirements, a simple start
 Because the ShardId value is used in configuration, queries, and also for saving foreign shard references in your databases, once your project is established this value cannot be easily changed. The same ShardId type is used across all [ShardSets](/api/ArgentSea.ShardSetsBase-2.html).
 
 > [!NOTE]
-> The database itself may not know what its own *ShardId* is. This sounds absurd until you realize that it is genuinely difficult to keep scores or even hundreds of database schemas and procedures in sync while preserving a programmatic ShardId value. Your continuous delivery tooling will keep detecting any differences and trying to overwrite them. Fortunately, your connection *does* know this and can set the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) values correctly.
+> The database itself may not know what its own *ShardId* is. This sounds absurd until you realize that it is genuinely difficult to keep scores or even hundreds of database schemas and procedures in sync while preserving a programmatic ShardId value. Your continuous delivery tooling will keep detecting any differences and trying to overwrite them! Fortunately, your connection *does* know this and can set the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) values correctly.
 
 ### The RecordId
 
@@ -98,13 +101,9 @@ public ShardKey<short, int> CustomerKey { get; set; }
 
 ***
 
-This example sets the property to a [ShardKey](/api/ArgentSea.ShardKey-2.html) instance with a *[DataOrigin](/api/ArgentSea.DataOrigin.html)* of “c”, the *ShardId* to the value of the data connection, and the *RecordId* the “CustomerId” column or parameter value.
+This example sets the property to a [ShardKey](/api/ArgentSea.ShardKey-2.html) instance with a *DataOrigin* of “c”, the *ShardId* to the value of the data connection, and the *RecordId* the “CustomerId” column or parameter value.
 
-The [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) attribute’s first argument can be either a [DataOrigin](/api/ArgentSea.DataOrigin.html) instance or a char from which a [DataOrigin](/api/ArgentSea.DataOrigin.html) will be created.
-
-The second argument is the name of the data parameter or column. This name must *exactly* match the name in the data *MapTo* attribute.
-
-The [MapShardChild](/api/ArgentSea.MapShardChildAttribute.html) attribute is nearly identical, except for the additional *ChildId* parameter:
+The [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) attribute’s first argument is a *DataOrigin* char value. The second argument is the name of the data parameter or column. This name must *exactly* match the name in the data *MapTo* attribute. The [MapShardChild](/api/ArgentSea.MapShardChildAttribute.html) attribute is nearly identical, except for the additional *ChildId* parameter:
 
 ## [SQL Server](#tab/tabid-sql)
 

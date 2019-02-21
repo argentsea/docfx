@@ -3,8 +3,8 @@
 
 Every ArgentSea data access method takes a `Query` argument. ArgentSea offers two implementations:
 
-* `QueryProcedure` - which names a procedure (or function). This also sets the DbCommandType to “StoredProcedure”. Of course, the actual SQL implementation is hosted on the server, giving DBAs or SQL developers the ability to revise the implementation, if needed.
-* `QueryStatement` - which presents a parameterized SQL statement which is loaded from a file. This sets the DbCommandType to “Text”.
+* `QueryProcedure` - which names a stored procedure (or function). This also sets the DbCommandType to *StoredProcedure*. Of course, the actual SQL implementation is hosted on the server, giving DBAs or SQL developers the ability to revise the implementation, if needed. This is the recommended approach for SQL Server.
+* `QueryStatement` - which presents a parameterized SQL statement which is loaded from a file. This sets the DbCommandType to “Text”. This is the recommended approach for PostgreSQL and situations with limited ownership of the database.
 
 ArgentSea recommends creating a single, static class which contains *all* defined procedures or SQL statements as static properties. As large applications evolve, it can become difficult to determine procedures or commands are actually used by the application. Noting Visual Studio’s reference count for each property may help prune dead code.
 

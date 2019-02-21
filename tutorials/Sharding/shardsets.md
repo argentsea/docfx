@@ -99,7 +99,7 @@ public async Task<Subscriber> GetSubscriber(ShardKey<byte, int> subscriberKey, C
 {
     var prms = new QueryParameterCollection()
         .AddSqlIntInputParameter("@SubId", subscriberKey.RecordId);
-    return await _shardSet[subscriberKey].Read.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    return await _shardSet[subscriberKey].Read.MapOutputAsync<Subscriber>(Queries.GetSubscriber, prms, cancellation);
 }
 ```
 
@@ -110,7 +110,7 @@ public async Task<Subscriber> GetSubscriber(ShardKey<short, int> subscriberKey, 
 {
     var prms = new QueryParameterCollection()
         .AddPgIntegerInputParameter("SubId", subscriberKey.RecordId);
-    return await _shardSet[subscriberKey].Read.MapOutputAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    return await _shardSet[subscriberKey].Read.MapOutputAsync<Subscriber>(Queries.GetSubscriber, prms, cancellation);
 }
 ```
 
@@ -118,7 +118,7 @@ public async Task<Subscriber> GetSubscriber(ShardKey<short, int> subscriberKey, 
 
 Several database implementations — such as *SQL Server Availability Groups* or *AWS Aurora PostgreSQL* to name a couple of examples — enable a master server to handle both reads and writes and separate clone instances that can handle read-only traffic. Most applications have a greater percentage of reads than writes, so this is a great way to scale-out database access. However, there are two issues of concern:
 
-* ArgentSea has *no idea* which stored procedures or functions update data and which are read-only, so it is left to the application developer to designate this by selecting  the appropriate connection property (Read or Write).
+* ArgentSea has *no idea* which queries update data and which are read-only, so it is left to the application developer to designate this by selecting  the appropriate connection property (Read or Write).
 * There is often some latency between the time that data is saved and when it is available from the read instance. This temporary data inconsistency can cause problems or confusion due to missing data.
 
 There are several architectural solutions to the latency-driven data inconsistency problem, such as intelligent caching, client observable collections, delayed retries, and retries on the Write connection. Due to the variations in environments, optimal solutions, and the challenge of simple determining when a missing record is really expected, ArgentSea does not attempt an automatic retry on the Write connection.
@@ -126,12 +126,12 @@ There are several architectural solutions to the latency-driven data inconsisten
 To implement your own latency handling, you can easily implement an automatic retry using the Write connection after an unexpectedly missing record on the Read connection. In this example method we retrieve data by key value, so a missing record is unexpected and might be due to replication latency. The code assumes that the subscriber key has the “required” attribute set so that the Mapper returns a null object if the key is null. The resolution is to simply retry on the Write connection.
 
 ```csharp
-    var sub = await _shardSet[subscriberKey].Read.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+    var sub = await _shardSet[subscriberKey].Read.MapReaderAsync<Subscriber>(Queries.GetSubscriber, prms, cancellation);
     // add automatic retry on write connection if subscriber is not found.
     if (sub is null)
     {
         // consider logging the retry on the write connection
-        var sub = await _shardSet[subscriberKey].Write.MapReaderAsync<Subscriber>("ws.GetSubscriber", prms, cancellation);
+        var sub = await _shardSet[subscriberKey].Write.MapReaderAsync<Subscriber>(Queries.GetSubscriber, prms, cancellation);
     }
     return sub;
 }
@@ -140,7 +140,7 @@ To implement your own latency handling, you can easily implement an automatic re
 
 > [!TIP]
 > Even if you are not using a scale-out strategy today, it would be a good idea to use the `Read` and `Write` properties as if you were. This would make a future migration to separate read and write instances a little easier.  
-> You might also consider using different database schemas for read-only and write-capable procedures or functions. This helps underline the importance of separating read-only activity to your data developers. And testing may be easier if each connection’s permissions is limited to the appropriate schema.
+> You might also consider using different database schemas for read-only and write-capable stored procedures. This helps underline the importance of separating read-only activity to your data developers. And testing may be easier if each connection’s permissions is limited to the appropriate schema.
 
 ### Shard Query Methods
 
@@ -148,15 +148,17 @@ There are several query methods, described briefly below and in more detail in t
 
 #### *RunAsync*
 
-Executes a stored procedure without returning a result — other than an Exception if it is not successful. Presumably, this method would only be called on the Write connection but nothing prevents running a procedure on the Read connection. This method is available on individual shards, but not on the entire ShardSet.
+Executes a stored procedure or SQL statement without returning a result — other than an Exception if it is not successful. Presumably, this method would only be called on the Write connection but nothing prevents running a query on the Read connection.
+
+This method also supports running a *Batch*, which is a set of statements which run within the same transaction. Batches on ShardSets do not return results, but batches on databases or shard instances can.
 
 #### *LookupAsync*
 
-Executes a stored procedure and returns the value (string, number, etc.) of either the return result or (single) output parameter. This method useful to fetch a single value from the shard rather than an entire record. This method is also available on individual shards, but not on the entire ShardSet.
+Executes a query and returns the value (string, number, etc.) of either the return result or (single) output parameter. This method useful to fetch a single value from the shard rather than an entire record. This method is also available on individual shards, but not on the entire ShardSet.
 
 #### *ListAsync*
 
-Executes a stored procedure and returns a list containing a Model object, one entry for each record in the result set.
+Executes a query and returns a list containing a Model object, one entry for each record in the result set.
 
 The objects are created using Mapping attributes. If the Model object does not have attributes, you can create a List using QueryAsync with a custom handler.
 
@@ -164,7 +166,7 @@ This method is available on both individual shards and the entire ShardSet. Resu
 
 #### *QueryAsync*, *QueryFirstAsync*, and *QueryAllAsync*
 
-Executes a stored procedure and returns a (potentially complex) result object from output parameters and/or result sets. The method can create an arbitrary result (List, Dictionary, Model, etc.) via a custom delegate that constructs the response.
+Executes a query and returns a (potentially complex) result object from output parameters and/or result sets. The method can create an arbitrary result (List, Dictionary, Model, etc.) via a custom delegate that constructs the response.
 
 #### *MapOutputAsync*, *MapOutputFirstAsync*, and*MapOutputAllAsync*
 
@@ -179,9 +181,9 @@ Also uses the Mapper to build a results, but does so through a single-row DataRe
 
 ### Arguments
 
-#### Procedure (required)
+#### Query (required)
 
-The name of the stored procedure, including the schema name.
+The stored procedure or SQL statement to run.
 
 #### Parameters (required)
 

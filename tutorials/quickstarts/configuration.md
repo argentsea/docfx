@@ -281,7 +281,7 @@ public static class Queries
 }
 ```
 
-Finally, the application needs a repository class to actually retrieve the data. In the sample application, this is called the *SubscriberStore*. This is the class that will call the database stored procedure or function and return the specified subscriber. If you are creating your own project, you need to construct something similar.
+Finally, the application needs a repository class to actually retrieve the data. In the sample application, this is called the *SubscriberStore*. This is the class that will call the database stored procedure or SQL statement and return the specified subscriber. If you are creating your own project, you need to construct something similar.
 
 Our implementation of the data access code requires only a few lines:
 
@@ -315,7 +315,7 @@ The `MapOutputAsync` method retrieves the data and creates the model instance au
 
 Create a new folder call “SQL” in your project. In that folder, create a new file named “GetSubscriber.psql”. In Visual Studio, open the file properties and ensure the *Build Action* attribute is set to “None” and the *Copy to Output Directory* attribute is set to “Copy if newer”.
 
-In the simple [QuickStart query](https://github.com/argentsea/quickstarts/blob/master/QuickStart1.Pg/QuickStart1.Pg/Sql/GetCustomer.psql), the function looks like this:
+In the simple [QuickStart query](https://github.com/argentsea/quickstarts/blob/master/QuickStart1.Pg/QuickStart1.Pg/Sql/GetCustomer.psql), the statement looks like this:
 
 ```SQL
 SELECT subscribers.subid, subscribers.subname, subscribers.enddate 
@@ -335,7 +335,7 @@ public static class Queries
 
 Because want to load the file only when it’s needed and we need cache the file without multiple thread all doing the same thing, our declaration of each SQL statement requires two lines of code.
 
-Finally, the application needs a repository class to actually retrieve the data. In the sample application, this is called the *SubscriberStore*. This is the class that will call the database stored procedure or function and return the specified subscriber. If you are creating your own project, you need to construct something similar.
+Finally, the application needs a repository class to actually retrieve the data. In the sample application, this is called the *SubscriberStore*. This is the class that will invoke the query and return the specified subscriber. If you are creating your own project, you need to construct something similar.
 
 Our implementation of the data access code requires only a few lines:
 
