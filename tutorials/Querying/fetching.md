@@ -15,7 +15,7 @@ These are the methods that can be invoked on a connection:
 
 | Method | Description |
 | --- | --- |
-| __LookupAsync__ | Returns a value from the database. This may be a return value (int) or single output parameter. |
+| __ReturnValueAsync__ | Returns a value from the database. This may be a return value (int) or single output value from a parameter or column. |
 | __RunAsync__ | Executes a database statement, procedure, or batch. No results are returned (except possibly batch results). |
 | __QueryAsync__ | Returns the typed object created by a handler delegate. |
 | __MapListAsync__ | Returns a List of typed objects from the data results. |
@@ -28,7 +28,7 @@ The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute 
 
 | Method | Uses Mapper | Db.Read | Db.Write | ShardSet.ReadAll | ShardSet.ReadFirst | ShardSet.Write |
 | --- |:---:| :---: | :---: | :---: | :---: | :---: |
-| __LookupAsync__ |   | • | • |  |  |  |
+| __ReturnValueAsync__ |   | • | • |  |  |  |
 | __RunAsync__ |   | • | • |  |  | • |
 | __QueryAsync__ |   | • | • | • | • | • |
 | __MapListAsync__ | • | • | • | • |  |  |

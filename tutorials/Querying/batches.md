@@ -1,13 +1,18 @@
 # Query Batches
 
-Batches allows multiple commands to run on the same connection within a single transaction. Because they involve multiple round-trips to the database server, Batches are less efficient than executing multiple SQL statements in a single command. You should avoid using batches to execute a series of statements that could be combined into a single command, but you may occasionally need access to a single connection for multiple operations. For example, you might want to use the connection to batch insert a series of records, then run a query to validate and process the data. In fact, support for PostgreSQL’s COPY functionality is why batches were created.
+A *Batch* allows multiple commands to run within a single transaction on the same connection.  For example, ArgentSea makes it easy to save a single “customer” record with multiple “locations”. However, using a batch you could save multiple customers, each with multiple locations — all within the same transaction.
+
+The real purpose of the *Batch* is that it allows non-query actions, like *SqlBulkCopy* (SQL Server) or the *NpgsqlBinaryImporter* (PostgreSQL) to be combined with queries within the same transaction. See [multi-record saves](multirecord.md) for more information.
+
+> [!CAUTION]
+> Because they involve multiple round-trips to the database server, Batches are less efficient than executing multiple SQL statements in a single command. You should avoid using batches to execute a series of statements that could be combined into a single command.
 
 > [!NOTE]
-> Because client-managed transactions are much less efficient than server-side transactions, only ArgentSea batches enlist ADO.NET transactions.
+> Because client-managed transactions are much less efficient than server-side transactions, a *Batch* is the only place where ArgentSEa explicitly enlists ADO.NET transactions.
 
 ## Batch Types
 
-There are three types of batches, each offering somewhat different operations.
+There are three types of batches. Each type offers somewhat different operations.
 
 * __DatabaseBatch__ can be used for non-sharded database connections.
 * __ShardBatch__ is for a specific shard in a shard set.
@@ -15,43 +20,57 @@ There are three types of batches, each offering somewhat different operations.
 
 Batches are executed with the `RunAsync` command. The ShardSet’s `RunAsync` method will only accept a `ShardSetBatch` argument. Likewise, the Database or Shard connections will only accept the `DatabaseBatch` or `ShardBatch` respectively.
 
-Batches are simply collections of (abstract) BatchStep objects. You use the `Add` method to set up the batch commands. The `Add` method has a fluent API:
+Batches are simply collections of *BatchStep* objects. The BatchStep is abstract. You can implement your own BatchStep, but several implementations are available. The principal one enables execution of `Query`.
+
+ShardSet batches cannot not return a result, but the other batches use a generic argument to specify the type of the return value. For example, this batch will return a integer value when run:
 
 ```csharp
-var batch = new DatabaseBatch<int>()
-    .Add(Queries.CustomerLoadStuff, parameters)
-    .Add(Queries.CustomerCreate, "customerid");
-var newCustomerId = _database.Write.RunAsync(batch, cancellation);
+var batch = new DatabaseBatch<int>();
 ```
 
-In this example, the batch is declared with a return type (of integer). The second step run a query that ultimately returns a value. The value with a column name of “customerid” in the first row is returned to the caller.
+You use the `Add` method to set up the batch commands. The `Add` method has a fluent API:
+
+```csharp
+var batch = new DatabaseBatch<string>()
+    .Add(Queries.CustomerLoadStuff, parameters)
+    .Add(Queries.CustomerCreate, "customername");
+var customerName = _database.Write.RunAsync(batch, cancellation);
+```
+
+In this example, the batch is declared with a return type (of integer). The second step run a query that ultimately returns a value; the value in the first row with a column name of “customername” is returned to the caller.
 
 ### The Shard Set Batch
 
-The `ShardSetBatch` does not return any data. The ShardSetBatch only supports running a query (or a user-supplied implementation of a custom BatchStep&lt;&gt;).
+Because the `ShardSetBatch` will run on multiple sharded databases, the `ShardSetBatch` does return data when executed. ArgentSea offers the ability to run a query (`QueryProcedure` or `QueryStatement`) on a `ShardSetBatch`, although a user-created implementation of a custom BatchStep&lt;&gt; could also be used.
+
+When creating a `ShardSetBatch`, the generic parameter is the shard id type.
 
 ```csharp
 var batch = new ShardSetBatch<short>()
-    .Add(Queries.UpdateCustomers)
+    .Add(Queries.UpdateCustomers, parameters)
     .Add(Queries.ProcessCustomers);
 await _shardSet.Write.RunAsync(batch, cancellation);
 ```
 
-The generic parameter is the (ubiquitous) shard id type.
-
-The query can include input parameters. If a *shardParameters* argument is provided, only the listed shards with be impacted — and the shard parameter values will be updated as per any matching argument values.
+The query can include input parameters. As with other query commands, if a *shardParameters* argument is provided, only the listed shards with be impacted — and the shard parameter values will be updated as per any matching argument values.
 
 | Instantiation: | Batch argument: | Return Type: |
 | --- | --- |--- |
 | new ShardSetBatch&lt;TShard&gt;() | Query | none |
 | Custom BatchStep implementation | varies | none |
 
+
+> [!CAUTION]
+> The `ShardSetBatch` will likely perform more poorly than a single SQL command. The main circumstance where this would be useful is when the client application must dynamically assemble the Query set. Really, the `ShardSetBatch` seems to have a fairly limited number of use cases.
+
 ### The Shard Batch
 
-The `ShardBatch` can execute a query and return a ShardKey, a ShardChild, a list of ShardKeys or ShardChilds, or Model object. The first generic parameter is the ubiquitous shard id type, you determine the return type when you instantiate the ShardBatch. 
+The `ShardBatch` can execute a query and return a Model result (using the Mapper), a ShardKey, a ShardChild, or a list of ShardKeys or ShardChilds. For example, a batch that inserts records with identity columns might need to return the ShardKey(s) or ShardChild(s) containing the identifiers of the newly inserted records. You can use `ShardKey`, `ShardChild` for a single record key result, or `List<ShardKey>`, `List<ShardChild>`, `IList<ShardKey>` and `IList<ShardChild>` for a multi-record key result.
+
+The `ShardBatch` has two generic parameters. The first is the ubiquitous shard id type; the second is the return type.  
 
 > [!NOTE]
-> The second generic specifies both the return type and also what methods are available. You can use `ShardKey`, `ShardChild` for a single record key result, or `List<ShardKey>`, `List<ShardChild>`, `IList<ShardKey>` and `IList<ShardChild>` for a multi-record key result.
+> The methods that are available are determined by the return type specified in the second generic argument.
 
 For example, this would return the ShardKey of the new customer:
 
@@ -82,7 +101,10 @@ var batch = new ShardBatch<short, List<ShardKey<short, int>>>()
 var customerKeys = await _shardSet.DefaultShard.Write.RunAsync(batch, cancellation);
 ```
 
-Ideally, only one step should return a result. If multiple steps each return a result, only the last one with a valid value (non-null or non-default value) is returned to the client.
+> [!NOTE]
+> If you do not need a result, you can simply specified the return type of `object` and the Run method will return null.
+
+Ideally, only one step in the batch should return a result. If multiple steps each return a result, only the last one with a valid value (non-null or non-default value) is returned to the client.
 
 | Instantiation: | Batch argument: | Return Type: |
 | --- | --- |--- |
@@ -97,7 +119,43 @@ Ideally, only one step should return a result. If multiple steps each return a r
 
 ### The Database Batch
 
-The DatabaseBatch object is similar to the ShardBatch object, except the return values avoid the ShardKey or ShardChild values.
+The DatabaseBatch object is similar to the ShardBatch object. It has one generic argument, which specifies the return type when executed.
+
+```csharp
+var batch = new DatabaseBatch<long>()
+    .Add(Queries.CustomerCreate, parameters)
+    .Add(Queries.CustomerList, "customerid");
+var newCustomerId = _database.Write.RunAsync(batch4, cancellation);
+
+```
+
+The return type can be a Model class (using the Mapper), a column value, or a list of column values. This allows you to return the identity value (or values) of an inserted record (or records).
+
+> [!NOTE]
+> The methods that are available are determined by the return type specified in the generic argument.
+
+For example, this would return the identity value of the new customer:
+
+```csharp
+var batch = new DatabaseBatch<int>()
+    .Add(Queries.CustomerPrep)
+    .Add(Queries.CustomerCreate, parameters, "customerid");
+var customerId = await _database.Write.RunAsync(batch, cancellation);
+```
+
+To instead return a list of values from the query, make the return type a list:
+
+```csharp
+var batch = new DatabaseBatch<List<int>>()
+    .Add(Queries.CustomerPrep)
+    .Add(Queries.CustomersCreate, parameters, "customerid");
+var customerIds = await _database.Write.RunAsync(batch, cancellation);
+```
+
+> [!NOTE]
+> If you do not need a result, you can simply specified the return type of `object` and the Run method will return null.
+
+Ideally, only one step in the batch should return a result. If multiple steps each return a result, only the last one with a valid value (non-null or non-default value) is returned to the client.
 
 | Instantiation: | Batch argument: | Return Type: |
 | --- | --- |--- |
@@ -108,5 +166,4 @@ The DatabaseBatch object is similar to the ShardBatch object, except the return 
 | new DatabaseBatch&lt;Model&gt;() | Query | Model |
 | new DatabaseBatch&lt;CustomBatchStep) | varies | any |
 
-
-## PostgreSQL
+Next: [Multi-record Saves](multirecord.md)

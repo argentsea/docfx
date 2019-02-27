@@ -152,9 +152,13 @@ Executes a stored procedure or SQL statement without returning a result — othe
 
 This method also supports running a *Batch*, which is a set of statements which run within the same transaction. Batches on ShardSets do not return results, but batches on databases or shard instances can.
 
-#### *LookupAsync*
+#### *ReturnValueAsync*
 
-Executes a query and returns the value (string, number, etc.) of either the return result or (single) output parameter. This method useful to fetch a single value from the shard rather than an entire record. This method is also available on individual shards, but not on the entire ShardSet.
+Executes a query and returns the value (string, number, etc.) of either the return result, output parameter, or first-row column. The result can also be a ShardKey or ShardChild.
+
+This method might be useful to lookup a single value from the shard rather than an entire record. Its principle and essential role, however, is to enable the return of inserted keys when identity columns are used.
+
+This method is available on individual shards, but not across the ShardSet.
 
 #### *ListAsync*
 

@@ -10,3 +10,7 @@
   href: fetching.md
 - name: Handling Data Results
   href: handling.md
+- name: Query Batches
+  href: batches.md
+- name: Multiple Record Saves
+  href: multirecord.md

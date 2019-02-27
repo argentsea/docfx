@@ -36,7 +36,7 @@ return await db.Read.MapReaderAsync<Subscriber>(Queries.GetSubscriber, parameter
 
 The recommended way to query SQL Server is via stored procedures. This offers performance benefits, the advantage of consolidating SQL in a single repository (SQL Server itself), and the ability to tinker with SQL without changing application code. The defined inputs and output of the stored procedure becomes the defined “interface” to the underlying data.
 
-A `QueryProcedure` class requires a stored procedure name in its constructor. Optionally, you can add parameter names. The advantage of providing parameters names is described below.
+A `QueryProcedure` class requires a stored procedure name in its constructor. Optionally, you can add parameter names. The advantage of providing parameters names is described below, along with a SQL script that can generate this metadata automatically.
 
 If you are referencing a database where creating stored procedures would be problematic (say, you don’t control the target database), then the `Statement` class allows SQL strings to be used instead.
 
@@ -130,6 +130,61 @@ Another scenario where this is helpful is the the “ShardId” parameter. Becau
 ## [SQL Server](#tab/tabid-sql)
 
 SQL parameter names are always implicitly normalized to include a “@” prefix, so parameters names should match even if the Model’s property attribute does not include the “@” sign. Casing does matter though.
+
+This SQL statement will generate the Queries class from the existing stored procedures, you can paste this code into SQL Management Studio.
+
+```sql
+PRINT N'public static class Queries
+{'
+DECLARE @Parameters nvarchar(max), @ObjectId int, @SchemaName sysname, @SprocName sysname, @ParameterName sysname;
+
+DECLARE curProcedures CURSOR FOR 
+SELECT procedures.object_id, schemas.name, procedures.name 
+FROM sys.procedures 
+	INNER JOIN sys.schemas 
+	ON schemas.schema_id = procedures.schema_id 
+ORDER BY schemas.name, procedures.name
+
+OPEN curProcedures;
+FETCH NEXT FROM curProcedures INTO @ObjectId, @SchemaName, @SprocName;
+WHILE @@FETCH_STATUS = 0
+BEGIN;
+	SET @Parameters = N'';
+	DECLARE curParameters CURSOR FOR
+	SELECT parameters.name FROM sys.parameters WHERE object_id = @ObjectId ORDER BY parameter_id;
+	OPEN curParameters;
+	FETCH NEXT FROM curParameters INTO @ParameterName;
+	WHILE @@FETCH_STATUS = 0
+	BEGIN;
+		IF @Parameters = N''
+		BEGIN;
+			SET @Parameters = N'"' + @ParameterName + N'"'
+		END;
+		ELSE
+		BEGIN;
+			SET @Parameters = @Parameters + N', "' + @ParameterName + N'"'
+		END;
+		--PRINT N'     ' + @ParameterName
+		FETCH NEXT FROM curParameters INTO @ParameterName;
+	END;
+	CLOSE curParameters;
+	DEALLOCATE curParameters;
+	IF @Parameters = N''
+	BEGIN;
+		PRINT N'    public static QueryProcedure ' + @SprocName + N' => new QueryProcedure("' + @SchemaName + N'.' + @SprocName + N'", new string[] { });'
+	END;
+	ELSE
+	BEGIN;
+		PRINT N'    public static QueryProcedure ' + @SprocName + N' => new QueryProcedure("' + @SchemaName + N'.' + @SprocName + N'", new[] { ' + @Parameters + ' });'
+	END;
+
+	FETCH NEXT FROM curProcedures INTO @ObjectId, @SchemaName, @SprocName;
+END;
+CLOSE curProcedures;
+DEALLOCATE curProcedures;
+
+PRINT N'}'
+```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
