@@ -42,6 +42,6 @@ The logging functionality can also provide substantial insight to developers, in
 
 Explore the [deep dives](tutorials/index.md) to understand the logic and services of ArgentSea. An ArgentSea implementation consists of the [NuGet library packages](tutorials/setup.md), loading the [configuration and services](tutorials/configuration/configuration.md) at startup, decorating the models classes with [data attributes](tutorials/mapping/mapping.md), and calling the various [query methods](tutorials/querying/querying.md).
 
-If you prefer to learn by getting your hands dirty, jump into the [walkthroughs](tutorials/quickstarst/configuration.md). You can find the most detailed information in the [API section](/reference/apis.html).
+If you prefer to learn by getting your hands dirty, jump into the [walkthroughs](tutorials/quickstarts/configuration.md). You can find the most detailed information in the [API section](/reference/apis.html).
 
 Next: [Explore ArgentSea’s functionality](tutorials/index.md)

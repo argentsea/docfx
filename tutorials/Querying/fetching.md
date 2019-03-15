@@ -31,6 +31,7 @@ The ShardSet has `Write`, `ReadAll`, and `ReadFirst` connections, which execute 
 | __ReturnValueAsync__ |   | • | • |  |  |  |
 | __RunAsync__ |   | • | • |  |  | • |
 | __QueryAsync__ |   | • | • | • | • | • |
+| __ListAsync__ |   | • | • | • | • | • |
 | __MapListAsync__ | • | • | • | • |  |  |
 | __MapReaderAsync__ | • | • | • | • | • | • |
 | __MapOutputAsync__ | • | • | • | • | • | • |

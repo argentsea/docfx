@@ -143,4 +143,18 @@ var customer = rdr.ToModel<Customer>(logger);
 
 The DataReader mapping methods allow you to use multiple SELECT result to map both the base object and one or more list properties. The order of the generic objects provided to the Mapper determines the expected order of the result streams in the DataReader.
 
+## Mapping to Data Loaders
+
+In addition to the capabilities just discussed, ArgentSea has provider-specific Mapping functionality.
+
+## [SQL Server](#tab/tabid-sql)
+
+The SQL Server library offers a Mapper to set Table Valued Parameters. A Table Valued Parameter allows a series of records to be sent to a stored procedure, which can dramatically improve performance compared to multiple requests.
+
+## [PostgreSQL](#tab/tabid-pg)
+
+The PostgreSQL library offers a Mapper to create tables and load data using PostgreSQL COPY command and the NpgsqlBinaryImporter.
+
+***
+
 Next: [Logging](logging.md)

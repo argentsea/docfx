@@ -1,5 +1,4 @@
-
-## Creating SQL Queries
+# Creating SQL Queries
 
 Every ArgentSea data access method takes a `Query` argument. ArgentSea offers two implementations:
 
@@ -24,7 +23,7 @@ public static class Queries
 }
 ```
 
-Now, it is easy to reference the statement batch or procedure like this:
+Once this is done, it is easy to reference the statement batch or procedure like this:
 
 ```csharp
 return await db.Read.MapReaderAsync<Subscriber>(Queries.GetSubscriber, parameters, cancellation);
@@ -101,6 +100,9 @@ In your IDE (i.e. Visual Studio), access the file’s *Properties* pane, then:
 
 This will ensure that the files are copied to the output/publish directory.
 
+> [!WARNING]
+> This step is critical and often overlook on new query files. If you get an error that the query file was not found, this is probably the reason.
+
 #### 4. Add a corresponding property to the Queries static class
 
 The `QueryStatement` class does not have a default constructor; use the `Create` factory method instead. The `Create` factory method returns a `Lazy<QueryStatement>`. This allows the SQL file to be loaded only when first requested, and then cached for all subsequent requests.
@@ -138,7 +140,7 @@ PRINT N'public static class Queries
 {'
 DECLARE @Parameters nvarchar(max), @ObjectId int, @SchemaName sysname, @SprocName sysname, @ParameterName sysname;
 
-DECLARE curProcedures CURSOR FOR 
+DECLARE curProcedures CURSOR FOR
 SELECT procedures.object_id, schemas.name, procedures.name 
 FROM sys.procedures 
 	INNER JOIN sys.schemas 
