@@ -44,5 +44,4 @@ var custKey = await _shardSet.DefaultShard.Write.RunAsync(shardBatch, cancellati
 
 ***
 
-
 Next: [Sharding](../sharding/sharding.md)

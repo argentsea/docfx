@@ -169,4 +169,10 @@ If a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.S
 
 In most cases, a [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) represents a primary key, so a database Null value really represents a non-existent record. In this case, the desired behavior is probably to return the entire parent object as null. Marking the *MapTo* attribute(s) as *required* implements this behavior. When the *required* parameter is set, the [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) property does not need to be `Nullable<>` since a Null database value will return a null result object.
 
+## Keyed Models
+
+If your Model class uses a ShardKey or ShardChild key, you might consider implementing `IKeyedModel<,>` or `IKeyedChildModel<, ,>` respectively. These interfaces require a property named “Key” of ShardKey or ShardChild type. Models that implement this interface can leverage some additional ArgentSea utility functions.
+
+For example, both the ShardKey and ShardChild structs have a static `Merge` method which can combine model sets, comparing the records by the key value. Both structs also have a `ForeignShards` method which returns a list of shards that are not local to the specified shard, which simplifies the problem of identifying records that need to be updated of foreign shards. Also, the SQL Server implementation also allows convertion of the Model keys directly to a Table Valued Parameter.
+
 Next: [ShardSets](shardsets.md)

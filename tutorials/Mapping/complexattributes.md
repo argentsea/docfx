@@ -7,6 +7,7 @@ There are three types of complex objects handled by the Mapper:
 * Model Properties, via the [MapToModel](/api/ArgentSea.MapToModel.html) attribute
 * List Properties
 * Shard Identifiers, via the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) attributes
+* Models that inherit from parent Models
 
 ## The [MapToModel](/api/ArgentSea.MapToModel.html) Attribute
 
@@ -122,6 +123,8 @@ public class Address
 In this example, the Vendor, Store, and Customer Models each have a property with an Address Model type. When mapping Vendor database results, the Mapper will map the StreetAddress column or parameter to Vendor.VendorAddress.StreetAddress. Likewise for the Store and Customer Models.
 
 In each case, the Address properties and attributes are simply included in the properties that the Mapper expects to see in the data results or parameters.
+
+In short, `MapToModel` simply extends the expected parameter or column lists with further values, but it offers the capability to reuse or encapsulate a column/parameter set in your code.
 
 ### Null Values
 

@@ -157,4 +157,4 @@ The PostgreSQL library offers a Mapper to create tables and load data using Post
 
 ***
 
-Next: [Logging](logging.md)
+Next: [The Mapper Generated Code](process.md)
