@@ -1,6 +1,10 @@
 # Loading the Configuration
 
-ArgentSea fully leverages the configuration architecture of .NET Core. If this architecture is new to you, it essentially consists of two parts:
+ArgentSea fully leverages the configuration architecture of .NET Core. In brief, ArgentSea requires one or more configuration files and offers a simple extension method to load the entire framework at start up.
+
+## About .NET Configuration
+
+If the .NET Core configuration architecture is new to you, it essentially consists of two parts:
 
 * A configuration *Dictionary*, which can be loaded from multiple sources — one of which is typically a file called *appsettings.json*
 * An “Options” architecture, which casts the configuration entries into a strongly-typed configuration objects.
@@ -189,18 +193,14 @@ ArgentSea uses .NET Core’s built-in Options configuration and dependency injec
 
 ## [SQL Server](#tab/tabid-sql)
 
-This example assumes that your ShardId type is *byte*. If you use any other type, change the generic parameter.
-
-If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
-
 ````csharp
         public void ConfigureServices(IServiceCollection services)
         {
             ...
             // add your injectable logging provider
             services.AddLogging();
-            // add the ArgentSea SQL database connections (ShardId type: byte)
-            services.AddSqlServices<byte>(Configuration);
+            // add the ArgentSea SQL database connections
+            services.AddSqlServices(Configuration);
             // now add your custom data classes, which use the data components
             services.AddSingleton<MyDataStore>();
             ...
@@ -212,18 +212,14 @@ If you use ArgentSea database connections *without* sharding, simply remove the 
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-This example assumes that your ShardId type is *short*. If you use any other type, change the generic parameter.
-
-If you use ArgentSea database connections *without* sharding, simply remove the generic declaration altogether (i.e. `services.AddPgServices(Configuration);` only).
-
 ````csharp
         public void ConfigureServices(IServiceCollection services)
         {
             ...
             // add your injectable logging provider
             services.AddLogging();
-            // add the ArgentSea SQL database connections (ShardId type: short)
-            services.AddPgServices<short>(Configuration);
+            // add the ArgentSea SQL database connections
+            services.AddPgServices(Configuration);
             // now add your custom data classes, which use the data components
             services.AddSingleton<MyDataStore>();
             ...

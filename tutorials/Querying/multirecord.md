@@ -36,7 +36,7 @@ using ArgentSea.Pg;
 //...
 var customerPrms = new ParameterCollection()
     .AddPgVarcharInputParameter("customername", customer.Name, 255);
-var shardBatch = new ShardBatch<short, ShardKey<short, int>>()
+var shardBatch = new ShardBatch<ShardKey<short, int>>()
     .Add(customer.Locations, "t-locations")
     .Add(Queries.CustomerSave, customerPrms, DataOrigins.Customer, "customerid");
 var custKey = await _shardSet.DefaultShard.Write.RunAsync(shardBatch, cancellation);

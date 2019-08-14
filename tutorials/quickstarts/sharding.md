@@ -4,7 +4,7 @@ The [previous QuickStart](configuration.md) introduced configuration and mapping
 
 Sharded data introduces two complexities:
 
-* How do I uniquely identify and locate a record, which could be on any shard?
+* How do I uniquely identify and locate a record, which might be on any shard?
 * How do I manage data on one shard and related data on a foreign shard?
 
 This walkthrough illustrates how both challenges can be met.
@@ -78,21 +78,11 @@ Finally, run the shard-specific SQL scripts — *ShardUS.sql*, *ShardBR.sql*, *S
 
 At this point, we should have four database with identical table structures. SQL Server instances should also have a identical set of stored procedures.
 
-## The ShardId
+## The Shard Set Record Key
 
-Each of the four databases needs an identifier. This is more significant than it sounds. ArgentSea uses a “virtual compound key” consisting of the ShardId and the RecordId; this is called a [ShardKey](/api/ArgentSea.ShardKey-2.html). A thorough discussion of the options and impact is [here](/tutorials/sharding/shardkey.md). The précis is that once established, the type (and values) of the *ShardId* cannot be easily changed. The ShardId is a part of record identification, so confusion or misconfiguration could result in data corruption.
+Each of the four databases needs an identifier. ArgentSea uses a `short` (Int32/tinyint) to identify each shard, and a generic type as a record id. The combination of shard id and record id becomes a “virtual compound key”, which is called a [ShardKey](/api/ArgentSea.ShardKey-1.html). A thorough discussion of the options and impact is [here](/tutorials/sharding/shardkey.md).
 
-## [SQL Server](#tab/tabid-sql)
-
-In this sample application, the type of the ShardId for SQL Server is a `byte` (SQL TinyInt). Because ArgentSea uses a generic type to define the ShardId, you can use one of many types in your application; however, the ShardId must be consistent throughout the application.
-
-Naturally, this mandates an upper maximum  of 256 shards. If there is any possibility of one day needing to exceeding this count, you can use a `short` data type instead.
-
-## [PostgreSQL](#tab/tabid-pg)
-
-In this sample application, the type of the ShardId for PostgreSQL is a `short` (SQL SmallInt). Because ArgentSea uses a generic type to define the ShardId, you can use one of many types in your application; however, the ShardId must be consistent throughout the application.
-
-***
+Some tables may require a compound key themselves. For these, ArgentSea offers the [ShardChild](/api/ArgentSea.ShardChild-2.html), which consists of a shard id, record id, and child id. Because the record id, and child id are generic types, they can accommodate most data column types.
 
 ## Configuring Connections
 
@@ -157,7 +147,7 @@ So the configuration settings looks like this (with annotations):
 
 ⁶ `Shards` is an array of shard connections, one for each shard in the shard set.
 
-⁷ `ShardId` is a *required* identifier for the shard. This value is essential for finding and identifying a sharded record. It cannot be duplicated within a shard set. If the type of the ShardId is a string, then this value should have quotes around it in the JSON file.
+⁷ `ShardId` is a *required* identifier for the shard. This value is essential for finding and identifying a sharded record. It cannot be duplicated within a shard set. The value must be a number.
 
 ⁸ `InitialCatalog` is a connection attribute. Because it appears at the shard level, both read connections and write connections for this shard will inherit this value.
 
@@ -215,7 +205,7 @@ So the configuration settings looks like this (with annotations):
 
 ⁶ `Shards` is an array of shard connections, one for each shard in the shard set.
 
-⁷ `ShardId` is a *required* identifier for the shard. This value is essential for finding and identifying a sharded record. It cannot be duplicated within a shard set. If the type of the ShardId is a string, then this value should have quotes around it in the JSON file.
+⁷ `ShardId` is a *required* identifier for the shard. This value is essential for finding and identifying a sharded record. It cannot be duplicated within a shard set. The value must be a number.
 
 ⁸ `Database` is a connection attribute. Because it appears at the shard level, both read connections and write connections for this shard will inherit this value.
 
@@ -280,35 +270,17 @@ The complete code is on GitHub, at https://github.com/argentsea/quickstarts/tree
 
 To use the attributes, each Model class should include a `using ArgentSea.Sql` statement.
 
-Optionally, a second `using` statement can reduce the redundancy of declaring generic arguments throughout the Model class.
-
 ```csharp
 using ArgentSea.Sql;
-using ShardKey = ArgentSea.ShardKey<byte, int>;
 ```
-
-Because the generic ShardId type cannot change within an application, this second `using` statement can simplify the Model code. Of course, this simplification won't work if you use different data types for the record id (integer vs bigint) in different sharded tables in the same model.
-
-You can implement an equivalent practice for the [ShardChild](/api/ArgentSea.ShardChild-3.html) object too. 
-
-(While it might seem even better to declare a subclass that inherits from ShardKey or ShardChild which defines the ShardId type for your entire project, unfortunately, the ShardKey and ShardChild are *structs*, so inheritance is not an option.)
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 To use the attributes, each Model class should include a `using ArgentSea.Pg;` statement.
 
-Optionally, a second `using` statement can reduce the redundancy of declaring generic arguments throughout the Model class.
-
 ```csharp
 using ArgentSea.Pg;
-using ShardKey = ArgentSea.ShardKey<short, int>;
 ```
-
-Because the generic ShardId type cannot change within an application, this second `using` statement can simplify the Model code. Of course, this simplification won't work if you use different data types for the record id (integer vs bigint) in different sharded tables in the same model.
-
-You can implement an equivalent practice for the [ShardChild](/api/ArgentSea.ShardChild-3.html) object too. 
-
-(While it might seem even better to declare a subclass that inherits from ShardKey or ShardChild which defines the ShardId type for your entire project, unfortunately, the ShardKey and ShardChild are *structs*, so inheritance is not an option.)
 
 ***
 
@@ -437,14 +409,14 @@ Because database queries often return subsets of entity columns, this object inh
 
 ### The ShardKey
 
-The final object type which may combine multiple data records is the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) types. These are described in detail [here](/tutorials/sharding/shardkey.md).
+The final object type which may combine multiple data records is the [ShardKey](/api/ArgentSea.ShardKey-1.html) and [ShardChild](/api/ArgentSea.ShardChild-2.html) types. These are described in detail [here](/tutorials/sharding/shardkey.md).
 
 ## [SQL Server](#tab/tabid-sql)
 
 ```csharp
 [MapShardKey('c', "@CustomerId")]
 [MapToSqlInt("@CustomerId")]
-public ShardKey CustomerKey { get; set; }
+public ShardKey<int> CustomerKey { get; set; }
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
@@ -452,13 +424,13 @@ public ShardKey CustomerKey { get; set; }
 ```csharp
 [MapShardKey('c', "customerid")]
 [MapToPgInteger("customerid")]
-public ShardKey CustomerKey { get; set; }
+public ShardKey<int> CustomerKey { get; set; }
 ```
 
 ***
 
 > [!NOTE]
-> The ShardKey in this example does not specify a ShardId data mapping. Because the client knows the ShardId, ArgentSea will populate the ShardId value from this configuration data. If you provide a ShardId mapping (and include the shardid argument in the `MapShardKey` attribute), ArgentSea will understand that you want the data value instead.
+> The ShardKey in this example does not specify a ShardId data mapping. Because the client knows the ShardId, ArgentSea will populate the ShardId value from this configuration data. If you provide a ShardId mapping (and include the shardid argument in the `MapShardKey` attribute), ArgentSea will understand that you want to use the data value instead.
 
 ### The ShardChild
 
@@ -470,7 +442,7 @@ The ShardChild object supports table compound keys in your sharded data. In this
 [MapShardChild('L', "CustomerId", "LocationId")]
 [MapToSqlInt("CustomerId")]
 [MapToSqlSmallInt("LocationId")]
-public ShardChild CustomerLocationKey { get; set; }
+public ShardChild<int, int> CustomerLocationKey { get; set; }
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
@@ -479,7 +451,7 @@ public ShardChild CustomerLocationKey { get; set; }
 [MapShardChild('L', "customerid", "locationid")]
 [MapToPgInteger("customerid")]
 [MapToPgSmallint("locationid")]
-public ShardChild CustomerLocationKey { get; set; }
+public ShardChild<int, int> CustomerLocationKey { get; set; }
 ```
 
 ***
@@ -488,70 +460,35 @@ It would be possible for ArgentSea to include a “ShardGrandChild” struct, fo
 
 ## Loading the Shard Service
 
-Loading and injecting the ArgentSea ShardSets service is similar to the Databases services explained in the last tutorial. However, because the ShardSets’ shard id type is generic, it can get tiresome to repeatedly include the generic type. We can simplify using the ShardSet type by declaring a child instance which defines the shard id type.
+Loading and injecting the ArgentSea ShardSets service is identical to the Databases services explained in the last tutorial. 
 
 ## [SQL Server](#tab/tabid-sql)
 
-```csharp
-public class ShardSets : SqlShardSets<byte>
-{
-    public ShardSets(
-        IOptions<SqlShardConnectionOptions<byte>> configOptions,
-        IOptions<SqlGlobalPropertiesOptions> globalOptions,
-        ILogger<ShardSets> logger
-    ) : base(configOptions, globalOptions, logger)
-    {
-        //
-    }
-}
-```
-
-Calling the ArgentSea `AddSqlService<>` (note the generic argument) extension method will load both the ArgentSea sharding and database services, *except* the ShardSet. The `AddSqlService` method does not automatically load the `SqlShardSets<>` service in order to to allow a locally defined, typed ShardSets collection to be loaded instead.
+Calling the ArgentSea `AddSqlService` extension method will load both the ArgentSea sharding and database services.
 
 ```csharp
+using ArgentSea.Sql;
+...
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddSqlServices<byte>(this.Configuration);
-    services.AddSingleton<ShardSets>(); //Load locally defined service.
+    ...
+    services.AddSqlServices(this.Configuration);
+    ...
 }
-```
-
-If you prefer to simply use the extant `ArgentSea.SqlShardSets` collection, you can load that instead:
-
-```csharp
-services.AddSingleton<SqlShardSets<byte>>(); //Load ArgentSea.ShardSets with generic parameter.
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
-```csharp
-public class ShardSets : PgShardSets<byte>
-{
-    public ShardSets(
-        IOptions<SqlShardConnectionOptions<short>> configOptions,
-        IOptions<SqlGlobalPropertiesOptions> globalOptions,
-        ILogger<ShardSets> logger
-    ) : base(configOptions, globalOptions, logger)
-    {
-        //
-    }
-}
-```
-
-Calling the ArgentSea `AddPgService<>` (note the generic argument) extension method will load both the ArgentSea sharding and database services, *except* the ShardSet. To allow a locally defined, typed ShardSets collection to be a service, you have to load it separately.
+Calling the ArgentSea `AddPgService` extension method will load both the ArgentSea sharding and database services.
 
 ```csharp
+using ArgentSea.Pg;
+...
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddPgServices<byte>(this.Configuration);
-    services.AddSingleton<ShardSets>(); //Load locally defined service.
+    ...
+    services.AddPgServices(this.Configuration);
 }
-```
-
-If you prefer to simply use the extant `ArgentSea.PgShardSets` collection, you can load that instead:
-
-```csharp
-services.AddSingleton<PgShardSets<short>>(); //Load ArgentSea.ShardSets with generic parameter.
 ```
 
 ***

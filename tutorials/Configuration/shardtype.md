@@ -1,18 +1,16 @@
 # The Shard Id Type
 
-End each shard instance has a `ShardId` property, which identifies a specific subset (“shard”) of the data. ArgentSea uses a generic ShardId to allow you to define any data type you prefer.
+End each shard instance has a `ShardId` property, which identifies a specific subset (“shard”) of the data. This value is not simply a key for a shard instance; the ShardId is generally used in combination with the record key to *uniquely identify* a record. ArgentSea identifies records in the shard set with a sort-of “virtual” compound key, consisting of both the numeric shard identifier and the record key. Note that because records in a data shard may refer to foreign records in *other* shards, the “foreign shard” reference requires saving the shard identifier too.
 
-This value is *critical* because it is not simply a key for a shard instance; the ShardId is generally used in combination with the record key to *uniquely identify* a record. ArgentSea identifies records in the shard set with a sort-of “virtual” compound key, consisting of both the shard identifier and the record key. Note that because records in a data shard may refer to foreign records in *other* shards, the “foreign shard” reference requires saving the shard identifier too. Consequently, the data type of the ShardId matters for all of the tables that hold the ShardId.
-
-> [!WARNING]
-> Once established, the ShardId *type* cannot be easily changed. The ShardId type is used in configuration, throughout your code, in the database, and across all shard sets. Make sure that you will not outgrow your ShardId type’s maximum value (nor unnecessarily require space that will never be used).
-> If you are uncertain, consider using a `short` (Int16/SmallInt) data type for your ShardId.
 
 > [!CAUTION]
-> The shardId value is managed by the *client* when it calls a shard instance. If two clients are (mis-)configured differently (i.e. with different databases having the same shard Id) reading on one client and writing on the other client could result in data corruption. Always ensure that the shard Id configuration is consistent across all clients. It may be a good idea to include the shard Id with each query and validate it on the database server.
-
-The JSON configuration ShardId type must correspond to whatever type you have defined for your application’s ShardId. If your application defines its ShardId as a string, then the JSON should be a string value (i.e. be in quotes); if a number, it should be numeric (i.e. a number, without quotes).
+> The shardId value is managed by the *client* when it calls a shard instance. If two clients are (mis-)configured differently (i.e. with *different* databases having the *same* shard Id) reading on one client and writing on the other client could result in data corruption. Always ensure that the shard Id configuration is consistent across all clients! You might consider including the shard Id with each query and validating it on the database server.
 
 More details about the ShardId type is in the [Sharding](../sharding/sharding.md) section.
+
+> [!NOTE]
+> The initial version of ArgentSea used a generic type as the ShardId — allowing the application to use an integer, string, short, etc. to identify each shard. This flexibility created an unnecessarily complex object model and redundant and verbose client code, particularly since the generic type could not change within the application.
+> Even then, he best choice for the ShardId type was clearly a `short` (Int32/SmallInt): it is a small enough for efficient storage, yet large enough to theoretically support 65,535 shards.
+> The current version of ArgentSea assumes this type and is much easier to use as a result.
 
 Next: [Resilience Strategies](resilience.md)

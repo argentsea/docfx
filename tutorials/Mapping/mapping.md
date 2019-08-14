@@ -24,8 +24,8 @@ Property attributes can only be retrieved using *reflection*, which is relativel
 
 In some cases, the Model may have more properties than are defined in a parameter list or in data reader columns. When this happens, ArgentSea is somewhat forgiving.
 
-If a data reader result does not contain an expected column, the property is simply ignored. If the logging level is “Debug” or lower, a log message will be created including the Model name and column name.
+As part of a Query definition (`QueryStatement` or `QueryProcedure` class), you can optionally specify the parameter set. If set, only parameters included in this list will be mapped from the Model object. This is a great way to suppress values not needed for this particular request. Of course, if the Mapper sets/reads/writes parameters and the query does not include that parameter, ADO.NET will return an error if the query is sent to the database.
 
-If the Mapper sets/reads/writes parameters and the query does not include that parameter, ADO.NET will return an error if the query is sent to the database. One solution is to simply manually remove unwanted parameters from the parameters collection. However, a better approach is to include parameter names in the query definition (`QueryStatement` or `QueryProcedure` class). This allows the Mapper to only include the subset of parameters whose names match the query definition.
+If a data reader result does not contain an expected column, the property is simply ignored. If the logging level is “Debug” or lower, a log message will be created including the Model name and column name.
 
 Next: [Property Attributes](attributes.md)
