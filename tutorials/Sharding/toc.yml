@@ -1,6 +1,6 @@
 - name: Sharding
   href: sharding.md
-- name: The ShardKey and ShardChild
+- name: The ShardKey
   href: shardkey.md
 - name: ShardSets
   href: shardsets.md

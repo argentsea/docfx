@@ -65,7 +65,7 @@ The query can include input parameters. As with other query commands, if a *shar
 
 ### The Shard Batch
 
-The `ShardBatch` can execute a query and return a Model result (using the Mapper), a ShardKey, a ShardChild, or a list of ShardKeys or ShardChilds. For example, a batch that inserts records with identity columns might need to return the ShardKey(s) or ShardChild(s) containing the identifiers of the newly inserted records. You can use `ShardKey`, `ShardChild` for a single record key result, or `List<ShardKey>`, `List<ShardChild>`, `IList<ShardKey>` and `IList<ShardChild>` for a multi-record key result.
+The `ShardBatch` can execute a query and return a Model result (using the Mapper), a ShardKey or a list of ShardKeys. For example, a batch that inserts records with identity columns might need to return the ShardKey(s) containing the identifiers of the newly inserted records. You can use `ShardKey` for a single record key result, or `List<ShardKey>` or `IList<ShardKey>` for a multi-record key result.
 
 The `ShardBatch` has two generic parameters. The first is the ubiquitous shard id type; the second is the return type.  
 
@@ -109,11 +109,11 @@ Ideally, only one step in the batch should return a result. If multiple steps ea
 | Instantiation: | Batch argument: | Return Type: |
 | --- | --- |--- |
 | new ShardBatch&lt;TShard, ShardKey&lt;TShard, TRecord&gt;&gt;() | Query | ShardKey |
-| new ShardBatch&lt;TShard, ShardChild&lt;TShard, TRecord, TChild&gt;&gt;() | Query | ShardChild |
+| new ShardBatch&lt;TShard, ShardKey&lt;TShard, TRecord, TChild&gt;&gt;() | Query | ShardKey |
 | new ShardBatch&lt;TShard, List&lt;ShardKey&lt;TShard, TRecord&gt;&gt;&gt;() | Query | ShardKey List |
-| new ShardBatch&lt;TShard, List&lt;ShardChild&lt;TShard, TRecord, TChild&gt;&gt;&gt;() | Query | ShardChild List |
+| new ShardBatch&lt;TShard, List&lt;ShardKey&lt;TShard, TRecord, TChild&gt;&gt;&gt;() | Query | ShardKey List |
 | new ShardBatch&lt;TShard, IList&lt;ShardKey&lt;TShard, TRecord&gt;&gt;&gt;() | Query | ShardKey List |
-| new ShardBatch&lt;TShard, IList&lt;ShardChild&lt;TShard, TRecord, TChild&gt;&gt;&gt;() | Query | ShardChild List |
+| new ShardBatch&lt;TShard, IList&lt;ShardKey&lt;TShard, TRecord, TChild&gt;&gt;&gt;() | Query | ShardKey List |
 | new ShardBatch&lt;TShard, Model&gt;() | Query | Model |
 | new ShardBatch&lt;TShard, CustomBatchStep) | varies | any |
 

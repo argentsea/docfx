@@ -66,14 +66,13 @@ There are two types of ShardSet queries:
 
 ### Accessing a Shard
 
-Access any shard in the ShardSet collection using a shardId key value, just like you would with any other collection. The ShardId value often comes from the ShardId property of a `ShardKey` or `ShardChild`; for convenience, you can simply provide the `ShardKey` or `ShardChild` object instead.
+Access any shard in the ShardSet collection using a shardId key value, just like you would with any other collection. The ShardId value often comes from the ShardId property of a `ShardKey`; for convenience, you can simply provide the `ShardKey` object instead.
 
 ```csharp
 /// all of these are equally valid:
 var shard = myShardSet[myShardId];
 var shard = myShardSet[myShardKey.ShardId];
 var shard = myShardSet[myShardKey];
-var shard = myShardSet[myShardChild];
 ```
 
 If you have implemented a solution using identity ranges, just call your custom resolver to get the shard index.
@@ -154,7 +153,7 @@ This method also supports running a *Batch*, which is a set of statements which 
 
 #### *ReturnValueAsync*
 
-Executes a query and returns the value (string, number, etc.) of either the return result, output parameter, or first-row column. The result can also be a ShardKey or ShardChild.
+Executes a query and returns the value (string, number, etc.) of either the return result, output parameter, or first-row column. The result can also be a ShardKey.
 
 This method might be useful to lookup a single value from the shard rather than an entire record. Its principle and essential role, however, is to enable the return of inserted keys when identity columns are used.
 

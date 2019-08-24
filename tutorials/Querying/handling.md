@@ -28,7 +28,7 @@ Both the return type (“Store”, in the example) and the optional data argumen
 
 ### (short) shardId
 
-The shardId argument will be a default value, like null or zero, when not using a ShardSet; otherwise it will be set to the current ShardId. This value is essential when building ShardKey or ShardChild types, where the shard identity is a component of the record identity.
+The shardId argument will be a default value, like null or zero, when not using a ShardSet; otherwise it will be set to the current ShardId. This value is essential when building ShardKey types, where the shard identity is a component of the record identity.
 
 ### (string) sprocName
 

@@ -30,8 +30,8 @@ If you are familiar with relational databases, you will discover that the databa
 ArgentSea offers essentially two services for managing sharded data:
 
 * The [ShardSet](/api/ArgentSea.ShardSetsBase-2.ShardSet.html) unifies the many shard connections and directs queries to the correct shard and allows concurrent queries across all of them
-* The [ShardKey](/api/ArgentSea.ShardKey-2.html) (and related [ShardChild](/api/ArgentSea.ShardChild-3.html)) are a “virtual compound key” that uniquely identifies a record using the shard Id and the record key.
+* The [ShardKey](/api/ArgentSea.ShardKey-1.html) is a “virtual compound key” that uniquely identifies a record using the shard Id and the record key(s).
 
 ArgentSea’s querying architecture is designed to support concurrent queries across multiple shards. You can explore that further [here](../querying/querying.md).
 
-Next: [The ShardKey and ShardChild](shardkey.md)
+Next: [The ShardKey](shardkey.md)

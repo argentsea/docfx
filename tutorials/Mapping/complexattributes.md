@@ -6,7 +6,7 @@ There are three types of complex objects handled by the Mapper:
 
 * Model Properties, via the [MapToModel](/api/ArgentSea.MapToModel.html) attribute
 * List Properties
-* Shard Identifiers, via the [ShardKey](/api/ArgentSea.ShardKey-2.html) and [ShardChild](/api/ArgentSea.ShardChild-3.html) attributes
+* Shard Identifiers, via the [ShardKey](/api/ArgentSea.ShardKey-1.html) attributes
 * Models that inherit from parent Models
 
 ## The [MapToModel](/api/ArgentSea.MapToModel.html) Attribute
@@ -164,11 +164,11 @@ List properties cannot be read-only.
 
 For the details on how to populate Models with `List<Model>` properties, see the discussion on [querying](../querying/fetching.md#the-mapreader-and-mapoutput-methods).
 
-## [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) and [MapShardChild](/api/ArgentSea.MapShardChildAttribute.html) Attributes
+## [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) Attributes
 
-A [ShardKey](/api/ArgentSea.ShardKey-2.html) is a record identifier containing a shard Id and a record Id. A [ShardChild](/api/ArgentSea.ShardChild-3.html) is a compound key consisting of a shard Id, a record Id, and a child Id.
+A [ShardKey](/api/ArgentSea.ShardKey-1.html) is a record identifier containing a shard Id and one or more record Ids. Essentially, it uniquely identifies a sharded record by combining the table key with the shard Id. Because the record identifier type is generic, you can use the ShardKey for any primary key or unique identity value. The shard id is always short/Int16/tinyint. ShardKey classes with multiple generic definitions can be used for tables that use up to four columns as compound keys.
 
-The [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) and [MapShardChild](/api/ArgentSea.MapShardChildAttribute.html) attributes are used to decorate properties of type [ShardKey](/api/ArgentSea.ShardKey-2.html) or [ShardChild](/api/ArgentSea.ShardChild-3.html) respectively.
+The [MapShardKey](/api/ArgentSea.MapShardKeyAttribute.html) attribute is used to decorate properties of type [ShardKey](/api/ArgentSea.ShardKey-1.html).
 
 These are special types are reviewed in detail in the [sharding](../sharding/shardkey.md) section.
 

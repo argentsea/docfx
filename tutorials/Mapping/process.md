@@ -20,7 +20,7 @@ public void CreateAndSetInputParameter(LocationModel model, DbParameterCollectio
     short? keyChildId;
 
     logger.TraceInMapperProperty("Key");
-    if (model.Key != ShardChild<short, int, short>.Empty)
+    if (model.Key != ShardKey<short, int, short>.Empty)
     {
         keyRecordId = model.Key.RecordId;
         keyChildId = model.Key.ChildId;
@@ -100,7 +100,7 @@ public void CreateAndSetInputParameter(LocationModel model, DbParameterCollectio
     short? keyChildId;
 
     logger.TraceInMapperProperty("Key");
-    if (model.Key != ShardChild<short, int, short>.Empty)
+    if (model.Key != ShardKey<short, int, short>.Empty)
     {
         keyRecordId = model.Key.RecordId;
         keyChildId = model.Key.ChildId;
@@ -342,7 +342,7 @@ Here are a few notes about the code:
 
 * Ordinal values of -1 indicate that the column was not found, in which case the property will be ignored.
 * The Trace logging commands might be useful in determining the Mapper’s last operation before an unexpected failure.
-* In this example, the ShardId is obtained from the connection’s property. If the `MapToShardChild` attribute had specified a ShardId column, the code would instead be obtained a value from a database column.
+* In this example, the ShardId is obtained from the connection’s property. If the `MapToShardKey` attribute had specified a ShardId column, the code would instead be obtained a value from a database column.
 
 
 ```csharp
@@ -381,11 +381,11 @@ public LocationModel ReadData(short shardId, int[] ordinals, DbDataReader rdr, I
     }
     if (keyShardId != null && keyRecordId != null && keyChildId != null)
     {
-        model.Key = new ShardChild<short, int, short>('L', keyShardId.Value, keyRecordId.Value, keyChildId.Value);
+        model.Key = new ShardKey<short, int, short>('L', keyShardId.Value, keyRecordId.Value, keyChildId.Value);
     }
     else
     {
-        model.Key = ShardChild<short, int, short>().Empty;
+        model.Key = ShardKey<short, int, short>().Empty;
     }
     logger.TraceRdrMapperProperty("Type");
     ordinal = ordinals[2];
@@ -550,7 +550,7 @@ public SqlDataRecord SetTvpRow(LocationModel model, IList<string> columnList, IL
     var result = new SqlDataRecord(GetRecordDataFields(fields, columnList));
 
     logger.TraceTvpMapperProperty("Key");
-    if (model.Key != ShardChild<short, int, short>.Empty)
+    if (model.Key != ShardKey<short, int, short>.Empty)
     {
         keyRecordId = model.Key.RecordId;
     }
@@ -569,7 +569,7 @@ public SqlDataRecord SetTvpRow(LocationModel model, IList<string> columnList, IL
             result.SetDBNull(TvpExpressionHelpers.GetOrdinal(0, "CustomerId", columnList));
         }
     }
-    if (model.Key != ArgentSea.ShardChild<short, int, short>.Empty)
+    if (model.Key != ArgentSea.ShardKey<short, int, short>.Empty)
     {
         KeyChildId = model.Key.ChildId;
     }

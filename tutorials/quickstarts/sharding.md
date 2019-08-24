@@ -82,7 +82,7 @@ At this point, we should have four database with identical table structures. SQL
 
 Each of the four databases needs an identifier. ArgentSea uses a `short` (Int32/tinyint) to identify each shard, and a generic type as a record id. The combination of shard id and record id becomes a “virtual compound key”, which is called a [ShardKey](/api/ArgentSea.ShardKey-1.html). A thorough discussion of the options and impact is [here](/tutorials/sharding/shardkey.md).
 
-Some tables may require a compound key themselves. For these, ArgentSea offers the [ShardChild](/api/ArgentSea.ShardChild-2.html), which consists of a shard id, record id, and child id. Because the record id, and child id are generic types, they can accommodate most data column types.
+Some tables may require a compound key themselves. For these, ArgentSea offers [ShardKeys](/api/ArgentSea.ShardKey-2.html) with generic overloads, which may consist of a shard id, record id, child id, grandchild id, and even great grandchild id! Because all the the record and child id types are generic, they can accommodate most data column types.
 
 ## Configuring Connections
 
@@ -409,7 +409,8 @@ Because database queries often return subsets of entity columns, this object inh
 
 ### The ShardKey
 
-The final object type which may combine multiple data records is the [ShardKey](/api/ArgentSea.ShardKey-1.html) and [ShardChild](/api/ArgentSea.ShardChild-2.html) types. These are described in detail [here](/tutorials/sharding/shardkey.md).
+The final object type which may combine multiple data records is the [ShardKey](/api/ArgentSea.ShardKey-1.html) type.
+This type is described in detail [here](/tutorials/sharding/shardkey.md).
 
 ## [SQL Server](#tab/tabid-sql)
 
@@ -432,26 +433,24 @@ public ShardKey<int> CustomerKey { get; set; }
 > [!NOTE]
 > The ShardKey in this example does not specify a ShardId data mapping. Because the client knows the ShardId, ArgentSea will populate the ShardId value from this configuration data. If you provide a ShardId mapping (and include the shardid argument in the `MapShardKey` attribute), ArgentSea will understand that you want to use the data value instead.
 
-### The ShardChild
-
-The ShardChild object supports table compound keys in your sharded data. In this sample application, the Customer __Location__ records are identified by a compound key including both a CustomerId and LocationId.
+The ShardKey type supports table compound keys in your sharded data. In this sample application, the Customer __Location__ records are identified by a compound key including both a CustomerId and LocationId.
 
 ## [SQL Server](#tab/tabid-sql)
 
 ```csharp
-[MapShardChild('L', "CustomerId", "LocationId")]
+[MapShardKey('L', "CustomerId", "LocationId")]
 [MapToSqlInt("CustomerId")]
 [MapToSqlSmallInt("LocationId")]
-public ShardChild<int, int> CustomerLocationKey { get; set; }
+public ShardKey<int, int> CustomerLocationKey { get; set; }
 ```
 
 ## [PostgreSQL](#tab/tabid-pg)
 
 ```csharp
-[MapShardChild('L', "customerid", "locationid")]
+[MapShardKey'L', "customerid", "locationid")]
 [MapToPgInteger("customerid")]
 [MapToPgSmallint("locationid")]
-public ShardChild<int, int> CustomerLocationKey { get; set; }
+public ShardKey<int, int> CustomerLocationKey { get; set; }
 ```
 
 ***
@@ -498,7 +497,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Queries and Data
 
-Our implementation adds two static classes which help describe our data. The first is a simple list of constants, which correspond to the “origin” parameter of `ShardKey` and `ShardChild` objects. the “Origin” helps prevent accidental use of, say, an __Inventory__ key to delete an __Order__ record. By using constants, you cam more explicitly distinguish the “c” used for __Contact__ data from the “C” used for __Customer__ data, which might otherwise be confusing.
+Our implementation adds two static classes which help describe our data. The first is a simple list of constants, which correspond to the “origin” parameter of `ShardKey` object. the “Origin” helps prevent accidental use of, say, an __Inventory__ key to delete an __Order__ record. By using constants, you cam more explicitly distinguish the “c” used for __Contact__ data from the “C” used for __Customer__ data, which might otherwise be confusing.
 
 The second static class consolodates query definitions, as described in the [Creating SQL Queries](/querying/sql.md) tutorial. This serves two purposes: first, it becomes easy to determine which queries are actually used by the code (on large projects, this can be difficult). Also, the optional parameter list can limit the parameters that are set when Model attributes have more parameters than the query requires.
 

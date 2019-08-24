@@ -184,6 +184,9 @@ This step creates an injectable *SqlServices* object that we can consume in all 
 
 ***
 
+> [!NOTE]
+> The ArgentSea services include both the `Databases` and `ShardSets` service. Of course, if no ShardSets are configured, the collection will be empty.
+
 ## 8. Create a Model Class
 
 A model class has properties that correspond the the fields of a data entity. ArgentSea can automatically map these properties to input or output parameters, the columns of a DataReader object, or (in SQL Server) a table-valued parameter.
