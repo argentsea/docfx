@@ -47,7 +47,7 @@ Note that these examples include only the attributes that we want to change. The
 
 ## (Non-Sharded) Database Connections
 
-The database configuration architecture allow any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code. The key in your configuration must *exactly* match the keys used in your code (i.e casing, accents, and kana must match — and spelling too).
+The database configuration architecture allows any number of database connections. Each connection is identified by a key, which you also use to request the connection in your code. The key in your configuration must *exactly* match the keys used in your code (i.e casing, accents, and kana must match — and spelling too).
 
 Database connections have a three-level hierarchy: global properties, database properties, and properties for distinct read and write endpoints. This illustration shows how various “parent” configuration properties are applied to the child values. Ultimately, these values are combined to build a Read or Write connection.
 
@@ -225,14 +225,14 @@ Each shard set has two required properties:
           "ShardId": 0,
           "Database": "ShardDb1",
           "ReadConnection": {
-            "DataSource": "HotStandby1",
+            "Host": "HotStandby1",
           }
         },
         {
           "ShardId": 1,
           "Database": "ShardDb2",
           "ReadConnection": {
-            "DataSource": "HotStandby1",
+            "Host": "HotStandby1",
           }
         }
       ]
@@ -296,27 +296,36 @@ The complete set of available properties is:
 {
   "ApplicationName": "MyWebApp",
   "AutoPrepareMinUsages": 5,
+  "CancellationTimeout": 10,
   "CheckCertificateRevocation": false,
   "CircuitBreakerFailureCount": 20,
   "CircuitBreakerTestInterval": 25,
+  "ClientCertificate": null,
+  "ClientCertificateKey": null,
   "ClientEncoding": "UTF8",
   "CommandTimeout": 5,
   "ConnectionIdleLifetime": 300,
+  "ConnectionLifetime": 0,
   "ConnectionPruningInterval": 10,
   "ConvertInfinityDateTime": false,
   "Database": "MyDb",
   "Encoding": "UTF8",
   "Enlist": true,
   "Host": "10.10.25.1",
+  "IncludeErrorDetails": null,
   "IncludeRealm": false,
   "InternalCommandTimeout": -1,
   "KeepAlive": null,
   "KerberosServiceName": "postgres",
   "LoadTableComposites": false,
+  "LogParameters": false,
   "MaxAutoPrepare": 0,
   "MaxPoolSize": 100,
   "MinPoolSize": 1,
+  "Multiplexing": true,
   "NoResetOnClose": false,
+  "Options": null,
+  "Passfile": null,
   "Password": "pwd1234",
   "PersistSecurityInfo": false,
   "Pooling": true,
@@ -325,19 +334,22 @@ The complete set of available properties is:
   "RetryCount": 15,
   "RetryInterval": 10,
   "RetryLengthening": "Fibonacci",
+  "RootCertificate": null,
   "SearchPath": null,
   "ServerCompatibilityMode": "none",
   "SocketReceiveBufferSize": 8192,
   "SocketSendBufferSize": 8192,
   "SslMode": "Require",
   "TcpKeepAlive": true,
+  "TcpKeepAliveInterval": 15,
+  "TcpKeepAliveTime": 15,
   "Timeout": 5,
   "Timezone": "America/Los_Angeles",
   "TrustServerCertificate": true,
-  "UsePerfCounters": false,
   "UserName": "webUser",
-  "UseSslStream": true,
   "WindowsAuth": false,
+  "WriteCoalescingBufferThresholdBytes": 8192,
+  "WriteCoalescingDelayUs": 0,
   "WriteBufferSize": 8192
 }
 ````
